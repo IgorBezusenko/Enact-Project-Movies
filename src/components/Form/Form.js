@@ -1,9 +1,9 @@
 import {useForm} from "react-hook-form";
 import {ErrorMessage} from "@hookform/error-message";
 import css from "./Form.module.less"
-import {getToken} from "../../redux/reducers/authReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
+import {getToken} from "../../redux/actions";
 
 export const Form = () => {
     const dispatch = useDispatch()
@@ -18,9 +18,7 @@ export const Form = () => {
     });
 
     const onSubmit = async (data) => {
-        console.log(data)
         await dispatch(getToken(data.login, data.password))
-
     };
     return (
         <>{!!token && <Redirect to={"/home"}/>}

@@ -1,11 +1,7 @@
 import {AuthAPI} from "../../API/API";
 import {reactLocalStorage} from "reactjs-localstorage";
+import {CLEAR_ERROR, CLEAR_TOKEN, SET_ERROR, SET_TOKEN, TOGGLE_IS_FETCHING, toggleIsFetching} from "../actions";
 
-const SET_TOKEN = "SET_TOKEN"
-const CLEAR_TOKEN = "CLEAR_TOKEN"
-const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
-const SET_ERROR = "SET_ERROR"
-const CLEAR_ERROR = "CLEAR_ERROR"
 
 const initialState = {
     token: reactLocalStorage.get("token") || "",
@@ -43,43 +39,4 @@ export const authReducer = (state = initialState, action) => {
         default:
             return state
     }
-}
-
-const setToken = (token) => ({
-    type: SET_TOKEN,
-    token
-})
-export const clearToken = () => ({
-    type: CLEAR_TOKEN,
-
-})
-const setError = (error) => ({
-    type: SET_ERROR,
-    error
-})
-const clearError = () => ({
-    type: CLEAR_ERROR,
-
-})
-const toggleIsFetching = (IsFetching) => ({
-    type: TOGGLE_IS_FETCHING,
-    IsFetching
-})
-
-
-export const getToken = (login, password) => async (dispatch) => {
-    dispatch(toggleIsFetching(true))
-    try {
-        const {data} = await AuthAPI.login(login, password)
-        dispatch(setToken(data.data.token))
-        console.log("Auth", data.data.token)
-        dispatch(clearError())
-        dispatch(toggleIsFetching(false))
-    } catch (e) {
-        dispatch(setError(e.response.data.error.message))
-        console.log("Error", e.response.data.error.message)
-        dispatch(toggleIsFetching(false))
-    }
-
-
 }

@@ -1,45 +1,22 @@
-// import kind from '@enact/core/kind';
-// import css from "../App/App.less"
-//
-// const MainPanel = kind({
-//     name: 'MainPanel',
-//
-//     render: ({...rest}) => (
-//         <div {...rest} className={css.bgRed}>
-//             <h1>MainList Panel</h1>
-//
-//             <button>Click me</button>
-//         </div>
-//     )
-// });
-//
-// export default MainPanel;
-
 import React, {useEffect} from "react";
 import css from "./Main.module.less"
-// import  "../../App/App.less"
 import {useDispatch, useSelector} from "react-redux";
-import {clearToken} from "../../redux/reducers/authReducer";
 import MainList from "./MainList";
 import {reactLocalStorage} from "reactjs-localstorage";
-import {getMovies} from "../../redux/reducers/mainReducer";
-import Scroller from "@enact/ui/Scroller";
+import {clearToken, getMain} from "../../redux/actions";
 
 const MainPanel = () => {
     const token = useSelector(state => state.authReducer.token)
     const movies = useSelector(state => state.mainReducer.mainData)
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(getMovies())
-        console.log("Response")
+        dispatch(getMain())
     }, [])
 
     useEffect(() => {
         reactLocalStorage.set('token', token);
-        // localStorage.setItem("token", JSON.stringify(token));
     }, [token]);
 
-    console.log(movies.map(m => m))
 
     const onClearToken = () => {
         dispatch(clearToken())
@@ -48,17 +25,17 @@ const MainPanel = () => {
     return (
         <div className={css.movies__Container}>
             <>
-                <div className={css.bgRed} >
+                <div className={css.bgRed}>
                     <div>
                         <h1>Main Panel</h1>
                         {token ? token : "Токена нет!"}
                         <button onClick={onClearToken}>Logout</button>
                     </div>
                     {
-                        movies.map((moviesList,idx) => {
+                        movies.map((moviesList, idx) => {
                             return (
                                 <div key={idx}>
-                                    <MainList  moviesList={moviesList} />
+                                    <MainList moviesList={moviesList}/>
                                 </div>
                             )
                         })

@@ -1,24 +1,29 @@
-import React from "react";
-import {
-    useParams,
-    useLocation,
-    useHistory,
-    useRouteMatch,
-} from "react-router-dom";
+import React, {useEffect} from "react";
+import {useParams,} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {getMovieFile} from "../../../redux/actions";
 
-export const Movies=()=>{
+export const Movies = () => {
     const params = useParams()
-    const location = useLocation()
-    const history = useHistory()
-    const match = useRouteMatch()
-    console.log(params)
-    console.log(location)
-    console.log(history)
-    console.log(match)
-    return(
+    const dispatch = useDispatch()
+    const movieFile = useSelector(state=>state.mainReducer.movieFile)
+
+    useEffect(()=>{
+        dispatch(getMovieFile(params.id))
+    },[params.id])
+
+    console.log("asdadadas",movieFile.media)
+
+    return (
         <>
             <div> {params.id} </div>
-        <div>Movies</div>
+            <div> {}</div>
+            <div> {movieFile.title}</div>
+            <div> {movieFile.year}</div>
+            <div> {movieFile.review}</div>
+            <div><img src={movieFile.logo} alt="Logo"/></div>
+
+
         </>
     )
 }
