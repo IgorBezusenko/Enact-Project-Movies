@@ -7,7 +7,8 @@ const MainListItem = ({item}) => {
     return (
         <>
             <div className={css.item__cover}>
-                <Link to={"/detail/" + item.id}>
+
+                <Link to={item.url}>
                     <img src={item.logo} alt=""/>
                 </Link>
 

@@ -8,8 +8,8 @@ export const Header = () => {
     return (
         <div>
             <ul className={css.nav}>
-                <li><NavLink to={"/home"}><Home/> Home Page</NavLink></li>
-                <li><NavLink to={"/auth"}><LogIn/> Login</NavLink></li>
+                <li><NavLink to={"/"}><Home/>Home Page</NavLink></li>
+                <li><NavLink to={"/auth"}><LogIn/>Login</NavLink></li>
             </ul>
         </div>
     )

@@ -1,29 +1,49 @@
 import React, {useEffect} from "react";
-import {useParams,} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getMovieFile} from "../../../redux/actions";
+import {useLocation} from "react-router-dom";
+
 
 export const Movies = () => {
-    const params = useParams()
-    const dispatch = useDispatch()
-    const movieFile = useSelector(state=>state.mainReducer.movieFile)
 
-    useEffect(()=>{
-        dispatch(getMovieFile(params.id))
-    },[params.id])
+    function useQuery() {
+        return new URLSearchParams(useLocation().search);
+    }
+        let query = useQuery();
+        let movieFileId = query.get("id")
 
-    console.log("asdadadas",movieFile.media)
+        const dispatch = useDispatch()
+        const state = useSelector(state => state.mainReducer)
+        const {movieFile, isFetching} = state
 
-    return (
-        <>
-            <div> {params.id} </div>
-            <div> {}</div>
-            <div> {movieFile.title}</div>
-            <div> {movieFile.year}</div>
-            <div> {movieFile.review}</div>
-            <div><img src={movieFile.logo} alt="Logo"/></div>
+        const getMovieFileById = (id) => {
+            dispatch(getMovieFile(id))
+        }
+        useEffect(() => {
+            getMovieFileById(movieFileId)
+        }, [movieFileId])
 
 
-        </>
-    )
-}
+
+        if (isFetching) {
+            return <div>Loading</div>
+        }
+        return (
+            <>
+                {/*{movieFile.media ? movieFile.media : null}*/}
+                <div> {movieFileId}
+                    <div>
+                        <div> {}</div>
+                        <div> {movieFile.title}</div>
+                        <div> {movieFile.year}</div>
+                        <div> {movieFile.review}</div>
+                        <div><img src={movieFile.logo} alt="Logo"/></div>
+                    </div>
+
+
+                </div>
+
+
+            </>
+        )
+    }

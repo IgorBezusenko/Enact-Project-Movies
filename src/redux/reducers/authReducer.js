@@ -1,6 +1,5 @@
-import {AuthAPI} from "../../API/API";
 import {reactLocalStorage} from "reactjs-localstorage";
-import {CLEAR_ERROR, CLEAR_TOKEN, SET_ERROR, SET_TOKEN, TOGGLE_IS_FETCHING, toggleIsFetching} from "../actions";
+import {AUTH_TOGGLE_IS_FETCHING, CLEAR_ERROR, CLEAR_TOKEN, SET_ERROR, SET_TOKEN} from "../actions";
 
 
 const initialState = {
@@ -21,7 +20,7 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 token: ""
             }
-        case  TOGGLE_IS_FETCHING:
+        case  AUTH_TOGGLE_IS_FETCHING:
             return {
                 ...state,
                 loading: action.IsFetching

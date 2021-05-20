@@ -21,7 +21,7 @@ export const Form = () => {
         await dispatch(getToken(data.login, data.password))
     };
     return (
-        <>{!!token && <Redirect to={"/home"}/>}
+        <>{!!token && <Redirect to={"/"}/>}
             {loading ? <p>Lading...</p> : <form onSubmit={handleSubmit(onSubmit)}>
 
                 <h1>Авторизация</h1>

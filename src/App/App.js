@@ -19,10 +19,12 @@ import {Movies} from "../components/Main/Movies/Movies";
 const App = () => {
     return (
         <Router>
-            <Route path={"/"} component={Header}/>
+            <Header/>
+            {/*<Route path={"/"} component={Header}/>*/}
+            <Route exact path={"/"} component={MainPanel}/>
             <Route path={"/auth"} component={Form}/>
-            <Route path={"/home"} component={MainPanel}/>
-            <Route path={"/detail/:id?"} component={Movies}/>
+
+            <Route path={"/detail"} component={Movies}/>
 
         </Router>
     )

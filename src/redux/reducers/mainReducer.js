@@ -1,4 +1,4 @@
-import {GET_MAIN, GET_MOVIE_FILE, TOGGLE_IS_FETCHING} from "../actions";
+import {GET_MAIN, GET_MOVIE_FILE, MAIN_TOGGLE_IS_FETCHING} from "../actions";
 
 const initialState = {
     mainData: [],
@@ -18,7 +18,8 @@ export const mainReducer = (state = initialState, action) => {
                 ...state,
                 movieFile: {...action.payload}
             }
-        case  TOGGLE_IS_FETCHING:
+
+        case  MAIN_TOGGLE_IS_FETCHING:
             return {
                 ...state,
                 isFetching: action.IsFetching
