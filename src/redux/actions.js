@@ -67,7 +67,7 @@ export const getMain = () => async (dispatch) => {
         })
 
     } catch (e) {
-        console.log("Error", e.response.data.message)
+        console.log("Error", e.response)
         dispatch(mainToggleIsFetching(false))
     }
 }
@@ -86,7 +86,7 @@ export const getMovieFile = (id) => async (dispatch) => {
         })
 
     } catch (e) {
-        console.log("Error", e.response.data.message)
+        console.log("Error", e.response)
         dispatch(mainToggleIsFetching(false))
 
     }
