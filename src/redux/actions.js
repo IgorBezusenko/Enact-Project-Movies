@@ -9,7 +9,7 @@ export const CLEAR_ERROR = "AUTH/CLEAR_ERROR"
 export const GET_MAIN = "MAIN/GET_MAIN";
 export const GET_MOVIE_FILE = "MAIN/GET_MOVIE_FILE";
 export const MAIN_TOGGLE_IS_FETCHING = "MAIN/MAIN_TOGGLE_IS_FETCHING"
-
+export const GET_VIDEO_URL = "MAIN/GET_VIDEO_URL"
 
 export const authToggleIsFetching = (IsFetching) => ({
     type: AUTH_TOGGLE_IS_FETCHING,
@@ -42,7 +42,7 @@ export const getToken = (login, password) => async (dispatch) => {
         dispatch(authToggleIsFetching(false))
     } catch (e) {
         dispatch(setError(e.response.data.error.message))
-        console.log("Error", e.response.data.error.message)
+        console.log("Error getToken", e.response.data.error.message)
         dispatch(authToggleIsFetching(false))
     }
 }
@@ -52,8 +52,6 @@ export const mainToggleIsFetching = (IsFetching) => ({
     type: MAIN_TOGGLE_IS_FETCHING,
     IsFetching
 })
-
-
 
 export const getMain = () => async (dispatch) => {
     dispatch(mainToggleIsFetching(true))
@@ -67,13 +65,10 @@ export const getMain = () => async (dispatch) => {
         })
 
     } catch (e) {
-        console.log("Error", e.response)
+        console.log("Error getMain", e.response)
         dispatch(mainToggleIsFetching(false))
     }
 }
-
-
-
 
 export const getMovieFile = (id) => async (dispatch) => {
     dispatch(mainToggleIsFetching(true))
@@ -86,8 +81,26 @@ export const getMovieFile = (id) => async (dispatch) => {
         })
 
     } catch (e) {
-        console.log("Error", e.response)
+        console.log("Error getMovieFile", e.response)
         dispatch(mainToggleIsFetching(false))
 
     }
 }
+
+export const getVideoUrl =(file)=>async (dispatch)=>{
+    dispatch(mainToggleIsFetching(true))
+    try{
+        const response= await MainAPI.videoUrl(file)
+        console.log(response.data.url)
+        dispatch({
+            type:GET_VIDEO_URL,
+            videoUrl:response.data.url
+
+        })
+        dispatch(mainToggleIsFetching(false))
+    }catch (e) {
+        console.log("Error getVideoUrl",e)
+        dispatch(mainToggleIsFetching(false))
+    }
+}
+

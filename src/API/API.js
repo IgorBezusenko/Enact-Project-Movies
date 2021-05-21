@@ -21,6 +21,9 @@ export const MainAPI={
         return instance.get('/main').then(r=>r.data)
     },
     movieFile(id){
-        return instance.get(`/file/${id}`,).then(r=>r.data)
+        return instance.get(`/file/${id}`).then(r=>r.data)
+    },
+    videoUrl(file){
+        return instance.get(`/file/url/${file}`).then(r=>r.data)
     }
 }

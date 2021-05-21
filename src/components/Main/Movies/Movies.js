@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getMovieFile} from "../../../redux/actions";
+import {getMovieFile, getVideoUrl} from "../../../redux/actions";
 import {useLocation} from "react-router-dom";
 
 
@@ -35,18 +35,25 @@ export const Movies = () => {
             <>
                 {
                     movieFile.media.map(media => {
-                        console.log("media", media)
-                        console.log("media.title", media.title)
-                        console.log("media.items", media.items)
+                        // console.log("media", media)
+                        // console.log("media.title", media.title)
+                        // console.log("media.items", media.items)
                         return (
                             <div>
                                 {media.title && <div>{media.title}</div>}
                                 {
                                     media.items.map(item => {
-                                            console.log(item)
+                                            // console.log(item.file)
+                                            const onClickVideoUrl = (file) => {
+                                                // console.log("file",file)
+                                                dispatch(getVideoUrl(file))
+                                                // const response= MainAPI.videoUrl(file)
+                                                //  console.log(response)
+                                            }
                                             return (
                                                 <span>
-                                                      | <strong>{item.title}</strong> {item.file} |
+                                                      <button
+                                                          onClick={() => onClickVideoUrl(item.file)}>{item.title}</button>
                                                 </span>
                                             )
                                         }
