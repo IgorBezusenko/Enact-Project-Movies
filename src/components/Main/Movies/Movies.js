@@ -1,21 +1,22 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getMovieFile, getVideoUrl} from "../../../redux/actions";
+import {getMovieFile} from "../../../redux/actions";
 import {useLocation} from "react-router-dom";
+import {MovieItem} from "./MovieItem/MovieItem";
 
+import css from "../Main.module.less"
+import {MoviesDescription} from "./MoviesDescription";
 
 export const Movies = () => {
-
     function useQuery() {
         return new URLSearchParams(useLocation().search);
     }
-
     let query = useQuery();
     let movieFileId = query.get("id")
 
     const dispatch = useDispatch()
     const state = useSelector(state => state.mainReducer)
-    const {movieFile, isFetching} = state
+    const {movieFile, isFetching,} = state
 
     const getMovieFileById = (id) => {
         dispatch(getMovieFile(id))
@@ -29,56 +30,21 @@ export const Movies = () => {
         return <div>Loading</div>
     }
 
-    const SeasonSeries = ({movieFile}) => {
-        // console.log(movieFile)
-        return (
-            <>
-                {
-                    movieFile.media.map(media => {
-                        // console.log("media", media)
-                        // console.log("media.title", media.title)
-                        // console.log("media.items", media.items)
-                        return (
-                            <div>
-                                {media.title && <div>{media.title}</div>}
-                                {
-                                    media.items.map(item => {
-                                            // console.log(item.file)
-                                            const onClickVideoUrl = (file) => {
-                                                // console.log("file",file)
-                                                dispatch(getVideoUrl(file))
-                                                // const response= MainAPI.videoUrl(file)
-                                                //  console.log(response)
-                                            }
-                                            return (
-                                                <span>
-                                                      <button
-                                                          onClick={() => onClickVideoUrl(item.file)}>{item.title}</button>
-                                                </span>
-                                            )
-                                        }
-                                    )
-                                }
-                            </div>)
-                    })
-                }
-            </>
-        )
+    console.log(movieFile)
 
-    }
 
     return (
         <>
             {/*{movieFile.media ? movieFile.media : null}*/}
-            <div>
-                {movieFile.media ? <SeasonSeries movieFile={movieFile}/> : null}
+            <div className={css.row}>
+
                 <div>
+                    {movieFile.media ? <MovieItem movieFile={movieFile}/> : null}
                     <div> {movieFileId}</div>
-                    <div> {movieFile.title}</div>
-                    <div> {movieFile.year}</div>
-                    <div> {movieFile.review}</div>
-                    <div><img src={movieFile.logo} alt="Logo"/></div>
+                    <MoviesDescription/>
+
                 </div>
+                <div ><img src={movieFile.logo} width={"400px"} alt="Logo"/></div>
 
 
             </div>

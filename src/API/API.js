@@ -3,8 +3,7 @@ import {reactLocalStorage} from "reactjs-localstorage";
 
 const instance = axios.create({
     baseURL:"https://api.portal.idc.md/api/",
-    header:{
-        // "HTTP-X-TOKEN": localStorage.getItem('my-token') || ""
+    headers:{
         "HTTP-X-TOKEN":reactLocalStorage.get("token") || ""
     }
 })
