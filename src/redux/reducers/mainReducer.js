@@ -1,9 +1,9 @@
-import {GET_MAIN, GET_MOVIE_FILE, GET_VIDEO_URL, MAIN_TOGGLE_IS_FETCHING} from "../actions";
+import {CLEAR_VIDEO_URL, GET_MAIN, GET_MOVIE_FILE, GET_VIDEO_URL, MAIN_TOGGLE_IS_FETCHING} from "../actions";
 
 const initialState = {
     mainData: [],
     movieFile: {},
-    videoUrl:null,
+    videoUrl: null,
     isFetching: false
 }
 
@@ -29,6 +29,11 @@ export const mainReducer = (state = initialState, action) => {
             return {
                 ...state,
                 videoUrl: action.videoUrl
+            }
+        case  CLEAR_VIDEO_URL:
+            return {
+                ...state,
+                videoUrl: null
             }
 
         default :

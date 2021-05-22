@@ -2,12 +2,12 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getMovieFile} from "../../../redux/actions";
 import {useLocation} from "react-router-dom";
-import {MovieItem} from "./MovieItem/MovieItem";
+import {MovieSeries} from "./MovieSeries";
 
 import css from "../Main.module.less"
 import {MoviesDescription} from "./MoviesDescription";
 
-export const Movies = () => {
+export const MoviesPreview = () => {
     function useQuery() {
         return new URLSearchParams(useLocation().search);
     }
@@ -25,13 +25,10 @@ export const Movies = () => {
         getMovieFileById(movieFileId)
     }, [movieFileId])
 
-
     if (isFetching) {
         return <div>Loading</div>
     }
-
     console.log(movieFile)
-
 
     return (
         <>
@@ -39,7 +36,7 @@ export const Movies = () => {
             <div className={css.row}>
 
                 <div>
-                    {movieFile.media ? <MovieItem movieFile={movieFile}/> : null}
+                    {movieFile.media ? <MovieSeries movieFile={movieFile}/> : null}
                     <div> {movieFileId}</div>
                     <MoviesDescription/>
 

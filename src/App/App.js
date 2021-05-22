@@ -3,7 +3,7 @@ import MainPanel from "../components/Main/MainPanel";
 import {Header} from "../components/Header/Header";
 import {Form} from "../components/Form/Form";
 import css from "./App.less"
-import {Movies} from "../components/Main/Movies/Movies";
+import {MoviesPreview} from "../components/Main/Movies/MoviesPreview";
 
 // const App = kind({
 //     name: 'App',
@@ -24,7 +24,7 @@ const App = () => {
             <Route exact path={"/"} component={MainPanel}/>
             <Route path={"/auth"} component={Form}/>
 
-            <Route path={"/detail"} component={Movies}/>
+            <Route path={"/detail"} component={MoviesPreview}/>
 
         </Router>
     )

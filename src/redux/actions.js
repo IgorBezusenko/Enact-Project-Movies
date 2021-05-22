@@ -10,6 +10,7 @@ export const GET_MAIN = "MAIN/GET_MAIN";
 export const GET_MOVIE_FILE = "MAIN/GET_MOVIE_FILE";
 export const MAIN_TOGGLE_IS_FETCHING = "MAIN/MAIN_TOGGLE_IS_FETCHING"
 export const GET_VIDEO_URL = "MAIN/GET_VIDEO_URL"
+export const CLEAR_VIDEO_URL="MAIN/CLEAR_VIDEO_URL"
 
 export const authToggleIsFetching = (IsFetching) => ({
     type: AUTH_TOGGLE_IS_FETCHING,
@@ -87,8 +88,12 @@ export const getMovieFile = (id) => async (dispatch) => {
     }
 }
 
+export const clearVideoUrl=()=>({
+    type:CLEAR_VIDEO_URL
+})
+
 export const getVideoUrl =(file)=>async (dispatch)=>{
-    dispatch(mainToggleIsFetching(true))
+    // dispatch(mainToggleIsFetching(true))
     try{
         const response= await MainAPI.videoUrl(file)
         console.log(response.data.url)
@@ -97,10 +102,10 @@ export const getVideoUrl =(file)=>async (dispatch)=>{
             videoUrl:response.data.url
 
         })
-        dispatch(mainToggleIsFetching(false))
+        // dispatch(mainToggleIsFetching(false))
     }catch (e) {
         console.log("Error getVideoUrl",e)
-        dispatch(mainToggleIsFetching(false))
+        // dispatch(mainToggleIsFetching(false))
     }
 }
 
