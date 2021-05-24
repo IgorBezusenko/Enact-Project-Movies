@@ -1,18 +1,16 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getMovieFile} from "../../../redux/actions";
-import {useLocation} from "react-router-dom";
 import {MovieSeries} from "./MovieSeries";
 
 import css from "../Main.module.less"
-import {MoviesDescription} from "./MoviesDescription";
+import {useQuery} from "../../../utils/useQuery";
+import {Link} from "react-router-dom";
+import {NavOnBack} from "../../NavOnBack/NavOnBack";
 
-export const MoviesPreview = () => {
-    function useQuery() {
-        return new URLSearchParams(useLocation().search);
-    }
-    let query = useQuery();
-    let movieFileId = query.get("id")
+export const MoviesPreview = (props) => {
+    const query = useQuery();
+    const movieFileId = query.get("id")
 
     const dispatch = useDispatch()
     const state = useSelector(state => state.mainReducer)
@@ -25,23 +23,23 @@ export const MoviesPreview = () => {
         getMovieFileById(movieFileId)
     }, [movieFileId])
 
+    const onBackHandler = () => props.history.goBack()
+
     if (isFetching) {
         return <div>Loading</div>
     }
-    console.log(movieFile)
+
 
     return (
         <>
-            {/*{movieFile.media ? movieFile.media : null}*/}
-            <div className={css.row}>
+            <div>
+                <NavOnBack onGoBack={onBackHandler}/>
+                {movieFile.media ? <MovieSeries movieFile={movieFile}/> : null}
+                <Link to={"/description"}><h3>Go to description</h3></Link>
 
-                <div>
-                    {movieFile.media ? <MovieSeries movieFile={movieFile}/> : null}
-                    <div> {movieFileId}</div>
-                    <MoviesDescription/>
-
+                <div className={css.row}>
+                    <div><img src={movieFile.logo} width={"400px"} alt="Logo"/></div>
                 </div>
-                <div ><img src={movieFile.logo} width={"400px"} alt="Logo"/></div>
 
 
             </div>

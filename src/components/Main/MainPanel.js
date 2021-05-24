@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import MainList from "./MainList";
 import {reactLocalStorage} from "reactjs-localstorage";
 import {clearToken, getMain} from "../../redux/actions";
+import {Header} from "../Header/Header";
 
 const MainPanel = () => {
     const token = useSelector(state => state.authReducer.token)
@@ -22,9 +23,9 @@ const MainPanel = () => {
         dispatch(clearToken())
         reactLocalStorage.clear();
     }
-    return (
-        <div className={css.movies__Container}>
-            <>
+    return (<>
+
+            <div className={css.movies__Container}>
                 <div className={css.bgRed}>
                     <div>
                         <h1>Main Panel</h1>
@@ -40,10 +41,9 @@ const MainPanel = () => {
                             )
                         })
                     }
-
                 </div>
-            </>
-        </div>
+            </div>
+        </>
     )
 }
 

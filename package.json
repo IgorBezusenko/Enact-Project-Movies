@@ -54,6 +54,7 @@
 		"reactjs-localstorage": "^1.0.1",
 		"redux": "^4.1.0",
 		"redux-thunk": "^2.3.0",
+		"video-react": "^0.14.1",
 		"yup": "^0.32.9"
 	}
 }
