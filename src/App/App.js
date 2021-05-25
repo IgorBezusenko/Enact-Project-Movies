@@ -7,6 +7,7 @@ import {MoviesPreview} from "../components/Main/Movies/MoviesPreview";
 import {VideoPlayer} from "../components/VideoPlayer/VideoPlayer";
 import {MoviesDescription} from "../components/Main/Movies/MoviesDescription";
 import React from "react";
+import {MovieSeries} from "../components/Main/Movies/MovieSeries";
 
 const App = () => {
     return (
@@ -16,8 +17,9 @@ const App = () => {
             <Route exact path={"/"} component={MainPanel}/>
             <Route path={"/auth"} component={Form}/>
             <Route path={"/detail"} component={MoviesPreview}/>
-            <Route path={"/series"} component={VideoPlayer}/>
+            <Route path={"/player"} component={VideoPlayer}/>
             <Route path={"/description"} component={MoviesDescription}/>
+            <Route path={"/series"} component={MovieSeries}/>
 
 
         </Router>

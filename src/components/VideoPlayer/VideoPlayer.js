@@ -21,9 +21,9 @@ export const VideoPlayer=(props)=>{
                 <ReactHlsPlayer
                     src={videoUrl}
                     autoPlay
+                    width="auto"
                     controls
                     isFullscreen
-
                      />
             }
         </>

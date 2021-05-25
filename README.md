@@ -157,7 +157,7 @@ export default Button; // Don’t forget to use export default!
 
 ```js
 import kind from '@enact/core/kind';
-import Button from './Button'; // Import a component from another file
+import Button from './Buttons'; // Import a component from another file
 
 const DangerButton = kind({
   render(props) {
@@ -196,7 +196,7 @@ This project setup uses [Webpack](https://webpack.github.io/) for handling all a
 
 ```js
 import kind from '@enact/core/kind';
-import styles './Button.css'; // Tell Webpack that Button.js uses these styles
+import styles './Buttons.css'; // Tell Webpack that Buttons.js uses these styles
 
 const Button = kind({
   render() {

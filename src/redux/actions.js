@@ -104,7 +104,7 @@ export const getVideoUrl =(file)=>async (dispatch)=>{
         })
         // dispatch(mainToggleIsFetching(false))
     }catch (e) {
-        console.log("Error getVideoUrl",e)
+        console.log("Error getVideoUrl",e.response)
         // dispatch(mainToggleIsFetching(false))
     }
 }

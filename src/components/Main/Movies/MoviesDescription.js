@@ -1,6 +1,5 @@
 import {useSelector} from "react-redux";
 import React from "react";
-import {CornerUpLeft} from "react-feather";
 import {NavOnBack} from "../../NavOnBack/NavOnBack";
 
 export const MoviesDescription = (props) => {
@@ -13,24 +12,24 @@ export const MoviesDescription = (props) => {
             </>)
         })
         const genre = movieFile.genre.map((genre, i) => {
-            return (<span>
+            return (<>
                 {genre.name}{i === movieFile.genre.length - 1 ? "" : ", "}
-            </span>)
+            </>)
         })
         const creator = movieFile.creator.map((creator, i) => {
-            return (<span>
+            return (<>
                 {creator.name}{i === movieFile.creator.length - 1 ? "" : ", "}
-            </span>)
+            </>)
         })
         const producer = movieFile.producer.map((producer, i) => {
-            return (<span>
+            return (<>
                 {producer.name}{i === movieFile.producer.length - 1 ? "" : ", "}
-            </span>)
+            </>)
         })
         const in_the_roles = movieFile.in_the_roles.map((in_the_roles, i) => {
-            return (<span>
+            return (<>
                 {in_the_roles.name}{i === movieFile.in_the_roles.length - 1 ? "" : ", "}
-            </span>)
+            </>)
         })
         const onBackHandler = () => props.history.goBack()
         return (
