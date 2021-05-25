@@ -23,7 +23,7 @@ export const VideoPlayer=(props)=>{
                     autoPlay
                     width="auto"
                     controls
-                    isFullscreen
+
                      />
             }
         </>

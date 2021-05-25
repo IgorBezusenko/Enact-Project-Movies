@@ -30,8 +30,13 @@ export const MoviesPreview = (props) => {
     if (isFetching) {
         return <div>Loading</div>
     }
+    const genre = movieFile.genre && movieFile.genre.map((genre, i) => {
+        return (<>
+            {i !== 0 && ", "}{genre.name}
+        </>)
+    })
 
-    console.log("movieFile", movieFile.media)
+    console.log("movieFile", movieFile)
 
 
     return (
@@ -40,8 +45,11 @@ export const MoviesPreview = (props) => {
                 <NavOnBack onGoBack={onBackHandler}/>
                 <div className={css.preview__row}>
                     <div>
-
-                        <ButtonPlay movieFile={movieFile} />
+                        <h2>{movieFile.title}</h2>
+                        <div>{movieFile.year} </div>
+                        <div>{genre}</div>
+                        <br/>
+                        <ButtonPlay movieFile={movieFile}/>
                         <ButtonMovie title={"Продолжить"}><Clock/></ButtonMovie>
                         <ButtonMovie title={"Избранное"}><Bookmark/></ButtonMovie>
                         <Link to={"/description"}><h3>Go to description</h3></Link>

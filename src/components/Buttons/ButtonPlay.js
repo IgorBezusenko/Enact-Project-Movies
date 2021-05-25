@@ -5,15 +5,15 @@ import {ButtonMovie} from "./ButtonMovie";
 import {Play} from "react-feather";
 
 export const ButtonPlay = ({movieFile})=>{
+    const isSerial =movieFile.media&& movieFile.media.map(media=>media.title[0])
+
     return(
         <>
-            {movieFile.media && movieFile.media.length > 1
+            {movieFile.media && isSerial.length>0 && isSerial[0] !==undefined
                 ? <Link to={"/series"}>
                     <ButtonMovie title={"Смотреть"} >
                         <Play/>
                     </ButtonMovie>
-
-
                 </Link>
                 : <MovieFilm movieFile={movieFile}/>}
         </>

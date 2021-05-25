@@ -1,27 +1,64 @@
-.container{
-    max-width: 120rem;
-    padding: 7rem 9.5rem 7rem 7rem;
+
+.container {
+  max-width: 120rem;
+  padding: 4rem 0 0 7rem;
 }
 
-.row{
-    display: flex;
-    justify-content: flex-start;
+.season__row {
+  display: flex;
+
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+.series__container{
+  width: 100%;
+  background: #2E2E2E;
+}
+.series__row {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0 2rem 7rem;
+  overflow-x: auto;
 }
 
-.btn{
+.btn {
+  //font-family: SF Pro Display;
 
-    //font-family: SF Pro Display;
-    font-style: normal;
-    font-weight: 500;
-
-    margin-left: 1.875rem;
-    font-size:2.25rem;
-    line-height: 2.625rem;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  margin-right: 1.875rem;
+  font-size: 2.25rem;
+  line-height: 2.625rem;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 1rem;
 }
-.btn__season{
-    background: rgba(0, 0, 0, 0.5);
-    padding: 1.3125rem 3.75rem;
+
+.btn__season {
+  min-width: 16rem;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1.3125rem 3.75rem;
+}
+
+.btn__season:hover,
+.btn__season:focus,
+.btn__season:active{
+  background: #FF0000;
+}
+
+.btn__series {
+  min-width: 21rem;
+  background: #000000;
+  padding: 4rem 4.4375rem;
+  font-weight: bold;
+  font-size: 3rem;
+  line-height: 3.5625rem;
+  box-shadow: -4px 0px 5px rgba(151, 151, 151, 0.5), 0px -4px 5px rgba(151, 151, 151, 0.5), 4px 0px 5px rgba(151, 151, 151, 0.5), 0px 4px 5px rgba(151, 151, 151, 0.5);
+
+}
+
+.btn__series:hover,
+.btn__series:focus,
+.btn__series:active{
+  box-shadow: -4px 0px 25px #D6182A, 0px -4px 25px #FF0000, 4px 0px 25px #FF0000, 0px 4px 25px #FF0000;
 }
