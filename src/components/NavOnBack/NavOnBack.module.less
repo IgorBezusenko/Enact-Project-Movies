@@ -1,0 +1,11 @@
+import {CornerUpLeft} from "react-feather";
+import React from "react";
+
+export const NavOnBack=(props)=>{
+    return(
+        <div >
+            <CornerUpLeft size={50}/>
+            <span><h2 onClick={props.onGoBack}> {props.title ? props.title : null}</h2></span>
+        </div>
+    )
+}
