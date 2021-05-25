@@ -7,7 +7,7 @@ export const NavOnBack=(props)=>{
     return(
         <div className={css.row} onClick={props.onGoBack}>
             <CornerUpLeft size={50}/>
-            <h2 className={css.ml_7} > {props.title ? props.title : null}</h2>
+            <h2 className={css.ml_7+ " " + css.nav__title} > {props.title ? props.title : null}</h2>
         </div>
     )
 }
