@@ -1,5 +1,5 @@
-import React from "react";
-import {NavLink} from "react-router-dom";
+import React, {useEffect} from "react";
+import {NavLink, useHistory} from "react-router-dom";
 import {Home, LogIn} from "react-feather"
 
 import css from "./Header.module.less"
@@ -8,6 +8,8 @@ import {clearVideoUrl} from "../../redux/actions";
 
 export const Header = () => {
     const dispatch=useDispatch()
+
+
     const onClearVideoUrl=()=>{
         dispatch(clearVideoUrl())
     }

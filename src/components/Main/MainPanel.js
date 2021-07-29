@@ -28,6 +28,7 @@ const MainPanel = () => {
             <div className={css.movies__Container}>
                 <div className={css.bgRed}>
                     <div>
+                        <Header/>
                         <h1>Main Panel</h1>
                         {token ? token : "Токена нет!"}
                         <button onClick={onClearToken}>Logout</button>

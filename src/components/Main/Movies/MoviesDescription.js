@@ -2,7 +2,7 @@ import {useSelector} from "react-redux";
 import React from "react";
 import {NavOnBack} from "../../NavOnBack/NavOnBack";
 
-import css from "../Main.module.less"
+import css from "./MoviesDescription.module.less"
 
 export const MoviesDescription = (props) => {
     const movieFile = useSelector(state => state.mainReducer.movieFile)
@@ -30,7 +30,7 @@ export const MoviesDescription = (props) => {
         })
         const in_the_roles = movieFile.in_the_roles.map((in_the_roles, i) => {
             return (<>
-                {i !== 0 && ", "}  {in_the_roles.name}
+                {i !== 0 && ", "} {in_the_roles.name}
             </>)
         })
 
@@ -38,21 +38,21 @@ export const MoviesDescription = (props) => {
 
         return (
             <div className={css.container}>
-                <NavOnBack onGoBack={onBackHandler} title={movieFile.title}/>
+                <NavOnBack onGoBack={onBackHandler} className={css.on__back} title={movieFile.title}/>
 
-                <div>Год: {movieFile.year}</div>
+                <div><span className={css.title}>Год:</span> {movieFile.year}</div>
                 <br/>
-                <div>Жанр: {genre}</div>
+                <div><span className={css.title}>Жанр: </span>{genre}</div>
                 <br/>
-                <div>Страна: {country}</div>
+                <div><span className={css.title}>Страна: </span>{country}</div>
                 <br/>
-                <div> {movieFile.review}</div>
+                <div>{movieFile.review}</div>
                 <br/>
-                <div>Режиссер: {creator}</div>
+                <div><span className={css.title}>Режиссер: </span>{creator}</div>
                 <br/>
-                <div>Продюссер: {producer}</div>
+                <div><span className={css.title}>Продюссер: </span>{producer}</div>
                 <br/>
-                <div>В ролях: {in_the_roles}</div>
+                <div><span className={css.title}>В ролях: </span>{in_the_roles}</div>
                 <br/>
 
             </div>

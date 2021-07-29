@@ -6,6 +6,12 @@ import {Form} from "../components/Form/Form";
 
 import css from "./App.less"
 import kind from "@enact/core/kind";
+import {Header} from "../components/Header/Header";
+import {MoviesPreview} from "../components/Main/Movies/MoviesPreview";
+import {VideoPlayer} from "../components/VideoPlayer/VideoPlayer";
+import {MoviesDescription} from "../components/Main/Movies/MoviesDescription";
+import {MovieSeries} from "../components/Main/Movies/MovieSeries";
+import React from "react";
 
 const Home = () => (<>
     <div className={css.bgRed}>
@@ -22,14 +28,27 @@ const App = kind({
     name: 'App',
     render: () => (
         <>
+            <Router basename={process.env.PUBLIC_URL}>
 
-            <Router>
-                <Switch>
-                    <Route exact path={"/"} component={Home}/>
-                    <Route path={"/auth"} component={Form}/>
-                    <Route path={"/panel"} component={MainPanel}/>
-                </Switch>
+                <Header/>
+              <Switch>
+                  <Route exact path={"/"} component={MainPanel}/>
+                  <Route path={"/auth"} component={Form}/>
+                  <Route path={"/detail"} component={MoviesPreview}/>
+                  <Route path={"/player"} component={VideoPlayer}/>
+                  <Route path={"/description"} component={MoviesDescription}/>
+                  <Route path={"/series"} component={MovieSeries} />
+              </Switch>
+
+
             </Router>
+            {/*<Router>*/}
+            {/*    <Switch>*/}
+            {/*        <Route exact path={"/"} component={Home}/>*/}
+            {/*        <Route path={"/auth"} component={Form}/>*/}
+            {/*        <Route path={"/panel"} component={MainPanel}/>*/}
+            {/*    </Switch>*/}
+            {/*</Router>*/}
         </>
     )
 })

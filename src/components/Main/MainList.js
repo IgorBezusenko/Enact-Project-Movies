@@ -13,7 +13,7 @@ const MainList = ({moviesList}) => {
                         {moviesList.items.map((item, idx) => {
                             return (
                                 <div className={css.list__item} key={idx}>
-                                    <MainListItem item={item}/>
+                                    <MainListItem className={css.kitten} item={item}/>
                                 </div>
                             )
                         })}

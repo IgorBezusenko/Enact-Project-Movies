@@ -1,3 +1,16 @@
+@import "~@enact/sandstone/styles/mixins.less";
+
+.kitten {
+  display: inline-block;
+  padding: 24px;
+  text-align: center;
+  .focus({
+    background-color:  #e6e6e6;
+    color: black;
+  });
+}
+
+
 .movies__Container {
   background-color: black;
   color: azure;
@@ -60,14 +73,19 @@
   padding-bottom: 0.5rem;
 }
 
-.container{
-  max-width: 120rem;
-  padding: 7rem 9.5rem 7rem 7rem;
+.image__focus:focus,
+.image__focus:active,
+
+.image__focus:hover
+{
+  display: inline-block;
+  border: 1px solid tomato;;
+  transform: scale(1.1);
+  opacity: 1;
 }
 
-.preview__row{
-  display: flex;
-  justify-content: space-between;
+.image__focus{
 
+  //background-color: black;
 }
 
