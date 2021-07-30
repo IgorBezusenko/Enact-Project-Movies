@@ -2,7 +2,7 @@ import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom'
 
 
 import MainPanel from "../components/Main/MainPanel";
-import {Auth} from "../components/Form/Auth";
+import {Auth} from "../components/Auth/Auth";
 
 import css from "./App.less"
 import kind from "@enact/core/kind";

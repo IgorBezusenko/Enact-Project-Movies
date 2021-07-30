@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import MainPanel from "../components/Main/MainPanel";
-import {Auth} from "../components/Form/Auth";
+import {Auth} from "../components/Auth/Auth";
 import {MoviesPreview} from "../components/Main/Movies/MoviesPreview";
 import {VideoPlayer} from "../components/VideoPlayer/VideoPlayer";
 import {MoviesDescription} from "../components/Main/Movies/MoviesDescription";
