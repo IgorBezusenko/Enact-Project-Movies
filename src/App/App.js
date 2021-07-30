@@ -17,7 +17,7 @@ const App = () => {
         <Router basename={process.env.PUBLIC_URL}>
             <Preloader/>
 
-            <Route exact path={"/"} component={MainPanel}/>
+            <Route  path={"/main"} component={MainPanel}/>
 
             <Route path={"/auth"} component={Form}/>
             <Route path={"/detail"} component={MoviesPreview}/>

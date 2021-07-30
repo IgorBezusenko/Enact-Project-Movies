@@ -14,14 +14,7 @@ import {ButtonDescription} from "../../Buttons/ButtonDescription";
 
 
 export const MoviesPreview = (props) => {
-    // const [keycode, setKeycode] = useState(null)
-    // useEffect(() => {
-    //     document.addEventListener("keydown", function (inEvent) {
-    //         console.log(inEvent)
-    //         setKeycode(inEvent.code)
-    //
-    //     });
-    // }, [])
+
     const query = useQuery();
     const movieFileId = query.get("id")
 
@@ -57,7 +50,14 @@ export const MoviesPreview = (props) => {
 
 
     return (
-        <>
+        <div style={{
+            width: "100%",
+            height: "100%",
+            backgroundImage: `url(${movieFile.logo})`,
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "0 0",
+            backgroundSize: "cover"
+        }}>
             <div className={css.container}>
                 <NavOnBack className={css.on__back} onGoBack={onBackHandler}/>
                 <div className={css.preview__row}>
@@ -74,25 +74,25 @@ export const MoviesPreview = (props) => {
 
                         </div>
                         <div className={css.rating}>
-                            <div  className={css.rating__kp}>
+                            <div className={css.rating__kp}>
                                 <div>{movieFile.rate_kp}</div>
                                 <div>КиноПоиск</div>
                             </div>
-                            <div  className={css.rating__imbd}>
+                            <div className={css.rating__imbd}>
                                 <div>{movieFile.rate_imdb}</div>
                                 <div>IMBb</div>
                             </div>
 
                         </div>
-                        <ButtonDescription/>
 
 
                     </div>
                     <div><img src={movieFile.logo} width={"400px"} alt="Logo"/></div>
                 </div>
+                <ButtonDescription/>
             </div>
 
-        </>
+        </div>
     )
 
 }

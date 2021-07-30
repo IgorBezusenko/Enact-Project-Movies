@@ -7,7 +7,7 @@ const MainListItemBase = ({item, ...rest}) => {
     let history = useHistory();
 
     const onSelectHandler = (e) => {
-        console.log("e.code", e.code)
+        console.log("item.url",item.url)
         if (e.code === "Enter") {
             history.push(`${item.url}`)
         }

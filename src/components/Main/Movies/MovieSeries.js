@@ -32,13 +32,13 @@ export const MovieSeries = (props) => {
                 <NavOnBack onGoBack={onBackHandler} title={movieFile.title}/>
                 <div className={css.season__row}>
                     {
-                        movieFile.media && movieFile.media.map((media,index) => {
+                        movieFile.media && movieFile.media.map((media, index) => {
                             return (
                                 <>
                                     {media.title
                                     && <ButtonSpotTable key={index}
-                                        className={css.btn + " " + css.btn__season}
-                                        onClick={() => onClickToSeason(media.title)}
+                                                        className={css.btn + " " + css.btn__season}
+                                                        onClick={() => onClickToSeason(media.title)}
                                     >{media.title}</ButtonSpotTable>}
                                 </>
                             )
@@ -47,15 +47,14 @@ export const MovieSeries = (props) => {
                 </div>
             </div>
             {
-                state &&
-                <div className={css.series__container}>
+                state && <div className={css.series__container}>
                     <div className={css.series__row}>
                         {
                             seasonSel.map(sel => {
                                 return (
                                     <>
                                         {
-                                            sel.items.map((item,index) => {
+                                            sel.items.map((item, index) => {
                                                 return (
                                                     <>
                                                         <Link to={"/player?file=" + item.file} key={index}>
