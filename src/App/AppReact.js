@@ -2,7 +2,7 @@ import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom'
 
 
 import MainPanel from "../components/Main/MainPanel";
-import {Form} from "../components/Form/Form";
+import {Auth} from "../components/Form/Auth";
 
 import css from "./App.less"
 import kind from "@enact/core/kind";
@@ -33,7 +33,7 @@ const App = kind({
                 <Header/>
               <Switch>
                   <Route exact path={"/"} component={MainPanel}/>
-                  <Route path={"/auth"} component={Form}/>
+                  <Route path={"/auth"} component={Auth}/>
                   <Route path={"/detail"} component={MoviesPreview}/>
                   <Route path={"/player"} component={VideoPlayer}/>
                   <Route path={"/description"} component={MoviesDescription}/>
@@ -45,7 +45,7 @@ const App = kind({
             {/*<Router>*/}
             {/*    <Switch>*/}
             {/*        <Route exact path={"/"} component={Home}/>*/}
-            {/*        <Route path={"/auth"} component={Form}/>*/}
+            {/*        <Route path={"/auth"} component={Auth}/>*/}
             {/*        <Route path={"/panel"} component={MainPanel}/>*/}
             {/*    </Switch>*/}
             {/*</Router>*/}

@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import MainPanel from "../components/Main/MainPanel";
-import {Form} from "../components/Form/Form";
+import {Auth} from "../components/Form/Auth";
 import {MoviesPreview} from "../components/Main/Movies/MoviesPreview";
 import {VideoPlayer} from "../components/VideoPlayer/VideoPlayer";
 import {MoviesDescription} from "../components/Main/Movies/MoviesDescription";
@@ -19,7 +19,7 @@ const App = () => {
 
             <Route  path={"/main"} component={MainPanel}/>
 
-            <Route path={"/auth"} component={Form}/>
+            <Route path={"/auth"} component={Auth}/>
             <Route path={"/detail"} component={MoviesPreview}/>
             <Route path={"/player"} component={VideoPlayer}/>
             <Route path={"/description"} component={MoviesDescription}/>
@@ -34,3 +34,4 @@ const App = () => {
 
 
 export default ThemeDecorator(App);
+// export default App;

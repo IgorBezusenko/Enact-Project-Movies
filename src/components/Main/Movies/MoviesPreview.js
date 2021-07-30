@@ -40,6 +40,11 @@ export const MoviesPreview = (props) => {
             {i !== 0 && ", "}{genre.name}
         </span>)
     })
+    const country = movieFile.country && movieFile.country.map((country, i) => {
+        return (<span>
+            {i !== 0 && ", "} {country}
+        </span>)
+    })
 
     const onSelect = (e) => {
         console.log("onSelect")
@@ -62,9 +67,12 @@ export const MoviesPreview = (props) => {
                 <NavOnBack className={css.on__back} onGoBack={onBackHandler}/>
                 <div className={css.preview__row}>
                     <div>
-                        <h2>{movieFile.title}</h2>
-                        <div>{movieFile.year} </div>
-                        <div>{genre}</div>
+                        <div className={css.description}>
+                            <h1>{movieFile.title}</h1>
+                            <div>{movieFile.year} </div>
+                            <div>{genre}</div>
+                            <div>{country}</div>
+                        </div>
                         <br/>
                         <div className={css.button__group}>
                             <ButtonPlay movieFile={movieFile}/>
