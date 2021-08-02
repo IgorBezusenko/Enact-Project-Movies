@@ -6,7 +6,7 @@ import React, {useState} from "react";
 import Input from "@enact/moonstone/Input";
 import {getToken, setError} from "../../redux/actions";
 
-export const Auth = (props) => {
+export const AuthForm = (props) => {
     const dispatch = useDispatch()
 
     const [login, setLogin] = useState("")
