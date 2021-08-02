@@ -1,22 +1,25 @@
 .container {
-  max-width: 120rem;
-  padding: 4rem 0 0 7rem;
+  width: 100vw;
+  height: 100vh;
+  padding: 3rem 0 0 5rem;
+  background: rgba(4, 20, 35, 0.75);
+  color: #FFFFFF;
 }
 
 .season__row {
   display: flex;
 
   overflow-x: auto;
-  margin-bottom: 1.5rem;
+  margin: 2.5rem 0.5rem 1.5rem 0.5rem;
 }
 .series__container{
   width: 100%;
-  background: #2E2E2E;
+
 }
 .series__row {
   display: flex;
   align-items: center;
-  padding: 2rem 0 2rem 7rem;
+  padding: 1rem 0 1rem 0.45rem;
   overflow-x: auto;
 }
 
@@ -26,7 +29,7 @@
   font-style: normal;
   font-weight: 500;
   margin-right: 1.875rem;
-  font-size: 2.25rem;
+  font-size: 1.5rem;
   line-height: 2.625rem;
   color: #FFFFFF;
   border: none;
@@ -36,34 +39,35 @@
 
 .btn__season {
   min-width: 16rem;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(70, 70, 70, 0.85);
   padding: 1.3125rem 3.75rem;
-
+  transition: all 0.4s;
 
 }
 
-.btn__season:hover,
-.btn__season:focus,
-.btn__season:active{
+
+.btn__season:focus{
   background: #FF0000;
   border: none;
-
 }
 
 .btn__series {
   min-width: 23rem;
-  background: #000000;
-  padding: 4rem 4.4375rem;
+  background: rgba(70, 70, 70, 0.85);
+  padding: 2.5rem 3rem;
   font-weight: bold;
-  font-size: 3rem;
+  font-size: 2rem;
   line-height: 3.5625rem;
   box-shadow: -4px 0px 5px rgba(151, 151, 151, 0.5), 0px -4px 5px rgba(151, 151, 151, 0.5), 4px 0px 5px rgba(151, 151, 151, 0.5), 0px 4px 5px rgba(151, 151, 151, 0.5);
-
+  transition: all 0.4s;
 }
 
-.btn__series:hover,
-.btn__series:focus,
-.btn__series:active{
+
+.btn__series:focus{
   border: none;
   box-shadow: -4px 0px 25px #D6182A, 0px -4px 25px #FF0000, 4px 0px 25px #FF0000, 0px 4px 25px #FF0000;
+}
+
+.on__back:focus{
+  color: #FF0000;
 }

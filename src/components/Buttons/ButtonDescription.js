@@ -10,6 +10,9 @@ export const ButtonDescription = () => {
         if (e.code === "Enter") {
             history.push("/description")
         }
+        if (e.code === "ArrowDown") {
+            history.push("/description")
+        }
     }
     return (
         <>

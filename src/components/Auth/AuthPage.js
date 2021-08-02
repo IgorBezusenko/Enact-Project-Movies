@@ -20,19 +20,19 @@ export const AuthPage = (props) => {
         <div className={css.container}>
             <div><NavOnBack className={css.on__back} title={"Вход"} onGoBack={onBackHandler}/></div>
             <div className={css.auth__block}>
-                <Link to={"/auth/form"}>
+                <Link to={"/auth-form"}>
                     <AuthButton
                         className={css.auth__button}
-                        onKeyDown={(e) => onSelect(e, "/auth/form")}
+                        onKeyDown={(e) => onSelect(e, "/auth-form")}
                         title={"Войти через логин и пароль"}>
                         <User/>
                     </AuthButton>
                 </Link>
 
-                <Link to={"/auth/mobile"}>
+                <Link to={"/auth-mobile"}>
                     <AuthButton
                         className={css.auth__button}
-                        onKeyDown={(e) => onSelect(e, "/auth/mobile")}
+                        onKeyDown={(e) => onSelect(e, "/auth-mobile")}
                         title={"Войти с помощью мобильного приложения"}>
                         <Smartphone/>
                     </AuthButton>

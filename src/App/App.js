@@ -17,13 +17,13 @@ const App = () => {
     return (
 
         <Router basename={process.env.PUBLIC_URL}>
-            <Preloader/>
+            {/*<Preloader/>*/}
 
             <Route  path={"/main"} component={MainPanel}/>
 
             <Route exact path={"/auth"} component={AuthPage}/>
-            <Route path={"/auth/form"} component={AuthForm}/>
-            <Route path={"/auth/mobile"} component={AuthMobile}/>
+            <Route path={"/auth-form"} component={AuthForm}/>
+            <Route path={"/auth-mobile"} component={AuthMobile}/>
 
             <Route path={"/detail"} component={MoviesPreview}/>
             <Route path={"/player"} component={VideoPlayer}/>
