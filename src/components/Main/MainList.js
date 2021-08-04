@@ -3,11 +3,11 @@ import css from "./Main.module.less";
 import MainListItem from "./MainListItem";
 
 const MainList = ({moviesList}) => {
-
+    console.log("moviesList",moviesList)
     return (
         <>
-            <div className={css.moviesPanel}>
-                <h1> {moviesList.title}</h1>
+            <div>
+                <h1>{moviesList.title}</h1>
                 <>
                     <div className={css.row}>
                         {moviesList.items.map((item, idx) => {

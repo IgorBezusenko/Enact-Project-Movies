@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {NavLink} from "react-router-dom";
-import {Bookmark, Briefcase, LogIn, LogOut, PlayCircle, Search, Smile, User, Video} from "react-feather"
+import {Bookmark, Briefcase, LogIn, PlayCircle, Search, Smile, Video} from "react-feather"
 
 import css from "./Header.module.less"
 import {useDispatch, useSelector} from "react-redux";
 import {clearToken, clearVideoUrl} from "../../redux/actions";
 import logo from "../../assets/logo.svg"
-import film from "../../assets/film.svg"
-import serials from "../../assets/serials.svg"
+
 import {reactLocalStorage} from "reactjs-localstorage";
 import Spottable from "@enact/spotlight/Spottable";
 
@@ -37,69 +36,11 @@ export const Header = () => {
         setFocus(false)
     }
 
-    // if (focus) {
-    //     console.log("focus41", focus)
-    //     return <Sidebar token={token} onClearToken={onClearToken} onHandleBlur={onHandleBlur} className={css.sidebar}/>
-    // }
-    // console.log("focus44", focus)
     return (
-        <SidebarMini onHandleFocus={onHandleFocus}/>
+        <SidebarMini/>
     )
 }
 
-
-const SidebarBase = ({onClearToken, onHandleBlur, token, ...rest}) => {
-    return (
-        <div {...rest} >
-            <div className={css.logo}><NavLink to={"/main"}><img src={logo} alt="logo"/>Portal</NavLink></div>
-            <div className={css.log__in}><User/>Электронная почта</div>
-            <ul className={css.nav}>
-
-                <li>
-                    <ItemBase className={css.item__base}>
-                        <NavLink
-                            to={"/main"}><Search/>Поиск</NavLink>
-                    </ItemBase>
-                </li>
-                <li>
-                    <NavLink to={"/main"}>
-                        <ItemBase className={css.item__base}>
-                            <PlayCircle/>Я смотрю</ItemBase>
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to={"/main"}>
-                        <ItemBase
-                            className={css.item__base}><Bookmark/>Избранное</ItemBase>
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to={"/main"}>
-                        <ItemBase className={css.item__base}>
-                            <img src={film} alt="film"/>Фильмы</ItemBase>
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to={"/main"}>
-                        <ItemBase className={css.item__base}>
-                            <img src={serials} alt="serials"/>Сериалы</ItemBase>
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to={"/main"}>
-                        <ItemBase
-                            className={css.item__base}><Smile/>Мультфильмы</ItemBase>
-                    </NavLink>
-                </li>
-
-            </ul>
-            <div><NavLink to={"/auth"}>
-                <div onClick={onClearToken} className={css.log__in}>{!token ? <LogIn/> :
-                    <LogOut/>}{!token ? "Войти" : "Выйти"}</div>
-            </NavLink></div>
-        </div>
-    )
-}
 
 const SidebarMiniBase = ({...rest}) => {
     const [search, setSearch] = useState(false)
@@ -108,6 +49,7 @@ const SidebarMiniBase = ({...rest}) => {
     const [film, setFilm] = useState(false)
     const [serial, setSerial] = useState(false)
     const [smile, setSmile] = useState(false)
+    const [login, setLogin] = useState(false)
 
     return (
         <div {...rest} className={css.sidebar}>
@@ -184,6 +126,17 @@ const SidebarMiniBase = ({...rest}) => {
 
             </ul>
 
+            <div className={css.log__in}><ItemBase
+                onFocus={() => {
+                    setLogin(true)
+                }}
+                onBlur={() => {
+                    setLogin(false)
+                }}
+                className={css.item__base}> <NavLink to={"/auth"}><LogIn
+                style={{transform: "rotate(180deg)"}}/></NavLink></ItemBase>
+                {login && <div className={css.icon__text}>Выйти</div>}
+            </div>
         </div>
     )
 }
@@ -193,5 +146,4 @@ const Component = ({children, ...rest}) => {
 }
 
 const ItemBase = Spottable(Component)
-const Sidebar = Spottable(SidebarBase)
 const SidebarMini = Spottable(SidebarMiniBase)

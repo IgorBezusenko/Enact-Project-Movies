@@ -114,7 +114,11 @@ export const MoviesPreview = (props) => {
 
 
                     </div>
-                    <div><img src={movieFile.logo} width={"500px"} alt="Logo"/>
+
+                    <div>
+
+                        <img src={movieFile.logo} width={"500px"} alt="Logo"/>
+
                         <div className={css.button__group}>
                             <LikeGroup
                                 onClick={() => {
