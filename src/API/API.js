@@ -24,5 +24,14 @@ export const MainAPI={
     },
     videoUrl(file){
         return instance.get(`/file/url/${file}`).then(r=>r.data)
+    },
+
+}
+export const MoviesPreview = {
+    putLike(id,vote){
+        return instance.get(`/like/${id}/${vote}`).then(r=>r.data)
     }
 }
+
+// const res =()=> MoviesPreview.putLike(5875,2)
+// res().then(r=>console.log(r.data))

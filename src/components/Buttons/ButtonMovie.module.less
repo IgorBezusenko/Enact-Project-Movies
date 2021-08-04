@@ -26,7 +26,7 @@
 .description{
   display: flex;
   justify-content: center;
-  margin-top: 3rem;
+  //margin-top: 3rem;
 
 }
 .description a{
@@ -43,18 +43,36 @@
 }
 
 
-.icon{
-  margin: 0.5em;
-  border: 1px solid #CCCCCC;;
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover;
-  transition: all 0.3s;
-  opacity: 0.7;
+.btn__like{
+  margin-right: 0.6rem;
+  border: none;
+  cursor: pointer;
+}
+.btn__like svg{
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
-.icon:focus{
-  border: 1px solid tomato;;
-  transform: scale(1.1);
-  opacity: 1;
+.btn__like:focus  .row{
+  background: #FF0000;
+}
+
+.row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 6.5rem;
+  height: 3.25rem;
+  background: rgba(181, 175, 175, 0.25);
+  border-radius: 0.20833rem;
+  color: #FFFFFF;
+  padding: 0 0.4rem;
+}
+.range__like{
+  color: #FFFFFF;
+}
+.text__like{
+  color: #FFFFFF;
+  text-align: center;
+  margin-top: 0.3rem;
 }

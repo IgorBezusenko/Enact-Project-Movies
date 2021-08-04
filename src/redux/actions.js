@@ -1,4 +1,4 @@
-import {AuthAPI, MainAPI} from "../API/API";
+import {AuthAPI, MainAPI, MoviesPreview} from "../API/API";
 
 export const AUTH_TOGGLE_IS_FETCHING = "AUTH/AUTH_TOGGLE_IS_FETCHING"
 export const SET_TOKEN = "AUTH/SET_TOKEN"
@@ -10,7 +10,9 @@ export const GET_MAIN = "MAIN/GET_MAIN";
 export const GET_MOVIE_FILE = "MAIN/GET_MOVIE_FILE";
 export const MAIN_TOGGLE_IS_FETCHING = "MAIN/MAIN_TOGGLE_IS_FETCHING"
 export const GET_VIDEO_URL = "MAIN/GET_VIDEO_URL"
-export const CLEAR_VIDEO_URL="MAIN/CLEAR_VIDEO_URL"
+export const CLEAR_VIDEO_URL = "MAIN/CLEAR_VIDEO_URL"
+export const PUT_LIKE_AC = "MoviesPreview/PUT_LIKE_AC"
+export const SET_VOTE_AC = "MoviesPreview/SET_VOTE_AC"
 
 export const authToggleIsFetching = (IsFetching) => ({
     type: AUTH_TOGGLE_IS_FETCHING,
@@ -75,12 +77,12 @@ export const getMovieFile = (id) => async (dispatch) => {
     dispatch(mainToggleIsFetching(true))
     try {
         const {data} = await MainAPI.movieFile(id)
-        dispatch(mainToggleIsFetching(false))
+
         dispatch({
             type: GET_MOVIE_FILE,
             payload: data
         })
-
+        dispatch(mainToggleIsFetching(false))
     } catch (e) {
         console.log("Error getMovieFile", e.response)
         dispatch(mainToggleIsFetching(false))
@@ -88,23 +90,46 @@ export const getMovieFile = (id) => async (dispatch) => {
     }
 }
 
-export const clearVideoUrl=()=>({
-    type:CLEAR_VIDEO_URL
+export const clearVideoUrl = () => ({
+    type: CLEAR_VIDEO_URL
 })
 
-export const getVideoUrl =(file)=>async (dispatch)=>{
+export const getVideoUrl = (file) => async (dispatch) => {
     // dispatch(mainToggleIsFetching(true))
-    try{
-        const response= await MainAPI.videoUrl(file)
+    try {
+        const response = await MainAPI.videoUrl(file)
         console.log(response.data.url)
         dispatch({
-            type:GET_VIDEO_URL,
-            videoUrl:response.data.url
+            type: GET_VIDEO_URL,
+            videoUrl: response.data.url
 
         })
         // dispatch(mainToggleIsFetching(false))
-    }catch (e) {
-        console.log("Error getVideoUrl",e.response)
+    } catch (e) {
+        console.log("Error getVideoUrl", e.response)
+        // dispatch(mainToggleIsFetching(false))
+    }
+}
+
+//like
+export const setVote = (vote) => ({
+    type: SET_VOTE_AC,
+    payload: vote
+})
+
+export const putLikeAC = (id, vote) => async (dispatch) => {
+    // dispatch(mainToggleIsFetching(true))
+    try {
+        const response = await MoviesPreview.putLike(id, vote)
+        // console.log(response.data)
+        dispatch({
+            type: PUT_LIKE_AC,
+            payload: response.data
+
+        })
+        // dispatch(mainToggleIsFetching(false))
+    } catch (e) {
+        console.log("Error getVideoUrl", e.response)
         // dispatch(mainToggleIsFetching(false))
     }
 }

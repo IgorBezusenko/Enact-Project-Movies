@@ -1,24 +1,25 @@
-@import "~@enact/sandstone/styles/mixins.less";
+
 
 .kitten {
+
   display: inline-block;
   padding: 24px;
   text-align: center;
-  .focus({
-    background-color:  #e6e6e6;
-    color: black;
-  });
+
+}
+.kitten:focus{
+  background-color:  #e6e6e6;
+  color: black;
 }
 
 
-.movies__Container {
+
+.container {
+  display: flex;
+
   line-height: normal;
-  background-color: black;
-  color: azure;
-}
-
-.bgRed {
-  //overflow: hidden;
+  background: #041423;
+  color: #FFFFFF;
   height: 100vh;
   overflow-y: auto;
 
@@ -27,15 +28,16 @@
   }
 }
 
-.moviesPanel {
-  //overflow: hidden;
-  //overflow-y: scroll;
 
+.content{
+  flex-grow: 1;
+  padding: 0 0 0 5rem;
 }
 
 .row {
   display: flex;
   justify-content: space-between;
+  width: 100vw;
   overflow-x: auto;
 }
 

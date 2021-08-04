@@ -1,5 +1,5 @@
-import React from "react";
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import React, {useEffect} from "react";
+import {BrowserRouter as Router, Route,Redirect} from "react-router-dom";
 import MainPanel from "../components/Main/MainPanel";
 import {AuthForm} from "../components/Auth/AuthForm";
 import {MoviesPreview} from "../components/Main/Movies/MoviesPreview";
@@ -10,15 +10,23 @@ import ThemeDecorator from "@enact/sandstone/ThemeDecorator";
 import {Preloader} from "../components/Header/Preloader";
 import {AuthPage} from "../components/Auth/AuthPage";
 import {AuthMobile} from "../components/Auth/AuthMobile";
+import {reactLocalStorage} from "reactjs-localstorage";
+import {useSelector} from "react-redux";
 
 const App = () => {
-
-
+    const token = useSelector(state => state.authReducer.token)
+    useEffect(() => {
+        reactLocalStorage.set('token', token);
+    }, [token]);
     return (
 
         <Router basename={process.env.PUBLIC_URL}>
-            {/*<Preloader/>*/}
-
+            <Preloader/>
+            {/*<Route*/}
+            {/*    exact*/}
+            {/*    path={"/"}*/}
+            {/*    render={() => <Redirect to={"/main"}/>}*/}
+            {/*/>*/}
             <Route  path={"/main"} component={MainPanel}/>
 
             <Route exact path={"/auth"} component={AuthPage}/>

@@ -41,7 +41,7 @@ export const MovieSeries = (props) => {
     return (
         <div  style={{
             width: "100%",
-            height: "100%",
+            height:"100%",
             backgroundImage: `url(${movieFile.logo})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "0 0",
