@@ -20,9 +20,9 @@ const MainPanel = () => {
                 <div className={css.content}>{
                     movies.map((moviesList, idx) => {
                         return (
-                            <div key={idx}>
-                                <MainList moviesList={moviesList}/>
-                            </div>
+
+                                <MainList key={idx} moviesList={moviesList}/>
+
                         )
                     })
                 }</div>

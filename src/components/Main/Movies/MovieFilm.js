@@ -8,6 +8,7 @@ export const MovieFilm = ({movieFile}) => {
     const history = useHistory()
 
     const onSelect = (e,item) => {
+
         if (e.code === "Enter") {
             history.push("/player?file=" + item)
         }

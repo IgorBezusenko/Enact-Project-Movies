@@ -145,5 +145,5 @@ const Component = ({children, ...rest}) => {
     return (<div {...rest}>{children}</div>)
 }
 
-const ItemBase = Spottable(Component)
+export const ItemBase = Spottable(Component)
 const SidebarMini = Spottable(SidebarMiniBase)

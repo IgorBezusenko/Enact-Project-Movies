@@ -11,8 +11,11 @@ export const GET_MOVIE_FILE = "MAIN/GET_MOVIE_FILE";
 export const MAIN_TOGGLE_IS_FETCHING = "MAIN/MAIN_TOGGLE_IS_FETCHING"
 export const GET_VIDEO_URL = "MAIN/GET_VIDEO_URL"
 export const CLEAR_VIDEO_URL = "MAIN/CLEAR_VIDEO_URL"
+
 export const PUT_LIKE_AC = "MoviesPreview/PUT_LIKE_AC"
 export const SET_VOTE_AC = "MoviesPreview/SET_VOTE_AC"
+
+export const GET_CATEGORY = "CATEGORY/GET_CATEGORY"
 
 export const authToggleIsFetching = (IsFetching) => ({
     type: AUTH_TOGGLE_IS_FETCHING,
@@ -134,3 +137,21 @@ export const putLikeAC = (id, vote) => async (dispatch) => {
     }
 }
 
+//category
+
+export const getCategory = (cid) => async (dispatch) => {
+    dispatch(mainToggleIsFetching(true))
+    try {
+        const {data} = await MainAPI.category(cid)
+
+        dispatch({
+            type: GET_CATEGORY,
+            payload: data
+        })
+        dispatch(mainToggleIsFetching(false))
+    } catch (e) {
+        console.log("Error getCategory", e.response)
+        dispatch(mainToggleIsFetching(false))
+
+    }
+}

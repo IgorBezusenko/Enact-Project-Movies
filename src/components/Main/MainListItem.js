@@ -25,8 +25,8 @@ const MainListItemBase = ({item, ...rest}) => {
 
             </div>
             <div className={css.item__details}>
-                <div>{item.year} | {!!item.access ? "Подписка" : "Бесплатный"}</div>
-                <div>{!!item.rate_age && item.rate_age} {item.title}</div>
+                {/*<div>{item.year} | {!!item.access ? "Подписка" : "Бесплатный"}</div>*/}
+                {/*<div>{!!item.rate_age && item.rate_age} {item.title}</div>*/}
             </div>
         </div>
     )

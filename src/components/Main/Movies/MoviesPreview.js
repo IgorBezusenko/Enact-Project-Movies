@@ -157,7 +157,9 @@ export const MoviesPreview = (props) => {
                         </div>
                     </div>
                 </div>
+
                 <ButtonDescription/>
+
             </div>
 
         </div>

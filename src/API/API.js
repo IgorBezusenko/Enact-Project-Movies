@@ -25,6 +25,9 @@ export const MainAPI={
     videoUrl(file){
         return instance.get(`/file/url/${file}`).then(r=>r.data)
     },
+    category(cid){
+        return instance.get(`/file/category/${cid}/12`).then(r=>r.data)
+    },
 
 }
 export const MoviesPreview = {
@@ -33,5 +36,5 @@ export const MoviesPreview = {
     }
 }
 
-// const res =()=> MoviesPreview.putLike(5875,2)
+// const res =()=> MainAPI.category(102)
 // res().then(r=>console.log(r.data))
