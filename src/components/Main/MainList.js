@@ -1,16 +1,25 @@
 import React from "react";
 import css from "./Main.module.less";
 import MainListItem from "./MainListItem";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {ItemBase} from "../Header/Header";
 import Slider from "react-slick";
 import Scroller from "@enact/moonstone/Scroller";
 
 const MainList = ({moviesList}) => {
-    return (
-        <div className={css.main__list}>
+    let history = useHistory();
+    const onSelectHandler = (e,path) => {
+        // console.log("item.url",item.url)
+        if (e.code === "Enter") {
+            history.push(path)
+        }
 
-                <ItemBase className={css.on__title__focus}>
+    }
+
+    return (
+        <div className={css.main__list} >
+
+                <ItemBase className={css.on__title__focus} onKeyDown={(e)=>onSelectHandler(e,"/category?cid="+moviesList.cid)}>
                 <Link to={"/category?cid="+moviesList.cid}> <h1>{moviesList.title}</h1></Link>
                 </ItemBase>
 

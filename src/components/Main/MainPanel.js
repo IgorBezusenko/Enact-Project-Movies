@@ -17,15 +17,17 @@ const MainPanel = () => {
         <>
             <div className={css.container}>
                 <Header/>
-                <div className={css.content}>{
-                    movies.map((moviesList, idx) => {
-                        return (
+                <div className={css.content}>
+                    {
+                        movies.map((moviesList, idx) => {
+                            return (
 
                                 <MainList key={idx} moviesList={moviesList}/>
 
-                        )
-                    })
-                }</div>
+                            )
+                        })
+                    }
+                </div>
             </div>
         </>
 
