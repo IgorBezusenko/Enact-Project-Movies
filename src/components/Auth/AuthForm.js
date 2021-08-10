@@ -47,7 +47,7 @@ export const AuthForm = (props) => {
             {!!token && <Redirect to={"/main"}/>}
             {loading ? <p>Lading...</p> : <div className={css.container}>
                 <NavOnBack className={css.on__back} title={"Вход"} onGoBack={onBackHandler}/>
-                <form onSubmit={onSubmit}>
+                <form className={css.form} onSubmit={onSubmit}>
 
 
 

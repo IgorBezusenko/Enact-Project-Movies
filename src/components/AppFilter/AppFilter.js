@@ -18,7 +18,7 @@ export const AppFilter = ({title,onGoBack,children}) => {
                           onClick={onGoBack}
                           onKeyDown={(e) => onSelectHandler(e)}><span></span></ItemBase>
             </div>
-            <div>
+            <div >
                 {children}
             </div>
         </div>
