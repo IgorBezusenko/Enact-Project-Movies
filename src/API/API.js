@@ -26,7 +26,7 @@ export const MainAPI={
         return instance.get(`/file/url/${file}`).then(r=>r.data)
     },
     category(cid){
-        return instance.get(`/file/category/${cid}/12`).then(r=>r.data)
+        return instance.get(`/file/category/${cid}/15`).then(r=>r.data)
     },
 
 }

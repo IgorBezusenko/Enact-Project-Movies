@@ -15,7 +15,7 @@ const OnBack = ({title, onGoBack, ...rest}) => {
             }
         }}>
 
-            <div className={css.row}><div className={css.icon}><CornerUpLeft/></div><h2 className={css.ml_7 + " " + css.nav__title}> {title ? title : null}</h2></div>
+            <div className={css.row}><div className={css.icon}><CornerUpLeft/></div><div className={css.ml_7 + " " + css.nav__title}> {title ? title : null}</div></div>
         </div>
     )
 }

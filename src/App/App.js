@@ -14,6 +14,8 @@ import {Preloader} from "../components/Header/Preloader";
 import {AuthPage} from "../components/Auth/AuthPage";
 import {AuthMobile} from "../components/Auth/AuthMobile";
 import {Category} from "../components/Main/Category/Category";
+import {AppFilter, CategoryFilter} from "../components/AppFilter/CategoryFilter";
+import {CategorySort} from "../components/AppFilter/CategorySort";
 
 const App = () => {
     const token = useSelector(state => state.authReducer.token)
@@ -23,7 +25,7 @@ const App = () => {
     return (
 
         <Router basename={process.env.PUBLIC_URL}>
-            <Preloader/>
+            {/*<Preloader/>*/}
             {/*<Route*/}
             {/*    exact*/}
             {/*    path={"/"}*/}
@@ -38,6 +40,8 @@ const App = () => {
             <Route path={"/detail"} component={MoviesPreview}/>
 
             <Route path={"/category"} component={Category}/>
+            <Route path={"/app-filter"} component={CategoryFilter}/>
+            <Route path={"/app-sort"} component={CategorySort}/>
 
             <Route path={"/player"} component={VideoPlayer}/>
             <Route path={"/description"} component={MoviesDescription}/>

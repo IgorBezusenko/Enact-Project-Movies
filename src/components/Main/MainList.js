@@ -2,9 +2,9 @@ import React from "react";
 import css from "./Main.module.less";
 import MainListItem from "./MainListItem";
 import {Link, useHistory} from "react-router-dom";
-import {ItemBase} from "../Header/Header";
 import Slider from "react-slick";
 import Scroller from "@enact/moonstone/Scroller";
+import {ItemBase} from "../Buttons/ItemBase";
 
 const MainList = ({moviesList}) => {
     let history = useHistory();

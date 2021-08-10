@@ -1,8 +1,37 @@
 .container {
   width: 100%;
-  padding: 0 2rem;
+  padding: 2rem 2rem 0;
 }
 
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn__category {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 0.5rem 1.4rem;
+  font-size: 1rem;
+  color: #FFFFFF;
+  margin: 0 1.4rem 0 0;
+  border: none;
+  border-radius: 0.6rem;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+    margin: 0 0.6rem 0 0;
+  }
+}
+
+.btn__category:focus {
+  background-color: #FF0000;
+}
 
 .list {
   display: flex;
@@ -22,11 +51,11 @@
   margin: 1rem 0.5rem;
   font-size: 1rem;
   border-radius: 0.1rem;
-  img{
+
+  img {
     width: 100%;
     height: 18.75rem;
   }
-
 
 
 }
@@ -37,9 +66,11 @@
 
 }
 
-.on__back{
+.on__back {
+  width: 100%;
   margin: 0 0 0 4rem;
 }
+
 .on__back:focus {
   color: #FF0000;
 }
