@@ -1,5 +1,4 @@
-import {useQuery} from "../../../utils/useQuery";
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -12,32 +11,44 @@ import {Header} from "../../Header/Header";
 import {NavOnBack} from "../../NavOnBack/NavOnBack";
 import {ButtonBase} from "../../Buttons/ButtonBase";
 import {List, Sliders} from "react-feather";
-import {AppFilter} from "../../AppFilter/CategoryFilter";
 import {Link, useHistory} from "react-router-dom";
 
+import * as queryString from "querystring";
 
 export const Category = (props) => {
-    const query = useQuery();
-    const categoryId = query.get("cid")
     const dispatch = useDispatch()
     const history = useHistory();
-    const category = useSelector(state => state.mainReducer.category)
-    const [sort, setSort] = useState(false)
-    const [filter, setFilter] = useState(false)
+    const categoryReducer = useSelector(state => state.categoryReducer)
+    const {category, currentPage, idSort, categoryId} = categoryReducer
+
+
     useEffect(() => {
-        console.log("categoryId", categoryId)
-        dispatch(getCategory(categoryId))
+        const parsed = queryString.parse(history.location.search.substr(1))
+        let actualCurrentPage = currentPage
+        let actualIdSort = idSort
+        let actualCategoryId = categoryId
+        if (!!parsed.page) actualCurrentPage = +parsed.page
+        if (!!parsed.cid) actualCategoryId = parsed.cid
+        if (!!parsed.id_sort) actualCategoryId = parsed.id_sort
+        // console.log("parsed1", parsed)
+        dispatch(getCategory(actualCategoryId, actualCurrentPage, actualIdSort))
     }, [categoryId])
 
     useEffect(() => {
-        console.log(category)
-    }, [category])
+        const query = {};
+        if (categoryId !== null) query.cid = categoryId
+        if (idSort !== 1) query.id_sort = idSort
+
+        history.push({
+            pathname: '/category',
+            search: queryString.stringify(query)
+        })
+    }, [idSort, categoryId])
 
 
     const onBackHandler = () => props.history.goBack()
 
     const onSelectHandler = (e, path) => {
-        // console.log("item.url",item.url)
         if (e.code === "Enter") {
             history.push(path)
         }

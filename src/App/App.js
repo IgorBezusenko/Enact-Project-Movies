@@ -25,7 +25,7 @@ const App = () => {
     return (
 
         <Router basename={process.env.PUBLIC_URL}>
-            {/*<Preloader/>*/}
+            <Preloader/>
             {/*<Route*/}
             {/*    exact*/}
             {/*    path={"/"}*/}

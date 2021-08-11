@@ -4,10 +4,9 @@ import {Bookmark, Briefcase, LogIn, PlayCircle, Search, Smile, Video} from "reac
 
 import css from "./Header.module.less"
 import {useDispatch, useSelector} from "react-redux";
-import {clearToken, clearVideoUrl} from "../../redux/actions";
+import {clearToken, clearVideoUrl, setCategoryId} from "../../redux/actions";
 
 import {reactLocalStorage} from "reactjs-localstorage";
-import Spottable from "@enact/spotlight/Spottable";
 import {ItemBase} from "../Buttons/ItemBase";
 
 export const Header = () => {
@@ -50,14 +49,19 @@ const Sidebar = () => {
     const [serial, setSerial] = useState(false)
     const [smile, setSmile] = useState(false)
     const [login, setLogin] = useState(false)
-
+    const dispatch = useDispatch()
     let history = useHistory();
-    const onSelectHandler = (e, path) => {
-        // console.log("item.url",path)
-        if (e.code === "Enter") {
-            history.push(path)
-        }
 
+    const onSelectHandler = (e, path) => {
+        if (e.code === "Enter") {
+            history.push("/category?cid=" + path)
+            onHandleClick(path)
+        }
+    }
+
+    const onHandleClick = (categoryId) => {
+        // console.log(categoryId)
+        dispatch(setCategoryId(categoryId))
     }
 
     return (
@@ -69,14 +73,15 @@ const Sidebar = () => {
             <ul className={css.nav}>
 
                 <li>
-                    <ItemBase onKeyDown={(e) => onSelectHandler(e, "/main")}
-                              onFocus={() => {
-                                  setSearch(true)
-                              }}
-                              onBlur={() => {
-                                  setSearch(false)
-                              }}
-                              className={css.item__base}><Link to={"/main"}><Search/></Link></ItemBase>
+                    <ItemBase
+                        onKeyDown={(e) => onSelectHandler(e, "/main")}
+                        onFocus={() => {
+                            setSearch(true)
+                        }}
+                        onBlur={() => {
+                            setSearch(false)
+                        }}
+                        className={css.item__base}><Link to={"/main"}><Search/></Link></ItemBase>
                     {search && <div className={css.icon__text}>Поиск</div>}
                 </li>
                 <li>
@@ -102,7 +107,10 @@ const Sidebar = () => {
                     {favorite && <div className={css.icon__text}>Избранное</div>}
                 </li>
                 <li>
-                    <ItemBase onKeyDown={(e) => onSelectHandler(e, "/category?cid=100")}
+                    <ItemBase onClick={() => {
+                        onHandleClick("100")
+                    }}
+                              onKeyDown={(e) => onSelectHandler(e, "100")}
                               onFocus={() => {
                                   setFilm(true)
                               }}
@@ -114,7 +122,10 @@ const Sidebar = () => {
                     {film && <div className={css.icon__text}>Фильмы</div>}
                 </li>
                 <li>
-                    <ItemBase onKeyDown={(e) => onSelectHandler(e, "/category?cid=39")}
+                    <ItemBase onClick={() => {
+                        onHandleClick("39")
+                    }}
+                              onKeyDown={(e) => onSelectHandler(e, "39")}
                               onFocus={() => {
                                   setSerial(true)
                               }}
@@ -126,14 +137,18 @@ const Sidebar = () => {
                     {serial && <div className={css.icon__text}>Сериалы</div>}
                 </li>
                 <li>
-                    <ItemBase onKeyDown={(e) => onSelectHandler(e, "/category?cid=20")}
-                              onFocus={() => {
-                                  setSmile(true)
-                              }}
-                              onBlur={() => {
-                                  setSmile(false)
-                              }}
-                              className={css.item__base}><Link to={"/category?cid=20"}><Smile/></Link></ItemBase>
+                    <ItemBase
+                        onClick={() => {
+                            onHandleClick("20")
+                        }}
+                        onKeyDown={(e) => onSelectHandler(e, "20")}
+                        onFocus={() => {
+                            setSmile(true)
+                        }}
+                        onBlur={() => {
+                            setSmile(false)
+                        }}
+                        className={css.item__base}><Link to={"/category?cid=20"}><Smile/></Link></ItemBase>
                     {smile && <div className={css.icon__text}>Мультфильмы</div>}
                 </li>
 

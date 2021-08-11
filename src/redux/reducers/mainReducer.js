@@ -1,17 +1,9 @@
-import {
-    CLEAR_VIDEO_URL,
-    GET_CATEGORY,
-    GET_MAIN,
-    GET_MOVIE_FILE,
-    GET_VIDEO_URL,
-    MAIN_TOGGLE_IS_FETCHING
-} from "../actions";
+import {CLEAR_VIDEO_URL, GET_MAIN, GET_MOVIE_FILE, GET_VIDEO_URL, MAIN_TOGGLE_IS_FETCHING} from "../actions";
 
 const initialState = {
     mainData: [],
     movieFile: {},
     videoUrl: null,
-    category:null,
     isFetching: false
 }
 
@@ -43,11 +35,7 @@ export const mainReducer = (state = initialState, action) => {
                 ...state,
                 videoUrl: null
             }
-            case  GET_CATEGORY:
-            return {
-                ...state,
-                category: action.payload
-            }
+
 
         default :
             return state

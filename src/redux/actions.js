@@ -16,6 +16,10 @@ export const PUT_LIKE_AC = "MoviesPreview/PUT_LIKE_AC"
 export const SET_VOTE_AC = "MoviesPreview/SET_VOTE_AC"
 
 export const GET_CATEGORY = "CATEGORY/GET_CATEGORY"
+export const SET_CATEGORY_ID = "CATEGORY/SET_CATEGORY_ID"
+export const SET_ID_SORT = "CATEGORY/SET_ID_SORT"
+
+// export const GET_SORT_FILE = "CATEGORY/GET_SORT_FILE"
 
 export const authToggleIsFetching = (IsFetching) => ({
     type: AUTH_TOGGLE_IS_FETCHING,
@@ -139,10 +143,19 @@ export const putLikeAC = (id, vote) => async (dispatch) => {
 
 //category
 
-export const getCategory = (cid) => async (dispatch) => {
+export const setCategoryId = (categoryId) => ({
+    type: SET_CATEGORY_ID,
+    categoryId
+})
+export const setIdSort = (idSort) => ({
+    type: SET_ID_SORT,
+    idSort
+})
+
+export const getCategory = (cid, currentPage, idSort) => async (dispatch) => {
     dispatch(mainToggleIsFetching(true))
     try {
-        const {data} = await MainAPI.category(cid)
+        const {data} = await MainAPI.category(cid,currentPage,idSort)
 
         dispatch({
             type: GET_CATEGORY,
