@@ -28,6 +28,9 @@ export const MainAPI = {
     category(cid, currentPage=1, idSort=1) {
         return instance.get(`/file/category/${cid}/15?page=${currentPage}&id_sort=${idSort}`).then(r => r.data)
     },
+    categoryFilter() {
+        return instance.get(`/listFilter`).then(r => r.data)
+    }
 
 
 }

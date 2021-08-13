@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import css from "./Category.module.less"
 
 import {useDispatch, useSelector} from "react-redux";
-import {getCategory} from "../../../redux/actions";
+import {getCategory, getCategoryFilter} from "../../../redux/actions";
 import MainListItem from "../MainListItem";
 import {Header} from "../../Header/Header";
 import {NavOnBack} from "../../NavOnBack/NavOnBack";
@@ -26,12 +26,10 @@ export const Category = (props) => {
         const parsed = queryString.parse(history.location.search.substr(1))
         let actualCurrentPage = currentPage
         let actualIdSort = idSort
-        let actualCategoryId = categoryId
         if (!!parsed.page) actualCurrentPage = +parsed.page
-        if (!!parsed.cid) actualCategoryId = parsed.cid
-        if (!!parsed.id_sort) actualCategoryId = parsed.id_sort
-        // console.log("parsed1", parsed)
-        dispatch(getCategory(actualCategoryId, actualCurrentPage, actualIdSort))
+        if (!!parsed.id_sort) actualIdSort = parsed.id_sort
+
+        dispatch(getCategory(categoryId, actualCurrentPage, actualIdSort))
     }, [categoryId])
 
     useEffect(() => {

@@ -18,6 +18,11 @@ export const SET_VOTE_AC = "MoviesPreview/SET_VOTE_AC"
 export const GET_CATEGORY = "CATEGORY/GET_CATEGORY"
 export const SET_CATEGORY_ID = "CATEGORY/SET_CATEGORY_ID"
 export const SET_ID_SORT = "CATEGORY/SET_ID_SORT"
+export const SET_CATEGORY_FILTER = "CATEGORY/SET_CATEGORY_FILTER"
+export const SET_FILTER_GENRE = "CATEGORY/SET_FILTER_GENRE"
+export const SET_FILTER_YEAR = "CATEGORY/SET_FILTER_YEAR"
+export const SET_FILTER_COUNTRY = "CATEGORY/SET_FILTER_COUNTRY"
+export const SET_FILTER_TYPE_CONTENT = "CATEGORY/SET_FILTER_TYPE_CONTENT"
 
 // export const GET_SORT_FILE = "CATEGORY/GET_SORT_FILE"
 
@@ -152,6 +157,31 @@ export const setIdSort = (idSort) => ({
     idSort
 })
 
+export const setCategoryFilter = (categoryFilter) => ({
+    type: SET_CATEGORY_FILTER,
+    categoryFilter
+})
+
+export const setFilterGenre = (id, name, checked) => ({
+    type: SET_FILTER_GENRE,
+    id, name, checked
+})
+export const setFilterYear = (filterYear) => ({
+    type: SET_FILTER_YEAR,
+    filterYear
+})
+
+export const setFilterCountry = (id, name, checked) => ({
+    type: SET_FILTER_COUNTRY,
+    id, name, checked
+})
+
+export const setFilterTypeContent = (id, name, checked) => ({
+    type: SET_FILTER_TYPE_CONTENT,
+    id, name, checked
+})
+
+
 export const getCategory = (cid, currentPage, idSort) => async (dispatch) => {
     dispatch(mainToggleIsFetching(true))
     try {
@@ -164,6 +194,19 @@ export const getCategory = (cid, currentPage, idSort) => async (dispatch) => {
         dispatch(mainToggleIsFetching(false))
     } catch (e) {
         console.log("Error getCategory", e.response)
+        dispatch(mainToggleIsFetching(false))
+
+    }
+}
+export const getCategoryFilter = () => async (dispatch) => {
+    dispatch(mainToggleIsFetching(true))
+    try {
+        const {data} = await MainAPI.categoryFilter()
+        // console.log(data)
+        dispatch(setCategoryFilter(data))
+        dispatch(mainToggleIsFetching(false))
+    } catch (e) {
+        console.log("Error getCategoryFilter", e.response)
         dispatch(mainToggleIsFetching(false))
 
     }

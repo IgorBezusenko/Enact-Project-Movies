@@ -14,7 +14,7 @@ import {Preloader} from "../components/Header/Preloader";
 import {AuthPage} from "../components/Auth/AuthPage";
 import {AuthMobile} from "../components/Auth/AuthMobile";
 import {Category} from "../components/Main/Category/Category";
-import {AppFilter, CategoryFilter} from "../components/AppFilter/CategoryFilter";
+import { CategoryFilter} from "../components/AppFilter/CategoryFilter";
 import {CategorySort} from "../components/AppFilter/CategorySort";
 
 const App = () => {

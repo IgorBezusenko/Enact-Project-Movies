@@ -1,14 +1,18 @@
-import React from "react";
+import React, {useEffect} from "react";
 import css from "./Main.module.less";
 import MainListItem from "./MainListItem";
 import {Link, useHistory} from "react-router-dom";
 import {ItemBase} from "../Buttons/ItemBase";
 import {useDispatch} from "react-redux";
-import {setCategoryId} from "../../redux/actions";
+import {getCategoryFilter, setCategoryId} from "../../redux/actions";
 
 const MainList = ({moviesList}) => {
     let history = useHistory();
     const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getCategoryFilter())
+    }, [])
+
     const onSelectHandler = (e, path) => {
         if (e.code === "Enter") {
             history.push("/category?cid="+path)
