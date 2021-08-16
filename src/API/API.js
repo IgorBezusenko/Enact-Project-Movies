@@ -30,6 +30,9 @@ export const MainAPI = {
     },
     categoryFilter() {
         return instance.get(`/listFilter`).then(r => r.data)
+    },
+    searchFilter(genre='', country='',year='',typeContent=''){
+        return instance.get(`/searchExt/15?genre=${genre}&country=${country}&year=${year}&type_content=${typeContent}`).then(r => r.data)
     }
 
 

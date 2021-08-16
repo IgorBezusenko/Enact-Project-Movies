@@ -6,6 +6,7 @@ import {ButtonBase} from "../Buttons/ButtonBase";
 import {useSelector} from "react-redux";
 import {InputCheckBox} from "./InputCheckBox";
 import {InputRadio} from "./InputRadio";
+import {Link} from "react-router-dom";
 
 export const CategoryFilter = (props) => {
     const onBackHandler = () => props.history.goBack()
@@ -79,8 +80,10 @@ export const CategoryFilter = (props) => {
 
                 <div className={css.row}>
                     <ButtonBase className={css.btn__filter}>
-                        <Sliders/>
-                        <div>Показать результат</div>
+                       <Link to={"/app-search"} className={css.btn__row}>
+                           <Sliders/>
+                           <div>Показать результат</div>
+                       </Link>
                     </ButtonBase>
 
                     <ButtonBase className={css.btn__filter}>

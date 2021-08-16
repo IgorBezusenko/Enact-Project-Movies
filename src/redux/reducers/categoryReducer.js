@@ -3,7 +3,7 @@ import {
     SET_CATEGORY_FILTER,
     SET_CATEGORY_ID,
     SET_FILTER_COUNTRY,
-    SET_FILTER_GENRE, SET_FILTER_TYPE_CONTENT, SET_FILTER_YEAR,
+    SET_FILTER_GENRE, SET_FILTER_SEARCH, SET_FILTER_TYPE_CONTENT, SET_FILTER_YEAR,
     SET_ID_SORT
 } from "../actions";
 
@@ -84,6 +84,12 @@ export const categoryReducer = (state = initialState, action) => {
                 }
             }
         }
+        case SET_FILTER_SEARCH:
+            return {
+                ...state,
+                search: action.search
+            }
+
         // case SET_FILTER_TYPE_CONTENT:
         // {
         //     const indexTypeContent = state.categoryFilter.type_content.findIndex(
@@ -114,6 +120,7 @@ export const categoryReducer = (state = initialState, action) => {
 }
 
 const initialState = {
+    search:null,
     category: null,
     categoryId: null,
     categoryFilter: {
@@ -124,8 +131,8 @@ const initialState = {
         category: [],
         sort: []
     },
-    filterYear:null,
-    filterTypeContent:null,
+    filterYear:"",
+    filterTypeContent:"",
     currentPage: 1,
     idSort: 1,
     isFetching: false

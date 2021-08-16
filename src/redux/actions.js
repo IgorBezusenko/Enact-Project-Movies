@@ -23,6 +23,7 @@ export const SET_FILTER_GENRE = "CATEGORY/SET_FILTER_GENRE"
 export const SET_FILTER_YEAR = "CATEGORY/SET_FILTER_YEAR"
 export const SET_FILTER_COUNTRY = "CATEGORY/SET_FILTER_COUNTRY"
 export const SET_FILTER_TYPE_CONTENT = "CATEGORY/SET_FILTER_TYPE_CONTENT"
+export const SET_FILTER_SEARCH = "CATEGORY/SET_FILTER_SEARCH"
 
 // export const GET_SORT_FILE = "CATEGORY/GET_SORT_FILE"
 
@@ -187,7 +188,7 @@ export const setFilterCountry = (id, name, checked) => ({
 
 
 export const getCategory = (cid, currentPage, idSort) => async (dispatch) => {
-    dispatch(mainToggleIsFetching(true))
+    // dispatch(mainToggleIsFetching(true))
     try {
         const {data} = await MainAPI.category(cid,currentPage,idSort)
 
@@ -195,23 +196,41 @@ export const getCategory = (cid, currentPage, idSort) => async (dispatch) => {
             type: GET_CATEGORY,
             payload: data
         })
-        dispatch(mainToggleIsFetching(false))
+        // dispatch(mainToggleIsFetching(false))
     } catch (e) {
         console.log("Error getCategory", e.response)
-        dispatch(mainToggleIsFetching(false))
+        // dispatch(mainToggleIsFetching(false))
 
     }
 }
 export const getCategoryFilter = () => async (dispatch) => {
-    dispatch(mainToggleIsFetching(true))
+    // dispatch(mainToggleIsFetching(true))
     try {
         const {data} = await MainAPI.categoryFilter()
         // console.log(data)
         dispatch(setCategoryFilter(data))
-        dispatch(mainToggleIsFetching(false))
+        // dispatch(mainToggleIsFetching(false))
     } catch (e) {
         console.log("Error getCategoryFilter", e.response)
-        dispatch(mainToggleIsFetching(false))
+        // dispatch(mainToggleIsFetching(false))
+
+    }
+}
+
+export const setSearchFilter = (search)=>({
+    type:SET_FILTER_SEARCH,
+    search
+})
+export const getSearchFilter = (genre,country,year,typeContent)=>async (dispatch)=>{
+    // dispatch(mainToggleIsFetching(true))
+    try {
+        const {data} = await MainAPI.searchFilter(genre,country,year,typeContent)
+        console.log(data)
+        dispatch(setSearchFilter(data))
+        // dispatch(mainToggleIsFetching(false))
+    } catch (e) {
+        console.log("Error getCategoryFilter", e.response)
+        // dispatch(mainToggleIsFetching(false))
 
     }
 }
