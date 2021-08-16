@@ -3,7 +3,7 @@ import {
     SET_CATEGORY_FILTER,
     SET_CATEGORY_ID,
     SET_FILTER_COUNTRY,
-    SET_FILTER_GENRE, SET_FILTER_TYPE_CONTENT,
+    SET_FILTER_GENRE, SET_FILTER_TYPE_CONTENT, SET_FILTER_YEAR,
     SET_ID_SORT
 } from "../actions";
 
@@ -31,23 +31,16 @@ export const categoryReducer = (state = initialState, action) => {
                 categoryFilter: action.categoryFilter
             }
 
-        // case EDIT_ITEM:
-        //     const indexEdit = state.filterGenre.findIndex(
-        //         (item) => item.id === action.payloadId
-        //     );
-        //     const editItem = {
-        //         id: action.payloadId,
-        //         date: today,
-        //         ...action.payloadItem,
-        //     };
-        //     return {
-        //         ...state,
-        //         itemState: [
-        //             ...state.itemState.slice(0, indexEdit),
-        //             editItem,
-        //             ...state.itemState.slice(indexEdit + 1),
-        //         ],
-        //     };
+        case SET_FILTER_YEAR:
+            return {
+                ...state,
+                filterYear: action.filterYear
+            }
+            case SET_FILTER_TYPE_CONTENT:
+            return {
+                ...state,
+                filterTypeContent: action.filterTypeContent
+            }
 
         case SET_FILTER_GENRE: {
             const indexGenre = state.categoryFilter.genre.findIndex(
@@ -70,8 +63,6 @@ export const categoryReducer = (state = initialState, action) => {
                 }
             }
         }
-        // case SET_FILTER_YEAR:
-
         case SET_FILTER_COUNTRY: {
             const indexCountry = state.categoryFilter.country.findIndex(
                 (item) => item.id === action.id
@@ -93,29 +84,28 @@ export const categoryReducer = (state = initialState, action) => {
                 }
             }
         }
-        case SET_FILTER_TYPE_CONTENT:
-        {
-            const indexTypeContent = state.categoryFilter.type_content.findIndex(
-                (item) => item.id === action.id
-            );
-            const editItem = {
-                id: action.id,
-                name: action.name,
-                checked: action.checked,
-            };
-            return {
-                ...state,
-                categoryFilter: {
-                    ...state.categoryFilter,
-                    type_content: [
-                        ...state.categoryFilter.type_content.slice(0, indexTypeContent),
-                        editItem,
-                        ...state.categoryFilter.type_content.slice(indexTypeContent + 1),
-                    ]
-                }
-            }
-        }
-
+        // case SET_FILTER_TYPE_CONTENT:
+        // {
+        //     const indexTypeContent = state.categoryFilter.type_content.findIndex(
+        //         (item) => item.id === action.id
+        //     );
+        //     const editItem = {
+        //         id: action.id,
+        //         name: action.name,
+        //         checked: action.checked,
+        //     };
+        //     return {
+        //         ...state,
+        //         categoryFilter: {
+        //             ...state.categoryFilter,
+        //             type_content: [
+        //                 ...state.categoryFilter.type_content.slice(0, indexTypeContent),
+        //                 editItem,
+        //                 ...state.categoryFilter.type_content.slice(indexTypeContent + 1),
+        //             ]
+        //         }
+        //     }
+        // }
 
 
         default :
@@ -134,7 +124,8 @@ const initialState = {
         category: [],
         sort: []
     },
-
+    filterYear:null,
+    filterTypeContent:null,
     currentPage: 1,
     idSort: 1,
     isFetching: false

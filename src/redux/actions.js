@@ -170,16 +170,20 @@ export const setFilterYear = (filterYear) => ({
     type: SET_FILTER_YEAR,
     filterYear
 })
-
+export const setFilterTypeContent = (filterTypeContent) => ({
+    type: SET_FILTER_TYPE_CONTENT,
+    filterTypeContent
+})
+// export const setFilterTypeContent = (id, name, checked) => ({
+//     type: SET_FILTER_TYPE_CONTENT,
+//     id, name, checked
+// })
 export const setFilterCountry = (id, name, checked) => ({
     type: SET_FILTER_COUNTRY,
     id, name, checked
 })
 
-export const setFilterTypeContent = (id, name, checked) => ({
-    type: SET_FILTER_TYPE_CONTENT,
-    id, name, checked
-})
+
 
 
 export const getCategory = (cid, currentPage, idSort) => async (dispatch) => {

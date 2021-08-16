@@ -21,16 +21,15 @@ export const CategorySort = (props) => {
         e.preventDefault()
         dispatch(setIdSort(inputIdSort))
         const query={};
-        // if (!!filter.term) query.term  = filter.term
-        // if (filter.friend !== null) query.friend  = String(filter.friend)
+
         if (categoryId !== null) query.cid  = categoryId
         if (idSort !==1) query.id_sort  = idSort
-        //
+
         history.push({
             pathname: '/category',
             search: queryString.stringify(query)
         })
-        // console.log("idSort",inputIdSort)
+
     }
     const onChangeHandler = (e) => {
         setInputIdSort(e.target.value)
