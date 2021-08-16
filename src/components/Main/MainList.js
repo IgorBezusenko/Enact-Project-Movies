@@ -33,6 +33,7 @@ const MainList = ({moviesList}) => {
             </ItemBase>
 
             <div className={css.row}>
+                <ItemBase>{" "}</ItemBase>
                 {moviesList.items.map((item, idx) => {
                     return (
 

@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import MainList from "./MainList";
 import {getMain} from "../../redux/actions";
 import {Header} from "../Header/Header";
+import {ItemBase} from "../Buttons/ItemBase";
 
 const MainPanel = () => {
     const movies = useSelector(state => state.mainReducer.mainData)
@@ -18,6 +19,7 @@ const MainPanel = () => {
             <div className={css.container}>
                 <Header/>
                 <div className={css.content}>
+
                     {
                         movies.map((moviesList, idx) => {
                             return (
