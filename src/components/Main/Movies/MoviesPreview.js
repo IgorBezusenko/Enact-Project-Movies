@@ -83,16 +83,17 @@ export const MoviesPreview = (props) => {
             backgroundSize: "cover"
         }}>
             <div className={css.container}>
-                <NavOnBack className={css.on__back} onGoBack={onBackHandler}/>
+
                 <div className={css.preview__row}>
                     <div>
+                        <NavOnBack className={css.on__back} onGoBack={onBackHandler}/>
                         <div className={css.description}>
                             <h1>{movieFile.title}</h1>
                             <div>{movieFile.year} </div>
                             <div>{genre}</div>
                             <div>{country}</div>
                         </div>
-                        <br/>
+
                         <div className={css.button__group}>
                             <ButtonPlay movieFile={movieFile}/>
                             <ButtonMovie className={cssSpottable.btn__movie} title={"Продолжить"}><Clock/></ButtonMovie>
@@ -115,7 +116,11 @@ export const MoviesPreview = (props) => {
 
                     </div>
 
-                    <div>
+                    <div style={{
+                        // width:"100%",
+                        // padding:"0 0 0 10rem",
+
+                    }}>
 
                         <img src={movieFile.logo} width={"500px"} alt="Logo"/>
 

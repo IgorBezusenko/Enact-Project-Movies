@@ -1,11 +1,12 @@
 import {useDispatch, useSelector} from "react-redux";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {clearVideoUrl} from "../../../redux/actions";
 import {Link, useHistory} from "react-router-dom";
 import {NavOnBack} from "../../NavOnBack/NavOnBack";
 
 import css from "./MovieSeries.module.less"
 import Spottable from "@enact/spotlight/Spottable";
+import {ItemBase} from "../../Buttons/ItemBase";
 
 const Component = ({children, ...rest}) => {
     return (
@@ -18,10 +19,16 @@ export const MovieSeries = (props) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const movieFile = useSelector(state => state.mainReducer.movieFile)
-    const [state, setState] = useState('')
+    const [state, setState] = useState('Сезон 1')
+    const [loading, setLoading] = useState(false)
 
     const onClickToSeason = (mediaTitle) => {
-        setState(mediaTitle)
+        // console.log(mediaTitle)
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+            setState(mediaTitle)
+        }, 100)
         dispatch(clearVideoUrl())
     }
     const onSelectSeason = (e, mediaTitle) => {
@@ -39,9 +46,9 @@ export const MovieSeries = (props) => {
     const onBackHandler = () => props.history.goBack()
 
     return (
-        <div  style={{
+        <div style={{
             width: "100%",
-            height:"100%",
+            height: "100%",
             backgroundImage: `url(${movieFile.logo})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "0 0",
@@ -59,7 +66,7 @@ export const MovieSeries = (props) => {
                                 <>
                                     {media.title
                                     && <ButtonSpotTable key={index}
-                                                        className={css.btn + " " + css.btn__season}
+                                                        className={css.btn + " " + css.btn__season +" "+`${media.title===state && css.btn__season_focus} `}
                                                         onClick={() => onClickToSeason(media.title)}
                                                         onKeyDown={(e) => onSelectSeason(e, media.title)}
                                     >{media.title}</ButtonSpotTable>}
@@ -70,33 +77,39 @@ export const MovieSeries = (props) => {
                 </div>
 
                 {
-                    state && <div className={css.series__container}>
-                        <div className={css.series__row}>
-                            {
-                                seasonSel.map(sel => {
-                                    return (
-                                        <>
-                                            {
-                                                sel.items.map((item, index) => {
-                                                    return (
-                                                        <>
-                                                            <Link to={"/player?file=" + item.file} key={index}>
-                                                                <ButtonSpotTable
-                                                                    className={css.btn + " " + css.btn__series}
-                                                                    onKeyDown={(e) => onSelectSeries(e, "/player?file=" + item.file)}
-                                                                >{item.title}</ButtonSpotTable>
-                                                            </Link>
+                    !loading && <>
+                        {
+                            state && <div className={css.series__container}>
+                                <div className={css.series__row}>
+                                    <ItemBase className={css.on__back}>{""}</ItemBase>
+                                    {
+                                        seasonSel.map(sel => {
+                                            return (
+                                                <>
+                                                    {
+                                                        sel.items.map((item, index) => {
+                                                            return (
+                                                                <>
+                                                                    <Link to={"/player?file=" + item.file} key={index}>
+                                                                        <ButtonSpotTable
+                                                                            className={css.btn + " " + css.btn__series}
+                                                                            onKeyDown={(e) => onSelectSeries(e, "/player?file=" + item.file)}
+                                                                        >{item.title}</ButtonSpotTable>
+                                                                    </Link>
 
-                                                        </>
-                                                    )
-                                                })
-                                            }
-                                        </>
-                                    )
-                                })
-                            }
-                        </div>
-                    </div>
+                                                                </>
+                                                            )
+                                                        })
+                                                    }
+                                                </>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </>
+
                 }
             </div>
         </div>

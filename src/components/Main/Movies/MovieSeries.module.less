@@ -9,18 +9,22 @@
 .season__row {
   display: flex;
 
-  overflow-x: auto;
-  margin: 2.5rem 0.5rem 1.5rem 0.5rem;
+  //overflow-x: auto;
+  overflow-x: hidden;
+  margin: 5rem 0.5rem 1.5rem 0.5rem;
 }
-.series__container{
+
+.series__container {
   width: 100%;
 
 }
+
 .series__row {
   display: flex;
   align-items: center;
   padding: 1rem 0 1rem 0.45rem;
-  overflow-x: auto;
+  //overflow-x: auto;
+  overflow-x: hidden;
 }
 
 .btn {
@@ -38,22 +42,27 @@
 }
 
 .btn__season {
-  min-width: 16rem;
-  background: rgba(70, 70, 70, 0.85);
-  padding: 1.3125rem 3.75rem;
+  min-width: 11rem;
+  //background: rgba(70, 70, 70, 0.85);
+  background: rgba(255, 255, 255, 0.25);
+  padding: 0.85rem;
   transition: all 0.4s;
-
 }
 
-
-.btn__season:focus{
+.btn__season:focus {
+  background: #FF0000;
+  border: none;
+}
+.btn__season_focus {
   background: #FF0000;
   border: none;
 }
 
+
 .btn__series {
-  min-width: 23rem;
-  background: rgba(70, 70, 70, 0.85);
+  min-width: 15rem;
+  //background: rgba(70, 70, 70, 0.85);
+  background: rgba(255, 255, 255, 0.25);
   padding: 2.5rem 3rem;
   font-weight: bold;
   font-size: 2rem;
@@ -62,12 +71,11 @@
   transition: all 0.4s;
 }
 
-
-.btn__series:focus{
+.btn__series:focus {
   border: none;
   box-shadow: -4px 0px 25px #D6182A, 0px -4px 25px #FF0000, 4px 0px 25px #FF0000, 0px 4px 25px #FF0000;
 }
 
-.on__back:focus{
+.on__back:focus {
   color: #FF0000;
 }
