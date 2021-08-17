@@ -3,21 +3,42 @@ import {AppFilter} from "./AppFilter";
 import css from "./AppFilter.module.less";
 import {Sliders} from "react-feather";
 import {ButtonBase} from "../Buttons/ButtonBase";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {InputCheckBox} from "./InputCheckBox";
 import {InputRadio} from "./InputRadio";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
+import {getCategoryFilter, setFilterTypeContent, setFilterYear} from "../../redux/actions";
 
 export const CategoryFilter = (props) => {
-    const onBackHandler = () => props.history.goBack()
+    const history = useHistory();
+    const dispatch = useDispatch();
     const categoryReducer = useSelector(state => state.categoryReducer)
-    const {categoryFilter, filterYear, filterTypeContent} = categoryReducer
+    const {categoryFilter, filterYear, filterTypeContent, categoryId} = categoryReducer
 
+    const onBackHandler = () => history.push(`/category?cid=${categoryId}`)
     console.log(filterYear, filterTypeContent)
+
+    const onSelectHandler = (e, path) => {
+        if (e.code === "Enter") {
+            goToPath(path)
+        }
+    }
+    const goToPath = (path) => history.push(path)
+    const onResetFilterClick = () => {
+        dispatch(getCategoryFilter())
+        dispatch(setFilterYear(""))
+        dispatch(setFilterTypeContent(""))
+    }
+    const onResetFilterSelect = (e) => {
+        if (e.code === "Enter") {
+            onResetFilterClick()
+        }
+    }
+    console.log(history.location)
 
     const FilterCheckBox = ({itemType}) => {
         return categoryFilter && categoryFilter[`${itemType}`].map((item, index) => {
-            if (index < 4 && item.id !== -1) {
+            if (index < 4) {
                 return <InputCheckBox className={css.form__control}
                                       itemType={itemType}
                                       inputId={item.id}
@@ -27,6 +48,7 @@ export const CategoryFilter = (props) => {
                                       key={item.id + item.name}
                 />
             }
+
         })
     }
     const FilterRadio = ({itemType}) => {
@@ -49,7 +71,9 @@ export const CategoryFilter = (props) => {
                 <div className={css.row}>
                     <div>
                         <FilterCheckBox itemType={"genre"}/>
-                        <ButtonBase className={css.btn__filter + " " + css.row}>
+                        <ButtonBase className={css.btn__filter + " " + css.row}
+                                    onClick={() => goToPath("/all-genre")}
+                                    onKeyDown={(e) => onSelectHandler(e, "/all-genre")}>
                             <div>Все жанры</div>
                             <div>{categoryFilter && categoryFilter.genre.length}</div>
                         </ButtonBase>
@@ -57,7 +81,10 @@ export const CategoryFilter = (props) => {
 
                     <div>
                         <FilterCheckBox itemType={"country"}/>
-                        <ButtonBase className={css.btn__filter + " " + css.row}>
+                        <ButtonBase className={css.btn__filter + " " + css.row}
+                                    onClick={() => goToPath("/all-country")}
+                                    onKeyDown={(e) => onSelectHandler(e, "/all-country")}
+                        >
                             <div>Все страны</div>
                             <div>{categoryFilter && categoryFilter.country.length}</div>
                         </ButtonBase>
@@ -65,7 +92,10 @@ export const CategoryFilter = (props) => {
 
                     <div>
                         <FilterRadio itemType={"year"}/>
-                        <ButtonBase className={css.btn__filter + " " + css.row}>
+                        <ButtonBase className={css.btn__filter + " " + css.row}
+                                    onClick={() => goToPath("/all-year")}
+                                    onKeyDown={(e) => onSelectHandler(e, "/all-year")}
+                        >
                             <div>Все годы</div>
                             <div>{categoryFilter && categoryFilter.year.length}</div>
                         </ButtonBase>
@@ -79,14 +109,16 @@ export const CategoryFilter = (props) => {
                 </div>
 
                 <div className={css.row}>
-                    <ButtonBase className={css.btn__filter}>
-                       <Link to={"/app-search"} className={css.btn__row}>
-                           <Sliders/>
-                           <div>Показать результат</div>
-                       </Link>
+                    <ButtonBase className={css.btn__filter} onKeyDown={(e) => onSelectHandler(e, "/app-search")}>
+                        <Link to={"/app-search"} className={css.btn__row}>
+                            <Sliders/>
+                            <div>Показать результат</div>
+                        </Link>
                     </ButtonBase>
 
-                    <ButtonBase className={css.btn__filter}>
+                    <ButtonBase className={css.btn__filter}
+                                onClick={onResetFilterClick}
+                                onKeyDown={(e) => onResetFilterSelect(e)}>
                         Сбросить фильтр
                     </ButtonBase>
                 </div>

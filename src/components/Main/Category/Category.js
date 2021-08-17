@@ -44,7 +44,7 @@ export const Category = (props) => {
     }, [idSort, categoryId])
 
 
-    const onBackHandler = () => props.history.goBack()
+    const onBackHandler = () => history.push("/main")
 
     const onSelectHandler = (e, path) => {
         if (e.code === "Enter") {

@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {BrowserRouter as Router, Route,Redirect} from "react-router-dom";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import {reactLocalStorage} from "reactjs-localstorage";
 import {useSelector} from "react-redux";
 import ThemeDecorator from "@enact/sandstone/ThemeDecorator";
@@ -14,9 +14,11 @@ import {Preloader} from "../components/Header/Preloader";
 import {AuthPage} from "../components/Auth/AuthPage";
 import {AuthMobile} from "../components/Auth/AuthMobile";
 import {Category} from "../components/Main/Category/Category";
-import { CategoryFilter} from "../components/AppFilter/CategoryFilter";
+import {CategoryFilter} from "../components/AppFilter/CategoryFilter";
 import {CategorySort} from "../components/AppFilter/CategorySort";
 import {SearchPage} from "../components/SearchPage/SearchPage";
+import {AllCheckBoxFilter} from "../components/AppFilter/AllCheckBoxFilter";
+import {AllRadioFilter} from "../components/AppFilter/AllRadioFilter";
 
 const App = () => {
     const token = useSelector(state => state.authReducer.token)
@@ -26,13 +28,13 @@ const App = () => {
     return (
 
         <Router basename={process.env.PUBLIC_URL}>
-            {/*<Preloader/>*/}
+            <Preloader/>
             {/*<Route*/}
             {/*    exact*/}
             {/*    path={"/"}*/}
             {/*    render={() => <Redirect to={"/main"}/>}*/}
             {/*/>*/}
-            <Route  path={"/main"} component={MainPanel}/>
+            <Route path={"/main"} component={MainPanel}/>
 
             <Route exact path={"/auth"} component={AuthPage}/>
             <Route path={"/auth-form"} component={AuthForm}/>
@@ -42,6 +44,14 @@ const App = () => {
 
             <Route path={"/category"} component={Category}/>
             <Route path={"/app-filter"} component={CategoryFilter}/>
+
+            {/*<Route path={"/all-genre"} component={AllCheckBoxFilter}/>*/}
+            <Route path={"/all-genre"} render={() => <AllCheckBoxFilter title={"Жанры"} itemType={"genre"} />}/>
+            <Route path={"/all-country"} render={() => <AllCheckBoxFilter title={"Страны"} itemType={"country"} />}/>
+            <Route path={"/all-year"} render={() => <AllRadioFilter title={"Годы"} itemType={"year"} />}/>
+            {/*<Route path={"/all-country"} component={AllCountryFilter}/>*/}
+
+
             <Route path={"/app-sort"} component={CategorySort}/>
             <Route path={"/app-search"} component={SearchPage}/>
 
@@ -53,8 +63,6 @@ const App = () => {
         </Router>
     )
 }
-
-
 
 
 export default ThemeDecorator(App);
