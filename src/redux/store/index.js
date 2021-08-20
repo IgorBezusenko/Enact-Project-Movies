@@ -4,12 +4,14 @@ import thunk from "redux-thunk";
 import {mainReducer} from "../reducers/mainReducer";
 import {likeReducer} from "../reducers/likeReducer";
 import {categoryReducer} from "../reducers/categoryReducer";
+import {playerReducer} from "../reducers/playerReducer";
 
 const rootReducer = combineReducers({
     authReducer,
     mainReducer,
     likeReducer,
-    categoryReducer
+    categoryReducer,
+    playerReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

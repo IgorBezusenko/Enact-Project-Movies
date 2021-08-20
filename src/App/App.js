@@ -19,6 +19,7 @@ import {CategorySort} from "../components/AppFilter/CategorySort";
 import {SearchPage} from "../components/SearchPage/SearchPage";
 import {AllCheckBoxFilter} from "../components/AppFilter/AllCheckBoxFilter";
 import {AllRadioFilter} from "../components/AppFilter/AllRadioFilter";
+import {CustomVideoPlayer} from "../components/VideoPlayer/CustomVideoPlayer";
 
 const App = () => {
     const token = useSelector(state => state.authReducer.token)
@@ -49,13 +50,15 @@ const App = () => {
             <Route path={"/all-genre"} render={() => <AllCheckBoxFilter title={"Жанры"} itemType={"genre"} />}/>
             <Route path={"/all-country"} render={() => <AllCheckBoxFilter title={"Страны"} itemType={"country"} />}/>
             <Route path={"/all-year"} render={() => <AllRadioFilter title={"Годы"} itemType={"year"} />}/>
-            {/*<Route path={"/all-country"} component={AllCountryFilter}/>*/}
+
+
+            <Route path={"/video"} component={CustomVideoPlayer}/>
 
 
             <Route path={"/app-sort"} component={CategorySort}/>
             <Route path={"/app-search"} component={SearchPage}/>
 
-            <Route path={"/player"} component={VideoPlayer}/>
+            <Route path={"/player"} component={CustomVideoPlayer}/>
             <Route path={"/description"} component={MoviesDescription}/>
             <Route path={"/series"} component={MovieSeries}/>
 
