@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getMovieFile, putLikeAC, setVote} from "../../../redux/actions";
+import {clearVideoUrl, getMovieFile, putLikeAC, setVote} from "../../../redux/actions";
 import {useQuery} from "../../../utils/useQuery";
 import {useHistory} from "react-router-dom";
 import {NavOnBack} from "../../NavOnBack/NavOnBack";
@@ -27,6 +27,9 @@ export const MoviesPreview = (props) => {
     const getMovieFileById = (id) => {
         dispatch(getMovieFile(id))
     }
+    useEffect(()=>{
+        dispatch(clearVideoUrl())
+    },[])
     useEffect(() => {
         getMovieFileById(movieFileId)
     }, [movieFileId])

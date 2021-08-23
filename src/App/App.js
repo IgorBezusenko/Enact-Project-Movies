@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route} from "react-router-dom";
 import {reactLocalStorage} from "reactjs-localstorage";
 import {useSelector} from "react-redux";
 import ThemeDecorator from "@enact/sandstone/ThemeDecorator";
@@ -30,11 +30,11 @@ const App = () => {
 
         <Router basename={process.env.PUBLIC_URL}>
             <Preloader/>
-            {/*<Route*/}
-            {/*    exact*/}
-            {/*    path={"/"}*/}
-            {/*    render={() => <Redirect to={"/main"}/>}*/}
-            {/*/>*/}
+            <Route
+                exact
+                path={"/"}
+                render={() => <Redirect to={"/main"}/>}
+            />
             <Route path={"/main"} component={MainPanel}/>
 
             <Route exact path={"/auth"} component={AuthPage}/>
