@@ -25,6 +25,9 @@ export const SET_FILTER_COUNTRY = "CATEGORY/SET_FILTER_COUNTRY"
 export const SET_FILTER_TYPE_CONTENT = "CATEGORY/SET_FILTER_TYPE_CONTENT"
 export const SET_FILTER_SEARCH = "CATEGORY/SET_FILTER_SEARCH"
 
+export const SET_SEARCH_ITEMS = "SEARCH/SET_SEARCH_ITEMS"
+export const SET_CLEAR_SEARCH_ITEMS = "SEARCH/SET_CLEAR_SEARCH_ITEMS"
+
 
 // export const SET_FILTER_SEARCH = "CATEGORY/SET_FILTER_SEARCH"
 
@@ -187,12 +190,10 @@ export const setFilterCountry = (id, name, checked) => ({
 })
 
 
-
-
 export const getCategory = (cid, currentPage, idSort) => async (dispatch) => {
     // dispatch(mainToggleIsFetching(true))
     try {
-        const {data} = await MainAPI.category(cid,currentPage,idSort)
+        const {data} = await MainAPI.category(cid, currentPage, idSort)
 
         dispatch({
             type: GET_CATEGORY,
@@ -219,20 +220,37 @@ export const getCategoryFilter = () => async (dispatch) => {
     }
 }
 
-export const setSearchFilter = (search)=>({
-    type:SET_FILTER_SEARCH,
+export const setSearchFilter = (search) => ({
+    type: SET_FILTER_SEARCH,
     search
 })
-export const getSearchFilter = (genre,country,year,typeContent)=>async (dispatch)=>{
+export const getSearchFilter = (genre, country, year, typeContent) => async (dispatch) => {
     // dispatch(mainToggleIsFetching(true))
     try {
-        const {data} = await MainAPI.searchFilter(genre,country,year,typeContent)
-        console.log(data)
+        const {data} = await MainAPI.searchFilter(genre, country, year, typeContent)
         dispatch(setSearchFilter(data))
         // dispatch(mainToggleIsFetching(false))
     } catch (e) {
         console.log("Error getCategoryFilter", e.response)
         // dispatch(mainToggleIsFetching(false))
 
+    }
+}
+
+//search
+export const setSearchItems = (searchItems) => ({
+    type: SET_SEARCH_ITEMS,
+    searchItems
+})
+export const setClearSearchItems = () => ({
+    type: SET_CLEAR_SEARCH_ITEMS,
+
+})
+export const getSearchItems = (query)=>async (dispatch)=>{
+    try {
+        const {data} = await MainAPI.searchMovie(query)
+        dispatch(setSearchItems(data))
+    }catch (e) {
+        console.log("Error getSearchItems", e.response)
     }
 }

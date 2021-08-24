@@ -5,13 +5,15 @@ import {mainReducer} from "../reducers/mainReducer";
 import {likeReducer} from "../reducers/likeReducer";
 import {categoryReducer} from "../reducers/categoryReducer";
 import {playerReducer} from "../reducers/playerReducer";
+import {searchReducer} from "../reducers/searchReducer";
 
 const rootReducer = combineReducers({
     authReducer,
     mainReducer,
     likeReducer,
     categoryReducer,
-    playerReducer
+    playerReducer,
+    searchReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

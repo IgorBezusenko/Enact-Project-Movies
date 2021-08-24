@@ -13,8 +13,8 @@ export const AuthForm = (props) => {
     const [pass, setPass] = useState("")
 
 
-    const state = useSelector((state) => state.authReducer);
-    const {token, loading, error} = state
+    const authReducer = useSelector((state) => state.authReducer);
+    const {token, loading, error} = authReducer
 
 
     const onBackHandler = () => props.history.goBack()

@@ -33,7 +33,10 @@ export const MainAPI = {
     },
     searchFilter(genre='', country='',year='',typeContent=''){
         return instance.get(`/searchExt/15?genre=${genre}&country=${country}&year=${year}&type_content=${typeContent}`).then(r => r.data)
-    }
+    },
+    searchMovie(query){
+        return instance.get(`/searchExt/15?query=${query}`).then(r => r.data)
+    },
 
 
 }
@@ -43,5 +46,5 @@ export const MoviesPreview = {
     }
 }
 
-// const res =()=> MainAPI.category(102)
+// const res =()=> MainAPI.searchMovie("при")
 // res().then(r=>console.log(r.data))

@@ -75,14 +75,14 @@ const Sidebar = () => {
 
                 <li>
                     <ItemBase
-                        onKeyDown={(e) => onSelectHandler(e, "/main")}
+                        onKeyDown={(e) => onSelectHandler(e, "/search-panel")}
                         onFocus={() => {
                             setSearch(true)
                         }}
                         onBlur={() => {
                             setSearch(false)
                         }}
-                        className={css.item__base}><Link to={"/main"}><Search/></Link>
+                        className={css.item__base}><Link to={"/search-panel"}><Search/></Link>
 
                     </ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${search && css.color__red}`}>Поиск</div>}

@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {BrowserRouter as Router, Redirect, Route} from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route, useHistory} from "react-router-dom";
 import {reactLocalStorage} from "reactjs-localstorage";
 import {useSelector} from "react-redux";
 import ThemeDecorator from "@enact/sandstone/ThemeDecorator";
@@ -20,9 +20,12 @@ import {SearchPage} from "../components/SearchPage/SearchPage";
 import {AllCheckBoxFilter} from "../components/AppFilter/AllCheckBoxFilter";
 import {AllRadioFilter} from "../components/AppFilter/AllRadioFilter";
 import {CustomVideoPlayer} from "../components/VideoPlayer/CustomVideoPlayer";
+import {SearchPanel} from "../components/SearchPanel/SearchPanel";
+import {HomePage} from "../views/HomePage";
 
 const App = () => {
     const token = useSelector(state => state.authReducer.token)
+    const history = useHistory();
     useEffect(() => {
         reactLocalStorage.set('token', token);
     }, [token]);
@@ -30,11 +33,14 @@ const App = () => {
 
         <Router basename={process.env.PUBLIC_URL}>
             <Preloader/>
+
+            {/*<Route path={"/"}  exact component={HomePage}/>*/}
             <Route
                 exact
                 path={"/"}
                 render={() => <Redirect to={"/main"}/>}
             />
+
             <Route path={"/main"} component={MainPanel}/>
 
             <Route exact path={"/auth"} component={AuthPage}/>
@@ -52,6 +58,7 @@ const App = () => {
             <Route path={"/all-year"} render={() => <AllRadioFilter title={"Годы"} itemType={"year"} />}/>
 
 
+            <Route path={"/search-panel"} component={SearchPanel}/>
             <Route path={"/video"} component={CustomVideoPlayer}/>
 
 

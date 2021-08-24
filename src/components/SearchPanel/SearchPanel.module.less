@@ -1,0 +1,134 @@
+.container {
+  width: 100%;
+  padding: 2rem 2rem 0;
+
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content {
+  margin: 0 0 0 4rem;
+}
+
+
+.on__back {
+  width: 100%;
+  margin: 0 0 0 4rem;
+}
+
+.on__back:focus {
+  color: #FF0000;
+}
+
+.form {
+  width: 44rem;
+  margin: 3rem auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.formControl {
+  width: 100%;
+ }
+
+.formControl input {
+  font-family: Inter, Roboto, Oxygen, Fira Sans, Helvetica Neue, sans-serif;
+  margin: 0;
+  outline: none;
+  border: none;
+  display: block;
+  width: 44rem;
+  border-bottom: #FFFFFF 0.2rem solid;
+  color: #FFFFFF;
+  padding: 0.68rem;
+  background: #041423;;
+  font-size: 1rem;
+}
+
+
+.formControl input:focus {
+  border-bottom: #FF0000 0.2rem solid;
+  //span{
+  //  border-bottom: #FF0000 0.2rem solid;
+  //}
+}
+
+.on__close {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.on__close span {
+  position: relative;
+
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.on__close span:after,
+.on__close span:before {
+  content: "";
+  width: 2rem;
+  border-radius: 1rem;
+  height: 0.2rem;
+  background-color: #FFFFFF;
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+
+.on__close span:before {
+  transform: rotate(-45deg);
+}
+
+.on__close span:after {
+  transform: rotate(45deg);
+}
+
+.on__close:focus {
+  span:before,
+  span:after {
+    background-color: #FF0000;
+  }
+}
+
+
+.list {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  //width: 92vw;
+  //height: auto;
+  overflow: hidden;
+  padding: 0.7rem;
+
+}
+
+.list__item {
+  width: 12.5rem;
+  height: auto;
+  margin: 1rem 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.1rem;
+
+  img {
+    width: 100%;
+    height: 18.75rem;
+  }
+
+
+}
+
+.list__item:focus {
+  border: 0.1rem solid #FF0000;;
+  transform: scale(1.1);
+
+}
