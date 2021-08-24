@@ -23,7 +23,7 @@ const MainListItemBase = ({item, ...rest}) => {
 
                   </div>
                   {
-                      history.location.pathname === "/category" || history.location.pathname ==="/app-search" ?
+                      history.location.pathname === "/category" || history.location.pathname ==="/app-search"|| history.location.pathname ==="/search-panel" ?
                       <div className={css.item__details}>
                           <div>{item.year} | {!!item.access ? <span style={{color:"#FF0000"}}>Подписка</span> : <span style={{color:"#979797"}}>Бесплатный</span>}</div>
                           <div className={css.nowrap}>{!!item.rate_age && item.rate_age} {item.title}</div>
