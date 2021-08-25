@@ -7,7 +7,7 @@ import css from "../Main/Category/Category.module.less"
 import {NavOnBack} from "../NavOnBack/NavOnBack";
 import {Header} from "../Header/Header";
 
-export const SearchPage = (props) => {
+export const SortPage = (props) => {
     const categoryReducer = useSelector(state => state.categoryReducer)
     const dispatch = useDispatch()
     const {categoryFilter, filterTypeContent, filterYear, search} = categoryReducer

@@ -16,12 +16,13 @@ import {AuthMobile} from "../components/Auth/AuthMobile";
 import {Category} from "../components/Main/Category/Category";
 import {CategoryFilter} from "../components/AppFilter/CategoryFilter";
 import {CategorySort} from "../components/AppFilter/CategorySort";
-import {SearchPage} from "../components/SearchPage/SearchPage";
+import {SortPage} from "../components/SortPage/SortPage";
 import {AllCheckBoxFilter} from "../components/AppFilter/AllCheckBoxFilter";
 import {AllRadioFilter} from "../components/AppFilter/AllRadioFilter";
 import {CustomVideoPlayer} from "../components/VideoPlayer/CustomVideoPlayer";
 import {SearchPanel} from "../components/SearchPanel/SearchPanel";
 import {HomePage} from "../views/HomePage";
+import {HistoryPage} from "../components/HistoryPage/HistoryPage";
 
 const App = () => {
     const token = useSelector(state => state.authReducer.token)
@@ -59,11 +60,11 @@ const App = () => {
 
 
             <Route path={"/search-panel"} component={SearchPanel}/>
-            <Route path={"/video"} component={CustomVideoPlayer}/>
+            <Route path={"/history"} component={HistoryPage}/>
 
 
             <Route path={"/app-sort"} component={CategorySort}/>
-            <Route path={"/app-search"} component={SearchPage}/>
+            <Route path={"/app-search"} component={SortPage}/>
 
             <Route path={"/player"} component={CustomVideoPlayer}/>
             <Route path={"/description"} component={MoviesDescription}/>

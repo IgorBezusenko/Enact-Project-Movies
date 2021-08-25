@@ -88,14 +88,14 @@ const Sidebar = () => {
                     {isFocus && <div className={css.icon__text + " " + `${search && css.color__red}`}>Поиск</div>}
                 </li>
                 <li>
-                    <ItemBase onKeyDown={(e) => onSelectHandler(e, "/video")}
+                    <ItemBase onKeyDown={(e) => onSelectHandler(e, "/history")}
                               onFocus={() => {
                                   setPlay(true)
                               }}
                               onBlur={() => {
                                   setPlay(false)
                               }}
-                              className={css.item__base}><Link to={"/video"}><PlayCircle/></Link></ItemBase>
+                              className={css.item__base}><Link to={"/history"}><PlayCircle/></Link></ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${play && css.color__red}`}>Я смотрю</div>}
                 </li>
                 <li>

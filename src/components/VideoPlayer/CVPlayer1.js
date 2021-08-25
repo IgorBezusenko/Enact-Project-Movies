@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { findDOMNode } from 'react-dom'
-import { hot } from 'react-hot-loader'
+import React, {Component} from 'react'
+import {findDOMNode} from 'react-dom'
+import {hot} from 'react-hot-loader'
 import screenfull from 'screenfull'
 
 // import './reset.css'
@@ -11,7 +11,6 @@ import css from './VideoPlayer.module.less'
 import './VideoPlayer.module.less'
 // import { version } from '../../package.json'
 import ReactPlayer from 'react-player'
-import Duration from './DurationT'
 
 class CVPlayer extends Component {
     state = {
@@ -26,15 +25,17 @@ class CVPlayer extends Component {
         loaded: 0,
         duration: 0,
         playbackRate: 1.0,
-        loop: false
+        loop: false,
+        visibleControls: true
     }
 
-      componentDidMount() {
+    componentDidMount() {
         // this.handleClickFullscreen()
         this.setState({
-            url:this.props.url
+            url: this.props.url
         })
     }
+
 
     load = url => {
         this.setState({
@@ -46,11 +47,11 @@ class CVPlayer extends Component {
     }
 
     handlePlayPause = () => {
-        this.setState({ playing: !this.state.playing })
+        this.setState({playing: !this.state.playing})
     }
 
     handleStop = () => {
-        this.setState({ url: null, playing: false })
+        this.setState({url: null, playing: false})
     }
 
     handleToggleControls = () => {
@@ -62,61 +63,61 @@ class CVPlayer extends Component {
     }
 
     handleToggleLight = () => {
-        this.setState({ light: !this.state.light })
+        this.setState({light: !this.state.light})
     }
 
     handleToggleLoop = () => {
-        this.setState({ loop: !this.state.loop })
+        this.setState({loop: !this.state.loop})
     }
 
     handleVolumeChange = e => {
-        this.setState({ volume: parseFloat(e.target.value) })
+        this.setState({volume: parseFloat(e.target.value)})
     }
 
     handleToggleMuted = () => {
-        this.setState({ muted: !this.state.muted })
+        this.setState({muted: !this.state.muted})
     }
 
     handleSetPlaybackRate = e => {
-        this.setState({ playbackRate: parseFloat(e.target.value) })
+        this.setState({playbackRate: parseFloat(e.target.value)})
     }
 
     handleTogglePIP = () => {
-        this.setState({ pip: !this.state.pip })
+        this.setState({pip: !this.state.pip})
     }
 
     handlePlay = () => {
         console.log('onPlay')
 
 
-        this.setState({ playing: true })
+        this.setState({playing: true})
     }
 
     handleEnablePIP = () => {
         console.log('onEnablePIP')
-        this.setState({ pip: true })
+        this.setState({pip: true})
     }
 
     handleDisablePIP = () => {
         console.log('onDisablePIP')
-        this.setState({ pip: false })
+        this.setState({pip: false})
     }
 
     handlePause = () => {
         console.log('onPause')
-        this.setState({ playing: false })
+        this.setState({playing: false})
     }
 
     handleSeekMouseDown = e => {
-        this.setState({ seeking: true })
+        this.setState({seeking: true})
     }
 
     handleSeekChange = e => {
-        this.setState({ played: parseFloat(e.target.value) })
+        this.setState({played: parseFloat(e.target.value)})
     }
 
     handleSeekMouseUp = e => {
-        this.setState({ seeking: false })
+        this.setState({seeking: false})
         this.player.seekTo(parseFloat(e.target.value))
     }
 
@@ -130,12 +131,12 @@ class CVPlayer extends Component {
 
     handleEnded = () => {
         console.log('onEnded')
-        this.setState({ playing: this.state.loop })
+        this.setState({playing: this.state.loop})
     }
 
     handleDuration = (duration) => {
         console.log('onDuration', duration)
-        this.setState({ duration })
+        this.setState({duration})
     }
 
     handleClickFullscreen = () => {
@@ -151,31 +152,52 @@ class CVPlayer extends Component {
     }
 
     ref = player => {
-
-        console.log("player",player)
         this.player = player
     }
 
-    render () {
+    render() {
 
-        const { url, playing, controls, light, volume, muted, loop, played, loaded, duration, playbackRate, pip } = this.state
+        const {
+            url,
+            playing,
+            controls,
+            light,
+            volume,
+            muted,
+            loop,
+            played,
+            loaded,
+            duration,
+            playbackRate,
+            pip,
+            visibleControls
+        } = this.state
         const SEPARATOR = ' · '
 
         return (
-            < div className={css.player}   onKeyPress={(e)=>{
-                console.log('e.code==="Enter"',e.code)
-                if (e.code==="Enter"){
-                    console.log(e.code,"Enter")
+            < div className={css.player} onKeyPress={(e) => {
+                console.log('e.code==="Enter"', e.code)
+                if (e.code === "Enter") {
+                    console.log(e.code, "Enter")
+                    this.handlePlayPause()
+                }
+                if (e.code === "Numpad0") {
+                    console.log(e.code, "Enter")
                     this.handlePlayPause()
                 }
             }
             }>
+
+                {
+                   <button className={css.btn_controls}
+                                               onClick={this.handlePlayPause}>{playing ? 'Pause' : 'Play'}</button>
+                }
                 <ReactPlayer
 
                     ref={this.ref}
                     className='react-player'
-                    width='100%'
-                    height='100%'
+                    width='80%'
+                    height='80%'
                     url={url}
                     pip={pip}
                     playing={playing}
@@ -198,6 +220,8 @@ class CVPlayer extends Component {
                     onProgress={this.handleProgress}
                     onDuration={this.handleDuration}
                 />
+
+
                 {/*<div className={css.app}>*/}
                 {/*    <section className='section'>*/}
 
@@ -211,9 +235,7 @@ class CVPlayer extends Component {
                 {/*        /!*        <th>Controls</th>*!/*/}
                 {/*        /!*        <td>*!/*/}
                 {/*        /!*            <button onClick={this.handleStop}>Stop</button>*!/*/}
-                {/*{*/}
-                {/*    this.state.loop &&   <button onClick={this.handlePlayPause}>{playing ? 'Pause' : 'Play'}</button>*/}
-                {/*}*/}
+
                 {/*        /!*            <button onClick={this.handleClickFullscreen}>Fullscreen</button>*!/*/}
                 {/*        /!*            {light &&*!/*/}
                 {/*        /!*            <button onClick={() => this.player.showPreview()}>Show preview</button>}*!/*/}

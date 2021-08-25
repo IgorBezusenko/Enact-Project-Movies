@@ -37,6 +37,9 @@ export const MainAPI = {
     searchMovie(query){
         return instance.get(`/searchExt/15?query=${query}`).then(r => r.data)
     },
+    history(){
+        return instance.get(`/history/15`).then(r => r.data)
+    },
 
 
 }
@@ -46,5 +49,5 @@ export const MoviesPreview = {
     }
 }
 
-// const res =()=> MainAPI.searchMovie("при")
+// const res =()=> MainAPI.history()
 // res().then(r=>console.log(r.data))
