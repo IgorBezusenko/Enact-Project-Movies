@@ -1,6 +1,13 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {clearVideoUrl, getMovieFile, putLikeAC, setVote} from "../../../redux/actions";
+import {
+    clearVideoUrl,
+    getMovieFile,
+    putLikeAC,
+    setBookmarkId,
+    setVote,
+    toggleBookmarkById
+} from "../../../redux/actions";
 import {useQuery} from "../../../utils/useQuery";
 import {useHistory} from "react-router-dom";
 import {NavOnBack} from "../../NavOnBack/NavOnBack";
@@ -20,6 +27,7 @@ export const MoviesPreview = (props) => {
     const history = useHistory()
     const state = useSelector(state => state.mainReducer)
     const voteState = useSelector(state => state.likeReducer.vote)
+    const bookmarkState = useSelector(state => state.bookmarkReducer.bookmarkId)
     // console.log("voteState", voteState)
     const {movieFile, isFetching,} = state
     // console.log(movieFile)
@@ -27,9 +35,10 @@ export const MoviesPreview = (props) => {
     const getMovieFileById = (id) => {
         dispatch(getMovieFile(id))
     }
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(clearVideoUrl())
-    },[])
+
+    }, [])
     useEffect(() => {
         getMovieFileById(movieFileId)
     }, [movieFileId])
@@ -39,6 +48,11 @@ export const MoviesPreview = (props) => {
             dispatch(setVote({myVote: movieFile.my_vote, ...movieFile.vote}))
         }
     }, [movieFile.my_vote])
+
+
+    useEffect(() => {
+        dispatch(setBookmarkId({active: movieFile.is_favorite}))
+    }, [movieFile])
 
     const onBackHandler = () => props.history.goBack()
 
@@ -75,7 +89,15 @@ export const MoviesPreview = (props) => {
         }
     }
 
-
+    const onToggleBookmark = () => {
+        dispatch(toggleBookmarkById(movieFile.id))
+    }
+    const onSelectBookmark = (e) => {
+        if (e.code === "Enter") {
+            onToggleBookmark()
+        }
+    }
+    console.log("bookmarkState", bookmarkState)
     return (
         <div style={{
             width: "100%",
@@ -100,8 +122,13 @@ export const MoviesPreview = (props) => {
                         <div className={css.button__group}>
                             <ButtonPlay movieFile={movieFile}/>
                             <ButtonMovie className={cssSpottable.btn__movie} title={"Продолжить"}><Clock/></ButtonMovie>
+
                             <ButtonMovie className={cssSpottable.btn__movie}
-                                         title={"Избранное"}><Bookmark/></ButtonMovie>
+                                         onClick={onToggleBookmark}
+                                         // onKeyDoun={(e)=>onSelectBookmark(e)}
+                                         title={"Избранное"}>
+                                <Bookmark style={{color: bookmarkState && bookmarkState.active ? "#FF0000" : ""}}/>
+                            </ButtonMovie>
 
                         </div>
                         <div className={css.rating}>

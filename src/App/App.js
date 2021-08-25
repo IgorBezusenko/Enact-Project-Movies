@@ -7,7 +7,6 @@ import ThemeDecorator from "@enact/sandstone/ThemeDecorator";
 import MainPanel from "../components/Main/MainPanel";
 import {AuthForm} from "../components/Auth/AuthForm";
 import {MoviesPreview} from "../components/Main/Movies/MoviesPreview";
-import {VideoPlayer} from "../components/VideoPlayer/VideoPlayer";
 import {MoviesDescription} from "../components/Main/Movies/MoviesDescription";
 import {MovieSeries} from "../components/Main/Movies/MovieSeries";
 import {Preloader} from "../components/Header/Preloader";
@@ -21,8 +20,8 @@ import {AllCheckBoxFilter} from "../components/AppFilter/AllCheckBoxFilter";
 import {AllRadioFilter} from "../components/AppFilter/AllRadioFilter";
 import {CustomVideoPlayer} from "../components/VideoPlayer/CustomVideoPlayer";
 import {SearchPanel} from "../components/SearchPanel/SearchPanel";
-import {HomePage} from "../views/HomePage";
 import {HistoryPage} from "../components/HistoryPage/HistoryPage";
+import {BookMark} from "../components/BookMark/BookMark";
 
 const App = () => {
     const token = useSelector(state => state.authReducer.token)
@@ -54,13 +53,14 @@ const App = () => {
             <Route path={"/app-filter"} component={CategoryFilter}/>
 
             {/*<Route path={"/all-genre"} component={AllCheckBoxFilter}/>*/}
-            <Route path={"/all-genre"} render={() => <AllCheckBoxFilter title={"Жанры"} itemType={"genre"} />}/>
-            <Route path={"/all-country"} render={() => <AllCheckBoxFilter title={"Страны"} itemType={"country"} />}/>
-            <Route path={"/all-year"} render={() => <AllRadioFilter title={"Годы"} itemType={"year"} />}/>
+            <Route path={"/all-genre"} render={() => <AllCheckBoxFilter title={"Жанры"} itemType={"genre"}/>}/>
+            <Route path={"/all-country"} render={() => <AllCheckBoxFilter title={"Страны"} itemType={"country"}/>}/>
+            <Route path={"/all-year"} render={() => <AllRadioFilter title={"Годы"} itemType={"year"}/>}/>
 
 
             <Route path={"/search-panel"} component={SearchPanel}/>
             <Route path={"/history"} component={HistoryPage}/>
+            <Route path={"/bookmark"} component={BookMark}/>
 
 
             <Route path={"/app-sort"} component={CategorySort}/>

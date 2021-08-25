@@ -99,14 +99,14 @@ const Sidebar = () => {
                     {isFocus && <div className={css.icon__text + " " + `${play && css.color__red}`}>Я смотрю</div>}
                 </li>
                 <li>
-                    <ItemBase onKeyDown={(e) => onSelectHandler(e, "/main")}
+                    <ItemBase onKeyDown={(e) => onSelectHandler(e, "/bookmark")}
                               onFocus={() => {
                                   setFavorite(true)
                               }}
                               onBlur={() => {
                                   setFavorite(false)
                               }}
-                              className={css.item__base}><Link to={"/main"}><Bookmark/></Link></ItemBase>
+                              className={css.item__base}><Link to={"/bookmark"}><Bookmark/></Link></ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${favorite && css.color__red}`}>Избранное</div>}
                 </li>
                 <li>

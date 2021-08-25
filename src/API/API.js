@@ -25,7 +25,7 @@ export const MainAPI = {
     videoUrl(file) {
         return instance.get(`/file/url/${file}`).then(r => r.data)
     },
-    category(cid, currentPage=1, idSort=1) {
+    category(cid, currentPage="1", idSort="1") {
         return instance.get(`/file/category/${cid}/15?page=${currentPage}&id_sort=${idSort}`).then(r => r.data)
     },
     categoryFilter() {
@@ -40,6 +40,12 @@ export const MainAPI = {
     history(){
         return instance.get(`/history/15`).then(r => r.data)
     },
+    bookmark(){
+        return instance.get(`/bookmark/15`).then(r => r.data)
+    },
+ bookmarkToggle(id){
+        return instance.get(`bookmark/change/${id}`).then(r => r.data)
+    },
 
 
 }
@@ -49,5 +55,5 @@ export const MoviesPreview = {
     }
 }
 
-// const res =()=> MainAPI.history()
+// const res =()=> MainAPI.category(102, 1, 2)
 // res().then(r=>console.log(r.data))

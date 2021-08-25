@@ -11,6 +11,9 @@ const MainListItemBase = ({item, ...rest}) => {
             history.push(path)
         }
     }
+
+    const visibleDescription = history.location.pathname === "/category" || history.location.pathname ==="/app-search"|| history.location.pathname ==="/search-panel"|| history.location.pathname ==="/history"|| history.location.pathname ==="/bookmark"
+
     return (
        <>
            <div   {...rest}  onKeyDown={(e)=>onSelectHandler(e,item.url)}>
@@ -23,7 +26,7 @@ const MainListItemBase = ({item, ...rest}) => {
 
                   </div>
                   {
-                      history.location.pathname === "/category" || history.location.pathname ==="/app-search"|| history.location.pathname ==="/search-panel"|| history.location.pathname ==="/history" ?
+                      visibleDescription ?
                       <div className={css.item__details}>
                           <div>{item.year} | {!!item.access ? <span style={{color:"#FF0000"}}>Подписка</span> : <span style={{color:"#979797"}}>Бесплатный</span>}</div>
                           <div className={css.nowrap}>{!!item.rate_age && item.rate_age} {item.title}</div>

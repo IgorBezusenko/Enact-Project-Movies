@@ -30,6 +30,9 @@ export const SET_CLEAR_SEARCH_ITEMS = "SEARCH/SET_CLEAR_SEARCH_ITEMS"
 
 export const SET_HISTORY_ITEMS = "HistoryPage/SET_HISTORY_ITEMS"
 
+export const SET_BOOKMARK_ITEMS = "BookMark/SET_BOOKMARK_ITEMS"
+export const SET_BOOKMARK_ID = "BookMark/SET_BOOKMARK_ID"
+
 
 // export const SET_FILTER_SEARCH = "CATEGORY/SET_FILTER_SEARCH"
 
@@ -267,6 +270,37 @@ export const getHistoryItems = () => async (dispatch) => {
         const {data} = await MainAPI.history()
         // console.log(data)
         dispatch(setHistoryItems(data))
+    } catch (e) {
+        console.log("Error getSearchItems", e.response)
+    }
+}
+
+//bookmark
+export const setBookmarkItems = (bookmarkItems) => ({
+    type: SET_BOOKMARK_ITEMS,
+    bookmarkItems
+})
+export const setBookmarkId = (bookmarkId) => ({
+    type: SET_BOOKMARK_ID,
+    bookmarkId
+})
+
+export const getBookmarkItems = () => async (dispatch) => {
+    try {
+        const {data} = await MainAPI.bookmark()
+        console.log(data)
+        dispatch(setBookmarkItems(data))
+    } catch (e) {
+        console.log("Error getSearchItems", e.response)
+    }
+}
+export const toggleBookmarkById = (id) => async (dispatch) => {
+    try {
+
+        const {data} = await MainAPI.bookmarkToggle(id)
+        dispatch(setBookmarkId(data))
+        console.log(data)
+
     } catch (e) {
         console.log("Error getSearchItems", e.response)
     }

@@ -84,7 +84,7 @@ export const CategorySort = (props) => {
 
 
                 <div>
-                    <ButtonBase className={css.btn__filter}>
+                    <ButtonBase onClick={onSubmitHandler} className={css.btn__filter}>
                         <List/>
                         <div>Применить сортировку</div>
                     </ButtonBase>
