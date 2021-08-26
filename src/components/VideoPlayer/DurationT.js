@@ -13,10 +13,11 @@ function format (seconds) {
     const hh = date.getUTCHours()
     const mm = date.getUTCMinutes()
     const ss = pad(date.getUTCSeconds())
-    if (hh) {
-        return `${hh}:${pad(mm)}:${ss}`
-    }
-    return `${mm}:${ss}`
+    return `${pad(hh)}:${pad(mm)}:${ss}`
+    // if (hh) {
+    //     return `${hh}:${pad(mm)}:${ss}`
+    // }
+    // return `${mm}:${ss}`
 }
 
 function pad (string) {

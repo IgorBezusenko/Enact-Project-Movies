@@ -1,4 +1,4 @@
-.player{
+.player {
   width: 100%;
   height: 100%;
   background-color: #000000;
@@ -14,34 +14,69 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 100;
 }
 
 
-
-.on__back{
+.on__back {
   position: absolute;
   top: 2rem;
   left: 10rem;
   z-index: 1000;
 }
+
 .on__back:focus {
   color: #FF0000;
 }
 
-.controls{
+.title_controls {
   position: absolute;
-  bottom: 2rem;
-  left: 4rem;
+  width: 100%;
+  top: 0;
+  left: 0;
   z-index: 1000;
-
-  display: flex;
-  justify-content: space-between;
 }
 
-.btn_controls{
+.controls {
   position: absolute;
-  background-color: #FFFFFF;
-  bottom: 2rem;
-  left: 4rem;
-  z-index: 10001;
+  bottom: 0.5rem;
+  left: 2rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.input_control {
+  width: 75vw;
+  margin: 0 1rem;
+}
+
+.time_controls {
+  min-width: 5.5rem;
+}
+
+.btn_group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn_controls {
+  color: #FFFFFF;
+  svg {
+    border-radius: 50%;
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+}
+
+.p_controls {
+  padding: 0.2rem 0 0.2rem 0.2rem;
+}
+
+.btn_controls:focus {
+  svg {
+    background-color: rgba(255, 0, 0, 0.5);
+  }
 }

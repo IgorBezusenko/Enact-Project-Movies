@@ -288,7 +288,7 @@ export const setBookmarkId = (bookmarkId) => ({
 export const getBookmarkItems = () => async (dispatch) => {
     try {
         const {data} = await MainAPI.bookmark()
-        console.log(data)
+        // console.log(data)
         dispatch(setBookmarkItems(data))
     } catch (e) {
         console.log("Error getSearchItems", e.response)
@@ -299,8 +299,7 @@ export const toggleBookmarkById = (id) => async (dispatch) => {
 
         const {data} = await MainAPI.bookmarkToggle(id)
         dispatch(setBookmarkId(data))
-        console.log(data)
-
+        // console.log(data)
     } catch (e) {
         console.log("Error getSearchItems", e.response)
     }

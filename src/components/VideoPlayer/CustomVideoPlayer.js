@@ -19,7 +19,7 @@ export const CustomVideoPlayer = (props) => {
             {/*<NavOnBack title={"Tittle"} className={css.on__back} onGoBack={() => props.history.goBack()}/>*/}
             {
                 videoUrl &&
-                <CVPlayer url={videoUrl}/>
+                <CVPlayer1 url={videoUrl}/>
             }
         </>
     )

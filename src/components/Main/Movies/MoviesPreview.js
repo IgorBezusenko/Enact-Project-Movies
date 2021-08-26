@@ -97,7 +97,7 @@ export const MoviesPreview = (props) => {
             onToggleBookmark()
         }
     }
-    console.log("bookmarkState", bookmarkState)
+    // console.log("bookmarkState", bookmarkState)
     return (
         <div style={{
             width: "100%",
