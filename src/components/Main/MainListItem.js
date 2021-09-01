@@ -3,8 +3,9 @@ import css from "./Main.module.less";
 import {Link, useHistory} from "react-router-dom";
 import Spottable from "@enact/spotlight/Spottable";
 
-const MainListItemBase = ({item, ...rest}) => {
+const MainListItemBase = ({item,itemIndex, ...rest}) => {
     let history = useHistory();
+    // console.log("item",itemIndex)
     const onSelectHandler = (e,path) => {
         // console.log("item.url",item.url)
         if (e.code === "Enter") {

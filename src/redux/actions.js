@@ -17,6 +17,9 @@ export const PUT_LIKE_AC = "MoviesPreview/PUT_LIKE_AC"
 export const SET_VOTE_AC = "MoviesPreview/SET_VOTE_AC"
 
 export const GET_CATEGORY = "CATEGORY/GET_CATEGORY"
+export const SET_NEW_CATEGORY_PAGE = "CATEGORY/SET_NEW_CATEGORY_PAGE"
+export const SET_PAGE_INCREMENT = "CATEGORY/SET_PAGE_INCREMENT"
+export const CLEAR_CATEGORY = "CATEGORY/CLEAR_CATEGORY"
 export const SET_CATEGORY_ID = "CATEGORY/SET_CATEGORY_ID"
 export const SET_ID_SORT = "CATEGORY/SET_ID_SORT"
 export const SET_CATEGORY_FILTER = "CATEGORY/SET_CATEGORY_FILTER"
@@ -202,7 +205,6 @@ export const getCategory = (cid, currentPage, idSort) => async (dispatch) => {
     // dispatch(mainToggleIsFetching(true))
     try {
         const {data} = await MainAPI.category(cid, currentPage, idSort)
-
         dispatch({
             type: GET_CATEGORY,
             payload: data
@@ -214,6 +216,34 @@ export const getCategory = (cid, currentPage, idSort) => async (dispatch) => {
 
     }
 }
+
+export const setPageIncrement = ()=>({
+    type:SET_PAGE_INCREMENT
+})
+
+export const clearCategory = ()=>({
+    type:CLEAR_CATEGORY
+})
+
+export const setNewCategoryPage = (cid, currentPage, idSort) => async (dispatch) => {
+    // dispatch(mainToggleIsFetching(true))
+    try {
+        const {data} = await MainAPI.category(cid, currentPage, idSort)
+        console.log("data",cid, currentPage, idSort,data)
+        dispatch({
+            type: SET_NEW_CATEGORY_PAGE,
+            payload: data
+        })
+        // dispatch(mainToggleIsFetching(false))
+    } catch (e) {
+        console.log("Error setNewCategoryPage", e)
+        // dispatch(mainToggleIsFetching(false))
+
+    }
+}
+
+
+
 export const getCategoryFilter = () => async (dispatch) => {
     // dispatch(mainToggleIsFetching(true))
     try {

@@ -1,10 +1,16 @@
 import {
+    CLEAR_CATEGORY,
     GET_CATEGORY,
     SET_CATEGORY_FILTER,
     SET_CATEGORY_ID,
     SET_FILTER_COUNTRY,
-    SET_FILTER_GENRE, SET_FILTER_SEARCH, SET_FILTER_TYPE_CONTENT, SET_FILTER_YEAR,
-    SET_ID_SORT
+    SET_FILTER_GENRE,
+    SET_FILTER_SEARCH,
+    SET_FILTER_TYPE_CONTENT,
+    SET_FILTER_YEAR,
+    SET_ID_SORT,
+    SET_NEW_CATEGORY_PAGE,
+    SET_PAGE_INCREMENT
 } from "../actions";
 
 
@@ -13,7 +19,20 @@ export const categoryReducer = (state = initialState, action) => {
         case  GET_CATEGORY:
             return {
                 ...state,
-                category: action.payload
+                categoryTitle: action.payload.title,
+                categoryItems: [...action.payload.items],
+            }
+        case  SET_NEW_CATEGORY_PAGE:
+            return {
+                ...state,
+                categoryItems: [...state.categoryItems, ...action.payload.items]
+            }
+        case  CLEAR_CATEGORY:
+            return {
+                ...state,
+                categoryItems: null,
+                categoryTitle: null,
+                currentPage: 1
             }
         case SET_CATEGORY_ID:
             return {
@@ -36,7 +55,7 @@ export const categoryReducer = (state = initialState, action) => {
                 ...state,
                 filterYear: action.filterYear
             }
-            case SET_FILTER_TYPE_CONTENT:
+        case SET_FILTER_TYPE_CONTENT:
             return {
                 ...state,
                 filterTypeContent: action.filterTypeContent
@@ -113,6 +132,11 @@ export const categoryReducer = (state = initialState, action) => {
         //     }
         // }
 
+        case SET_PAGE_INCREMENT:
+            return {
+                ...state,
+                currentPage: state.currentPage + 1
+            }
 
         default :
             return state
@@ -120,8 +144,9 @@ export const categoryReducer = (state = initialState, action) => {
 }
 
 const initialState = {
-    search:null,
-    category: null,
+    search: null,
+    categoryItems: [],
+    categoryTitle: null,
     categoryId: null,
     categoryFilter: {
         genre: [],
@@ -131,8 +156,8 @@ const initialState = {
         category: [],
         sort: []
     },
-    filterYear:"",
-    filterTypeContent:"",
+    filterYear: "",
+    filterTypeContent: "",
     currentPage: 1,
     idSort: 1,
     isFetching: false

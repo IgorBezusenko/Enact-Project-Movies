@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import css from "./Category.module.less"
 
 import {useDispatch, useSelector} from "react-redux";
-import {getCategory, getCategoryFilter} from "../../../redux/actions";
+import {clearCategory, getCategory, setNewCategoryPage, setPageIncrement} from "../../../redux/actions";
 import MainListItem from "../MainListItem";
 import {Header} from "../../Header/Header";
 import {NavOnBack} from "../../NavOnBack/NavOnBack";
@@ -19,29 +19,40 @@ export const Category = (props) => {
     const dispatch = useDispatch()
     const history = useHistory();
     const categoryReducer = useSelector(state => state.categoryReducer)
-    const {category, currentPage, idSort, categoryId} = categoryReducer
+    const {category, categoryItems, categoryTitle, currentPage, idSort, categoryId} = categoryReducer
 
 
     useEffect(() => {
         const parsed = queryString.parse(history.location.search.substr(1))
-        let actualCurrentPage = currentPage
+        console.log(parsed)
         let actualIdSort = idSort
-        if (!!parsed.page) actualCurrentPage = +parsed.page
         if (!!parsed.id_sort) actualIdSort = parsed.id_sort
 
-        dispatch(getCategory(categoryId, actualCurrentPage, actualIdSort))
-    }, [categoryId])
+        dispatch(getCategory(categoryId, currentPage, actualIdSort))
+        return () => {
+            dispatch(clearCategory())
+        }
+    }, [categoryId, idSort])
 
     useEffect(() => {
-        const query = {};
-        if (categoryId !== null) query.cid = categoryId
-        if (idSort !== 1) query.id_sort = idSort
+        console.log("currentPage",currentPage)
 
-        history.push({
-            pathname: '/category',
-            search: queryString.stringify(query)
-        })
-    }, [idSort, categoryId])
+        if (currentPage!==1) {
+            dispatch(setNewCategoryPage(categoryId, currentPage, idSort))
+        }
+
+    }, [currentPage])
+
+    // useEffect(() => {
+    //     const query = {};
+    //     if (categoryId !== null) query.cid = categoryId
+    //     if (idSort !== 1) query.id_sort = idSort
+    //
+    //     history.push({
+    //         pathname: '/category',
+    //         search: queryString.stringify(query)
+    //     })
+    // }, [idSort, categoryId])
 
 
     const onBackHandler = () => history.push("/main")
@@ -53,6 +64,14 @@ export const Category = (props) => {
 
     }
 
+    const onFocusHandler = (index) => {
+        console.log("itemIndex onFocus", index)
+        if (Math.ceil(index / 5) === Math.ceil(categoryItems.length / 5)) {
+            console.log("gooo")
+            dispatch(setPageIncrement())
+        }
+    }
+
 
     return (
         <>
@@ -60,7 +79,8 @@ export const Category = (props) => {
                 <Header/>
 
                 <div className={css.row}>
-                    <NavOnBack className={css.on__back} title={category && category.title} onGoBack={onBackHandler}/>
+                    <NavOnBack className={css.on__back} title={categoryTitle && categoryTitle}
+                               onGoBack={onBackHandler}/>
                     <div className={css.row}>
                         <Link to={"/app-sort"}>
                             <ButtonBase onKeyDown={(e) => onSelectHandler(e, "/app-sort")}
@@ -81,10 +101,11 @@ export const Category = (props) => {
                 </div>
 
                 <div className={css.list}>
-                    {category && category.items.map((item, idx) => {
+                    {categoryItems && categoryItems.map((item, idx) => {
                         return (
 
-                            <MainListItem key={idx} className={css.list__item} item={item}/>
+                            <MainListItem key={idx} className={css.list__item} onFocus={() => onFocusHandler(idx + 1)}
+                                          item={item} itemIndex={idx}/>
 
                         )
                     })}
