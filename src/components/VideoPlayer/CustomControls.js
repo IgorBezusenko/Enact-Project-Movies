@@ -4,20 +4,20 @@ import {useSelector} from "react-redux";
 import css from "./VideoPlayer.module.less";
 import {NavOnBack} from "../NavOnBack/NavOnBack";
 import {ItemBase} from "../Buttons/ItemBase";
-import {FastForward, PauseCircle, PlayCircle} from "react-feather";
+import {FastForward, PauseCircle, PlayCircle, SkipBack, SkipForward} from "react-feather";
 import Duration from "./DurationT";
 
 export const CustomControls = ({
-                            handlePlayPause,
-                            handleSeekChange,
-                            handleSeekMouseDown,
-                            handleSeekMouseUp,
-                            handleTogglePlus,
-                            handleToggleMinus,
-                            playing,
-                            played,
-                            duration,
-                        }) => {
+                                   handlePlayPause,
+                                   handleSeekChange,
+                                   handleSeekMouseDown,
+                                   handleSeekMouseUp,
+                                   handleTogglePlus,
+                                   handleToggleMinus,
+                                   playing,
+                                   played,
+                                   duration,
+                               }) => {
     const history = useHistory()
     const [keycode, setKeycode] = useState(null)
     const [hideControls, setHideControls] = useState(6)
@@ -47,6 +47,9 @@ export const CustomControls = ({
         return () => clearInterval(interval)
     }, [hideControls])
 
+    const SEEK15 = 1 / duration * 15;
+    const SEEK120 = 1 / duration * 120;
+
 
     return <>
         {
@@ -58,13 +61,26 @@ export const CustomControls = ({
                 </div>
                 <div className={css.controls}>
                     <div className={css.btn_group}>
-                        <ItemBase className={css.btn_controls} onClick={handleToggleMinus}>
+                        <ItemBase className={css.btn_controls} onClick={() => {
+                            handleToggleMinus(SEEK120)
+                        }}>
                             <FastForward className={css.p_controls} style={{transform: "rotate(180deg)"}}/>
+                        </ItemBase>
+                        <ItemBase className={css.btn_controls} onClick={() => {
+                            handleToggleMinus(SEEK15)
+                        }}>
+                            <SkipBack className={css.p_controls}/>
                         </ItemBase>
                         <ItemBase className={css.btn_controls} onClick={handlePlayPause}>
                             {playing ? <PauseCircle/> : <PlayCircle/>}
                         </ItemBase>
-                        <ItemBase className={css.btn_controls} onClick={handleTogglePlus}><FastForward
+                        <ItemBase className={css.btn_controls} onClick={() => {
+                            handleTogglePlus(SEEK15)
+                        }}><SkipForward
+                            className={css.p_controls}/></ItemBase>
+                        <ItemBase className={css.btn_controls} onClick={() => {
+                            handleTogglePlus(SEEK120)
+                        }}><FastForward
                             className={css.p_controls}/></ItemBase>
                     </div>
                     <div className={css.btn_group}>

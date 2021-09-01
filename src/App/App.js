@@ -24,7 +24,7 @@ import {HistoryPage} from "../components/HistoryPage/HistoryPage";
 import {BookMark} from "../components/BookMark/BookMark";
 
 const App = () => {
-    const token = useSelector(state => state.authReducer.token)
+    // const token = useSelector(state => state.authReducer.token)
 
     // useEffect(() => {
     //     reactLocalStorage.set('token', token);

@@ -113,22 +113,20 @@ class CVPlayer extends Component {
         this.setState({seeking: false})
         this.player.seekTo(parseFloat(e.target.value))
     }
-    handleTogglePlus = () => {
+    handleTogglePlus = (val) => {
         this.handleSeekMouseDown()
-
         this.setState({
-            played: this.state.played + 0.003
+            played: this.state.played + val
         })
-        this.handleSeekMouseUp1(this.state.played + 0.003)
+        this.handleSeekMouseUp1(this.state.played + val)
     }
 
-    handleToggleMinus = () => {
-
+    handleToggleMinus = (val) => {
         this.handleSeekMouseDown()
         this.setState({
-            played: this.state.played - 0.003
+            played: this.state.played - val
         })
-        this.handleSeekMouseUp1(this.state.played - 0.003)
+        this.handleSeekMouseUp1(this.state.played - val)
     }
 
     handleSeekMouseUp1 = value => {

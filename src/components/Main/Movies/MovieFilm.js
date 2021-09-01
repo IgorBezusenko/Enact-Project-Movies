@@ -17,24 +17,24 @@ export const MovieFilm = ({movieFile}) => {
         <>
 
             <div>
-                {movieFile.media && movieFile.media.map(sel => {
+                {movieFile.media && movieFile.media.map((sel,index) => {
                     return (
-                        <>
+                        <div key={index}>
                             {
                                 sel.items.map((item,index) => {
                                     return (
-                                        <>
+
                                             <Link to={"/player?file=" + item.file} key={index}>
                                                 <ButtonMovie onKeyDown={(e) => onSelect(e,item.file)} title={"Смотреть"} className={css.btn__movie} >
                                                     <Play/>
                                                 </ButtonMovie>
                                             </Link>
 
-                                        </>
+
                                     )
                                 })
                             }
-                        </>
+                        </div>
                     )
                 })
                 }

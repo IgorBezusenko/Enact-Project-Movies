@@ -65,7 +65,7 @@ export const MoviesPreview = (props) => {
         </span>)
     })
     const country = movieFile.country && movieFile.country.map((country, i) => {
-        return (<span>
+        return (<span key={i}>
             {i !== 0 && ", "} {country}
         </span>)
     })
