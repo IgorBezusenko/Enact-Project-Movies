@@ -1,4 +1,5 @@
 import {AuthAPI, MainAPI, MoviesPreview} from "../API/API";
+import {reactLocalStorage} from "reactjs-localstorage";
 
 export const AUTH_TOGGLE_IS_FETCHING = "AUTH/AUTH_TOGGLE_IS_FETCHING"
 export const SET_TOKEN = "AUTH/SET_TOKEN"
@@ -63,6 +64,7 @@ export const getToken = (login, password) => async (dispatch) => {
     try {
         const {data} = await AuthAPI.login(login, password)
         dispatch(setToken(data.data.token))
+        // reactLocalStorage.set('token', (data.data.token))
         console.log("Auth", data.data.token)
         dispatch(clearError())
         dispatch(authToggleIsFetching(false))
@@ -79,10 +81,11 @@ export const mainToggleIsFetching = (IsFetching) => ({
     IsFetching
 })
 
-export const getMain = () => async (dispatch) => {
+export const getMain = (token) => async (dispatch) => {
     dispatch(mainToggleIsFetching(true))
     try {
-        const {data} = await MainAPI.main()
+        // await AuthAPI.setAuthToken(token)
+        const {data} = await MainAPI.main(token)
         const movies = data.filter(m => m.viewport === 0.3)
         dispatch(mainToggleIsFetching(false))
         dispatch({

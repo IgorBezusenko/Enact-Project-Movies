@@ -83,8 +83,6 @@ class CVPlayer extends Component {
 
     handlePlay = () => {
         console.log('onPlay')
-
-
         this.setState({playing: true})
     }
 
@@ -117,7 +115,7 @@ class CVPlayer extends Component {
     }
     handleTogglePlus = () => {
         this.handleSeekMouseDown()
-        console.log("plus")
+
         this.setState({
             played: this.state.played + 0.003
         })
@@ -125,7 +123,7 @@ class CVPlayer extends Component {
     }
 
     handleToggleMinus = () => {
-        console.log("minus")
+
         this.handleSeekMouseDown()
         this.setState({
             played: this.state.played - 0.003
@@ -139,7 +137,7 @@ class CVPlayer extends Component {
     }
 
     handleProgress = state => {
-        console.log('onProgress', state)
+        // console.log('onProgress', state)
         // We only want to update time slider if we are not currently seeking
         if (!this.state.seeking) {
             this.setState(state)

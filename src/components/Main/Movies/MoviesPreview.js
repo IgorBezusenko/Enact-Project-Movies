@@ -125,9 +125,10 @@ export const MoviesPreview = (props) => {
 
                             <ButtonMovie className={cssSpottable.btn__movie}
                                          onClick={onToggleBookmark}
-                                         // onKeyDoun={(e)=>onSelectBookmark(e)}
+                                // onKeyDoun={(e)=>onSelectBookmark(e)}
                                          title={"Избранное"}>
-                                <Bookmark style={{color: bookmarkState && bookmarkState.active ? "#FF0000" : ""}}/>
+                                <Bookmark
+                                    className={css.bookmark + " " + `${bookmarkState && bookmarkState.active ? css.active : ""}`}/>
                             </ButtonMovie>
 
                         </div>

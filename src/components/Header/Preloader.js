@@ -9,10 +9,10 @@ export const Preloader = () => {
         history.push("/main")
         setLoading(false)
 
-    }, [history.location.pathname])
+    }, [history.location.pathname==="/"])
     return (
         <>
-            {loading && <div>Loaasdasd</div>}
+            {loading && <div>Loading....</div>}
         </>
     )
 }

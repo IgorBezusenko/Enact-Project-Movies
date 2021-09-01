@@ -12,36 +12,24 @@ import {ItemBase} from "../Buttons/ItemBase";
 export const Header = () => {
     const dispatch = useDispatch()
     const token = useSelector((state) => state.authReducer.token)
+    const history = useHistory()
     const [focus, setFocus] = useState(false)
     useEffect(() => {
         reactLocalStorage.set('token', token);
+        onClearVideoUrl()
         console.log("token", token)
-    }, [token]);
-
-
-    const onClearToken = () => {
-        dispatch(clearToken())
-        reactLocalStorage.clear();
-    }
-
+    }, []);
 
     const onClearVideoUrl = () => {
         dispatch(clearVideoUrl())
     }
-    const onHandleFocus = () => {
-        setFocus(true)
-    }
-    const onHandleBlur = () => {
-        setFocus(false)
-    }
 
     return (
-        <Sidebar/>
+        <Sidebar token={token} />
     )
 }
 
-
-const Sidebar = () => {
+const Sidebar = ({token}) => {
     const [search, setSearch] = useState(false)
     const [play, setPlay] = useState(false)
     const [favorite, setFavorite] = useState(false)
@@ -159,7 +147,9 @@ const Sidebar = () => {
             </ul>
 
             <div className={css.log__in}>
-                <ItemBase onKeyDown={(e) => onSelectHandler(e, "/auth")}
+                <ItemBase onKeyDown={(e) => {
+                    onSelectHandler(e,"/auth")
+                }}
                           onFocus={() => {
                               setLogin(true)
                           }}
@@ -170,7 +160,7 @@ const Sidebar = () => {
                     <Link to={"/auth"}>
                         <LogIn style={{transform: "rotate(180deg)"}}/>
                     </Link></ItemBase>
-                {isFocus && <div className={css.icon__text + " " + `${login && css.color__red}`}>Выйти</div>}
+                {isFocus && <div className={css.icon__text + " " + `${login && css.color__red}`}>{token ? "Выйти" : "Войти"}</div>}
             </div>
         </div>
     )

@@ -11,12 +11,26 @@ const instance = axios.create({
 export const AuthAPI = {
     login(login, password) {
         return instance.post(`/get_token`, {login, password})
+    },
+    logout(){
+        return instance.get(`logout`).then(r => r.data)
+    },
+    setAuthToken(token) {
+        // debugger
+        if (token) {
+            //applying token
+            instance.defaults.headers["HTTP-X-TOKEN"] = reactLocalStorage.set("token", token) ;
+        } else {
+            //deleting the token from header
+            delete instance.defaults.headers["HTTP-X-TOKEN"];
+        }
     }
 }
 
 
 export const MainAPI = {
-    main() {
+    main(token) {
+        AuthAPI.setAuthToken(token)
         return instance.get('/main').then(r => r.data)
     },
     movieFile(id) {
@@ -55,5 +69,5 @@ export const MoviesPreview = {
     }
 }
 
-// const res =()=> MainAPI.category(102, 1, 2)
+// const res =()=> AuthAPI.logout()
 // res().then(r=>console.log(r.data))

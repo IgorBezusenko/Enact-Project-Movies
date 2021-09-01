@@ -5,6 +5,7 @@ import {NavOnBack} from "../NavOnBack/NavOnBack";
 import React, {useState} from "react";
 import Input from "@enact/moonstone/Input";
 import {getToken, setError} from "../../redux/actions";
+import {reactLocalStorage} from "reactjs-localstorage";
 
 export const AuthForm = (props) => {
     const dispatch = useDispatch()
@@ -38,6 +39,7 @@ export const AuthForm = (props) => {
         } else {
             dispatch(setError(null))
             await dispatch(getToken(login, pass))
+
         }
 
 
@@ -50,13 +52,11 @@ export const AuthForm = (props) => {
                 <form className={css.form} onSubmit={onSubmit}>
 
 
-
                     {error && <p className={css.errors}>{error}</p>}
                     <div className={css.formControl}>
-                        <Input
-                               onChange={(e) => {
+                        <Input onChange={(e) => {
                             setLogin(e.value.trim())
-                        }}
+                        }}      autoFocus
                                className={css.input}
                                value={login}
                                placeholder={"email / логин"}
@@ -64,9 +64,9 @@ export const AuthForm = (props) => {
                     </div>
 
                     <div className={css.formControl}>
-                        <Input  onChange={(e) => {
+                        <Input onChange={(e) => {
                             setPass(e.value)
-                        }} className={css.input} value={pass} placeholder={"Пароль"}
+                        }}  autoFocus className={css.input} value={pass} placeholder={"Пароль"}
                         />
                     </div>
 

@@ -25,10 +25,10 @@ import {BookMark} from "../components/BookMark/BookMark";
 
 const App = () => {
     const token = useSelector(state => state.authReducer.token)
-    const history = useHistory();
-    useEffect(() => {
-        reactLocalStorage.set('token', token);
-    }, [token]);
+
+    // useEffect(() => {
+    //     reactLocalStorage.set('token', token);
+    // }, []);
     return (
 
         <Router basename={process.env.PUBLIC_URL}>

@@ -12,8 +12,8 @@ export const authReducer = (state = initialState, action) => {
         case SET_TOKEN :
             return {
                 ...state,
-                // token: action.token
-                token: reactLocalStorage.set('token', action.token)
+                token: action.token
+                // token: reactLocalStorage.set('token', action.token)
             }
         case CLEAR_TOKEN :
             return {
