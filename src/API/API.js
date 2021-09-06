@@ -48,8 +48,8 @@ export const MainAPI = {
     searchFilter(genre='', country='',year='',typeContent=''){
         return instance.get(`/searchExt/15?genre=${genre}&country=${country}&year=${year}&type_content=${typeContent}`).then(r => r.data)
     },
-    searchMovie(query){
-        return instance.get(`/searchExt/15?query=${query}`).then(r => r.data)
+    searchMovie(query, limit){
+        return instance.get(`/searchExt/${limit}?query=${query}`).then(r => r.data)
     },
     history(){
         return instance.get(`/history/15`).then(r => r.data)

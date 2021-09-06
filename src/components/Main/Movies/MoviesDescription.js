@@ -9,29 +9,29 @@ export const MoviesDescription = (props) => {
     const onBackHandler = () => props.history.goBack()
 
     const country = movieFile.country && movieFile.country.map((country, i) => {
-        return (<>
+        return (<span key={i}>
             {i !== 0 && ", "} {country}
-        </>)
+        </span>)
     })
     const genre = movieFile.genre && movieFile.genre.map((genre, i) => {
-        return (<>
+        return (<span key={i}>
             {i !== 0 && ", "}{genre.name}
-        </>)
+        </span>)
     })
     const creator = movieFile.creator && movieFile.creator.map((creator, i) => {
-        return (<>
+        return (<span key={i}>
             {i !== 0 && ", "}{creator.name}
-        </>)
+        </span>)
     })
     const producer = movieFile.producer && movieFile.producer.map((producer, i) => {
-        return (<>
+        return (<span key={i}>
             {i !== 0 && ", "} {producer.name}
-        </>)
+        </span>)
     })
     const in_the_roles = movieFile.in_the_roles && movieFile.in_the_roles.map((in_the_roles, i) => {
-        return (<>
+        return (<span key={i}>
             {i !== 0 && ", "} {in_the_roles.name}
-        </>)
+        </span>)
     })
 
 

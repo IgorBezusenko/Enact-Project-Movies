@@ -64,9 +64,9 @@ export const Category = (props) => {
 
     }
 
-    const onFocusHandler = (index) => {
+    const onFocusHandler = (index,array) => {
         console.log("itemIndex onFocus", index)
-        if (Math.ceil(index / 5) === Math.ceil(categoryItems.length / 5)) {
+        if (Math.ceil(index / 5) === Math.ceil(array.length / 5)) {
             console.log("gooo")
             dispatch(setPageIncrement())
         }
@@ -104,7 +104,7 @@ export const Category = (props) => {
                     {categoryItems && categoryItems.map((item, idx) => {
                         return (
 
-                            <MainListItem key={idx} className={css.list__item} onFocus={() => onFocusHandler(idx + 1)}
+                            <MainListItem key={idx} className={css.list__item} onFocus={() => onFocusHandler(idx + 1,categoryItems)}
                                           item={item} itemIndex={idx}/>
 
                         )

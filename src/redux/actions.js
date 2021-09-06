@@ -1,5 +1,4 @@
 import {AuthAPI, MainAPI, MoviesPreview} from "../API/API";
-import {reactLocalStorage} from "reactjs-localstorage";
 
 export const AUTH_TOGGLE_IS_FETCHING = "AUTH/AUTH_TOGGLE_IS_FETCHING"
 export const SET_TOKEN = "AUTH/SET_TOKEN"
@@ -30,6 +29,7 @@ export const SET_FILTER_TYPE_CONTENT = "CATEGORY/SET_FILTER_TYPE_CONTENT"
 export const SET_FILTER_SEARCH = "CATEGORY/SET_FILTER_SEARCH"
 
 export const SET_SEARCH_ITEMS = "SEARCH/SET_SEARCH_ITEMS"
+export const SET_NEW_SEARCH_PAGE = "SEARCH/SET_NEW_SEARCH_PAGE"
 export const SET_CLEAR_SEARCH_ITEMS = "SEARCH/SET_CLEAR_SEARCH_ITEMS"
 
 export const SET_HISTORY_ITEMS = "HistoryPage/SET_HISTORY_ITEMS"
@@ -217,19 +217,19 @@ export const getCategory = (cid, currentPage, idSort) => async (dispatch) => {
     }
 }
 
-export const setPageIncrement = ()=>({
-    type:SET_PAGE_INCREMENT
+export const setPageIncrement = () => ({
+    type: SET_PAGE_INCREMENT
 })
 
-export const clearCategory = ()=>({
-    type:CLEAR_CATEGORY
+export const clearCategory = () => ({
+    type: CLEAR_CATEGORY
 })
 
 export const setNewCategoryPage = (cid, currentPage, idSort) => async (dispatch) => {
     // dispatch(mainToggleIsFetching(true))
     try {
         const {data} = await MainAPI.category(cid, currentPage, idSort)
-        console.log("data",cid, currentPage, idSort,data)
+        console.log("data", cid, currentPage, idSort, data)
         dispatch({
             type: SET_NEW_CATEGORY_PAGE,
             payload: data
@@ -241,7 +241,6 @@ export const setNewCategoryPage = (cid, currentPage, idSort) => async (dispatch)
 
     }
 }
-
 
 
 export const getCategoryFilter = () => async (dispatch) => {
@@ -280,13 +279,16 @@ export const setSearchItems = (searchItems) => ({
     type: SET_SEARCH_ITEMS,
     searchItems
 })
+export const setNewSearchPage = () => ({
+    type: SET_NEW_SEARCH_PAGE,
+})
 export const setClearSearchItems = () => ({
     type: SET_CLEAR_SEARCH_ITEMS,
 
 })
-export const getSearchItems = (query) => async (dispatch) => {
+export const getSearchItems = (query, limit) => async (dispatch) => {
     try {
-        const {data} = await MainAPI.searchMovie(query)
+        const {data} = await MainAPI.searchMovie(query, limit)
         dispatch(setSearchItems(data))
     } catch (e) {
         console.log("Error getSearchItems", e.response)

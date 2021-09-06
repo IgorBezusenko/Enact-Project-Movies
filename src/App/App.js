@@ -1,7 +1,5 @@
-import React, {useEffect} from "react";
-import {BrowserRouter as Router, Redirect, Route, useHistory} from "react-router-dom";
-import {reactLocalStorage} from "reactjs-localstorage";
-import {useSelector} from "react-redux";
+import React from "react";
+import {BrowserRouter as Router, Redirect, Route} from "react-router-dom";
 import ThemeDecorator from "@enact/sandstone/ThemeDecorator";
 
 import MainPanel from "../components/Main/MainPanel";
@@ -22,6 +20,8 @@ import {CustomVideoPlayer} from "../components/VideoPlayer/CustomVideoPlayer";
 import {SearchPanel} from "../components/SearchPanel/SearchPanel";
 import {HistoryPage} from "../components/HistoryPage/HistoryPage";
 import {BookMark} from "../components/BookMark/BookMark";
+
+import "./App.less"
 
 const App = () => {
     // const token = useSelector(state => state.authReducer.token)
