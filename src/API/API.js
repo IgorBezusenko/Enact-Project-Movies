@@ -55,7 +55,7 @@ export const MainAPI = {
         return instance.get(`/history/${limit}`).then(r => r.data)
     },
     bookmark(limit){
-        return instance.get(`/bookmark/15`).then(r => r.data)
+        return instance.get(`/bookmark/${limit}`).then(r => r.data)
     },
  bookmarkToggle(id){
         return instance.get(`bookmark/change/${id}`).then(r => r.data)

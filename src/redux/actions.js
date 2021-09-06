@@ -37,10 +37,9 @@ export const SET_NEW_HISTORY_PAGE = "HistoryPage/SET_NEW_HISTORY_PAGE"
 
 export const SET_BOOKMARK_ITEMS = "BookMark/SET_BOOKMARK_ITEMS"
 export const SET_BOOKMARK_ID = "BookMark/SET_BOOKMARK_ID"
-
+export const SET_NEW_BOOKMARK_PAGE = "BookMark/SET_NEW_BOOKMARK_PAGE"
 
 // export const SET_FILTER_SEARCH = "CATEGORY/SET_FILTER_SEARCH"
-
 
 export const authToggleIsFetching = (IsFetching) => ({
     type: AUTH_TOGGLE_IS_FETCHING,
@@ -319,14 +318,17 @@ export const setBookmarkItems = (bookmarkItems) => ({
     type: SET_BOOKMARK_ITEMS,
     bookmarkItems
 })
+export const setNewBookmarkPage = () => ({
+    type: SET_NEW_BOOKMARK_PAGE,
+    })
 export const setBookmarkId = (bookmarkId) => ({
     type: SET_BOOKMARK_ID,
     bookmarkId
 })
 
-export const getBookmarkItems = () => async (dispatch) => {
+export const getBookmarkItems = (limit) => async (dispatch) => {
     try {
-        const {data} = await MainAPI.bookmark()
+        const {data} = await MainAPI.bookmark(limit)
         // console.log(data)
         dispatch(setBookmarkItems(data))
     } catch (e) {
