@@ -4,20 +4,19 @@ import {useDispatch, useSelector} from "react-redux";
 import MainList from "./MainList";
 import {getMain, setError, setToken} from "../../redux/actions";
 import {Header} from "../Header/Header";
-import {ItemBase} from "../Buttons/ItemBase";
 import {reactLocalStorage} from "reactjs-localstorage";
 
 const MainPanel = () => {
     const movies = useSelector(state => state.mainReducer.mainData)
-    const token = useSelector((state) => state.authReducer.token)
+    const {token, connectionCode} = useSelector((state) => state.authReducer)
     const dispatch = useDispatch()
 
     useEffect(() => {
         reactLocalStorage.set('token', token);
-        dispatch(getMain(token))
+        dispatch(getMain(token, connectionCode))
         dispatch(setToken(token))
         dispatch(setError(null))
-    }, [token]);
+    }, [token, connectionCode]);
 
     return (
         <>

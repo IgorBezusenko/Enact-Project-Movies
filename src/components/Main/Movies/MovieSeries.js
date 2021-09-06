@@ -26,8 +26,8 @@ export const MovieSeries = (props) => {
         // console.log(mediaTitle)
         setLoading(true)
         setTimeout(() => {
-            setLoading(false)
             setState(mediaTitle)
+            setLoading(false)
         }, 100)
         dispatch(clearVideoUrl())
     }
@@ -68,7 +68,7 @@ export const MovieSeries = (props) => {
                                     && <ButtonSpotTable key={index}
                                                         className={css.btn + " " + css.btn__season +" "+`${media.title===state && css.btn__season_focus} `}
                                                         onClick={() => onClickToSeason(media.title)}
-                                                        onKeyDown={(e) => onSelectSeason(e, media.title)}
+                                                        // onKeyDown={(e) => onSelectSeason(e, media.title)}
                                     >{media.title}</ButtonSpotTable>}
                                 </>
                             )

@@ -9,9 +9,30 @@ import {
     SET_FILTER_TYPE_CONTENT,
     SET_FILTER_YEAR,
     SET_ID_SORT,
-    SET_NEW_CATEGORY_PAGE,
+    SET_NEW_CATEGORY_PAGE, SET_NEW_FILTER_SEARCH_PAGE,
+    SET_NEW_SEARCH_PAGE,
     SET_PAGE_INCREMENT
 } from "../actions";
+
+const initialState = {
+    search: [],
+    categoryItems: [],
+    categoryTitle: null,
+    categoryId: null,
+    categoryFilter: {
+        genre: [],
+        country: [],
+        year: [],
+        type_content: [],
+        category: [],
+        sort: []
+    },
+    filterYear: "",
+    filterTypeContent: "",
+    currentPage: 1,
+    idSort: 1,
+    isFetching: false
+}
 
 
 export const categoryReducer = (state = initialState, action) => {
@@ -30,8 +51,9 @@ export const categoryReducer = (state = initialState, action) => {
         case  CLEAR_CATEGORY:
             return {
                 ...state,
-                categoryItems: null,
+                categoryItems: [],
                 categoryTitle: null,
+                search: [],
                 currentPage: 1
             }
         case SET_CATEGORY_ID:
@@ -108,29 +130,11 @@ export const categoryReducer = (state = initialState, action) => {
                 ...state,
                 search: action.search
             }
-
-        // case SET_FILTER_TYPE_CONTENT:
-        // {
-        //     const indexTypeContent = state.categoryFilter.type_content.findIndex(
-        //         (item) => item.id === action.id
-        //     );
-        //     const editItem = {
-        //         id: action.id,
-        //         name: action.name,
-        //         checked: action.checked,
-        //     };
-        //     return {
-        //         ...state,
-        //         categoryFilter: {
-        //             ...state.categoryFilter,
-        //             type_content: [
-        //                 ...state.categoryFilter.type_content.slice(0, indexTypeContent),
-        //                 editItem,
-        //                 ...state.categoryFilter.type_content.slice(indexTypeContent + 1),
-        //             ]
-        //         }
-        //     }
-        // }
+        case  SET_NEW_FILTER_SEARCH_PAGE:
+            return {
+                ...state,
+                search: [...state.search, ...action.search]
+            }
 
         case SET_PAGE_INCREMENT:
             return {
@@ -143,22 +147,3 @@ export const categoryReducer = (state = initialState, action) => {
     }
 }
 
-const initialState = {
-    search: null,
-    categoryItems: [],
-    categoryTitle: null,
-    categoryId: null,
-    categoryFilter: {
-        genre: [],
-        country: [],
-        year: [],
-        type_content: [],
-        category: [],
-        sort: []
-    },
-    filterYear: "",
-    filterTypeContent: "",
-    currentPage: 1,
-    idSort: 1,
-    isFetching: false
-}

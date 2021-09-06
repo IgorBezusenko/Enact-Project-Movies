@@ -4,9 +4,10 @@ import css from "./Form.module.less";
 import React, {useEffect} from "react";
 import {AuthButton} from "./AuthButton";
 import {Smartphone, User} from "react-feather";
-import {clearToken} from "../../redux/actions";
+import {clearToken, getTokenCode, setConnectionCode} from "../../redux/actions";
 import {reactLocalStorage} from "reactjs-localstorage";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import deviceinfo from "@enact/webos/deviceinfo";
 
 export const AuthPage = (props) => {
     const onBackHandler = () => props.history.goBack()
@@ -16,6 +17,7 @@ export const AuthPage = (props) => {
     useEffect(() => {
         dispatch(clearToken())
         reactLocalStorage.remove("token");
+        reactLocalStorage.remove("code");
     }, [])
 
 

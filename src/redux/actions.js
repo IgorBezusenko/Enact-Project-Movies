@@ -2,6 +2,8 @@ import {AuthAPI, MainAPI, MoviesPreview} from "../API/API";
 
 export const AUTH_TOGGLE_IS_FETCHING = "AUTH/AUTH_TOGGLE_IS_FETCHING"
 export const SET_TOKEN = "AUTH/SET_TOKEN"
+export const SET_TOKEN_CODE = "AUTH/SET_TOKEN_CODE"
+export const SET_CONNECTION_CODE = "AUTH/SET_CONNECTION_CODE"
 export const CLEAR_TOKEN = "AUTH/CLEAR_TOKEN"
 export const SET_ERROR = "AUTH/SET_ERROR"
 export const CLEAR_ERROR = "AUTH/CLEAR_ERROR"
@@ -27,6 +29,7 @@ export const SET_FILTER_YEAR = "CATEGORY/SET_FILTER_YEAR"
 export const SET_FILTER_COUNTRY = "CATEGORY/SET_FILTER_COUNTRY"
 export const SET_FILTER_TYPE_CONTENT = "CATEGORY/SET_FILTER_TYPE_CONTENT"
 export const SET_FILTER_SEARCH = "CATEGORY/SET_FILTER_SEARCH"
+export const SET_NEW_FILTER_SEARCH_PAGE = "CATEGORY/SET_NEW_FILTER_SEARCH_PAGE"
 
 export const SET_SEARCH_ITEMS = "SEARCH/SET_SEARCH_ITEMS"
 export const SET_NEW_SEARCH_PAGE = "SEARCH/SET_NEW_SEARCH_PAGE"
@@ -48,6 +51,14 @@ export const authToggleIsFetching = (IsFetching) => ({
 export const setToken = (token) => ({
     type: SET_TOKEN,
     token
+})
+export const setTokenCode = (tokenCode) => ({
+    type: SET_TOKEN_CODE,
+    tokenCode
+})
+export const setConnectionCode = (connectionCode) => ({
+    type: SET_CONNECTION_CODE,
+    connectionCode
 })
 export const clearToken = () => ({
     type: CLEAR_TOKEN,
@@ -77,6 +88,24 @@ export const getToken = (login, password) => async (dispatch) => {
         dispatch(authToggleIsFetching(false))
     }
 }
+export const getTokenCode = (code_UID, token) => async (dispatch) => {
+    dispatch(authToggleIsFetching(true))
+    try {
+        const {data} = await AuthAPI.loginMobil(code_UID, token)
+        if (data.code) {
+            dispatch(setTokenCode(data.code))
+        }
+        if (data.token) {
+            dispatch(setToken(data.token))
+        }
+        console.log("AuthCode_UID", data)
+        dispatch(authToggleIsFetching(false))
+    } catch (e) {
+        // dispatch(setError(e.response.data.error.message))
+        console.log("Error getToken", e.response.data.error.message)
+        dispatch(authToggleIsFetching(false))
+    }
+}
 
 
 export const mainToggleIsFetching = (IsFetching) => ({
@@ -84,11 +113,11 @@ export const mainToggleIsFetching = (IsFetching) => ({
     IsFetching
 })
 
-export const getMain = (token) => async (dispatch) => {
+export const getMain = (token, code) => async (dispatch) => {
     dispatch(mainToggleIsFetching(true))
     try {
         // await AuthAPI.setAuthToken(token)
-        const {data} = await MainAPI.main(token)
+        const {data} = await MainAPI.main(token, code)
         const movies = data.filter(m => m.viewport === 0.3)
         dispatch(mainToggleIsFetching(false))
         dispatch({
@@ -256,16 +285,32 @@ export const getCategoryFilter = () => async (dispatch) => {
 
     }
 }
-
+//searchFilter
 export const setSearchFilter = (search) => ({
     type: SET_FILTER_SEARCH,
     search
 })
-export const getSearchFilter = (genre, country, year, typeContent) => async (dispatch) => {
+export const setNewSearchFilterPage = (search) => ({
+    type: SET_NEW_FILTER_SEARCH_PAGE,
+    search
+})
+export const getSearchFilter = (genre, country, year, typeContent, page) => async (dispatch) => {
     // dispatch(mainToggleIsFetching(true))
     try {
-        const {data} = await MainAPI.searchFilter(genre, country, year, typeContent)
+        const {data} = await MainAPI.searchFilter(genre, country, year, typeContent,page)
         dispatch(setSearchFilter(data))
+        // dispatch(mainToggleIsFetching(false))
+    } catch (e) {
+        console.log("Error getCategoryFilter", e.response)
+        // dispatch(mainToggleIsFetching(false))
+
+    }
+}
+export const getNewSearchFilterPage = (genre, country, year, typeContent, page) => async (dispatch) => {
+    // dispatch(mainToggleIsFetching(true))
+    try {
+        const {data} = await MainAPI.searchFilter(genre, country, year, typeContent,page)
+        dispatch(setNewSearchFilterPage(data))
         // dispatch(mainToggleIsFetching(false))
     } catch (e) {
         console.log("Error getCategoryFilter", e.response)
@@ -302,7 +347,7 @@ export const setHistoryItems = (historyItems) => ({
 })
 export const setNewHistoryPage = () => ({
     type: SET_NEW_HISTORY_PAGE,
-    })
+})
 export const getHistoryItems = (limit) => async (dispatch) => {
     try {
         const {data} = await MainAPI.historyMovie(limit)
@@ -320,7 +365,7 @@ export const setBookmarkItems = (bookmarkItems) => ({
 })
 export const setNewBookmarkPage = () => ({
     type: SET_NEW_BOOKMARK_PAGE,
-    })
+})
 export const setBookmarkId = (bookmarkId) => ({
     type: SET_BOOKMARK_ID,
     bookmarkId
