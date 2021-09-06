@@ -51,10 +51,10 @@ export const MainAPI = {
     searchMovie(query, limit){
         return instance.get(`/searchExt/${limit}?query=${query}`).then(r => r.data)
     },
-    history(){
-        return instance.get(`/history/15`).then(r => r.data)
+    historyMovie(limit){
+        return instance.get(`/history/${limit}`).then(r => r.data)
     },
-    bookmark(){
+    bookmark(limit){
         return instance.get(`/bookmark/15`).then(r => r.data)
     },
  bookmarkToggle(id){

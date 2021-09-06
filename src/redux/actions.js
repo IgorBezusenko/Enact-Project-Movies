@@ -33,6 +33,7 @@ export const SET_NEW_SEARCH_PAGE = "SEARCH/SET_NEW_SEARCH_PAGE"
 export const SET_CLEAR_SEARCH_ITEMS = "SEARCH/SET_CLEAR_SEARCH_ITEMS"
 
 export const SET_HISTORY_ITEMS = "HistoryPage/SET_HISTORY_ITEMS"
+export const SET_NEW_HISTORY_PAGE = "HistoryPage/SET_NEW_HISTORY_PAGE"
 
 export const SET_BOOKMARK_ITEMS = "BookMark/SET_BOOKMARK_ITEMS"
 export const SET_BOOKMARK_ID = "BookMark/SET_BOOKMARK_ID"
@@ -300,9 +301,12 @@ export const setHistoryItems = (historyItems) => ({
     type: SET_HISTORY_ITEMS,
     historyItems
 })
-export const getHistoryItems = () => async (dispatch) => {
+export const setNewHistoryPage = () => ({
+    type: SET_NEW_HISTORY_PAGE,
+    })
+export const getHistoryItems = (limit) => async (dispatch) => {
     try {
-        const {data} = await MainAPI.history()
+        const {data} = await MainAPI.historyMovie(limit)
         // console.log(data)
         dispatch(setHistoryItems(data))
     } catch (e) {

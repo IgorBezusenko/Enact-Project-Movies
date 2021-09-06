@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect} from "react";
-import {getHistoryItems} from "../../redux/actions";
+import {getHistoryItems, getSearchItems, setNewHistoryPage, setNewSearchPage} from "../../redux/actions";
 import css from "../Main/Category/Category.module.less";
 import {Header} from "../Header/Header";
 import {NavOnBack} from "../NavOnBack/NavOnBack";
@@ -10,15 +10,31 @@ import MainListItem from "../Main/MainListItem";
 export const HistoryPage = () => {
     const history = useHistory();
     const dispatch = useDispatch()
-    const historyItems = useSelector((state) => state.historyReducer.historyItems)
+    const {historyItems, limitItems} = useSelector((state) => state.historyReducer)
 
     useEffect(() => {
-        dispatch(getHistoryItems())
+        dispatch(getHistoryItems(limitItems))
     }, [])
 
 
+    useEffect(() => {
+        console.log("currentPage", limitItems)
+
+        if (limitItems !== 15) {
+            dispatch(getHistoryItems(limitItems))
+        }
+
+    }, [limitItems])
+
     const onBackHandler = (path) => history.push(path)
 
+    const onFocusHandler = (index, array) => {
+        console.log("itemIndex onFocus", index)
+        if (Math.ceil(index / 5) === Math.ceil(array.length / 5)) {
+            console.log("gooo")
+            dispatch(setNewHistoryPage())
+        }
+    }
 
     return (
         <>
@@ -34,7 +50,9 @@ export const HistoryPage = () => {
                     {historyItems && historyItems.map((item, idx) => {
                         return (
 
-                            <MainListItem key={idx} className={css.list__item} item={item}/>
+                            <MainListItem key={idx}
+                                          onFocus={()=>onFocusHandler(idx, historyItems)}
+                                          className={css.list__item} item={item}/>
 
                         )
                     })}
