@@ -7,13 +7,9 @@ const InputSpottable = ({inputId, inputTitle, itemType, inputChecked, ...rest}) 
     const dispatch = useDispatch()
     const onChangeHandler = (id) => {
         if (itemType === "year") {
-            console.log("year", id)
-
             dispatch(setFilterYear(id))
         }
         if (itemType === "type_content") {
-            console.log("type_content", id)
-
             dispatch(setFilterTypeContent(id))
         }
 
@@ -21,11 +17,9 @@ const InputSpottable = ({inputId, inputTitle, itemType, inputChecked, ...rest}) 
     const onKeyDownHandler = (e, id) => {
         if (e.code === "Enter") {
             if (itemType === "year") {
-                console.log("year", id)
                 dispatch(setFilterYear(id))
             }
             if (itemType === "type_content") {
-                console.log("type_content", id)
                 dispatch(setFilterTypeContent(id))
             }
         }

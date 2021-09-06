@@ -12,17 +12,12 @@ import MainListItem from "../Main/MainListItem";
 export const SearchPanel = (props) => {
     const [inputValue, setInputValue] = useState("")
     const {searchItems, limitItems} = useSelector((state) => state.searchReducer)
-    const categoryReducer = useSelector(state => state.categoryReducer)
-    const {currentPage, idSort, categoryId} = categoryReducer
     const dispatch = useDispatch()
 
     useEffect(() => {
-        console.log("currentPage", limitItems)
-
         if (limitItems !== 15) {
             dispatch(getSearchItems(inputValue, limitItems))
         }
-
     }, [limitItems])
 
     const onSubmit = (e) => {
@@ -44,9 +39,7 @@ export const SearchPanel = (props) => {
     }
 
     const onFocusHandler = (index, array) => {
-        console.log("itemIndex onFocus", index)
         if (Math.ceil(index / 5) === Math.ceil(array.length / 5)) {
-            console.log("gooo")
             dispatch(setNewSearchPage())
         }
     }

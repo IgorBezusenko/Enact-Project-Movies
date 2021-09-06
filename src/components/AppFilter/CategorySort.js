@@ -33,12 +33,10 @@ export const CategorySort = (props) => {
     }
     const onChangeHandler = (e) => {
         setInputIdSort(e.target.value)
-        // console.log("e.target.value", e.target.value)
     }
     const onChangeKeyDown = (e) => {
         if (e.code === "Enter") {
             setInputIdSort(e.target.children[0].value)
-            // console.log("e.target.value", e.target.children[0].value)
         }
     }
 

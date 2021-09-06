@@ -16,7 +16,6 @@ export const CategoryFilter = (props) => {
     const {categoryFilter, filterYear, filterTypeContent, categoryId} = categoryReducer
 
     const onBackHandler = () => history.push(`/category?cid=${categoryId}`)
-    console.log(filterYear, filterTypeContent)
 
     const onSelectHandler = (e, path) => {
         if (e.code === "Enter") {
@@ -34,7 +33,6 @@ export const CategoryFilter = (props) => {
             onResetFilterClick()
         }
     }
-    console.log(history.location)
 
     const FilterCheckBox = ({itemType}) => {
         return categoryFilter && categoryFilter[`${itemType}`].map((item, index) => {

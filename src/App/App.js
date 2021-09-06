@@ -24,17 +24,10 @@ import {BookMark} from "../components/BookMark/BookMark";
 import "./App.less"
 
 const App = () => {
-    // const token = useSelector(state => state.authReducer.token)
-
-    // useEffect(() => {
-    //     reactLocalStorage.set('token', token);
-    // }, []);
-    return (
+       return (
 
         <Router basename={process.env.PUBLIC_URL}>
             <Preloader/>
-
-            {/*<Route path={"/"}  exact component={HomePage}/>*/}
             <Route
                 exact
                 path={"/"}
@@ -52,7 +45,6 @@ const App = () => {
             <Route path={"/category"} component={Category}/>
             <Route path={"/app-filter"} component={CategoryFilter}/>
 
-            {/*<Route path={"/all-genre"} component={AllCheckBoxFilter}/>*/}
             <Route path={"/all-genre"} render={() => <AllCheckBoxFilter title={"Жанры"} itemType={"genre"}/>}/>
             <Route path={"/all-country"} render={() => <AllCheckBoxFilter title={"Страны"} itemType={"country"}/>}/>
             <Route path={"/all-year"} render={() => <AllRadioFilter title={"Годы"} itemType={"year"}/>}/>

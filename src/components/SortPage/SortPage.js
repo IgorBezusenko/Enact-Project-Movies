@@ -14,7 +14,7 @@ export const SortPage = (props) => {
 
     const genre = categoryFilter.genre.filter(item => item.checked === true).map(item => item.id.toString()).join("|")
     const country = categoryFilter.country.filter(item => item.checked === true).map(item => item.id.toString()).join("|")
-    console.log(genre, country, filterYear, filterTypeContent)
+
     useEffect(() => {
         dispatch(getSearchFilter(genre, country, filterYear, filterTypeContent))
     }, [genre, country, filterYear, filterTypeContent])

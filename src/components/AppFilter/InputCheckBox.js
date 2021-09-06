@@ -9,18 +9,13 @@ const InputSpottable = ({itemType, inputId, inputTitle, inputValue, inputChecked
     const [checked, setChecked] = useState(inputChecked)
 
     const onChangeHandler = (e, id, name) => {
-        // console.log(checked, id, itemType)
-        // console.log(e.target.value)
         if (itemType === "genre") {
             dispatch(setFilterGenre(id, name, !checked))
-            console.log("genre", id, name, !checked)
         }
         if (itemType === "country") {
-            console.log("country", id, name, !checked)
             dispatch(setFilterCountry(id, name, !checked))
         }
         if (itemType === "type_content") {
-            console.log("type_content", id, name, !checked)
             dispatch(setFilterTypeContent(id, name, !checked))
         }
 
@@ -30,17 +25,12 @@ const InputSpottable = ({itemType, inputId, inputTitle, inputValue, inputChecked
         if (e.code === "Enter") {
 
             if (itemType === "genre") {
-                console.log("genre", id, name, checked)
                 dispatch(setFilterGenre(id, name, !checked))
             }
             if (itemType === "country") {
-                console.log("country", id, name, !checked)
                 dispatch(setFilterCountry(id, name, !checked))
             }
-            // if (itemType === "type_content") {
-            //     console.log("type_content", id, name, !checked)
-            //     dispatch(setFilterTypeContent(id, name, !checked))
-            // }
+
         }
 
     }

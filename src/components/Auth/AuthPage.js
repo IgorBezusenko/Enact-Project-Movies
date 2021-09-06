@@ -14,7 +14,6 @@ export const AuthPage = (props) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        console.log("log")
         dispatch(clearToken())
         reactLocalStorage.remove("token");
     }, [])

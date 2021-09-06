@@ -5,9 +5,7 @@ import Spottable from "@enact/spotlight/Spottable";
 
 const MainListItemBase = ({item,itemIndex, ...rest}) => {
     let history = useHistory();
-    // console.log("item",itemIndex)
     const onSelectHandler = (e,path) => {
-        // console.log("item.url",item.url)
         if (e.code === "Enter") {
             history.push(path)
         }

@@ -16,22 +16,16 @@ export const HistoryPage = () => {
         dispatch(getHistoryItems(limitItems))
     }, [])
 
-
     useEffect(() => {
-        console.log("currentPage", limitItems)
-
         if (limitItems !== 15) {
             dispatch(getHistoryItems(limitItems))
         }
-
     }, [limitItems])
 
     const onBackHandler = (path) => history.push(path)
 
     const onFocusHandler = (index, array) => {
-        console.log("itemIndex onFocus", index)
         if (Math.ceil(index / 5) === Math.ceil(array.length / 5)) {
-            console.log("gooo")
             dispatch(setNewHistoryPage())
         }
     }

@@ -21,10 +21,8 @@ export const Category = (props) => {
     const categoryReducer = useSelector(state => state.categoryReducer)
     const {category, categoryItems, categoryTitle, currentPage, idSort, categoryId} = categoryReducer
 
-
     useEffect(() => {
         const parsed = queryString.parse(history.location.search.substr(1))
-        console.log(parsed)
         let actualIdSort = idSort
         if (!!parsed.id_sort) actualIdSort = parsed.id_sort
 
@@ -35,12 +33,9 @@ export const Category = (props) => {
     }, [categoryId, idSort])
 
     useEffect(() => {
-        console.log("currentPage",currentPage)
-
         if (currentPage!==1) {
             dispatch(setNewCategoryPage(categoryId, currentPage, idSort))
         }
-
     }, [currentPage])
 
     // useEffect(() => {
@@ -54,24 +49,19 @@ export const Category = (props) => {
     //     })
     // }, [idSort, categoryId])
 
-
     const onBackHandler = () => history.push("/main")
 
     const onSelectHandler = (e, path) => {
         if (e.code === "Enter") {
             history.push(path)
         }
-
     }
 
     const onFocusHandler = (index,array) => {
-        console.log("itemIndex onFocus", index)
         if (Math.ceil(index / 5) === Math.ceil(array.length / 5)) {
-            console.log("gooo")
             dispatch(setPageIncrement())
         }
     }
-
 
     return (
         <>
@@ -104,7 +94,8 @@ export const Category = (props) => {
                     {categoryItems && categoryItems.map((item, idx) => {
                         return (
 
-                            <MainListItem key={idx} className={css.list__item} onFocus={() => onFocusHandler(idx + 1,categoryItems)}
+                            <MainListItem key={idx} className={css.list__item}
+                                          onFocus={() => onFocusHandler(idx + 1,categoryItems)}
                                           item={item} itemIndex={idx}/>
 
                         )

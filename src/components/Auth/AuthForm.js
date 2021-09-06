@@ -17,9 +17,7 @@ export const AuthForm = (props) => {
     const authReducer = useSelector((state) => state.authReducer);
     const {token, loading, error} = authReducer
 
-
     const onBackHandler = () => props.history.goBack()
-    console.log("error", error)
 
     const onSubmit = async (e) => {
         e.preventDefault()

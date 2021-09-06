@@ -17,7 +17,6 @@ export const Header = () => {
     useEffect(() => {
         reactLocalStorage.set('token', token);
         onClearVideoUrl()
-        console.log("token", token)
     }, []);
 
     const onClearVideoUrl = () => {
@@ -48,7 +47,6 @@ const Sidebar = ({token}) => {
     }
 
     const onHandleClick = (categoryId) => {
-        // console.log(categoryId)
         dispatch(setCategoryId(categoryId))
     }
 
