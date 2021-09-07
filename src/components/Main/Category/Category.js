@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import css from "./Category.module.less"
 
 import {useDispatch, useSelector} from "react-redux";
-import {clearCategory, getCategory, setNewCategoryPage, setPageIncrement} from "../../../redux/actions";
+import {clearCategory, getCategory, setCategoryId, setNewCategoryPage, setPageIncrement} from "../../../redux/actions";
 import MainListItem from "../MainListItem";
 import {Header} from "../../Header/Header";
 import {NavOnBack} from "../../NavOnBack/NavOnBack";
@@ -19,13 +19,13 @@ export const Category = (props) => {
     const dispatch = useDispatch()
     const history = useHistory();
     const categoryReducer = useSelector(state => state.categoryReducer)
-    const {category, categoryItems, categoryTitle, currentPage, idSort, categoryId} = categoryReducer
+    const { categoryItems, categoryTitle, currentPage, idSort, categoryId} = categoryReducer
 
     useEffect(() => {
         const parsed = queryString.parse(history.location.search.substr(1))
         let actualIdSort = idSort
         if (!!parsed.id_sort) actualIdSort = parsed.id_sort
-
+        if (!!parsed.id) dispatch(setCategoryId(parsed.id))
         dispatch(getCategory(categoryId, currentPage, actualIdSort))
         return () => {
             dispatch(clearCategory())
@@ -33,7 +33,7 @@ export const Category = (props) => {
     }, [categoryId, idSort])
 
     useEffect(() => {
-        if (currentPage!==1) {
+        if (currentPage !== 1) {
             dispatch(setNewCategoryPage(categoryId, currentPage, idSort))
         }
     }, [currentPage])
@@ -57,7 +57,7 @@ export const Category = (props) => {
         }
     }
 
-    const onFocusHandler = (index,array) => {
+    const onFocusHandler = (index, array) => {
         if (Math.ceil(index / 5) === Math.ceil(array.length / 5)) {
             dispatch(setPageIncrement())
         }
@@ -95,7 +95,7 @@ export const Category = (props) => {
                         return (
 
                             <MainListItem key={idx} className={css.list__item}
-                                          onFocus={() => onFocusHandler(idx + 1,categoryItems)}
+                                          onFocus={() => onFocusHandler(idx + 1, categoryItems)}
                                           item={item} itemIndex={idx}/>
 
                         )

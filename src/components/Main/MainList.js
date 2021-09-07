@@ -23,12 +23,12 @@ const MainList = ({moviesList}) => {
     const onHandleClick = (categoryId) => {
         dispatch(setCategoryId(categoryId))
     }
-
+    // console.log(moviesList.items)
     return (
         <div className={css.main__list}>
 
             <ItemBase className={css.on__title__focus} onClick={() => onHandleClick(moviesList.cid)}
-                      onKeyDown={(e) => onSelectHandler(e,  moviesList.cid)}>
+                      onKeyPress={(e) => onSelectHandler(e,  moviesList.cid)}>
                 <Link to={"/category?cid=" + moviesList.cid}><h1>{moviesList.title}</h1></Link>
             </ItemBase>
 
@@ -37,7 +37,7 @@ const MainList = ({moviesList}) => {
                 {moviesList.items.map((item, idx) => {
                     return (
 
-                        <MainListItem key={idx} className={css.list__item} item={item}/>
+                        <MainListItem key={idx} onHandleCategoryId={onHandleClick} className={css.list__item} item={item}/>
 
                     )
                 })}

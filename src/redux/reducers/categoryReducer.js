@@ -53,6 +53,7 @@ export const categoryReducer = (state = initialState, action) => {
                 ...state,
                 categoryItems: [],
                 categoryTitle: null,
+                categoryId: null,
                 search: [],
                 currentPage: 1
             }

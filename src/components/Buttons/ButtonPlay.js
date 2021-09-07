@@ -9,9 +9,9 @@ export const ButtonPlay = ({movieFile}) => {
     const isSerial = movieFile.media && movieFile.media.map(media => media.title[0])
     const history = useHistory()
 
-    const onSelect = (e) => {
+    const onSelect = (e,path) => {
         if (e.code === "Enter") {
-            history.push("/series")
+            history.push(path)
         }
     }
 
@@ -19,7 +19,7 @@ export const ButtonPlay = ({movieFile}) => {
         <>
             {movieFile.media && isSerial.length > 0 && isSerial[0] !== undefined
                 ? <Link to={"/series"}>
-                    <ButtonMovie onKeyDown={(e) => onSelect(e)} className={css.btn__movie} title={"Смотреть"}>
+                    <ButtonMovie onKeyPress={(e) => onSelect(e,"/series")} className={css.btn__movie} title={"Смотреть"}>
                         <Play/>
                     </ButtonMovie>
                 </Link>
