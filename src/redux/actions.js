@@ -13,6 +13,9 @@ export const GET_MOVIE_FILE = "MAIN/GET_MOVIE_FILE";
 export const MAIN_TOGGLE_IS_FETCHING = "MAIN/MAIN_TOGGLE_IS_FETCHING"
 export const GET_VIDEO_URL = "MAIN/GET_VIDEO_URL"
 export const CLEAR_VIDEO_URL = "MAIN/CLEAR_VIDEO_URL"
+export const SET_MOVIE_FILE_FOCUS = "MAIN/SET_MOVIE_FILE_FOCUS"
+export const SET_MOVIE_CATEGORY_TITLE = "MAIN/SET_MOVIE_CATEGORY_TITLE"
+export const CLEAR_MOVIE_FILE_FOCUS = "MAIN/CLEAR_MOVIE_FILE_FOCUS"
 
 export const PUT_LIKE_AC = "MoviesPreview/PUT_LIKE_AC"
 export const SET_VOTE_AC = "MoviesPreview/SET_VOTE_AC"
@@ -113,6 +116,7 @@ export const mainToggleIsFetching = (IsFetching) => ({
     IsFetching
 })
 
+//main
 export const getMain = (token, code) => async (dispatch) => {
     dispatch(mainToggleIsFetching(true))
     try {
@@ -168,6 +172,18 @@ export const getVideoUrl = (file) => async (dispatch) => {
         // dispatch(mainToggleIsFetching(false))
     }
 }
+
+export const setMovieFileFocus = (item) => ({
+    type: SET_MOVIE_FILE_FOCUS,
+    item
+})
+export const setMovieCategoryTitle = (title) => ({
+    type: SET_MOVIE_CATEGORY_TITLE,
+    title
+})
+export const clearMovieFileFocus = () => ({
+    type: CLEAR_MOVIE_FILE_FOCUS,
+})
 
 //like
 export const setVote = (vote) => ({
@@ -297,7 +313,7 @@ export const setNewSearchFilterPage = (search) => ({
 export const getSearchFilter = (genre, country, year, typeContent, page) => async (dispatch) => {
     // dispatch(mainToggleIsFetching(true))
     try {
-        const {data} = await MainAPI.searchFilter(genre, country, year, typeContent,page)
+        const {data} = await MainAPI.searchFilter(genre, country, year, typeContent, page)
         dispatch(setSearchFilter(data))
         // dispatch(mainToggleIsFetching(false))
     } catch (e) {
@@ -309,7 +325,7 @@ export const getSearchFilter = (genre, country, year, typeContent, page) => asyn
 export const getNewSearchFilterPage = (genre, country, year, typeContent, page) => async (dispatch) => {
     // dispatch(mainToggleIsFetching(true))
     try {
-        const {data} = await MainAPI.searchFilter(genre, country, year, typeContent,page)
+        const {data} = await MainAPI.searchFilter(genre, country, year, typeContent, page)
         dispatch(setNewSearchFilterPage(data))
         // dispatch(mainToggleIsFetching(false))
     } catch (e) {

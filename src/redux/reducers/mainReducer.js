@@ -1,10 +1,20 @@
-import {CLEAR_VIDEO_URL, GET_MAIN, GET_MOVIE_FILE, GET_VIDEO_URL, MAIN_TOGGLE_IS_FETCHING} from "../actions";
+import {
+    CLEAR_MOVIE_FILE_FOCUS,
+    CLEAR_VIDEO_URL,
+    GET_MAIN,
+    GET_MOVIE_FILE,
+    GET_VIDEO_URL,
+    MAIN_TOGGLE_IS_FETCHING, SET_MOVIE_CATEGORY_TITLE,
+    SET_MOVIE_FILE_FOCUS
+} from "../actions";
 
 const initialState = {
     mainData: [],
     movieFile: {},
     videoUrl: null,
-    isFetching: false
+    isFetching: false,
+    movieFileFocus: null,
+    movieCategoryTitle: null
 }
 
 export const mainReducer = (state = initialState, action) => {
@@ -35,6 +45,24 @@ export const mainReducer = (state = initialState, action) => {
                 ...state,
                 videoUrl: null
             }
+
+        case  SET_MOVIE_FILE_FOCUS:
+            return {
+                ...state,
+                movieFileFocus: {...action.item}
+            }
+        case   SET_MOVIE_CATEGORY_TITLE:
+            return {
+                ...state,
+                movieCategoryTitle: action.title
+            }
+        case   CLEAR_MOVIE_FILE_FOCUS:
+            return {
+                ...state,
+                movieCategoryTitle: null,
+                movieFileFocus: null
+            }
+
 
 
         default :
