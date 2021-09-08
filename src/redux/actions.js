@@ -16,6 +16,9 @@ export const CLEAR_VIDEO_URL = "MAIN/CLEAR_VIDEO_URL"
 export const SET_MOVIE_FILE_FOCUS = "MAIN/SET_MOVIE_FILE_FOCUS"
 export const SET_MOVIE_CATEGORY_TITLE = "MAIN/SET_MOVIE_CATEGORY_TITLE"
 export const CLEAR_MOVIE_FILE_FOCUS = "MAIN/CLEAR_MOVIE_FILE_FOCUS"
+export const SET_CURRENT_ITEM_INCREMENT = "MAIN/SET_CURRENT_ITEM_INCREMENT"
+export const SET_CURRENT_ITEM_DECREMENT = "MAIN/SET_CURRENT_ITEM_DECREMENT"
+export const CLEAR_CURRENT_ITEM = "MAIN/CLEAR_CURRENT_ITEM"
 
 export const PUT_LIKE_AC = "MoviesPreview/PUT_LIKE_AC"
 export const SET_VOTE_AC = "MoviesPreview/SET_VOTE_AC"
@@ -183,6 +186,15 @@ export const setMovieCategoryTitle = (title) => ({
 })
 export const clearMovieFileFocus = () => ({
     type: CLEAR_MOVIE_FILE_FOCUS,
+})
+export const setCurrentItemInc = () => ({
+    type: SET_CURRENT_ITEM_INCREMENT,
+})
+export const setCurrentItemDec = () => ({
+    type: SET_CURRENT_ITEM_DECREMENT,
+})
+export const clearCurrentItem = () => ({
+    type: CLEAR_CURRENT_ITEM,
 })
 
 //like

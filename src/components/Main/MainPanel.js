@@ -7,7 +7,7 @@ import {Header} from "../Header/Header";
 import {reactLocalStorage} from "reactjs-localstorage";
 
 const MainPanel = () => {
-    const movies = useSelector(state => state.mainReducer.mainData)
+    const {mainData: movies, currentItem} = useSelector(state => state.mainReducer)
     const {token, connectionCode} = useSelector((state) => state.authReducer)
     const dispatch = useDispatch()
 
@@ -17,24 +17,33 @@ const MainPanel = () => {
         dispatch(setToken(token))
         dispatch(setError(null))
     }, [token, connectionCode]);
-
+    // console.log( currentItem)
+    const list = movies.length > 0 && movies[currentItem]
+    const list1 = movies.length > 0 && movies[currentItem + 1] || movies.length-1 && movies[currentItem]
+    // console.log("movies.length 23",movies.length-1)
     return (
         <>
+
             <div className={css.container}>
                 <Header/>
-                <div className={css.content}>
 
-                    {
-                        movies.map((moviesList, idx) => {
-                            return (
+                {!list
+                    ? <h1 style={{margin: "20% auto"}}>Loading...</h1> :
+                    <div className={css.content}>
+                        <MainList moviesList={list} nextItem={list1}/>
+                        {/*{*/}
+                        {/*    movies.map((moviesList, idx) => {*/}
+                        {/*        return (*/}
 
-                                <MainList key={idx} moviesList={moviesList}/>
+                        {/*            <MainList key={idx} moviesList={moviesList}/>*/}
 
-                            )
-                        })
-                    }
-                </div>
+                        {/*        )*/}
+                        {/*    })*/}
+                        {/*}*/}
+                    </div>
+                }
             </div>
+
         </>
 
     )

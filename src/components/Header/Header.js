@@ -61,7 +61,7 @@ const Sidebar = ({token}) => {
 
                 <li>
                     <ItemBase
-                        onKeyDown={(e) => onSelectHandler(e, "/search-panel")}
+                        onKeyUp={(e) => onSelectHandler(e, "/search-panel")}
                         onFocus={() => {
                             setSearch(true)
                         }}
@@ -74,7 +74,7 @@ const Sidebar = ({token}) => {
                     {isFocus && <div className={css.icon__text + " " + `${search && css.color__red}`}>Поиск</div>}
                 </li>
                 <li>
-                    <ItemBase onKeyDown={(e) => onSelectHandler(e, "/history")}
+                    <ItemBase onKeyUp={(e) => onSelectHandler(e, "/history")}
                               onFocus={() => {
                                   setPlay(true)
                               }}
@@ -85,7 +85,7 @@ const Sidebar = ({token}) => {
                     {isFocus && <div className={css.icon__text + " " + `${play && css.color__red}`}>Я смотрю</div>}
                 </li>
                 <li>
-                    <ItemBase onKeyDown={(e) => onSelectHandler(e, "/bookmark")}
+                    <ItemBase onKeyUp={(e) => onSelectHandler(e, "/bookmark")}
                               onFocus={() => {
                                   setFavorite(true)
                               }}
@@ -99,7 +99,7 @@ const Sidebar = ({token}) => {
                     <ItemBase onClick={() => {
                         onHandleClick("100")
                     }}
-                              onKeyDown={(e) => onSelectHandler(e, "category?cid=100","100")}
+                              onKeyUp={(e) => onSelectHandler(e, "category?cid=100","100")}
                               onFocus={() => {
                                   setFilm(true)
                               }}
@@ -114,7 +114,7 @@ const Sidebar = ({token}) => {
                     <ItemBase onClick={() => {
                         onHandleClick("39")
                     }}
-                              onKeyDown={(e) => onSelectHandler(e, "category?cid=39","39")}
+                              onKeyUp={(e) => onSelectHandler(e, "category?cid=39","39")}
                               onFocus={() => {
                                   setSerial(true)
                               }}
@@ -131,7 +131,7 @@ const Sidebar = ({token}) => {
                         onClick={() => {
                             onHandleClick("20")
                         }}
-                        onKeyDown={(e) => onSelectHandler(e, "category?cid=20", "20")}
+                        onKeyUp={(e) => onSelectHandler(e, "category?cid=20", "20")}
                         onFocus={() => {
                             setSmile(true)
                         }}
@@ -145,7 +145,7 @@ const Sidebar = ({token}) => {
             </ul>
 
             <div className={css.log__in}>
-                <ItemBase onKeyDown={(e) => {
+                <ItemBase onKeyUp={(e) => {
                     onSelectHandler(e,"/auth")
                 }}
                           onFocus={() => {
