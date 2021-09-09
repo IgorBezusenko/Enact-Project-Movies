@@ -1,12 +1,12 @@
 {
-	"id": "enact-form",
+	"id": "portal-idc",
 	"version": "1.0.0",
-	"vendor": "LGE-SVL",
+	"vendor": "IDC",
 	"type": "web",
 	"main": "index.html",
-	"title": "Enact App Template",
-	"icon": "icon.png",
-	"miniicon": "icon-mini.png",
-	"largeIcon": "icon-large.png",
+	"title": "IDC Portal",
+	"icon": "portal.png",
+	"miniicon": "portal.png",
+	"largeIcon": "portal.png",
 	"uiRevision": 2
 }
