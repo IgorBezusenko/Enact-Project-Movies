@@ -8,6 +8,9 @@ export const CLEAR_TOKEN = "AUTH/CLEAR_TOKEN"
 export const SET_ERROR = "AUTH/SET_ERROR"
 export const CLEAR_ERROR = "AUTH/CLEAR_ERROR"
 
+export const SET_USER_PROFILE = "AUTH/SET_USER_PROFILE"
+export const CLEAR_USER_PROFILE = "AUTH/CLEAR_USER_PROFILE"
+
 export const GET_MAIN = "MAIN/GET_MAIN";
 export const GET_MOVIE_FILE = "MAIN/GET_MOVIE_FILE";
 export const MAIN_TOGGLE_IS_FETCHING = "MAIN/MAIN_TOGGLE_IS_FETCHING"
@@ -113,6 +116,23 @@ export const getTokenCode = (code_UID, token) => async (dispatch) => {
     }
 }
 
+//userProfile
+export const setUserProfile=(userProfile)=>({
+    type:SET_USER_PROFILE,
+    userProfile
+})
+export const clearUserProfile=()=>({
+    type:CLEAR_USER_PROFILE
+})
+
+export const getUserProfile = ()=> async (dispatch)=>{
+    try {
+        const {data} = await AuthAPI.userProfile()
+        dispatch(setUserProfile(data))
+    }catch (e) {
+        console.log("Error getUserProfile" , e.response)
+    }
+}
 
 export const mainToggleIsFetching = (IsFetching) => ({
     type: MAIN_TOGGLE_IS_FETCHING,

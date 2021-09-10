@@ -38,6 +38,9 @@ export const AuthAPI = {
             //deleting the code from header
             delete instance.defaults.headers["HTTP-X-UID"];
         }
+    },
+    userProfile(){
+        return instance.get(`getUserProfile`).then(r=>r.data)
     }
 }
 
@@ -84,5 +87,5 @@ export const MoviesPreview = {
     }
 }
 
-// const res =()=> AuthAPI.loginMobil(Date.now().toString())
+// const res =()=> MainAPI.userProfile(Date.now().toString())
 // res().then(r=>console.log(r.data))

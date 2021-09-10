@@ -2,11 +2,11 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {
     AUTH_TOGGLE_IS_FETCHING,
     CLEAR_ERROR,
-    CLEAR_TOKEN,
+    CLEAR_TOKEN, CLEAR_USER_PROFILE,
     SET_CONNECTION_CODE,
     SET_ERROR,
     SET_TOKEN,
-    SET_TOKEN_CODE
+    SET_TOKEN_CODE, SET_USER_PROFILE
 } from "../actions";
 
 
@@ -15,7 +15,8 @@ const initialState = {
     loading: false,
     error: null,
     tokenCode: null,
-    connectionCode: reactLocalStorage.get('code') || ""
+    connectionCode: reactLocalStorage.get('code') || "",
+    userProfile: null
 }
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -55,6 +56,16 @@ export const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 error: null
+            }
+            case  SET_USER_PROFILE:
+            return {
+                ...state,
+                userProfile: {...action.userProfile}
+            }
+            case  CLEAR_USER_PROFILE:
+            return {
+                ...state,
+                userProfile: null
             }
         default:
             return state
