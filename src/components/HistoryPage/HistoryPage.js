@@ -6,6 +6,7 @@ import {Header} from "../Header/Header";
 import {NavOnBack} from "../NavOnBack/NavOnBack";
 import {useHistory} from "react-router-dom";
 import MainListItem from "../Main/MainListItem";
+import {AppLoading} from "../AppLoading/AppLoading";
 
 export const HistoryPage = () => {
     const history = useHistory();
@@ -35,22 +36,26 @@ export const HistoryPage = () => {
             <div className={css.container}>
                 <Header/>
 
-                <div className={css.row}>
-                    <NavOnBack className={css.on__back} title={"Я смотрю"} onGoBack={() => onBackHandler("/main")}/>
+                { !historyItems ? <AppLoading/>:
+                    <>
+                        <div className={css.row}>
+                            <NavOnBack className={css.on__back} title={"Я смотрю"} onGoBack={() => onBackHandler("/main")}/>
 
-                </div>
+                        </div>
 
-                <div className={css.list}>
-                    {historyItems && historyItems.map((item, idx) => {
-                        return (
+                        <div className={css.list}>
+                            {historyItems && historyItems.map((item, idx) => {
+                                return (
 
-                            <MainListItem key={idx}
-                                          onFocus={()=>onFocusHandler(idx, historyItems)}
-                                          className={css.list__item} item={item}/>
+                                    <MainListItem key={idx}
+                                                  onFocus={()=>onFocusHandler(idx, historyItems)}
+                                                  className={css.list__item} item={item}/>
 
-                        )
-                    })}
-                </div>
+                                )
+                            })}
+                        </div>
+                    </>
+                }
             </div>
 
         </>

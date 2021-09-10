@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Link, NavLink, useHistory} from "react-router-dom";
+import {Link, NavLink, Redirect, useHistory} from "react-router-dom";
 import {Bookmark, Briefcase, LogIn, PlayCircle, Search, Smile, User, Video} from "react-feather"
 
 import css from "./Header.module.less"
@@ -24,7 +24,10 @@ export const Header = () => {
     }
 
     return (
-        <Sidebar token={token}/>
+        <>
+            {!token && <Redirect to={"/auth"}/>}
+            <Sidebar token={token}/>
+        </>
     )
 }
 

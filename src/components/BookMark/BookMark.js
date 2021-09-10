@@ -6,6 +6,7 @@ import {Header} from "../Header/Header";
 import {NavOnBack} from "../NavOnBack/NavOnBack";
 import {useHistory} from "react-router-dom";
 import MainListItem from "../Main/MainListItem";
+import {AppLoading} from "../AppLoading/AppLoading";
 
 export const BookMark = () => {
     const history = useHistory();
@@ -34,20 +35,24 @@ export const BookMark = () => {
             <div className={css.container}>
                 <Header/>
 
-                <div className={css.row}>
-                    <NavOnBack className={css.on__back} title={"Избранное"} onGoBack={() => onBackHandler("/main")}/>
-                </div>
+                { !bookmarkItems? <AppLoading/>:
+                    <>
+                        <div className={css.row}>
+                            <NavOnBack className={css.on__back} title={"Избранное"} onGoBack={() => onBackHandler("/main")}/>
+                        </div>
 
-                <div className={css.list}>
-                    {bookmarkItems && bookmarkItems.map((item, idx) => {
-                        return (
-                            <MainListItem key={idx}
-                                          onFocus={() => onFocusHandler(idx, bookmarkItems)}
-                                          className={css.list__item} item={item}/>
+                        <div className={css.list}>
+                            {bookmarkItems && bookmarkItems.map((item, idx) => {
+                                return (
+                                    <MainListItem key={idx}
+                                                  onFocus={() => onFocusHandler(idx, bookmarkItems)}
+                                                  className={css.list__item} item={item}/>
 
-                        )
-                    })}
-                </div>
+                                )
+                            })}
+                        </div>
+                    </>
+                }
             </div>
 
         </>

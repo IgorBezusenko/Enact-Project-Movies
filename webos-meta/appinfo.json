@@ -6,7 +6,7 @@
 	"main": "index.html",
 	"title": "IDC Portal",
 	"icon": "portal.png",
-	"miniicon": "portal.png",
-	"largeIcon": "portal.png",
+	"miniicon": "portal-mini.png",
+	"largeIcon": "portal-large.png",
 	"uiRevision": 2
 }
