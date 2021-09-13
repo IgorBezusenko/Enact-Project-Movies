@@ -4,7 +4,7 @@ import {getHistoryItems, getSearchItems, setNewHistoryPage, setNewSearchPage} fr
 import css from "../Main/Category/Category.module.less";
 import {Header} from "../Header/Header";
 import {NavOnBack} from "../NavOnBack/NavOnBack";
-import {useHistory} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import MainListItem from "../Main/MainListItem";
 import {AppLoading} from "../AppLoading/AppLoading";
 
@@ -12,6 +12,7 @@ export const HistoryPage = () => {
     const history = useHistory();
     const dispatch = useDispatch()
     const {historyItems, limitItems} = useSelector((state) => state.historyReducer)
+    const {token} = useSelector((state) => state.authReducer)
 
     useEffect(() => {
         dispatch(getHistoryItems(limitItems))
@@ -33,6 +34,7 @@ export const HistoryPage = () => {
 
     return (
         <>
+            {/*{!token && <Redirect to={"/auth"}/>}*/}
             <div className={css.container}>
                 <Header/>
 

@@ -79,7 +79,6 @@ export const setError = (error) => ({
 })
 export const clearError = () => ({
     type: CLEAR_ERROR,
-
 })
 
 export const getToken = (login, password) => async (dispatch) => {
@@ -131,6 +130,7 @@ export const getUserProfile = ()=> async (dispatch)=>{
         dispatch(setUserProfile(data))
     }catch (e) {
         console.log("Error getUserProfile" , e.response)
+        dispatch(clearToken())
     }
 }
 
@@ -192,6 +192,7 @@ export const getVideoUrl = (file) => async (dispatch) => {
         // dispatch(mainToggleIsFetching(false))
     } catch (e) {
         console.log("Error getVideoUrl", e.response)
+        // dispatch(clearToken())
         // dispatch(mainToggleIsFetching(false))
     }
 }
@@ -236,6 +237,7 @@ export const putLikeAC = (id, vote) => async (dispatch) => {
         // dispatch(mainToggleIsFetching(false))
     } catch (e) {
         console.log("Error getVideoUrl", e.response)
+        dispatch(clearToken())
         // dispatch(mainToggleIsFetching(false))
     }
 }
@@ -362,6 +364,7 @@ export const getNewSearchFilterPage = (genre, country, year, typeContent, page) 
         // dispatch(mainToggleIsFetching(false))
     } catch (e) {
         console.log("Error getCategoryFilter", e.response)
+
         // dispatch(mainToggleIsFetching(false))
 
     }
@@ -385,6 +388,7 @@ export const getSearchItems = (query, limit) => async (dispatch) => {
         dispatch(setSearchItems(data))
     } catch (e) {
         console.log("Error getSearchItems", e.response)
+        dispatch(clearToken())
     }
 }
 
@@ -402,7 +406,8 @@ export const getHistoryItems = (limit) => async (dispatch) => {
         // console.log(data)
         dispatch(setHistoryItems(data))
     } catch (e) {
-        console.log("Error getSearchItems", e.response)
+        console.log("Error setHistoryItems", e.response)
+        dispatch(clearToken())
     }
 }
 
@@ -425,7 +430,8 @@ export const getBookmarkItems = (limit) => async (dispatch) => {
         // console.log(data)
         dispatch(setBookmarkItems(data))
     } catch (e) {
-        console.log("Error getSearchItems", e.response)
+        console.log("Error getBookmarkItems", e.response)
+        dispatch(clearToken())
     }
 }
 export const toggleBookmarkById = (id) => async (dispatch) => {
@@ -435,6 +441,7 @@ export const toggleBookmarkById = (id) => async (dispatch) => {
         dispatch(setBookmarkId(data))
         // console.log(data)
     } catch (e) {
-        console.log("Error getSearchItems", e.response)
+        console.log("Error getBookmarkItems", e.response)
+        dispatch(clearToken())
     }
 }

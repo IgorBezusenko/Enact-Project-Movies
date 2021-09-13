@@ -65,6 +65,7 @@ export const AuthForm = (props) => {
                         <Input onChange={(e) => {
                             setPass(e.value)
                         }}  autoFocus className={css.input} value={pass} placeholder={"Пароль"}
+                               type={"password"}
                         />
                     </div>
 

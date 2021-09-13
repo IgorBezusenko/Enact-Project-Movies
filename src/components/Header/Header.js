@@ -43,9 +43,7 @@ const Sidebar = ({token}) => {
     const [navbar, setNavbar] = useState(false)
     const dispatch = useDispatch()
     let history = useHistory();
-    // useEffect(() => {
-    //     dispatch(getUserProfile())
-    // }, [])
+
     const isFocus = search || play || favorite || serial || smile || login || film || navbar
     const onSelectHandler = (e, path, cid) => {
         if (e.code === "Enter") {
@@ -67,14 +65,17 @@ const Sidebar = ({token}) => {
                 {
                     userProfile && !!userProfile.subscription && !!userProfile.paid ?
                         <div className={css.user__subscribe_true}>Подписка <small>(активирована)</small></div> :
-                        <div className={css.user__subscribe_false}>Подписка (приостановлена)</div>
+                        userProfile && userProfile.subscription === 2
+                            ?
+                            <div className={css.user__subscribe_true}>Подписка <small>(ожидание активации)</small></div>
+                            : <div className={css.user__subscribe_false}>Подписка <small>(приостановлена)</small></div>
                 }
 
             </div>
         }
         <div className={css.user__date}>{userProfile && userProfile.dtEnd}</div>
-    </div>
-    console.log(userProfile)
+    </div>;
+
     return (
         <div className={css.sidebar}
              onFocus={() => setNavbar(true)}
@@ -88,25 +89,19 @@ const Sidebar = ({token}) => {
 
             <div className={css.user}>
                 {
-                    isFocus &&
-                    <>
+                    isFocus && <>
                         <div className={css.user__icon}><User/></div>
                         {userProfileElement}
                     </>
                 }
             </div>
 
-
             <ul className={css.nav}>
                 <li>
                     <ItemBase
                         onKeyUp={(e) => onSelectHandler(e, "/search-panel")}
-                        onFocus={() => {
-                            setSearch(true)
-                        }}
-                        onBlur={() => {
-                            setSearch(false)
-                        }}
+                        onFocus={() => setSearch(true)}
+                        onBlur={() => setSearch(false)}
                         className={css.item__base}><Link to={"/search-panel"}><Search/></Link>
 
                     </ItemBase>
@@ -114,52 +109,32 @@ const Sidebar = ({token}) => {
                 </li>
                 <li>
                     <ItemBase onKeyUp={(e) => onSelectHandler(e, "/history")}
-                              onFocus={() => {
-                                  setPlay(true)
-                              }}
-                              onBlur={() => {
-                                  setPlay(false)
-                              }}
+                              onFocus={() => setPlay(true)}
+                              onBlur={() => setPlay(false)}
                               className={css.item__base}><Link to={"/history"}><PlayCircle/></Link></ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${play && css.color__red}`}>Я смотрю</div>}
                 </li>
                 <li>
                     <ItemBase onKeyUp={(e) => onSelectHandler(e, "/bookmark")}
-                              onFocus={() => {
-                                  setFavorite(true)
-                              }}
-                              onBlur={() => {
-                                  setFavorite(false)
-                              }}
+                              onFocus={() => setFavorite(true)}
+                              onBlur={() => setFavorite(false)}
                               className={css.item__base}><Link to={"/bookmark"}><Bookmark/></Link></ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${favorite && css.color__red}`}>Избранное</div>}
                 </li>
                 <li>
-                    <ItemBase onClick={() => {
-                        onHandleClick("100")
-                    }}
+                    <ItemBase onClick={() => onHandleClick("100")}
                               onKeyUp={(e) => onSelectHandler(e, "category?cid=100", "100")}
-                              onFocus={() => {
-                                  setFilm(true)
-                              }}
-                              onBlur={() => {
-                                  setFilm(false)
-                              }}
+                              onFocus={() => setFilm(true)}
+                              onBlur={() => setFilm(false)}
                               className={css.item__base}><Link
                         to={"/category?cid=100"}><Video/></Link></ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${film && css.color__red}`}>Фильмы</div>}
                 </li>
                 <li>
-                    <ItemBase onClick={() => {
-                        onHandleClick("39")
-                    }}
+                    <ItemBase onClick={() => onHandleClick("39")}
                               onKeyUp={(e) => onSelectHandler(e, "category?cid=39", "39")}
-                              onFocus={() => {
-                                  setSerial(true)
-                              }}
-                              onBlur={() => {
-                                  setSerial(false)
-                              }}
+                              onFocus={() => setSerial(true)}
+                              onBlur={() => setSerial(false)}
                               className={css.item__base}>
                         <Link to={"/category?cid=39"}>
                             <Briefcase/></Link></ItemBase>
@@ -167,16 +142,10 @@ const Sidebar = ({token}) => {
                 </li>
                 <li>
                     <ItemBase
-                        onClick={() => {
-                            onHandleClick("20")
-                        }}
+                        onClick={() => onHandleClick("20")}
                         onKeyUp={(e) => onSelectHandler(e, "category?cid=20", "20")}
-                        onFocus={() => {
-                            setSmile(true)
-                        }}
-                        onBlur={() => {
-                            setSmile(false)
-                        }}
+                        onFocus={() => setSmile(true)}
+                        onBlur={() => setSmile(false)}
                         className={css.item__base}><Link to={"/category?cid=20"}><Smile/></Link></ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${smile && css.color__red}`}>Мультфильмы</div>}
                 </li>
@@ -186,12 +155,8 @@ const Sidebar = ({token}) => {
                             <ItemBase onKeyUp={(e) => {
                                 onSelectHandler(e, "/auth")
                             }}
-                                      onFocus={() => {
-                                          setLogin(true)
-                                      }}
-                                      onBlur={() => {
-                                          setLogin(false)
-                                      }}
+                                      onFocus={() => setLogin(true)}
+                                      onBlur={() => setLogin(false)}
                                       className={css.item__base}>
                                 <Link to={"/auth"}>
                                     <LogIn style={{transform: "rotate(180deg)"}}/>
@@ -210,8 +175,3 @@ const Sidebar = ({token}) => {
     )
 }
 
-// const Component = ({children, ...rest}) => {
-//     return (<div {...rest}>{children}</div>)
-// }
-//
-// export const ItemBase = Spottable(Component)
