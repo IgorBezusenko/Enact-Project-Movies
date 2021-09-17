@@ -1,5 +1,5 @@
 import {
-    CLEAR_CATEGORY,
+    CLEAR_CATEGORY, CLEAR_PAGE,
     GET_CATEGORY,
     SET_CATEGORY_FILTER,
     SET_CATEGORY_ID,
@@ -141,6 +141,12 @@ export const categoryReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentPage: state.currentPage + 1
+            }
+
+        case CLEAR_PAGE:
+            return {
+                ...state,
+                currentPage: 1
             }
 
         default :

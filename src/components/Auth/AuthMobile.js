@@ -15,7 +15,7 @@ export const AuthMobile = (props) => {
     useEffect(() => {
         console.log("18con", connectionCode)
         const interval = setInterval(() => {
-            dispatch(getTokenCode(connectionCode,token))
+            dispatch(getTokenCode(connectionCode, token))
         }, 3000)
 
         return () => {
@@ -42,9 +42,11 @@ export const AuthMobile = (props) => {
                         <li className={css.list__item}>
                             <div className={css.index}>2</div>
                             <div>В разделе “Подключить устройство” введите код <span
-                                className={css.color__red}>{
-                                tokenCode && tokenCode
-                            }</span></div>
+                                className={css.color__red}>
+                                {
+                                    tokenCode && tokenCode
+                                }
+                            </span></div>
                         </li>
                         <li className={css.list__item}>
                             <div className={css.index}>3</div>

@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {InputCheckBox} from "./InputCheckBox";
 import {InputRadio} from "./InputRadio";
 import {Link, useHistory} from "react-router-dom";
-import {getCategoryFilter, setFilterTypeContent, setFilterYear} from "../../redux/actions";
+import {clearPage, getCategoryFilter, setFilterTypeContent, setFilterYear} from "../../redux/actions";
 
 export const CategoryFilter = (props) => {
     const history = useHistory();
@@ -16,13 +16,15 @@ export const CategoryFilter = (props) => {
     const {categoryFilter, filterYear, filterTypeContent, categoryId} = categoryReducer
 
     const onBackHandler = () => history.push(`/category?cid=${categoryId}`)
-
     const onSelectHandler = (e, path) => {
         if (e.code === "Enter") {
             goToPath(path)
         }
     }
-    const goToPath = (path) => history.push(path)
+    const goToPath = (path) => {
+        dispatch(clearPage())
+        history.push(path)
+    }
     const onResetFilterClick = () => {
         dispatch(getCategoryFilter())
         dispatch(setFilterYear(""))

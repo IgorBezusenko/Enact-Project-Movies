@@ -124,7 +124,7 @@ export const MoviesPreview = (props) => {
 
                            <div className={css.button__group}>
                                <ButtonPlay movieFile={movieFile}/>
-                               <ButtonMovie className={cssSpottable.btn__movie} title={"Продолжить"}><Clock/></ButtonMovie>
+                               {/*<ButtonMovie className={cssSpottable.btn__movie} title={"Продолжить"}><Clock/></ButtonMovie>*/}
 
                                <ButtonMovie className={cssSpottable.btn__movie}
                                             onClick={onToggleBookmark}

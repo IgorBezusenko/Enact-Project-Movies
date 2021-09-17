@@ -1,5 +1,4 @@
 import {Link, useHistory} from "react-router-dom";
-import {NavOnBack} from "../NavOnBack/NavOnBack";
 import css from "./Form.module.less";
 import React, {useEffect} from "react";
 import {AuthButton} from "./AuthButton";
@@ -7,17 +6,19 @@ import {Smartphone, User} from "react-feather";
 import {clearToken, clearUserProfile} from "../../redux/actions";
 import {reactLocalStorage} from "reactjs-localstorage";
 import {useDispatch} from "react-redux";
+import {AuthAPI} from "../../API/API";
 
-export const AuthPage = (props) => {
-    const onBackHandler = () => props.history.goBack()
+export const AuthPage = () => {
     const history = useHistory()
     const dispatch = useDispatch()
 
-    useEffect(() => {
+    useEffect(async () => {
         dispatch(clearToken())
         dispatch(clearUserProfile())
         reactLocalStorage.remove("token");
         reactLocalStorage.remove("code");
+        // const data = await AuthAPI.logout()
+        // console.log(data)
     }, [])
 
 
@@ -29,13 +30,12 @@ export const AuthPage = (props) => {
 
     return (
 
-        <div className={css.container}>
-            <div><NavOnBack className={css.on__back} title={"Вход"} onGoBack={onBackHandler}/></div>
+        <div>
             <div className={css.auth__block}>
                 <Link to={"/auth-form"}>
                     <AuthButton
                         className={css.auth__button}
-                        onKeyDown={(e) => onSelect(e, "/auth-form")}
+                        onKeyPress={(e) => onSelect(e, "/auth-form")}
                         title={"Войти через логин и пароль"}>
                         <User/>
                     </AuthButton>
@@ -44,7 +44,7 @@ export const AuthPage = (props) => {
                 <Link to={"/auth-mobile"}>
                     <AuthButton
                         className={css.auth__button}
-                        onKeyDown={(e) => onSelect(e, "/auth-mobile")}
+                        onKeyPress={(e) => onSelect(e, "/auth-mobile")}
                         title={"Войти с помощью мобильного приложения"}>
                         <Smartphone/>
                     </AuthButton>

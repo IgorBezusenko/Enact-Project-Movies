@@ -102,8 +102,8 @@ const MainList = ({moviesList, nextItem}) => {
                     movieCategoryTitle === moviesList.title && movieFileFocus &&
                     <div className={css.main__list_focus}>
                         <div className={css.focus__description}>
-                            <div className={css.focus__title}>{movieFileFocus.title} <span
-                                className={css.focus__genre}>({country})</span></div>
+                            <div className={css.focus__title}>{movieFileFocus.title} {!!country.length && <span
+                                className={css.focus__genre}>({country})</span>}</div>
                             <div className={css.focus__genre}>
                                 {movieFileFocus.year} {genre} | {!!movieFileFocus.access
                                 ? <span style={{color: "#FF0000"}}>Подписка</span>

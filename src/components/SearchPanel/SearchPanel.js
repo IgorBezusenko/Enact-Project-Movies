@@ -13,7 +13,9 @@ export const SearchPanel = (props) => {
     const [inputValue, setInputValue] = useState("")
     const {searchItems, limitItems} = useSelector((state) => state.searchReducer)
     const dispatch = useDispatch()
-
+    useEffect(()=>{
+        dispatch(setClearSearchItems())
+    },[])
     useEffect(() => {
         if (limitItems !== 15) {
             dispatch(getSearchItems(inputValue, limitItems))

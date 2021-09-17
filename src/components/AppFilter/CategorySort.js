@@ -6,7 +6,7 @@ import {List} from "react-feather";
 import {ItemBase} from "../Buttons/ItemBase";
 import queryString from "querystring";
 import {useDispatch, useSelector} from "react-redux";
-import {setIdSort} from "../../redux/actions";
+import {clearPage, setIdSort} from "../../redux/actions";
 import {useHistory} from "react-router-dom";
 
 export const CategorySort = (props) => {
@@ -19,6 +19,7 @@ export const CategorySort = (props) => {
 
     const onSubmitHandler = (e) => {
         e.preventDefault()
+        dispatch(clearPage())
         dispatch(setIdSort(inputIdSort))
         const query={};
 

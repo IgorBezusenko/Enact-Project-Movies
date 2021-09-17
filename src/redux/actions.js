@@ -29,6 +29,7 @@ export const SET_VOTE_AC = "MoviesPreview/SET_VOTE_AC"
 export const GET_CATEGORY = "CATEGORY/GET_CATEGORY"
 export const SET_NEW_CATEGORY_PAGE = "CATEGORY/SET_NEW_CATEGORY_PAGE"
 export const SET_PAGE_INCREMENT = "CATEGORY/SET_PAGE_INCREMENT"
+export const CLEAR_PAGE = "CATEGORY/CLEAR_PAGE"
 export const CLEAR_CATEGORY = "CATEGORY/CLEAR_CATEGORY"
 export const SET_CATEGORY_ID = "CATEGORY/SET_CATEGORY_ID"
 export const SET_ID_SORT = "CATEGORY/SET_ID_SORT"
@@ -298,6 +299,9 @@ export const getCategory = (cid, currentPage, idSort) => async (dispatch) => {
 
 export const setPageIncrement = () => ({
     type: SET_PAGE_INCREMENT
+})
+export const clearPage = () => ({
+    type: CLEAR_PAGE
 })
 
 export const clearCategory = () => ({
