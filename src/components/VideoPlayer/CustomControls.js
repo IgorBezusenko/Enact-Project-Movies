@@ -50,6 +50,12 @@ export const CustomControls = ({
     const SEEK15 = 1 / duration * 15;
     const SEEK120 = 1 / duration * 120;
 
+    const onGoPath = (path) => history.push(path)
+    const onSelect = (e,path) => {
+        if (e.code === "ArrowUp") {
+            onGoPath(path)
+        }
+    }
 
     return <>
         {
@@ -57,7 +63,9 @@ export const CustomControls = ({
             <div>
                 <div className={css.title_controls}>
                     <NavOnBack className={css.on__back} title={movieFile.title && movieFile.title}
-                               onGoBack={() => history.goBack()}/>
+                               onClick={() => onGoPath("/detail")}
+                               onKeyDown={(e=>onSelect(e,"/detail"))}
+                    />
                 </div>
                 <div className={css.controls}>
                     <div className={css.btn_group}>

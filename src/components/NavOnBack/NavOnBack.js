@@ -6,18 +6,7 @@ import Spottable from "@enact/spotlight/Spottable";
 
 const OnBack = ({title, onGoBack, ...rest}) => {
     return (
-        <div {...rest}
-             onClick={onGoBack}
-             onKeyDown={(e) => {
-                 if (e.code === "Enter") {
-                     onGoBack()
-                 }
-                 if (e.code === "ArrowUp") {
-                     onGoBack()
-                 }
-             }}
-        >
-
+        <div {...rest} >
             <div className={css.row}>
                 <div className={css.icon}><CornerUpLeft/></div>
                 <div className={css.ml_7 + " " + css.nav__title}> {title ? title : null}</div>

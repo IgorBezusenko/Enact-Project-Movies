@@ -3,10 +3,11 @@ import {NavOnBack} from "../NavOnBack/NavOnBack";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getTokenCode, setConnectionCode} from "../../redux/actions";
-import {Redirect} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 
 export const AuthMobile = (props) => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const {connectionCode, token, tokenCode} = useSelector(state => state.authReducer)
     useEffect(() => {
         dispatch(setConnectionCode("info.modelName"))
@@ -23,12 +24,20 @@ export const AuthMobile = (props) => {
         }
     }, [connectionCode])
 
-    const onBackHandler = () => props.history.goBack()
+    const onGoBack = () => history.push("/auth")
+    const onBackHandler = (e) => {
+        if (e.code === "Enter") {
+            onGoBack()
+        }
+    }
     return (
         <>
-            {!!token && <Redirect to={"/main"}/>}
+            {token && <Redirect to={"/main"}/>}
             <div className={css.container}>
-                <NavOnBack className={css.on__back} title={"Вход"} onGoBack={onBackHandler}/>
+                <NavOnBack className={css.on__back} title={"Вход"}
+                           onClick={onGoBack}
+                           // onKeyPress={onBackHandler}
+                           />
                 <h3 className={css.authMobile__title}>Для подключения телевизора к вашему профилю PORTAL всего 3
                     шага:</h3>
                 <div className={css.authMobile__content}>

@@ -6,13 +6,15 @@ import css from "./SearchPanel.module.less";
 import Input from '@enact/moonstone/Input';
 import {ItemBase} from "../Buttons/ItemBase";
 import {useDispatch, useSelector} from "react-redux";
+import {useHistory} from "react-router-dom";
 import {getSearchItems, setClearSearchItems, setNewSearchPage} from "../../redux/actions";
 import MainListItem from "../Main/MainListItem";
 
 export const SearchPanel = (props) => {
+    const dispatch = useDispatch()
+    const history =useHistory()
     const [inputValue, setInputValue] = useState("")
     const {searchItems, limitItems} = useSelector((state) => state.searchReducer)
-    const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(setClearSearchItems())
     },[])
@@ -45,13 +47,22 @@ export const SearchPanel = (props) => {
             dispatch(setNewSearchPage())
         }
     }
+    const onGoPath = (path) => history.push(path)
+    const onSelect = (e, path) => {
+        if (e.code === "ArrowUp") {
+            onGoPath(path)
+        }
+    }
     return (
         <>
             <div className={css.container}>
                 <Header/>
 
                 <div className={css.row}>
-                    <NavOnBack className={css.on__back} title={"Поиск"} onGoBack={() => props.history.push("/main")}/>
+                    <NavOnBack className={css.on__back} title={"Поиск"}
+                               onClick={() => onGoPath("/main")}
+                               onKeyDown={(e=>onSelect(e,"/main"))}
+                    />
                 </div>
                 <form className={css.form} onSubmit={onSubmit}>
 

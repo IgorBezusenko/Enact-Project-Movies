@@ -6,23 +6,24 @@ import {IconBase} from "./IconBase";
 
 export const ButtonDescription = () => {
     const history = useHistory()
-    const onSelect = (e) => {
-        if (e.code === "Enter") {
-            history.push("/description")
-        }
+    const onGoPath = (path) => history.push(path)
+    const onSelect = (e, push) => {
+        console.log(push)
         if (e.code === "ArrowDown") {
-            history.push("/description")
+            onGoPath(push)
         }
     }
     return (
         <>
-           <div className={css.description}>
-               <Link to={"/description"} >
-                   <IconBase onKeyDown={(e) => onSelect(e)} className={css.on__description}>
-                       <ChevronDown/>
-                   </IconBase>
-               </Link>
-           </div>
+            <div className={css.description}>
+                <Link to={"/description"}>
+                    <IconBase onKeyDown={(e) => onSelect(e, "/description")}
+                              onClick={() => onGoPath("/description")}
+                              className={css.on__description}>
+                        <ChevronDown/>
+                    </IconBase>
+                </Link>
+            </div>
         </>
     )
 }

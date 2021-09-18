@@ -3,10 +3,11 @@ import React from "react";
 import {NavOnBack} from "../../NavOnBack/NavOnBack";
 
 import css from "./MoviesDescription.module.less"
+import {useHistory} from "react-router-dom";
 
-export const MoviesDescription = (props) => {
+export const MoviesDescription = () => {
+    const history = useHistory()
     const movieFile = useSelector(state => state.mainReducer.movieFile)
-    const onBackHandler = () => props.history.goBack()
 
     const country = movieFile.country && movieFile.country.map((country, i) => {
         return (<span key={i}>
@@ -34,6 +35,13 @@ export const MoviesDescription = (props) => {
         </span>)
     })
 
+    const onGoPath = (path) => history.push(path)
+    const onSelect = (e, push) => {
+        console.log(push)
+        if (e.code === "ArrowUp") {
+            onGoPath(push)
+        }
+    }
 
     return (
         <div style={{
@@ -45,7 +53,10 @@ export const MoviesDescription = (props) => {
             backgroundSize: "cover",
         }}>
             <div className={css.container}>
-                <NavOnBack onGoBack={onBackHandler} className={css.on__back} title={movieFile.title}/>
+                <NavOnBack
+                    onClick={()=>onGoPath("/detail")}
+                    onKeyDown={(e=>onSelect(e,"/detail"))}
+                    className={css.on__back} title={movieFile.title}/>
 
               <div className={css.description}>
                   <div><span className={css.title}>Год:</span> {movieFile.year}</div>

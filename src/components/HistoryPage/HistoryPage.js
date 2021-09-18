@@ -1,10 +1,10 @@
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect} from "react";
-import {getHistoryItems, getSearchItems, setNewHistoryPage, setNewSearchPage} from "../../redux/actions";
+import {getHistoryItems, setNewHistoryPage} from "../../redux/actions";
 import css from "../Main/Category/Category.module.less";
 import {Header} from "../Header/Header";
 import {NavOnBack} from "../NavOnBack/NavOnBack";
-import {Redirect, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import MainListItem from "../Main/MainListItem";
 import {AppLoading} from "../AppLoading/AppLoading";
 
@@ -24,11 +24,17 @@ export const HistoryPage = () => {
         }
     }, [limitItems])
 
-    const onBackHandler = (path) => history.push(path)
 
     const onFocusHandler = (index, array) => {
         if (Math.ceil(index / 5) === Math.ceil(array.length / 5)) {
             dispatch(setNewHistoryPage())
+        }
+    }
+
+    const onGoPath = (path) => history.push(path)
+    const onSelect = (e, path) => {
+        if (e.code === "ArrowUp") {
+            onGoPath(path)
         }
     }
 
@@ -38,10 +44,13 @@ export const HistoryPage = () => {
             <div className={css.container}>
                 <Header/>
 
-                { !historyItems ? <AppLoading/>:
+                {!historyItems ? <AppLoading/> :
                     <>
                         <div className={css.row}>
-                            <NavOnBack className={css.on__back} title={"Я смотрю"} onGoBack={() => onBackHandler("/main")}/>
+                            <NavOnBack className={css.on__back} title={"Я смотрю"}
+                                       onClick={() => onGoPath("/main")}
+                                       onKeyDown={(e => onSelect(e, "/main"))}
+                            />
 
                         </div>
 
@@ -50,7 +59,7 @@ export const HistoryPage = () => {
                                 return (
 
                                     <MainListItem key={idx}
-                                                  onFocus={()=>onFocusHandler(idx, historyItems)}
+                                                  onFocus={() => onFocusHandler(idx, historyItems)}
                                                   className={css.list__item} item={item}/>
 
                                 )

@@ -56,13 +56,7 @@ export const Category = (props) => {
     //     })
     // }, [idSort, categoryId])
 
-    const onBackHandler = () => history.push("/main")
-
-    const onSelectHandler = (e, path) => {
-        if (e.code === "Enter") {
-            history.push(path)
-        }
-    }
+    const onBackHandler = (path) => history.push(path)
 
     const onFocusHandler = (index, array) => {
         if (Math.ceil(index / 5) === Math.ceil(array.length / 5)) {
@@ -78,19 +72,23 @@ export const Category = (props) => {
                 {!categoryTitle ? <AppLoading/> :
                     <>
                         <div className={css.row}>
-                            <NavOnBack className={css.on__back} title={categoryTitle && categoryTitle}
-                                       onGoBack={onBackHandler}/>
+                            <NavOnBack className={css.on__back}
+                                       title={categoryTitle && categoryTitle}
+                                       onClick={() => onBackHandler("/main")}
+                            />
                             <div className={css.row}>
                                 <Link to={"/app-sort"}>
-                                    <ButtonBase onKeyDown={(e) => onSelectHandler(e, "/app-sort")}
-                                                className={css.btn__category}>
+                                    <ButtonBase
+                                        onClick={() => onBackHandler("/app-sort")}
+                                        className={css.btn__category}>
                                         <List/>
                                         <div>Сортировка</div>
                                     </ButtonBase>
                                 </Link>
                                 <Link to={"/app-filter"}>
-                                    <ButtonBase onKeyDown={(e) => onSelectHandler(e, "/app-filter")}
-                                                className={css.btn__category}>
+                                    <ButtonBase
+                                        onClick={() => onBackHandler("/app-filter")}
+                                        className={css.btn__category}>
                                         <Sliders/>
                                         <div>Фильтр</div>
                                     </ButtonBase>

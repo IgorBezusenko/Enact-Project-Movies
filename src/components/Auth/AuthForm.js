@@ -5,7 +5,7 @@ import {NavOnBack} from "../NavOnBack/NavOnBack";
 import React, {useState} from "react";
 import Input from "@enact/moonstone/Input";
 import {getToken, setError} from "../../redux/actions";
-import {reactLocalStorage} from "reactjs-localstorage";
+import {AppLoading} from "../AppLoading/AppLoading";
 
 export const AuthForm = (props) => {
     const dispatch = useDispatch()
@@ -18,12 +18,6 @@ export const AuthForm = (props) => {
     const authReducer = useSelector((state) => state.authReducer);
     const {token, loading, error} = authReducer
 
-    const onBackHandler = () => history.push("/auth")
-    // const onGoBack = (e)=>{
-    //     if (e.code==="Enter"){
-    //         onGoBack()
-    //     }
-    // }
     const onSubmit = async (e) => {
         e.preventDefault()
         dispatch(setError(null))
@@ -42,45 +36,53 @@ export const AuthForm = (props) => {
         } else {
             dispatch(setError(null))
             await dispatch(getToken(login, pass))
-
         }
-
-
     };
-    console.log("token-45",token)
+
+    const onGoBack = () => history.push("/auth")
+    const onBackHandler = (e) => {
+        if (e.code === "Enter") {
+            onGoBack()
+        }
+    }
+    console.log("token-45", token)
     return (
         <>
-            {!!token && <Redirect to={"/main"}/>}
-            {loading ? <p>Lading...</p> : <div className={css.container}>
-                <NavOnBack className={css.on__back} title={"Вход"} onGoBack={onBackHandler}/>
-                <form className={css.form} onSubmit={onSubmit}>
+            {token && <Redirect to={"/main"}/>}
+            {loading ? <AppLoading/>
+                : <div className={css.container}>
+                    <NavOnBack className={css.on__back} title={"Вход"}
+                               onClick={onGoBack}
+                        // onKeyPress={onBackHandler}
+                    />
+                    <form className={css.form} onSubmit={onSubmit}>
 
 
-                    {error && <p className={css.errors}>{error}</p>}
-                    <div className={css.formControl}>
-                        <Input onChange={(e) => {
-                            setLogin(e.value.trim())
-                        }}      autoFocus
-                               // className={css.input}
-                               value={login}
-                               placeholder={"email / логин"}
-                        />
-                    </div>
+                        {error && <p className={css.errors}>{error}</p>}
+                        <div className={css.formControl}>
+                            <Input onChange={(e) => {
+                                setLogin(e.value.trim())
+                            }} autoFocus
+                                // className={css.input}
+                                   value={login}
+                                   placeholder={"email / логин"}
+                            />
+                        </div>
 
-                    <div className={css.formControl}>
-                        <Input onChange={(e) => {
-                            setPass(e.value)
-                        }}
-                               autoFocus
-                               // className={css.input}
-                               value={pass} placeholder={"Пароль"}
-                               type={"password"}
-                        />
-                    </div>
+                        <div className={css.formControl}>
+                            <Input onChange={(e) => {
+                                setPass(e.value)
+                            }}
+                                   autoFocus
+                                // className={css.input}
+                                   value={pass} placeholder={"Пароль"}
+                                   type={"password"}
+                            />
+                        </div>
 
-                    <button className={css.btn}>Войти</button>
-                </form>
-            </div>
+                        <button className={css.btn}>Войти</button>
+                    </form>
+                </div>
             }
         </>
     );

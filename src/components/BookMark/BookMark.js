@@ -29,16 +29,24 @@ export const BookMark = () => {
         }
     }
 
-    const onBackHandler = (path) => history.push(path)
+    const onGoPath = (path) => history.push(path)
+    const onSelect = (e, path) => {
+        if (e.code === "ArrowUp") {
+            onGoPath(path)
+        }
+    }
     return (
         <>
             <div className={css.container}>
                 <Header/>
 
-                { !bookmarkItems? <AppLoading/>:
+                {!bookmarkItems ? <AppLoading/> :
                     <>
                         <div className={css.row}>
-                            <NavOnBack className={css.on__back} title={"Избранное"} onGoBack={() => onBackHandler("/main")}/>
+                            <NavOnBack className={css.on__back} title={"Избранное"}
+                                       onClick={() => onGoPath("/main")}
+                                       onKeyDown={(e => onSelect(e, "/main"))}
+                            />
                         </div>
 
                         <div className={css.list}>
