@@ -13,10 +13,10 @@ export const AuthPage = () => {
     const dispatch = useDispatch()
 
     useEffect(async () => {
-        dispatch(clearToken())
-        dispatch(clearUserProfile())
-        reactLocalStorage.remove("token");
-        reactLocalStorage.remove("code");
+        // dispatch(clearToken())
+        // dispatch(clearUserProfile())
+        // reactLocalStorage.remove("token");
+        // reactLocalStorage.remove("code");
         // const data = await AuthAPI.logout()
         // console.log(data)
     }, [])

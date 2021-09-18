@@ -1,4 +1,5 @@
 import {AuthAPI, MainAPI, MoviesPreview} from "../API/API";
+import {reactLocalStorage} from "reactjs-localstorage";
 
 export const AUTH_TOGGLE_IS_FETCHING = "AUTH/AUTH_TOGGLE_IS_FETCHING"
 export const SET_TOKEN = "AUTH/SET_TOKEN"
@@ -111,27 +112,40 @@ export const getTokenCode = (code_UID, token) => async (dispatch) => {
         dispatch(authToggleIsFetching(false))
     } catch (e) {
         // dispatch(setError(e.response.data.error.message))
-        console.log("Error getToken", e.response.data.error.message)
+        console.log("Error getTokenCode", e.response.data.error.message)
         dispatch(authToggleIsFetching(false))
     }
 }
 
+//logout
+export const getLogout = () => async (dispatch) => {
+    try {
+        await AuthAPI.logout()
+        dispatch(clearToken())
+        dispatch(clearUserProfile())
+        reactLocalStorage.remove("token");
+        reactLocalStorage.remove("code");
+    } catch (e) {
+        console.log("Error getToken", e.response)
+    }
+}
+
 //userProfile
-export const setUserProfile=(userProfile)=>({
-    type:SET_USER_PROFILE,
+export const setUserProfile = (userProfile) => ({
+    type: SET_USER_PROFILE,
     userProfile
 })
-export const clearUserProfile=()=>({
-    type:CLEAR_USER_PROFILE
+export const clearUserProfile = () => ({
+    type: CLEAR_USER_PROFILE
 })
 
-export const getUserProfile = ()=> async (dispatch)=>{
+export const getUserProfile = () => async (dispatch) => {
     try {
         const {data} = await AuthAPI.userProfile()
         dispatch(setUserProfile(data))
-    }catch (e) {
-        console.log("Error getUserProfile" , e.response)
-        dispatch(clearToken())
+    } catch (e) {
+        console.log("Error getUserProfile", e.response)
+        // dispatch(clearToken())
     }
 }
 

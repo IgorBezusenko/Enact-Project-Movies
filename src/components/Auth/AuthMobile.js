@@ -26,7 +26,7 @@ export const AuthMobile = (props) => {
 
     const onGoBack = () => history.push("/auth")
     const onBackHandler = (e) => {
-        if (e.code === "Enter") {
+        if (e.code === "ArrowUp") {
             onGoBack()
         }
     }
@@ -36,7 +36,7 @@ export const AuthMobile = (props) => {
             <div className={css.container}>
                 <NavOnBack className={css.on__back} title={"Вход"}
                            onClick={onGoBack}
-                           // onKeyPress={onBackHandler}
+                           onKeyDown={onBackHandler}
                            />
                 <h3 className={css.authMobile__title}>Для подключения телевизора к вашему профилю PORTAL всего 3
                     шага:</h3>

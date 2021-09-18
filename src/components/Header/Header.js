@@ -4,7 +4,7 @@ import {Bookmark, Briefcase, LogIn, PlayCircle, Search, Smile, User, Video} from
 
 import css from "./Header.module.less"
 import {useDispatch, useSelector} from "react-redux";
-import {clearVideoUrl, setCategoryId} from "../../redux/actions";
+import {clearVideoUrl, getLogout, setCategoryId} from "../../redux/actions";
 
 import {reactLocalStorage} from "reactjs-localstorage";
 import {ItemBase} from "../Buttons/ItemBase";
@@ -50,6 +50,17 @@ const Sidebar = ({token}) => {
             history.push(path)
             onHandleClick(cid)
         }
+    }
+
+
+    // const onLogout = (e, path)=>{
+    //     if (e.code === "Enter") {
+    //         history.push(path)
+    //     }
+    // }
+    const onLogout = (e, path)=>{
+        dispatch(getLogout())
+        history.push(path)
     }
 
     const onHandleClick = (categoryId) => {
@@ -152,9 +163,11 @@ const Sidebar = ({token}) => {
                 <li>
                     {
                         <div className={css.log__in}>
-                            <ItemBase onKeyUp={(e) => {
-                                onSelectHandler(e, "/auth")
-                            }}
+                            <ItemBase
+                            //     onKeyUp={(e) => {
+                            //     onLogout(e, "/auth")
+                            // }}
+                                onClick={onLogout}
                                       onFocus={() => setLogin(true)}
                                       onBlur={() => setLogin(false)}
                                       className={css.item__base}>

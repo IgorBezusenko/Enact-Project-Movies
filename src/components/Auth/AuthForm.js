@@ -41,7 +41,7 @@ export const AuthForm = (props) => {
 
     const onGoBack = () => history.push("/auth")
     const onBackHandler = (e) => {
-        if (e.code === "Enter") {
+        if (e.code === "ArrowUp") {
             onGoBack()
         }
     }
@@ -53,7 +53,7 @@ export const AuthForm = (props) => {
                 : <div className={css.container}>
                     <NavOnBack className={css.on__back} title={"Вход"}
                                onClick={onGoBack}
-                        // onKeyPress={onBackHandler}
+                               onKeyDown={onBackHandler}
                     />
                     <form className={css.form} onSubmit={onSubmit}>
 
