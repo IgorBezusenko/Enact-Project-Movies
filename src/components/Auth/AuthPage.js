@@ -1,17 +1,17 @@
-import {Link, useHistory} from "react-router-dom";
+import {Link, Redirect, useHistory} from "react-router-dom";
 import css from "./Form.module.less";
 import React, {useEffect} from "react";
 import {AuthButton} from "./AuthButton";
 import {Smartphone, User} from "react-feather";
 import {clearToken, clearUserProfile} from "../../redux/actions";
 import {reactLocalStorage} from "reactjs-localstorage";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AuthAPI} from "../../API/API";
 
 export const AuthPage = () => {
     const history = useHistory()
     const dispatch = useDispatch()
-
+    const {token} = useSelector((state) => state.authReducer)
     useEffect(async () => {
         // dispatch(clearToken())
         // dispatch(clearUserProfile())
@@ -30,7 +30,8 @@ export const AuthPage = () => {
 
     return (
 
-        <div>
+        <>
+            {token && <Redirect to={"/main"}/>}
             <div className={css.auth__block}>
                 <Link to={"/auth-form"}>
                     <AuthButton
@@ -50,7 +51,7 @@ export const AuthPage = () => {
                     </AuthButton>
                 </Link>
             </div>
-        </div>
+        </>
 
     )
 }

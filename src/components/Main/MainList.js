@@ -6,7 +6,6 @@ import {ItemBase} from "../Buttons/ItemBase";
 import {useDispatch, useSelector} from "react-redux";
 import {
     clearCurrentItem,
-    clearMovieFileFocus,
     getCategoryFilter,
     setCategoryId,
     setCurrentItemDec,
@@ -23,6 +22,9 @@ const MainList = ({moviesList, nextItem}) => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getCategoryFilter())
+        // window.addEventListener("mousemove", (e)=>{
+        //     console.log("Xnjnj",e)
+        // })
     }, [])
     useEffect(() => {
         if (currentItem === movies.length - 1) {
@@ -31,13 +33,17 @@ const MainList = ({moviesList, nextItem}) => {
         onHandelSetItem(moviesList.items[0], moviesList.title, moviesList.items[0].id)
     }, [currentItem])
 
-    const onSelectHandler = (e, path) => {
+    const onSelectCategory = (e, path) => {
         if (e.code === "Enter") {
             history.push("/category?cid=" + path)
             onHandleClick(path)
         }
     }
-
+    const onSelectItem = (e, path) => {
+        if (e.code === "Enter") {
+            history.push(path)
+        }
+    }
     const onHandleClick = (categoryId) => {
         dispatch(setCategoryId(categoryId))
     }
@@ -47,9 +53,12 @@ const MainList = ({moviesList, nextItem}) => {
             dispatch(setMovieCategoryTitle(title))
         }
     }
+    const onCurrentItemInc = () => {
+        dispatch(setCurrentItemInc())
+    }
     const onHandleInc = (e) => {
         if (currentItem <= movies.length - 1 && e.code === "ArrowDown") {
-            dispatch(setCurrentItemInc())
+            onCurrentItemInc()
         }
     }
     const onHandleDec = (e) => {
@@ -57,9 +66,7 @@ const MainList = ({moviesList, nextItem}) => {
             dispatch(setCurrentItemDec())
         }
     }
-    const onHandleClearItem = () => {
-        dispatch(clearMovieFileFocus())
-    }
+
     const genre = movieFileFocus && movieFileFocus.genre.map((genre, i) => {
         return (<span key={i}>
             {i !== 0 && ", "}{genre.name}
@@ -76,10 +83,13 @@ const MainList = ({moviesList, nextItem}) => {
                 {
                     currentItem > 0 && <div className={css.arrow__up}><ChevronDown/></div>
                 }
-                <div className={css.arrow__down}><ChevronDown/></div>
+                <ItemBase className={css.arrow__down}
+                          onClick={onCurrentItemInc}
+                          onKeyUp={onHandleInc}
+                ><ChevronDown/></ItemBase>
 
                 <ItemBase className={css.on__title__focus} onClick={() => onHandleClick(moviesList.cid)}
-                          onKeyPress={(e) => onSelectHandler(e, moviesList.cid)}
+                          onKeyPress={(e) => onSelectCategory(e, moviesList.cid)}
                           onKeyDown={onHandleDec}>
                     <Link to={"/category?cid=" + moviesList.cid}>{moviesList.title}</Link>
                 </ItemBase>
@@ -90,13 +100,12 @@ const MainList = ({moviesList, nextItem}) => {
                         return (
                             <MainListItem key={idx}
                                           onFocus={() => onHandelSetItem(item, moviesList.title, item.id)}
-                                          onKeyPress={(e) => onHandleInc(e)}
+                                       
                                           className={css.list__item} item={item}/>
                         )
                     })}
                     <ItemBase className={css.plug}>{" "}</ItemBase>
                 </div>
-
 
                 {
                     movieCategoryTitle === moviesList.title && movieFileFocus &&
@@ -129,17 +138,11 @@ const MainList = ({moviesList, nextItem}) => {
                         </div>
                     </div>
                 }
-                <ItemBase className={css.on__title__focus}
-                          onClick={() => onHandleClick(nextItem.cid)}
-                          onKeyPress={(e) => onSelectHandler(e, nextItem.cid)}
-                          onKeyUp={onHandleInc}
-                >
-                    <Link className={css}
-                          to={"/category?cid=" + nextItem.cid}
-                    >
+                <div className={css.title__nextItem}>
+                    <Link>
                         {nextItem.title}
                     </Link>
-                </ItemBase>
+                </div>
                 <div className={css.row}>
                     {nextItem.items.map((item, idx) => {
                         return (
