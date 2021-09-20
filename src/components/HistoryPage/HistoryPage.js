@@ -59,6 +59,7 @@ export const HistoryPage = () => {
                                 return (
 
                                     <MainListItem key={idx}
+                                                  itemIndex={idx}
                                                   onFocus={() => onFocusHandler(idx, historyItems)}
                                                   className={css.list__item} item={item}/>
 

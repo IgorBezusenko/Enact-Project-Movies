@@ -53,6 +53,7 @@ export const BookMark = () => {
                             {bookmarkItems && bookmarkItems.map((item, idx) => {
                                 return (
                                     <MainListItem key={idx}
+                                                  itemIndex={idx}
                                                   onFocus={() => onFocusHandler(idx, bookmarkItems)}
                                                   className={css.list__item} item={item}/>
 

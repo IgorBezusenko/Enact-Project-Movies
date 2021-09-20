@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import css from "./Main.module.less";
 import MainListItem from "./MainListItem";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {ItemBase} from "../Buttons/ItemBase";
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -22,9 +22,6 @@ const MainList = ({moviesList, nextItem}) => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getCategoryFilter())
-        // window.addEventListener("mousemove", (e)=>{
-        //     console.log("Xnjnj",e)
-        // })
     }, [])
     useEffect(() => {
         if (currentItem === movies.length - 1) {
@@ -33,17 +30,14 @@ const MainList = ({moviesList, nextItem}) => {
         onHandelSetItem(moviesList.items[0], moviesList.title, moviesList.items[0].id)
     }, [currentItem])
 
+
     const onSelectCategory = (e, path) => {
         if (e.code === "Enter") {
             history.push("/category?cid=" + path)
             onHandleClick(path)
         }
     }
-    const onSelectItem = (e, path) => {
-        if (e.code === "Enter") {
-            history.push(path)
-        }
-    }
+
     const onHandleClick = (categoryId) => {
         dispatch(setCategoryId(categoryId))
     }
@@ -56,6 +50,9 @@ const MainList = ({moviesList, nextItem}) => {
     const onCurrentItemInc = () => {
         dispatch(setCurrentItemInc())
     }
+    const onCurrentItemDec = () => {
+        dispatch(setCurrentItemDec())
+    }
     const onHandleInc = (e) => {
         if (currentItem <= movies.length - 1 && e.code === "ArrowDown") {
             onCurrentItemInc()
@@ -63,7 +60,7 @@ const MainList = ({moviesList, nextItem}) => {
     }
     const onHandleDec = (e) => {
         if (currentItem > 0 && e.code === "ArrowUp") {
-            dispatch(setCurrentItemDec())
+            onCurrentItemDec()
         }
     }
 
@@ -80,28 +77,41 @@ const MainList = ({moviesList, nextItem}) => {
     return (
         <div>
             <div className={css.block__column}>
+                {/*{*/}
+                {/*    currentItem > 0 && <div className={css.arrow__up}><ChevronDown/></div>*/}
+                {/*} */}
                 {
-                    currentItem > 0 && <div className={css.arrow__up}><ChevronDown/></div>
+                    currentItem > 0 && <ItemBase
+                        className={css.arrow__up}
+                        onClick={onCurrentItemDec}
+                        onKeyUp={onHandleDec}
+                    ><ChevronDown/></ItemBase>
                 }
                 <ItemBase className={css.arrow__down}
                           onClick={onCurrentItemInc}
                           onKeyUp={onHandleInc}
                 ><ChevronDown/></ItemBase>
 
-                <ItemBase className={css.on__title__focus} onClick={() => onHandleClick(moviesList.cid)}
-                          onKeyPress={(e) => onSelectCategory(e, moviesList.cid)}
-                          onKeyDown={onHandleDec}>
-                    <Link to={"/category?cid=" + moviesList.cid}>{moviesList.title}</Link>
-                </ItemBase>
+                {/*<ItemBase className={css.on__title__focus} onClick={() => onHandleClick(moviesList.cid)}*/}
+                {/*          onKeyPress={(e) => onSelectCategory(e, moviesList.cid)}*/}
+                {/*          onKeyUp={onHandleDec}>*/}
+                {/*    <Link to={"/category?cid=" + moviesList.cid}>{moviesList.title}</Link>*/}
+                {/*</ItemBase>*/}
+                <div className={css.title__mainList}>
+                    {moviesList.title}
+                </div>
+
 
                 <div className={css.row}>
                     <ItemBase>{" "}</ItemBase>
                     {moviesList.items.map((item, idx) => {
                         return (
-                            <MainListItem key={idx}
-                                          onFocus={() => onHandelSetItem(item, moviesList.title, item.id)}
-                                       
-                                          className={css.list__item} item={item}/>
+                            <MainListItem
+                                itemIndex={idx}
+                                key={idx}
+                                onFocus={() => onHandelSetItem(item, moviesList.title, item.id)}
+
+                                className={css.list__item} item={item}/>
                         )
                     })}
                     <ItemBase className={css.plug}>{" "}</ItemBase>
@@ -138,10 +148,8 @@ const MainList = ({moviesList, nextItem}) => {
                         </div>
                     </div>
                 }
-                <div className={css.title__nextItem}>
-                    <Link>
-                        {nextItem.title}
-                    </Link>
+                <div className={css.title__mainList}>
+                    {nextItem.title}
                 </div>
                 <div className={css.row}>
                     {nextItem.items.map((item, idx) => {

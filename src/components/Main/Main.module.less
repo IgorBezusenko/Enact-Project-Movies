@@ -15,8 +15,14 @@
   opacity: 1;
 }
 
-.on__title__focus,
-.title__nextItem {
+.title__mainList {
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 0 3rem;
+  margin: 0 0 0 5.5rem;
+}
+
+.on__title__focus {
   padding: 0 3rem;
   margin: 0 0 0 5.5rem;
   width: 100%;
@@ -138,30 +144,26 @@
 .arrow__up, .arrow__down {
   position: absolute;
   text-align: center;
-
+  width: 80vw;
+  left: 12%;
   svg {
     color: rgba(255, 255, 255, 0.55);
-    width: 5rem;
-    height: 5rem;
+    width: 3.5rem;
+    height: 3.5rem;
   }
 }
 
 .arrow__up {
   top: 0;
-  left: 48%;
   transform: rotate(180deg);
 }
 
 .arrow__down {
-  width: 80vw;
-  text-align: center;
   bottom: 12%;
-  left: 12%;
 }
 
-.arrow__down:focus {
-  transform: scale(1.1);
-
+.arrow__down:focus,
+.arrow__up:focus {
   svg {
     color: #FF0000;
   }
