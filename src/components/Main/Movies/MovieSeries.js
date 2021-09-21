@@ -23,7 +23,6 @@ export const MovieSeries = (props) => {
     const [loading, setLoading] = useState(false)
 
     const onClickToSeason = (mediaTitle) => {
-        // console.log(mediaTitle)
         setLoading(true)
         setTimeout(() => {
             setState(mediaTitle)
@@ -43,8 +42,12 @@ export const MovieSeries = (props) => {
     }
 
     const seasonSel = movieFile.media && movieFile.media.filter(sel => sel.title === state)
-    const onBackHandler = () => props.history.goBack()
-
+    const onGoPath = (path) => history.push(path)
+    const onSelect = (e,path) => {
+        if (e.code === "ArrowUp") {
+            onGoPath(path)
+        }
+    }
     return (
         <div style={{
             width: "100%",
@@ -57,7 +60,11 @@ export const MovieSeries = (props) => {
         }}>
             <div
                 className={css.container}>
-                <NavOnBack className={css.on__back} onGoBack={onBackHandler} title={movieFile.title}/>
+                <NavOnBack className={css.on__back}
+                           title={movieFile.title}
+                           onClick={() => onGoPath(`/detail?id=${movieFile.id}`)}
+                           onKeyDown={(e=>onSelect(e,`/detail?id=${movieFile.id}`))}
+                />
                 <div className={css.season__row}>
                     {
 
@@ -68,7 +75,6 @@ export const MovieSeries = (props) => {
                                     && <ButtonSpotTable key={index}
                                                         className={css.btn + " " + css.btn__season +" "+`${media.title===state && css.btn__season_focus} `}
                                                         onClick={() => onClickToSeason(media.title)}
-                                                        // onKeyDown={(e) => onSelectSeason(e, media.title)}
                                     >{media.title}</ButtonSpotTable>}
                                 </>
                             )
@@ -79,7 +85,7 @@ export const MovieSeries = (props) => {
                 {
                     !loading && <>
                         {
-                            state && <div className={css.series__container}>
+                            state  && <div className={css.series__container}>
                                 <div className={css.series__row}>
                                     <ItemBase className={css.on__back}>{""}</ItemBase>
                                     {

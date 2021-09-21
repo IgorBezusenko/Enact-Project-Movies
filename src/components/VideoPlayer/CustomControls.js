@@ -57,14 +57,19 @@ export const CustomControls = ({
         }
     }
 
+    let path = "/detail"
+    if(movieFile.serial){
+        path = "/series"
+    }
+
     return <>
         {
             hideControls > 1 &&
             <div>
                 <div className={css.title_controls}>
                     <NavOnBack className={css.on__back} title={movieFile.title && movieFile.title}
-                               onClick={() => onGoPath("/detail")}
-                               onKeyDown={(e=>onSelect(e,"/detail"))}
+                               onClick={() => onGoPath(path)}
+                               onKeyDown={(e=>onSelect(e,path))}
                     />
                 </div>
                 <div className={css.controls}>

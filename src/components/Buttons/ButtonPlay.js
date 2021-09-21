@@ -17,7 +17,9 @@ export const ButtonPlay = ({movieFile}) => {
 
     return (
         <>
-            {movieFile.media && isSerial.length > 0 && isSerial[0] !== undefined
+            {
+                // movieFile.media && isSerial.length > 0 && isSerial[0] !== undefined
+                movieFile.serial
                 ? <Link to={"/series"}>
                     <ButtonMovie onKeyPress={(e) => onSelect(e,"/series")} className={css.btn__movie} title={"Смотреть"}>
                         <Play/>
