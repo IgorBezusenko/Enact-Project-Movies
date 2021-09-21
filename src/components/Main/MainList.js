@@ -14,19 +14,20 @@ import {
     setMovieFileFocus
 } from "../../redux/actions";
 import {MainListItemPreview} from "./MainListItemPreview";
-import {ChevronDown} from "react-feather";
+import {ChevronDown, ChevronsUp} from "react-feather";
 
-const MainList = ({moviesList, nextItem}) => {
+const MainList = ({moviesList, nextItem, moviesLength}) => {
     const {mainData: movies, currentItem, movieFileFocus, movieCategoryTitle} = useSelector(state => state.mainReducer)
     let history = useHistory();
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getCategoryFilter())
     }, [])
+
     useEffect(() => {
-        if (currentItem === movies.length - 1) {
-            dispatch(clearCurrentItem())
-        }
+        // if (currentItem === movies.length - 1) {
+        //     dispatch(clearCurrentItem())
+        // }
         onHandelSetItem(moviesList.items[0], moviesList.title, moviesList.items[0].id)
     }, [currentItem])
 
@@ -53,6 +54,9 @@ const MainList = ({moviesList, nextItem}) => {
     const onCurrentItemDec = () => {
         dispatch(setCurrentItemDec())
     }
+    const onResetCurrentItem = () => {
+        dispatch(clearCurrentItem())
+    }
     const onHandleInc = (e) => {
         if (currentItem <= movies.length - 1 && e.code === "ArrowDown") {
             onCurrentItemInc()
@@ -77,26 +81,27 @@ const MainList = ({moviesList, nextItem}) => {
     return (
         <div>
             <div className={css.block__column}>
-                {/*{*/}
-                {/*    currentItem > 0 && <div className={css.arrow__up}><ChevronDown/></div>*/}
-                {/*} */}
+
                 {
-                    currentItem > 0 && <ItemBase
-                        className={css.arrow__up}
-                        onClick={onCurrentItemDec}
-                        onKeyUp={onHandleDec}
+                    currentItem > 0 &&
+                    <ItemBase className={css.arrow__up}
+                              onClick={onCurrentItemDec}
+                              onKeyUp={onHandleDec}
                     ><ChevronDown/></ItemBase>
                 }
-                <ItemBase className={css.arrow__down}
-                          onClick={onCurrentItemInc}
-                          onKeyUp={onHandleInc}
-                ><ChevronDown/></ItemBase>
+                {
+                    currentItem < moviesLength ?
+                        <ItemBase className={css.arrow__down}
+                                  onClick={onCurrentItemInc}
+                                  onKeyUp={onHandleInc}
+                        ><ChevronDown/></ItemBase>
+                        :
+                        <ItemBase className={css.arrow__down}
+                                  onClick={onResetCurrentItem}
+                        ><ChevronsUp/></ItemBase>
+                }
 
-                {/*<ItemBase className={css.on__title__focus} onClick={() => onHandleClick(moviesList.cid)}*/}
-                {/*          onKeyPress={(e) => onSelectCategory(e, moviesList.cid)}*/}
-                {/*          onKeyUp={onHandleDec}>*/}
-                {/*    <Link to={"/category?cid=" + moviesList.cid}>{moviesList.title}</Link>*/}
-                {/*</ItemBase>*/}
+
                 <div className={css.title__mainList}>
                     {moviesList.title}
                 </div>
@@ -148,19 +153,23 @@ const MainList = ({moviesList, nextItem}) => {
                         </div>
                     </div>
                 }
-                <div className={css.title__mainList}>
-                    {nextItem.title}
-                </div>
-                <div className={css.row}>
-                    {nextItem.items.map((item, idx) => {
-                        return (
-                            <MainListItemPreview key={idx}
-                                                 item={item}
-                                                 className={css.list__item}
-                            />
-                        )
-                    })}
-                </div>
+                {
+                    nextItem && <>
+                        <div className={css.title__mainList}>
+                            {nextItem.title}
+                        </div>
+                        <div className={css.row}>
+                            {nextItem.items.map((item, idx) => {
+                                return (
+                                    <MainListItemPreview key={idx}
+                                                         item={item}
+                                                         className={css.list__item}
+                                    />
+                                )
+                            })}
+                        </div>
+                    </>
+                }
             </div>
 
         </div>

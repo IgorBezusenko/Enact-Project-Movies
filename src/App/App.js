@@ -22,7 +22,6 @@ import {HistoryPage} from "../components/HistoryPage/HistoryPage";
 import {BookMark} from "../components/BookMark/BookMark";
 
 import "./App.less"
-import MainPanelDemo from "../components/Main/MainPanelDemo";
 
 const App = () => {
        return (

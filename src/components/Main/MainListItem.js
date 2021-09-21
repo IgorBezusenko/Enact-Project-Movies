@@ -24,7 +24,7 @@ const MainListItemBase =
         }
 
         const onSelectCardRef = () => {
-            if (itemIndex === 0) {
+            if (itemIndex === 3) {
                 selectCard.current.focus();
             }
         }
