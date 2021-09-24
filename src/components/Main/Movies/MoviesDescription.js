@@ -21,17 +21,17 @@ export const MoviesDescription = () => {
     })
     const creator = movieFile.creator && movieFile.creator.map((creator, i) => {
         return (<span key={i}>
-            {i !== 0 && ", "}{creator.name}
+            {creator.name}
         </span>)
     })
     const producer = movieFile.producer && movieFile.producer.map((producer, i) => {
         return (<span key={i}>
-            {i !== 0 && ", "} {producer.name}
+            {producer.name}
         </span>)
     })
     const in_the_roles = movieFile.in_the_roles && movieFile.in_the_roles.map((in_the_roles, i) => {
         return (<span key={i}>
-            {i !== 0 && ", "} {in_the_roles.name}
+           {in_the_roles.name}
         </span>)
     })
 
@@ -47,33 +47,39 @@ export const MoviesDescription = () => {
         <div style={{
             width: "100%",
             height: "100%",
-            backgroundImage: `url(${movieFile.logo })`,
+            backgroundImage: `url(${movieFile.logo})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "0 0",
             backgroundSize: "cover",
         }}>
             <div className={css.container}>
                 <NavOnBack
-                    onClick={()=>onGoPath("/detail")}
-                    onKeyDown={(e=>onSelect(e,"/detail"))}
+                    onClick={() => onGoPath("/detail")}
+                    onKeyDown={(e => onSelect(e, "/detail"))}
                     className={css.on__back} title={movieFile.title}/>
 
-              <div className={css.description}>
-                  <div><span className={css.title}>Год:</span> {movieFile.year}</div>
-                  <br/>
-                  <div><span className={css.title}>Жанр: </span>{genre}</div>
-                  <br/>
-                  <div><span className={css.title}>Страна: </span>{country}</div>
-                  <br/>
-                  <div>{movieFile.review}</div>
-                  <br/>
-                  <div><span className={css.title}>Режиссер: </span>{creator}</div>
-                  <br/>
-                  <div><span className={css.title}>Продюссер: </span>{producer}</div>
-                  <br/>
-                  <div><span className={css.title}>В ролях: </span>{in_the_roles}</div>
-                  <br/>
-              </div>
+                <div className={css.description}>
+                    <div><span className={css.description__title}>Год:</span> {movieFile.year}</div>
+                    <div><span className={css.description__title}>Жанр: </span>{genre}</div>
+                    <div><span className={css.description__title}>Страна: </span>{country}</div>
+
+                    <div className={css.description__review}>{movieFile.review}</div>
+
+                    <div className={css.description__row}>
+                        <div className={css.description__col}>
+                            <div className={css.description__title}>Режиссер:</div>
+                            <div className={css.description__text}>{creator}</div>
+                        </div>
+                        <div className={css.description__col}>
+                            <div className={css.description__title}>Продюссер:</div>
+                            <div className={css.description__text}>{producer}</div>
+                        </div>
+                        <div className={css.description__col}>
+                            <div className={css.description__title}>В ролях:</div>
+                            <div className={css.description__text}>{in_the_roles} </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>

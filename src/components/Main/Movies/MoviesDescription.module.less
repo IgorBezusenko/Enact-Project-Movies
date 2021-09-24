@@ -5,17 +5,39 @@
   background: rgba(4, 20, 35, 0.85);
 }
 
-.description {
-  margin: 3rem 0 0 0;
-}
-
-.title {
-  color: #FF0000;;
-}
-
-
-
 .on__back:focus {
   color: #e53935;
 }
 
+.description {
+  margin: 3rem 0 0 0;
+
+  &__review {
+    margin: 2.2rem 0;
+  }
+
+  &__row {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  &__col {
+    margin: 0 2rem 0 0;
+  }
+
+  &__text {
+    height: 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    span {
+      margin: 0 1rem 0 0;
+    }
+  }
+
+  &__title {
+    color: #FF0000;;
+  }
+}
