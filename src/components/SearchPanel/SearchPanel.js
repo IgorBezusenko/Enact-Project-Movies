@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Header} from "../Header/Header";
 import {NavOnBack} from "../NavOnBack/NavOnBack";
 
@@ -15,18 +15,27 @@ export const SearchPanel = (props) => {
     const history =useHistory()
     const [inputValue, setInputValue] = useState("")
     const {searchItems, limitItems} = useSelector((state) => state.searchReducer)
+    const inputRef = useRef(null)
+
     useEffect(()=>{
         dispatch(setClearSearchItems())
+        onFocusInput()
     },[])
+
     useEffect(() => {
         if (limitItems !== 15) {
             dispatch(getSearchItems(inputValue, limitItems))
         }
     }, [limitItems])
 
-    const onSubmit = (e) => {
+     const onSubmit = (e) => {
         e.preventDefault()
         dispatch(getSearchItems(inputValue, limitItems))
+    }
+
+    const onFocusInput = ()=>{
+        const doc = document.querySelector('.enact_moonstone_Input_Input_input')
+        doc.focus()
     }
 
     const onChangeInputValue = (e) => {
@@ -66,7 +75,7 @@ export const SearchPanel = (props) => {
                 </div>
                 <form className={css.form} onSubmit={onSubmit}>
 
-                    <Input className={css.formControl} type="text" autoFocus
+                    <Input ref={inputRef} className={css.formControl} type="text" autoFocus
                            placeholder={"Введите поисковый запрос"}
                            value={inputValue}
                            onChange={onChangeInputValue}
