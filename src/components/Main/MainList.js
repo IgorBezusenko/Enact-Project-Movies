@@ -28,7 +28,7 @@ const MainList = ({moviesList, nextItem, moviesLength}) => {
         // if (currentItem === movies.length - 1) {
         //     dispatch(clearCurrentItem())
         // }
-        onHandelSetItem(moviesList.items[0], moviesList.title, moviesList.items[0].id)
+        onHandelSetItem(moviesList.items[3], moviesList.title, moviesList.items[3].id)
     }, [currentItem])
 
 
