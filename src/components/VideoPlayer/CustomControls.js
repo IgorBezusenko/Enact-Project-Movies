@@ -56,6 +56,11 @@ export const CustomControls = ({
             onGoPath(path)
         }
     }
+    const genre = movieFile.genre && movieFile.genre.map((genre, i) => {
+        return (<span key={i}>
+            {i !== 0 && ", "}{genre.name}
+        </span>)
+    })
 
     let path = "/detail"
     if(movieFile.serial){
@@ -67,7 +72,10 @@ export const CustomControls = ({
             hideControls > 1 &&
             <div>
                 <div className={css.title_controls}>
-                    <NavOnBack className={css.on__back} title={movieFile.title && movieFile.title}
+                    <NavOnBack className={css.on__back}
+                               title={movieFile.title && movieFile.title}
+                               subTitle={genre}
+                               year={movieFile.year}
                                onClick={() => onGoPath(path)}
                                onKeyDown={(e=>onSelect(e,path))}
                     />
