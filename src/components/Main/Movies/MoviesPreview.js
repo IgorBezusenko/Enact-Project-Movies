@@ -19,6 +19,7 @@ import css from "./MoviesPreveiw.module.less"
 import cssSpottable from "../../Buttons/ButtonMovie.module.less"
 import {ButtonDescription} from "../../Buttons/ButtonDescription";
 import {LikeGroup} from "../../Buttons/LikeGroup";
+import {AppLoading} from "../../AppLoading/AppLoading";
 
 export const MoviesPreview = (props) => {
     const query = useQuery();
@@ -55,11 +56,6 @@ export const MoviesPreview = (props) => {
         dispatch(setBookmarkId({active: movieFile.is_favorite}))
     }, [movieFile])
 
-    const onBackHandler = () => props.history.goBack()
-
-    if (isFetching) {
-        return <div>Loading</div>
-    }
     const genre = movieFile.genre && movieFile.genre.map((genre, i) => {
         return (<span key={i}>
             {i !== 0 && ", "}{genre.name}
@@ -70,25 +66,32 @@ export const MoviesPreview = (props) => {
             {i !== 0 && ", "} {country}
         </span>)
     })
+
+    console.log(movieFile.review)
+
     const vote = movieFile.vote ? movieFile.vote : {}
 
-    const onGoPath = (path) => history.push(path)
+        const onGoPath = (path) => history.push(path)
     const onSelect = (e,path) => {
         if (e.code === "ArrowUp") {
             onGoPath(path)
         }
     }
-
     const onPutLike = (id, vote) => {
+
         if (voteState && voteState.myVote === vote) {
             dispatch(putLikeAC(id, 0))
         } else {
             dispatch(putLikeAC(id, vote))
         }
     }
-
     const onToggleBookmark = () => {
+
         dispatch(toggleBookmarkById(movieFile.id))
+    }
+
+    if (isFetching) {
+        return <AppLoading/>
     }
 
     return (
@@ -106,7 +109,7 @@ export const MoviesPreview = (props) => {
 
                     <div className={css.preview__row}>
                         <div>
-                            <NavOnBack className={css.on__back}
+                            <NavOnBack className={css.on__back + " " + css.title}
                                        onClick={() => onGoPath("/main")}
                                        onKeyDown={(e=>onSelect(e,"/main"))}
                             />
@@ -116,6 +119,8 @@ export const MoviesPreview = (props) => {
                                 <div>{genre}</div>
                                 <div>{country}</div>
                             </div>
+
+
 
                             <div className={css.button__group}>
                                 <ButtonPlay movieFile={movieFile}/>
@@ -129,6 +134,7 @@ export const MoviesPreview = (props) => {
                                 </ButtonMovie>
 
                             </div>
+
                             <div className={css.rating}>
                                 <div className={css.rating__kp}>
                                     <div>{movieFile.rate_kp}</div>
@@ -138,17 +144,16 @@ export const MoviesPreview = (props) => {
                                     <div>{movieFile.rate_imdb}</div>
                                     <div>IMBb</div>
                                 </div>
-
                             </div>
 
+                            <div className={css.review}>
+                                {movieFile.review}
+                                {movieFile.review}
+                            </div>
 
                         </div>
 
-                        <div style={{
-                            // width:"100%",
-                            // padding:"0 0 0 10rem",
-
-                        }}>
+                        <div>
 
                             <img src={movieFile.logo} width={"500px"} alt="Logo"/>
 
