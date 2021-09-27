@@ -1,0 +1,12 @@
+{
+	"id": "portal-idc",
+	"version": "1.0.0",
+	"vendor": "IDC",
+	"type": "web",
+	"main": "index.html",
+	"title": "IDC Portal",
+	"icon": "portal.png",
+	"miniicon": "portal-mini.png",
+	"largeIcon": "portal-large.png",
+	"uiRevision": 2
+}
