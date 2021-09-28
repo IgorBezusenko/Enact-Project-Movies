@@ -6,7 +6,7 @@ import MainPanel from "../components/Main/MainPanel";
 import {AuthForm} from "../components/Auth/AuthForm";
 import {MoviesPreview} from "../components/Main/Movies/MoviesPreview";
 import {MoviesDescription} from "../components/Main/Movies/MoviesDescription";
-import {MovieSeries} from "../components/Main/Movies/MovieSeries";
+import {MovieSeries} from "../components/Main/Movies/MovieSeries/MovieSeries";
 import {Preloader} from "../components/Header/Preloader";
 import {AuthPage} from "../components/Auth/AuthPage";
 import {AuthMobile} from "../components/Auth/AuthMobile";

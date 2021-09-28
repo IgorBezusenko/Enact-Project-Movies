@@ -2,7 +2,7 @@ import React from "react";
 import {AppFilter} from "./AppFilter";
 import css from "./AppFilter.module.less";
 import {Sliders} from "react-feather";
-import {ButtonBase} from "../Buttons/ButtonBase";
+import {ButtonSpotTable} from "../Buttons/ButtonSpotTable";
 import {useDispatch, useSelector} from "react-redux";
 import {InputCheckBox} from "./InputCheckBox";
 import {InputRadio} from "./InputRadio";
@@ -71,34 +71,34 @@ export const CategoryFilter = (props) => {
                 <div className={css.row}>
                     <div>
                         <FilterCheckBox itemType={"genre"}/>
-                        <ButtonBase className={css.btn__filter + " " + css.row}
-                                    onClick={() => goToPath("/all-genre")}
-                                    onKeyDown={(e) => onSelectHandler(e, "/all-genre")}>
+                        <ButtonSpotTable className={css.btn__filter + " " + css.row}
+                                         onClick={() => goToPath("/all-genre")}
+                                         onKeyDown={(e) => onSelectHandler(e, "/all-genre")}>
                             <div>Все жанры</div>
                             <div>{categoryFilter && categoryFilter.genre.length}</div>
-                        </ButtonBase>
+                        </ButtonSpotTable>
                     </div>
 
                     <div>
                         <FilterCheckBox itemType={"country"}/>
-                        <ButtonBase className={css.btn__filter + " " + css.row}
-                                    onClick={() => goToPath("/all-country")}
-                                    onKeyDown={(e) => onSelectHandler(e, "/all-country")}
+                        <ButtonSpotTable className={css.btn__filter + " " + css.row}
+                                         onClick={() => goToPath("/all-country")}
+                                         onKeyDown={(e) => onSelectHandler(e, "/all-country")}
                         >
                             <div>Все страны</div>
                             <div>{categoryFilter && categoryFilter.country.length}</div>
-                        </ButtonBase>
+                        </ButtonSpotTable>
                     </div>
 
                     <div>
                         <FilterRadio itemType={"year"}/>
-                        <ButtonBase className={css.btn__filter + " " + css.row}
-                                    onClick={() => goToPath("/all-year")}
-                                    onKeyDown={(e) => onSelectHandler(e, "/all-year")}
+                        <ButtonSpotTable className={css.btn__filter + " " + css.row}
+                                         onClick={() => goToPath("/all-year")}
+                                         onKeyDown={(e) => onSelectHandler(e, "/all-year")}
                         >
                             <div>Все годы</div>
                             <div>{categoryFilter && categoryFilter.year.length}</div>
-                        </ButtonBase>
+                        </ButtonSpotTable>
                     </div>
                 </div>
 
@@ -109,18 +109,18 @@ export const CategoryFilter = (props) => {
                 </div>
 
                 <div className={css.row}>
-                    <ButtonBase className={css.btn__filter} onKeyDown={(e) => onSelectHandler(e, "/app-search")}>
+                    <ButtonSpotTable className={css.btn__filter} onKeyDown={(e) => onSelectHandler(e, "/app-search")}>
                         <Link to={"/app-search"} className={css.btn__row}>
                             <Sliders/>
                             <div>Показать результат</div>
                         </Link>
-                    </ButtonBase>
+                    </ButtonSpotTable>
 
-                    <ButtonBase className={css.btn__filter}
-                                onClick={onResetFilterClick}
-                                onKeyDown={(e) => onResetFilterSelect(e)}>
+                    <ButtonSpotTable className={css.btn__filter}
+                                     onClick={onResetFilterClick}
+                                     onKeyDown={(e) => onResetFilterSelect(e)}>
                         Сбросить фильтр
-                    </ButtonBase>
+                    </ButtonSpotTable>
                 </div>
 
 

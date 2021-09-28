@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import css from "./AppFilter.module.less"
 import {AppFilter} from "./AppFilter";
-import {ButtonBase} from "../Buttons/ButtonBase";
+import {ButtonSpotTable} from "../Buttons/ButtonSpotTable";
 import {List} from "react-feather";
 import {ItemBase} from "../Buttons/ItemBase";
 import queryString from "querystring";
@@ -83,10 +83,10 @@ export const CategorySort = (props) => {
 
 
                 <div>
-                    <ButtonBase onClick={onSubmitHandler} className={css.btn__filter}>
+                    <ButtonSpotTable onClick={onSubmitHandler} className={css.btn__filter}>
                         <List/>
                         <div>Применить сортировку</div>
-                    </ButtonBase>
+                    </ButtonSpotTable>
                 </div>
             </form>
 

@@ -1,6 +1,6 @@
 import {AppFilter} from "./AppFilter";
 import css from "./AppFilter.module.less";
-import {ButtonBase} from "../Buttons/ButtonBase";
+import {ButtonSpotTable} from "../Buttons/ButtonSpotTable";
 import {Link, useHistory} from "react-router-dom";
 import React from "react";
 import {InputCheckBox} from "./InputCheckBox";
@@ -61,20 +61,20 @@ export const AllCheckBoxFilter = ({title, itemType}) => {
 
 
                     <div className={css.row}>
-                        <ButtonBase className={css.btn__filter}
-                                    onKeyDown={(e) => onSelectHandler(e, "/app-filter")}
+                        <ButtonSpotTable className={css.btn__filter}
+                                         onKeyDown={(e) => onSelectHandler(e, "/app-filter")}
                         >
                             <Link to={"/app-filter"} className={css.btn__row}>
                                 <div>Применить</div>
                             </Link>
-                        </ButtonBase>
+                        </ButtonSpotTable>
 
-                        <ButtonBase className={css.btn__filter}
-                                    onClick={onResetFilterClick}
-                                    onKeyDown={(e) => onResetFilterSelect(e)}
+                        <ButtonSpotTable className={css.btn__filter}
+                                         onClick={onResetFilterClick}
+                                         onKeyDown={(e) => onResetFilterSelect(e)}
                         >
                             Сбросить фильтр
-                        </ButtonBase>
+                        </ButtonSpotTable>
                     </div>
 
 

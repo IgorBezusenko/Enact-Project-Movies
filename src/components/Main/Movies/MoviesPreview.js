@@ -67,26 +67,23 @@ export const MoviesPreview = (props) => {
         </span>)
     })
 
-    console.log(movieFile.review)
-
     const vote = movieFile.vote ? movieFile.vote : {}
 
-        const onGoPath = (path) => history.push(path)
-    const onSelect = (e,path) => {
+    const onGoPath = (path) => history.push(path)
+    const onSelect = (e, path) => {
         if (e.code === "ArrowUp") {
             onGoPath(path)
         }
     }
     const onPutLike = (id, vote) => {
-
         if (voteState && voteState.myVote === vote) {
             dispatch(putLikeAC(id, 0))
         } else {
             dispatch(putLikeAC(id, vote))
         }
     }
-    const onToggleBookmark = () => {
 
+    const onToggleBookmark = () => {
         dispatch(toggleBookmarkById(movieFile.id))
     }
 
@@ -111,7 +108,7 @@ export const MoviesPreview = (props) => {
                         <div>
                             <NavOnBack className={css.on__back + " " + css.title}
                                        onClick={() => onGoPath("/main")}
-                                       onKeyDown={(e=>onSelect(e,"/main"))}
+                                       onKeyDown={(e => onSelect(e, "/main"))}
                             />
                             <div className={css.description}>
                                 <h1>{movieFile.title}</h1>
@@ -119,7 +116,6 @@ export const MoviesPreview = (props) => {
                                 <div>{genre}</div>
                                 <div>{country}</div>
                             </div>
-
 
 
                             <div className={css.button__group}>

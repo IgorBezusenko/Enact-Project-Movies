@@ -1,9 +1,9 @@
 import Spottable from "@enact/spotlight/Spottable";
 
-const ButtonSpottable = ({ children, ...rest}) => {
+const ButtonBase = ({ children, ...rest}) => {
     return (
         <button {...rest}>{children}</button>
     )
 }
 
-export const ButtonBase = Spottable(ButtonSpottable)
+export const ButtonSpotTable = Spottable(ButtonBase)

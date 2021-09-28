@@ -9,7 +9,7 @@ import {clearPage, getCategory, setCategoryId, setNewCategoryPage, setPageIncrem
 import MainListItem from "../MainListItem";
 import {Header} from "../../Header/Header";
 import {NavOnBack} from "../../NavOnBack/NavOnBack";
-import {ButtonBase} from "../../Buttons/ButtonBase";
+import {ButtonSpotTable} from "../../Buttons/ButtonSpotTable";
 import {List, Sliders} from "react-feather";
 import {Link, useHistory} from "react-router-dom";
 
@@ -78,20 +78,20 @@ export const Category = (props) => {
                             />
                             <div className={css.row}>
                                 <Link to={"/app-sort"}>
-                                    <ButtonBase
+                                    <ButtonSpotTable
                                         onClick={() => onBackHandler("/app-sort")}
                                         className={css.btn__category}>
                                         <List/>
                                         <div>Сортировка</div>
-                                    </ButtonBase>
+                                    </ButtonSpotTable>
                                 </Link>
                                 <Link to={"/app-filter"}>
-                                    <ButtonBase
+                                    <ButtonSpotTable
                                         onClick={() => onBackHandler("/app-filter")}
                                         className={css.btn__category}>
                                         <Sliders/>
                                         <div>Фильтр</div>
-                                    </ButtonBase>
+                                    </ButtonSpotTable>
                                 </Link>
 
                             </div>
