@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {
+    clearItemFocus,
     clearVideoUrl,
     getMovieFile,
     putLikeAC,
@@ -26,20 +27,19 @@ export const MoviesPreview = (props) => {
     const movieFileId = query.get("id")
     const dispatch = useDispatch()
     const history = useHistory()
-    const state = useSelector(state => state.mainReducer)
+    const {movieFile, isFetching} = useSelector(state => state.mainReducer)
     const {token} = useSelector((state) => state.authReducer)
     const voteState = useSelector(state => state.likeReducer.vote)
     const bookmarkState = useSelector(state => state.bookmarkReducer.bookmarkId)
     // console.log("voteState", voteState)
-    const {movieFile, isFetching,} = state
-    // console.log(movieFile)
+    console.log(movieFile)
 
     const getMovieFileById = (id) => {
         dispatch(getMovieFile(id))
     }
     useEffect(() => {
         dispatch(clearVideoUrl())
-
+        dispatch(clearItemFocus())
     }, [])
     useEffect(() => {
         getMovieFileById(movieFileId)

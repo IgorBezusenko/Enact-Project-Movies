@@ -23,14 +23,11 @@ export const MovieFilm = ({movieFile}) => {
                             {
                                 sel.items.map((item,index) => {
                                     return (
-
                                             <Link to={"/player?file=" + item.file} key={index}>
                                                 <ButtonMovie onKeyDown={(e) => onSelect(e,item.file)} title={"Смотреть"} className={css.btn__movie} >
                                                     <Play/>
                                                 </ButtonMovie>
                                             </Link>
-
-
                                     )
                                 })
                             }

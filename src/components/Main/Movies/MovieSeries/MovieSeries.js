@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
-import React, {useState} from "react";
-import {clearVideoUrl} from "../../../../redux/actions";
+import React, {useEffect, useState} from "react";
+import {clearVideoUrl, setCurrentSeason, setCurrentSeries, setMediaFiles} from "../../../../redux/actions";
 import {useHistory} from "react-router-dom";
 import {NavOnBack} from "../../../NavOnBack/NavOnBack";
 
@@ -9,36 +9,49 @@ import {ItemBase} from "../../../Buttons/ItemBase";
 import {SeasonList} from "./SeasonList";
 import {SeriesList} from "./SeriesList";
 
-// const Component = ({children, ...rest}) => {
-//     return (
-//         <button {...rest}>{children}</button>
-//     )
-// };
-// const ButtonSpotTable = Spottable(Component)
-
 export const MovieSeries = (props) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const movieFile = useSelector(state => state.mainReducer.movieFile)
-    const [currentSeason, setCurrentSeason] = useState('Сезон 1')
-    const [currentSeries, setCurrentSeries] = useState(null)
+    const {mediaFiles, actualCurrentSeason} = useSelector(state => state.seriesReducer)
+    const [currentSeason, setCurrentSeason1] = useState('Сезон 1')
     const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        console.log("movieFile", movieFile)
+        console.log("mediaFiles", mediaFiles)
+
+        if (movieFile.serial) {
+            console.log(movieFile.media)
+            dispatch(setMediaFiles(movieFile.media))
+
+        }
+
+    }, [])
+
+    useEffect(() => {
+
+        dispatch(setCurrentSeason())
+        if (actualCurrentSeason) {
+            setCurrentSeason1(actualCurrentSeason.title)
+            dispatch(setCurrentSeries())
+        }
+    }, [mediaFiles])
+
 
     const onClickToSeason = (mediaTitle) => {
         setLoading(true)
         setTimeout(() => {
-            setCurrentSeason(mediaTitle)
+            setCurrentSeason1(mediaTitle)
             setLoading(false)
         }, 100)
         dispatch(clearVideoUrl())
     }
 
-    const onSelectSeries = (e, path) => {
-        if (e.code === "Enter") {
-            setCurrentSeries(path)
-            history.push(path)
-        }
+    const onSelectSeries = (path) => {
+        history.push(path)
     }
+
 
     const seasonSel = movieFile.media && movieFile.media.filter(sel => sel.title === currentSeason)
 
@@ -48,8 +61,7 @@ export const MovieSeries = (props) => {
             onGoPath(path)
         }
     }
-    console.log("currentSeason", currentSeason)
-    console.log("currentSeries", currentSeries)
+
     return (
         <div style={{
             width: "100%",

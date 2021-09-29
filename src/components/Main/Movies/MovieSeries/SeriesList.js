@@ -1,9 +1,9 @@
 import {Link} from "react-router-dom";
-import {ButtonSpotTable} from "../../../Buttons/ButtonSpotTable";
 import css from "./MovieSeries.module.less";
 import React from "react";
+import {ButtonSeries} from "./ButtonSeries";
 
-export const SeriesList = ({seasonSel, onSelectSeries}) => {
+export const SeriesList = ({seasonSel, onSelectSeries, currentSeries}) => {
     return seasonSel.map(sel => {
         // console.log("seasonSel", seasonSel)
         // console.log("sel", sel)
@@ -11,10 +11,13 @@ export const SeriesList = ({seasonSel, onSelectSeries}) => {
             // console.log(item)
             return (
                 <Link to={"/player?file=" + item.file} key={index}>
-                    <ButtonSpotTable
+                    <ButtonSeries
+                        currentSeries={currentSeries}
+                        itemFocusable={item.title}
                         className={css.btn + " " + css.btn__series}
-                        onKeyDown={(e) => onSelectSeries(e, "/player?file=" + item.file)}
-                    >{item.title}</ButtonSpotTable>
+                        // onKeyDown={(e) => onSelectSeries(e, "/player?file=" + item.file)}
+                        onClick={() => onSelectSeries("/player?file=" + item.file)}
+                    >{item.title}</ButtonSeries>
                 </Link>
             )
         })

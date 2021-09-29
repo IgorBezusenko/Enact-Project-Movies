@@ -53,6 +53,11 @@ export const SET_BOOKMARK_ITEMS = "BookMark/SET_BOOKMARK_ITEMS"
 export const SET_BOOKMARK_ID = "BookMark/SET_BOOKMARK_ID"
 export const SET_NEW_BOOKMARK_PAGE = "BookMark/SET_NEW_BOOKMARK_PAGE"
 
+export const SET_MEDIA_FILES = "MoviesSeries/SET_MEDIA_FILES"
+export const SET_CURRENT_SEASON = "MoviesSeries/SET_CURRENT_SEASON"
+export const SET_CURRENT_SERIES = "MoviesSeries/SET_CURRENT_SERIES"
+export const SET_ITEM_FOCUS = "MoviesSeries/SET_ITEM_FOCUS"
+export const CLEAR_ITEM_FOCUS = "MoviesSeries/CLEAR_ITEM_FOCUS"
 // export const SET_FILTER_SEARCH = "CATEGORY/SET_FILTER_SEARCH"
 
 export const authToggleIsFetching = (IsFetching) => ({
@@ -463,3 +468,22 @@ export const toggleBookmarkById = (id) => async (dispatch) => {
         dispatch(clearToken())
     }
 }
+
+//MoviesSeries
+export const setMediaFiles = (mediaFiles) => ({
+    type: SET_MEDIA_FILES,
+    mediaFiles
+})
+export const setCurrentSeason = () => ({
+    type: SET_CURRENT_SEASON,
+})
+export const setCurrentSeries = () => ({
+    type: SET_CURRENT_SERIES,
+})
+export const setItemFocus = () => ({
+    type: SET_ITEM_FOCUS,
+})
+export const clearItemFocus = () => ({
+    type: CLEAR_ITEM_FOCUS,
+})
+
