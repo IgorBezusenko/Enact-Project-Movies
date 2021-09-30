@@ -5,7 +5,7 @@ import {
     clearVideoUrl,
     getMovieFile,
     putLikeAC,
-    setBookmarkId,
+    setBookmarkId, setFocusRef,
     setVote,
     toggleBookmarkById
 } from "../../../redux/actions";
@@ -21,6 +21,7 @@ import cssSpottable from "../../Buttons/ButtonMovie.module.less"
 import {ButtonDescription} from "../../Buttons/ButtonDescription";
 import {LikeGroup} from "../../Buttons/LikeGroup";
 import {AppLoading} from "../../AppLoading/AppLoading";
+import {ARROW_ENTER} from "../../../redux/reducers/playerReducer";
 
 export const MoviesPreview = (props) => {
     const query = useQuery();
@@ -31,8 +32,6 @@ export const MoviesPreview = (props) => {
     const {token} = useSelector((state) => state.authReducer)
     const voteState = useSelector(state => state.likeReducer.vote)
     const bookmarkState = useSelector(state => state.bookmarkReducer.bookmarkId)
-    // console.log("voteState", voteState)
-    console.log(movieFile)
 
     const getMovieFileById = (id) => {
         dispatch(getMovieFile(id))
@@ -40,7 +39,9 @@ export const MoviesPreview = (props) => {
     useEffect(() => {
         dispatch(clearVideoUrl())
         dispatch(clearItemFocus())
+        dispatch(setFocusRef(ARROW_ENTER))
     }, [])
+
     useEffect(() => {
         getMovieFileById(movieFileId)
     }, [movieFileId])
@@ -50,7 +51,6 @@ export const MoviesPreview = (props) => {
             dispatch(setVote({myVote: movieFile.my_vote, ...movieFile.vote}))
         }
     }, [movieFile.my_vote])
-
 
     useEffect(() => {
         dispatch(setBookmarkId({active: movieFile.is_favorite}))
@@ -75,6 +75,7 @@ export const MoviesPreview = (props) => {
             onGoPath(path)
         }
     }
+
     const onPutLike = (id, vote) => {
         if (voteState && voteState.myVote === vote) {
             dispatch(putLikeAC(id, 0))

@@ -9,7 +9,6 @@ export const SeriesList = ({seasonSel, onSelectSeries, currentSeries}) => {
             return (
                 <Link to={"/player?file=" + item.file} key={index}>
                     <ButtonSeries
-                        currentSeries={currentSeries}
                         itemFocusable={item.title}
                         className={css.btn + " " + css.btn__series}
                         onClick={() => onSelectSeries("/player?file=" + item.file)}

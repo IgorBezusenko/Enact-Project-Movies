@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import css from "./VideoPlayer.module.less";
 import {NavOnBack} from "../NavOnBack/NavOnBack";
 import {ItemBase} from "../Buttons/ItemBase";
 import {FastForward, PauseCircle, PlayCircle, SkipBack, SkipForward} from "react-feather";
 import Duration from "./DurationT";
+import {ItemBaseRef} from "./ItemBaseRef";
+import {ARROW_DOWN, ARROW_ENTER, ARROW_LEFT, ARROW_RIGHT, ARROW_UP} from "../../redux/reducers/playerReducer";
+import {setFocusRef} from "../../redux/actions";
 
 export const CustomControls = ({
                                    handlePlayPause,
@@ -19,9 +22,11 @@ export const CustomControls = ({
                                    duration,
                                }) => {
     const history = useHistory()
+    const dispatch = useDispatch()
     const [keycode, setKeycode] = useState(null)
-    const [hideControls, setHideControls] = useState(6)
+    const [hideControls, setHideControls] = useState()
     const movieFile = useSelector(state => state.mainReducer.movieFile)
+
     useEffect(() => {
         setHideControls(6)
         const funcEvent = (e) => {
@@ -40,18 +45,34 @@ export const CustomControls = ({
             setHideControls(value => --value)
         }, 1000)
 
-        if (hideControls <= 1) {
-            clearInterval(interval)
+        const funcEvent = (e) => {
+            if (e.key === ARROW_LEFT) {
+                dispatch(setFocusRef(ARROW_LEFT))
+            }
+            if (e.key === ARROW_RIGHT) {
+                dispatch(setFocusRef(ARROW_RIGHT))
+            }
+            if (e.key === ARROW_UP || e.key === ARROW_DOWN || e.key === ARROW_ENTER) {
+                dispatch(setFocusRef(ARROW_ENTER))
+            }
         }
 
-        return () => clearInterval(interval)
+        if (hideControls <= 1) {
+            clearInterval(interval)
+            document.addEventListener("keydown", funcEvent);
+        }
+
+        return () => {
+            clearInterval(interval)
+            document.removeEventListener("keydown", funcEvent)
+        }
     }, [hideControls])
 
     const SEEK15 = 1 / duration * 15;
     const SEEK120 = 1 / duration * 120;
 
     const onGoPath = (path) => history.push(path)
-    const onSelect = (e,path) => {
+    const onSelect = (e, path) => {
         if (e.code === "ArrowUp") {
             onGoPath(path)
         }
@@ -63,7 +84,7 @@ export const CustomControls = ({
     })
 
     let path = "/detail"
-    if(movieFile.serial){
+    if (movieFile.serial) {
         path = "/series"
     }
 
@@ -77,7 +98,7 @@ export const CustomControls = ({
                                subTitle={genre}
                                year={movieFile.year}
                                onClick={() => onGoPath(path)}
-                               onKeyDown={(e=>onSelect(e,path))}
+                               onKeyDown={(e => onSelect(e, path))}
                     />
                 </div>
                 <div className={css.controls}>
@@ -87,18 +108,27 @@ export const CustomControls = ({
                         }}>
                             <FastForward className={css.p_controls} style={{transform: "rotate(180deg)"}}/>
                         </ItemBase>
-                        <ItemBase className={css.btn_controls} onClick={() => {
-                            handleToggleMinus(SEEK15)
-                        }}>
+                        <ItemBaseRef itemFocus={ARROW_LEFT}
+                                     className={css.btn_controls}
+                                     onClick={() => {
+                                         handleToggleMinus(SEEK15)
+                                     }}>
                             <SkipBack className={css.p_controls}/>
-                        </ItemBase>
-                        <ItemBase className={css.btn_controls} onClick={handlePlayPause}>
+                        </ItemBaseRef>
+
+                        <ItemBaseRef itemFocus={ARROW_ENTER}
+                                     className={css.btn_controls}
+                                     onClick={handlePlayPause}>
                             {playing ? <PauseCircle/> : <PlayCircle/>}
-                        </ItemBase>
-                        <ItemBase className={css.btn_controls} onClick={() => {
-                            handleTogglePlus(SEEK15)
-                        }}><SkipForward
-                            className={css.p_controls}/></ItemBase>
+                        </ItemBaseRef>
+
+                        <ItemBaseRef itemFocus={ARROW_RIGHT}
+                                     className={css.btn_controls}
+                                     onClick={() => {
+                                         handleTogglePlus(SEEK15)
+                                     }}><SkipForward
+                            className={css.p_controls}/></ItemBaseRef>
+
                         <ItemBase className={css.btn_controls} onClick={() => {
                             handleTogglePlus(SEEK120)
                         }}><FastForward
@@ -112,7 +142,6 @@ export const CustomControls = ({
                                onMouseDown={handleSeekMouseDown}
                                onChange={(e) => {
                                    handleSeekChange(e)
-
                                }}
                                onMouseUp={handleSeekMouseUp}
                         />
@@ -121,7 +150,5 @@ export const CustomControls = ({
                 </div>
             </div>
         }
-
-
     </>
 }
