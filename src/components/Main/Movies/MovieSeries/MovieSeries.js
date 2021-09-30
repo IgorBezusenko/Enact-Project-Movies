@@ -18,26 +18,18 @@ export const MovieSeries = (props) => {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        console.log("movieFile", movieFile)
-        console.log("mediaFiles", mediaFiles)
-
         if (movieFile.serial) {
-            console.log(movieFile.media)
             dispatch(setMediaFiles(movieFile.media))
-
         }
-
     }, [])
 
     useEffect(() => {
-
         dispatch(setCurrentSeason())
         if (actualCurrentSeason) {
             setCurrentSeason1(actualCurrentSeason.title)
             dispatch(setCurrentSeries())
         }
     }, [mediaFiles])
-
 
     const onClickToSeason = (mediaTitle) => {
         setLoading(true)
@@ -51,7 +43,6 @@ export const MovieSeries = (props) => {
     const onSelectSeries = (path) => {
         history.push(path)
     }
-
 
     const seasonSel = movieFile.media && movieFile.media.filter(sel => sel.title === currentSeason)
 
@@ -84,9 +75,7 @@ export const MovieSeries = (props) => {
                                 onClickToSeason={onClickToSeason}
                                 currentSeason={currentSeason}
                     />
-
                 </div>
-
                 {
                     !loading && <>
                         {
@@ -100,7 +89,6 @@ export const MovieSeries = (props) => {
                                 </div>
                             </div>}
                     </>
-
                 }
             </div>
         </div>

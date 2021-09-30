@@ -4,7 +4,6 @@ import React from "react";
 
 export const SeasonList = ({mediaItems, onClickToSeason, currentSeason}) => {
     return mediaItems.map((media, index) => {
-            // console.log(media)
             return media.title
                 && <ButtonSpotTable key={index}
                                     className={css.btn + " " + css.btn__season

@@ -18,15 +18,14 @@ export const seriesReducer = (state = initialState, action) => {
         }
         case SET_CURRENT_SEASON: {
             const actualCurrentSeason = state.mediaFiles.find((item) => item.isActive === true)
-            console.log("actualCurrentSeason", actualCurrentSeason)
+            const actualCurrentSeriesOfFilm = state.mediaFiles.find((item) => item.title === "Серии")
             return {
                 ...state,
-                actualCurrentSeason: actualCurrentSeason
+                actualCurrentSeason: actualCurrentSeason || actualCurrentSeriesOfFilm
             }
         }
         case SET_CURRENT_SERIES: {
             const actualCurrentSeries = state.actualCurrentSeason.items.find(item => item.isActive === true)
-            console.log("actualCurrentSeries", actualCurrentSeries.title)
             return {
                 ...state,
                 currentSeries: actualCurrentSeries.title
