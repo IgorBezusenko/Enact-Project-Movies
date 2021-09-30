@@ -27,6 +27,7 @@ export const CLEAR_CURRENT_ITEM = "MAIN/CLEAR_CURRENT_ITEM"
 export const PUT_LIKE_AC = "MoviesPreview/PUT_LIKE_AC"
 export const SET_VOTE_AC = "MoviesPreview/SET_VOTE_AC"
 
+export const CATEGORY_TOGGLE_IS_FETCHING = "CATEGORY/CATEGORY_TOGGLE_IS_FETCHING"
 export const GET_CATEGORY = "CATEGORY/GET_CATEGORY"
 export const SET_NEW_CATEGORY_PAGE = "CATEGORY/SET_NEW_CATEGORY_PAGE"
 export const SET_PAGE_INCREMENT = "CATEGORY/SET_PAGE_INCREMENT"
@@ -267,6 +268,10 @@ export const putLikeAC = (id, vote) => async (dispatch) => {
 
 //category
 
+export const categoryToggleIsFetching = (payload) => ({
+    type: CATEGORY_TOGGLE_IS_FETCHING,
+    payload
+})
 export const setCategoryId = (categoryId) => ({
     type: SET_CATEGORY_ID,
     categoryId
@@ -304,17 +309,17 @@ export const setFilterCountry = (id, name, checked) => ({
 
 
 export const getCategory = (cid, currentPage, idSort) => async (dispatch) => {
-    // dispatch(mainToggleIsFetching(true))
+    dispatch(categoryToggleIsFetching(true))
     try {
         const {data} = await MainAPI.category(cid, currentPage, idSort)
         dispatch({
             type: GET_CATEGORY,
             payload: data
         })
-        // dispatch(mainToggleIsFetching(false))
+        dispatch(categoryToggleIsFetching(false))
     } catch (e) {
         console.log("Error getCategory", e.response)
-        // dispatch(mainToggleIsFetching(false))
+        dispatch(categoryToggleIsFetching(false))
 
     }
 }

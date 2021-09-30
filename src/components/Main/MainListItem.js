@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import css from "./Main.module.less";
 import {Link, useHistory} from "react-router-dom";
 import Spottable from "@enact/spotlight/Spottable";
@@ -8,14 +8,16 @@ const MainListItemBase =
     ({item, itemIndex, ...rest}) => {
         let history = useHistory();
         const {currentItem} = useSelector(state => state.mainReducer)
+        const [focusItem, setFocusItem] = useState(3)
         const selectCard = useRef(null)
 
         useEffect(() => {
             onSelectCardRef()
         }, [])
+
         useEffect(() => {
             onSelectCardRef()
-        }, [currentItem])
+        }, [currentItem,focusItem])
 
         const onSelectHandler = (e, path) => {
             if (e.code === "Enter") {
@@ -24,7 +26,9 @@ const MainListItemBase =
         }
 
         const onSelectCardRef = () => {
-            if (itemIndex === 3) {
+            if (history.location.pathname === "/main") setFocusItem(3)
+            if (history.location.pathname !== "/main") setFocusItem(2)
+            if (itemIndex === focusItem) {
                 selectCard.current.focus();
             }
         }

@@ -1,6 +1,7 @@
 import {
+    CATEGORY_TOGGLE_IS_FETCHING,
     CLEAR_CATEGORY, CLEAR_PAGE,
-    GET_CATEGORY,
+    GET_CATEGORY, MAIN_TOGGLE_IS_FETCHING,
     SET_CATEGORY_FILTER,
     SET_CATEGORY_ID,
     SET_FILTER_COUNTRY,
@@ -37,6 +38,12 @@ const initialState = {
 
 export const categoryReducer = (state = initialState, action) => {
     switch (action.type) {
+
+        case  CATEGORY_TOGGLE_IS_FETCHING:
+            return {
+                ...state,
+              isFetching: action.payload
+            }
         case  GET_CATEGORY:
             return {
                 ...state,

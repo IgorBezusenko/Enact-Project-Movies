@@ -20,7 +20,7 @@ export const Category = (props) => {
     const dispatch = useDispatch()
     const history = useHistory();
     const categoryReducer = useSelector(state => state.categoryReducer)
-    const {categoryItems, categoryTitle, currentPage, idSort, categoryId} = categoryReducer
+    const {categoryItems, categoryTitle, currentPage, idSort, categoryId, isFetching} = categoryReducer
     useEffect(() => {
         dispatch(clearPage())
         dispatch(getCategory(categoryId, 1, 1))
@@ -34,9 +34,7 @@ export const Category = (props) => {
         if (!!parsed.id_sort) actualIdSort = parsed.id_sort
         if (!!parsed.id) dispatch(setCategoryId(parsed.id))
         dispatch(getCategory(categoryId, currentPage, actualIdSort))
-        // return () => {
-        //     dispatch(clearCategory())
-        // }
+
     }, [categoryId, idSort])
 
     useEffect(() => {
@@ -64,6 +62,9 @@ export const Category = (props) => {
         }
     }
 
+    if (isFetching) {
+        return <AppLoading/>
+    }
     return (
         <>
             <div className={css.container}>
