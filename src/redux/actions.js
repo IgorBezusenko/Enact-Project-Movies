@@ -339,7 +339,6 @@ export const setNewCategoryPage = (cid, currentPage, idSort) => async (dispatch)
     // dispatch(mainToggleIsFetching(true))
     try {
         const {data} = await MainAPI.category(cid, currentPage, idSort)
-        console.log("data", cid, currentPage, idSort, data)
         dispatch({
             type: SET_NEW_CATEGORY_PAGE,
             payload: data

@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import css from "./Main.module.less";
+import cssCategory from "./Category/Category.module.less"
 import {Link, useHistory} from "react-router-dom";
 import Spottable from "@enact/spotlight/Spottable";
 import {useSelector} from "react-redux";
@@ -39,9 +40,10 @@ const MainListItemBase =
                 <div   {...rest} onKeyPress={(e) => onSelectHandler(e, item.url)}
                        ref={selectCard}
                 >
-                    <div>
+
                         {
-                            !item.id && <div className={css.item__last}>
+                            !item.id &&
+                            <div className={css.item__last}>
                                 <Link to={item.url}>Смотреть все</Link>
                             </div>
                         }
@@ -57,13 +59,13 @@ const MainListItemBase =
                             visibleDescription ?
                                 <div className={css.item__details}>
                                     <div>{item.year} | {!!item.access ?
-                                        <span style={{color: "#FF0000"}}>Подписка</span> :
-                                        <span style={{color: "#979797"}}>Бесплатный</span>}</div>
+                                        <span className={cssCategory.follow} >Подписка</span> :
+                                        <span className={cssCategory.free} >Бесплатный</span>}</div>
                                     <div className={css.nowrap}>{!!item.rate_age && item.rate_age} {item.title}</div>
                                 </div>
                                 : null
                         }
-                    </div>
+
                 </div>
 
             </>

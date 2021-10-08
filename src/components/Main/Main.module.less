@@ -76,7 +76,6 @@
   padding: 0.5rem;
 }
 
-
 .list__item {
   margin: 0 0.3rem;
   font-size: 1rem;
@@ -84,13 +83,9 @@
 }
 
 .list__item:focus {
-  border: 0.1rem solid #FF0000;;
+  border: 0.1rem solid #FF0000;
   transform: scale(1.05);
   border-radius: 0.2rem;
-  //opacity: 1;
-  //a {
-  //  color: black;
-  //}
 }
 
 .item__last {
@@ -118,15 +113,17 @@
   border-radius: 0.2rem;
 }
 
-.list__item .item__details {
+.item__details {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   font-size: 1rem;
+  padding: 0 0 0 0.5rem;
 }
 
 .nowrap {
   white-space: nowrap;
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -147,6 +144,7 @@
   text-align: center;
   width: 88vw;
   left: 12%;
+
   svg {
     color: rgba(255, 255, 255, 0.55);
     width: 3.5rem;
