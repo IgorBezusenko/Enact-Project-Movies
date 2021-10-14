@@ -46,6 +46,7 @@ export const SET_NEW_FILTER_SEARCH_PAGE = "CATEGORY/SET_NEW_FILTER_SEARCH_PAGE"
 export const SET_SEARCH_ITEMS = "SEARCH/SET_SEARCH_ITEMS"
 export const SET_NEW_SEARCH_PAGE = "SEARCH/SET_NEW_SEARCH_PAGE"
 export const SET_CLEAR_SEARCH_ITEMS = "SEARCH/SET_CLEAR_SEARCH_ITEMS"
+export const SET_ERROR_SEARCH_ITEMS = "SEARCH/SET_ERROR_SEARCH_ITEMS"
 
 export const SET_HISTORY_ITEMS = "HistoryPage/SET_HISTORY_ITEMS"
 export const SET_NEW_HISTORY_PAGE = "HistoryPage/SET_NEW_HISTORY_PAGE"
@@ -410,15 +411,29 @@ export const setNewSearchPage = () => ({
 })
 export const setClearSearchItems = () => ({
     type: SET_CLEAR_SEARCH_ITEMS,
-
 })
+export const setErrorSearchItems = (error) => ({
+    type: SET_ERROR_SEARCH_ITEMS,
+    error
+})
+
 export const getSearchItems = (query, limit) => async (dispatch) => {
     try {
         const {data} = await MainAPI.searchMovie(query, limit)
         dispatch(setSearchItems(data))
+        dispatch(setErrorSearchItems(null))
+
     } catch (e) {
         console.log("Error getSearchItems", e.response)
-        dispatch(clearToken())
+        if (e.response.status === 490) {
+if (e.response.data.error.code===1001){
+    console.log("490", e.response.data.error.message)
+    dispatch(setErrorSearchItems("Количество символов в поле должно быть не меньше 3"))
+}
+
+        }
+
+        // dispatch(clearToken())
     }
 }
 

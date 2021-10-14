@@ -1,8 +1,9 @@
-import {SET_CLEAR_SEARCH_ITEMS, SET_NEW_SEARCH_PAGE, SET_SEARCH_ITEMS} from "../actions";
+import {SET_CLEAR_SEARCH_ITEMS, SET_ERROR_SEARCH_ITEMS, SET_NEW_SEARCH_PAGE, SET_SEARCH_ITEMS} from "../actions";
 
 const initialState = {
     searchItems: null,
-    limitItems: 15
+    limitItems: 15,
+    errorSearchItem:null
 }
 
 export const searchReducer = (state = initialState, action) => {
@@ -21,6 +22,11 @@ export const searchReducer = (state = initialState, action) => {
             return {
                 ...state,
                 searchItems: null
+            }
+        case SET_ERROR_SEARCH_ITEMS :
+            return {
+                ...state,
+                errorSearchItem: action.error
             }
         default :
             return state

@@ -12,15 +12,15 @@ import MainListItem from "../Main/MainListItem";
 
 export const SearchPanel = (props) => {
     const dispatch = useDispatch()
-    const history =useHistory()
+    const history = useHistory()
     const [inputValue, setInputValue] = useState("")
-    const {searchItems, limitItems} = useSelector((state) => state.searchReducer)
+    const {searchItems, limitItems, errorSearchItem} = useSelector((state) => state.searchReducer)
     const inputRef = useRef(null)
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(setClearSearchItems())
         onFocusInput()
-    },[])
+    }, [])
 
     useEffect(() => {
         if (limitItems !== 15) {
@@ -28,12 +28,12 @@ export const SearchPanel = (props) => {
         }
     }, [limitItems])
 
-     const onSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault()
         dispatch(getSearchItems(inputValue, limitItems))
     }
 
-    const onFocusInput = ()=>{
+    const onFocusInput = () => {
         const doc = document.querySelector('.enact_moonstone_Input_Input_input')
         doc.focus()
     }
@@ -70,11 +70,13 @@ export const SearchPanel = (props) => {
                 <div className={css.row}>
                     <NavOnBack className={css.on__back} title={"Поиск"}
                                onClick={() => onGoPath("/main")}
-                               onKeyDown={(e=>onSelect(e,"/main"))}
+                               onKeyDown={(e => onSelect(e, "/main"))}
                     />
                 </div>
-                <form className={css.form} onSubmit={onSubmit}>
 
+                <form className={css.form} onSubmit={onSubmit}>
+                    <div className={css.error}
+                    >{errorSearchItem && errorSearchItem}</div>
                     <Input ref={inputRef} className={css.formControl} type="text" autoFocus
                            placeholder={"Введите поисковый запрос"}
                            value={inputValue}
