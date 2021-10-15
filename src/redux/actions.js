@@ -47,6 +47,7 @@ export const SET_NEW_FILTER_SEARCH_PAGE = "CATEGORY/SET_NEW_FILTER_SEARCH_PAGE"
 
 export const SET_SEARCH_ITEMS = "SEARCH/SET_SEARCH_ITEMS"
 export const SET_NEW_SEARCH_PAGE = "SEARCH/SET_NEW_SEARCH_PAGE"
+export const RESET_SEARCH_PAGE = "SEARCH/RESET_SEARCH_PAGE"
 export const SET_CLEAR_SEARCH_ITEMS = "SEARCH/SET_CLEAR_SEARCH_ITEMS"
 export const SET_ERROR_SEARCH_ITEMS = "SEARCH/SET_ERROR_SEARCH_ITEMS"
 
@@ -418,6 +419,9 @@ export const setSearchItems = (searchItems) => ({
 export const setNewSearchPage = () => ({
     type: SET_NEW_SEARCH_PAGE,
 })
+export const resetSearchPage = () => ({
+    type: RESET_SEARCH_PAGE,
+})
 export const setClearSearchItems = () => ({
     type: SET_CLEAR_SEARCH_ITEMS,
 })
@@ -435,10 +439,9 @@ export const getSearchItems = (query, limit) => async (dispatch) => {
     } catch (e) {
         console.log("Error getSearchItems", e.response)
         if (e.response.status === 490) {
-if (e.response.data.error.code===1001){
-    console.log("490", e.response.data.error.message)
-    dispatch(setErrorSearchItems("Количество символов в поле должно быть не меньше 3"))
-}
+            if (e.response.data.error.code === 1001) {
+                dispatch(setErrorSearchItems("Количество символов в поле должно быть не меньше 3"))
+            }
 
         }
 

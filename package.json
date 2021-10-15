@@ -2,7 +2,7 @@
   "name": "enact-form",
   "version": "1.0.0",
   "description": "A general template for an Enact Sandstone application for webOS TVs",
-  "homepage": "http://IgorBezusenko.github.io/Enact-Project-Movies",
+
   "author": "Bezusenko Igor",
   "main": "src/index.js",
   "scripts": {

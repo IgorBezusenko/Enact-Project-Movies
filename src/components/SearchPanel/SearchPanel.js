@@ -7,7 +7,7 @@ import Input from '@enact/moonstone/Input';
 import {ItemBase} from "../Buttons/ItemBase";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
-import {getSearchItems, setClearSearchItems, setNewSearchPage} from "../../redux/actions";
+import {getSearchItems, resetSearchPage, setClearSearchItems, setNewSearchPage} from "../../redux/actions";
 import MainListItem from "../Main/MainListItem";
 
 export const SearchPanel = (props) => {
@@ -19,6 +19,7 @@ export const SearchPanel = (props) => {
 
     useEffect(() => {
         dispatch(setClearSearchItems())
+        dispatch(resetSearchPage())
         onFocusInput()
     }, [])
 
@@ -75,8 +76,9 @@ export const SearchPanel = (props) => {
                 </div>
 
                 <form className={css.form} onSubmit={onSubmit}>
-                    <div className={css.error}
-                    >{errorSearchItem && errorSearchItem}</div>
+                    <div className={css.error}>
+                        {errorSearchItem && errorSearchItem}
+                    </div>
                     <Input ref={inputRef} className={css.formControl} type="text" autoFocus
                            placeholder={"Введите поисковый запрос"}
                            value={inputValue}
