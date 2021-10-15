@@ -1,3 +1,4 @@
+This app was  optimization for the TVs with HD, FULLHD, 4K, 8K.
 ## Deploy/ https://igorbezusenko.github.io/Enact-Project-Movies/
 
 This project was bootstrapped with [@enact/cli](https://github.com/enactjs/cli).
