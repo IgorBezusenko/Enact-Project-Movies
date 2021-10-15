@@ -1,11 +1,11 @@
 import {
-    CLEAR_CURRENT_ITEM,
+    CLEAR_CURRENT_ITEM, CLEAR_CURRENT_PATH,
     CLEAR_MOVIE_FILE_FOCUS,
     CLEAR_VIDEO_URL,
     GET_MAIN,
     GET_MOVIE_FILE,
     GET_VIDEO_URL,
-    MAIN_TOGGLE_IS_FETCHING, SET_CURRENT_ITEM_DECREMENT, SET_CURRENT_ITEM_INCREMENT,
+    MAIN_TOGGLE_IS_FETCHING, SET_CURRENT_ITEM_DECREMENT, SET_CURRENT_ITEM_INCREMENT, SET_CURRENT_PATH,
     SET_MOVIE_CATEGORY_TITLE,
     SET_MOVIE_FILE_FOCUS
 } from "../actions";
@@ -17,7 +17,8 @@ const initialState = {
     isFetching: false,
     movieFileFocus: null,
     movieCategoryTitle: null,
-    currentItem: 0
+    currentItem: 0,
+    currentPath: null,
 }
 
 export const mainReducer = (state = initialState, action) => {
@@ -80,6 +81,16 @@ export const mainReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentItem: 0
+            }
+        case   SET_CURRENT_PATH:
+            return {
+                ...state,
+                currentPath: action.path
+            }
+        case   CLEAR_CURRENT_PATH:
+            return {
+                ...state,
+                currentPath: null
             }
 
 

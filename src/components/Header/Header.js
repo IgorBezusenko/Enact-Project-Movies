@@ -4,7 +4,7 @@ import {Bookmark, Briefcase, LogIn, PlayCircle, Search, Smile, User, Video} from
 
 import css from "./Header.module.less"
 import {useDispatch, useSelector} from "react-redux";
-import {clearVideoUrl, getLogout, setCategoryId} from "../../redux/actions";
+import {clearVideoUrl, getLogout, setCategoryId, setCurrentPath} from "../../redux/actions";
 
 import {reactLocalStorage} from "reactjs-localstorage";
 import {ItemBase} from "../Buttons/ItemBase";
@@ -52,19 +52,14 @@ const Sidebar = ({token}) => {
         }
     }
 
-
-    // const onLogout = (e, path)=>{
-    //     if (e.code === "Enter") {
-    //         history.push(path)
-    //     }
-    // }
-    const onLogout = (e, path)=>{
+    const onLogout = (e, path) => {
         dispatch(getLogout())
         history.push(path)
     }
 
     const onHandleClick = (categoryId) => {
         dispatch(setCategoryId(categoryId))
+        dispatch(setCurrentPath(history.location.pathname))
     }
     const userProfileElement = <div>
         <div>
@@ -110,6 +105,7 @@ const Sidebar = ({token}) => {
             <ul className={css.nav}>
                 <li>
                     <ItemBase
+                        onClick={() => onHandleClick("/search-panel")}
                         onKeyUp={(e) => onSelectHandler(e, "/search-panel")}
                         onFocus={() => setSearch(true)}
                         onBlur={() => setSearch(false)}
@@ -119,17 +115,21 @@ const Sidebar = ({token}) => {
                     {isFocus && <div className={css.icon__text + " " + `${search && css.color__red}`}>Поиск</div>}
                 </li>
                 <li>
-                    <ItemBase onKeyUp={(e) => onSelectHandler(e, "/history")}
-                              onFocus={() => setPlay(true)}
-                              onBlur={() => setPlay(false)}
-                              className={css.item__base}><Link to={"/history"}><PlayCircle/></Link></ItemBase>
+                    <ItemBase
+                        onClick={() => onHandleClick("/history")}
+                        onKeyUp={(e) => onSelectHandler(e, "/history")}
+                        onFocus={() => setPlay(true)}
+                        onBlur={() => setPlay(false)}
+                        className={css.item__base}><Link to={"/history"}><PlayCircle/></Link></ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${play && css.color__red}`}>Я смотрю</div>}
                 </li>
                 <li>
-                    <ItemBase onKeyUp={(e) => onSelectHandler(e, "/bookmark")}
-                              onFocus={() => setFavorite(true)}
-                              onBlur={() => setFavorite(false)}
-                              className={css.item__base}><Link to={"/bookmark"}><Bookmark/></Link></ItemBase>
+                    <ItemBase
+                        onClick={() => onHandleClick("/bookmark")}
+                        onKeyUp={(e) => onSelectHandler(e, "/bookmark")}
+                        onFocus={() => setFavorite(true)}
+                        onBlur={() => setFavorite(false)}
+                        className={css.item__base}><Link to={"/bookmark"}><Bookmark/></Link></ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${favorite && css.color__red}`}>Избранное</div>}
                 </li>
                 <li>
@@ -164,13 +164,10 @@ const Sidebar = ({token}) => {
                     {
                         <div className={css.log__in}>
                             <ItemBase
-                            //     onKeyUp={(e) => {
-                            //     onLogout(e, "/auth")
-                            // }}
                                 onClick={onLogout}
-                                      onFocus={() => setLogin(true)}
-                                      onBlur={() => setLogin(false)}
-                                      className={css.item__base}>
+                                onFocus={() => setLogin(true)}
+                                onBlur={() => setLogin(false)}
+                                className={css.item__base}>
                                 <Link to={"/auth"}>
                                     <LogIn style={{transform: "rotate(180deg)"}}/>
                                 </Link></ItemBase>

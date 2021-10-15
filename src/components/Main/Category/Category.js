@@ -5,7 +5,14 @@ import "slick-carousel/slick/slick-theme.css";
 import css from "./Category.module.less"
 
 import {useDispatch, useSelector} from "react-redux";
-import {clearPage, getCategory, setCategoryId, setNewCategoryPage, setPageIncrement} from "../../../redux/actions";
+import {
+    clearPage,
+    getCategory,
+    setCategoryId,
+    setCurrentPath,
+    setNewCategoryPage,
+    setPageIncrement
+} from "../../../redux/actions";
 import MainListItem from "../MainListItem";
 import {Header} from "../../Header/Header";
 import {NavOnBack} from "../../NavOnBack/NavOnBack";
@@ -42,6 +49,10 @@ export const Category = (props) => {
             dispatch(setNewCategoryPage(categoryId, currentPage, idSort))
         }
     }, [currentPage])
+
+    useEffect(() => {
+        dispatch(setCurrentPath(history.location.pathname + history.location.search))
+    }, [history.location.search])
 
     // useEffect(() => {
     //     const query = {};

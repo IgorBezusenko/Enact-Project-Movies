@@ -103,13 +103,13 @@ export const CustomControls = ({
                 </div>
                 <div className={css.controls}>
                     <div className={css.btn_group}>
-                        <ItemBase className={css.btn_controls} onClick={() => {
+                        <ItemBase className={css.btn_controls + " " + css.btn_controls_arrow} onClick={() => {
                             handleToggleMinus(SEEK120)
                         }}>
                             <FastForward className={css.p_controls} style={{transform: "rotate(180deg)"}}/>
                         </ItemBase>
                         <ItemBaseRef itemFocus={ARROW_LEFT}
-                                     className={css.btn_controls}
+                                     className={css.btn_controls + " " + css.btn_controls_arrow}
                                      onClick={() => {
                                          handleToggleMinus(SEEK15)
                                      }}>
@@ -122,14 +122,14 @@ export const CustomControls = ({
                             {playing ? <PauseCircle/> : <PlayCircle/>}
                         </ItemBaseRef>
 
-                        <ItemBaseRef itemFocus={ARROW_RIGHT}
-                                     className={css.btn_controls}
+                        <ItemBaseRef itemFocus={ARROW_RIGHT + " " + css.btn_controls_arrow}
+                                     className={css.btn_controls  + " " + css.btn_controls_arrow}
                                      onClick={() => {
                                          handleTogglePlus(SEEK15)
                                      }}><SkipForward
                             className={css.p_controls}/></ItemBaseRef>
 
-                        <ItemBase className={css.btn_controls} onClick={() => {
+                        <ItemBase className={css.btn_controls + " " + css.btn_controls_arrow} onClick={() => {
                             handleTogglePlus(SEEK120)
                         }}><FastForward
                             className={css.p_controls}/></ItemBase>

@@ -18,7 +18,8 @@ const MainListItemBase =
 
         useEffect(() => {
             onSelectCardRef()
-        }, [currentItem,focusItem])
+        }, [currentItem, focusItem])
+
 
         const onSelectHandler = (e, path) => {
             if (e.code === "Enter") {
@@ -37,34 +38,34 @@ const MainListItemBase =
 
         return (
             <>
-                <div   {...rest} onKeyPress={(e) => onSelectHandler(e, item.url)}
+                <div   {...rest}
+                       onKeyPress={(e) => onSelectHandler(e, item.url)}
                        ref={selectCard}
                 >
-
-                        {
-                            !item.id &&
-                            <div className={css.item__last}>
-                                <Link to={item.url}>Смотреть все</Link>
+                    {
+                        !item.id &&
+                        <div className={css.item__last}>
+                            <Link to={item.url}>Смотреть все</Link>
+                        </div>
+                    }
+                    {
+                        item.id &&
+                        <div className={css.item__cover}>
+                            <Link to={item.url}>
+                                <img src={item.logo} alt="item"/>
+                            </Link>
+                        </div>
+                    }
+                    {
+                        visibleDescription ?
+                            <div className={css.item__details}>
+                                <div>{item.year} | {!!item.access ?
+                                    <span className={cssCategory.follow}>Подписка</span> :
+                                    <span className={cssCategory.free}>Бесплатный</span>}</div>
+                                <div className={css.nowrap}>{!!item.rate_age && item.rate_age} {item.title}</div>
                             </div>
-                        }
-                        {
-                            item.id &&
-                            <div className={css.item__cover}>
-                                <Link to={item.url}>
-                                    <img src={item.logo} alt="item"/>
-                                </Link>
-                            </div>
-                        }
-                        {
-                            visibleDescription ?
-                                <div className={css.item__details}>
-                                    <div>{item.year} | {!!item.access ?
-                                        <span className={cssCategory.follow} >Подписка</span> :
-                                        <span className={cssCategory.free} >Бесплатный</span>}</div>
-                                    <div className={css.nowrap}>{!!item.rate_age && item.rate_age} {item.title}</div>
-                                </div>
-                                : null
-                        }
+                            : null
+                    }
 
                 </div>
 

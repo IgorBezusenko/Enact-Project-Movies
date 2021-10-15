@@ -1,11 +1,12 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {
     clearItemFocus,
     clearVideoUrl,
     getMovieFile,
     putLikeAC,
-    setBookmarkId, setFocusRef,
+    setBookmarkId,
+    setFocusRef,
     setVote,
     toggleBookmarkById
 } from "../../../redux/actions";
@@ -28,10 +29,11 @@ export const MoviesPreview = (props) => {
     const movieFileId = query.get("id")
     const dispatch = useDispatch()
     const history = useHistory()
-    const {movieFile, isFetching} = useSelector(state => state.mainReducer)
+    const {movieFile, isFetching, currentPath} = useSelector(state => state.mainReducer)
     const {token} = useSelector((state) => state.authReducer)
     const voteState = useSelector(state => state.likeReducer.vote)
     const bookmarkState = useSelector(state => state.bookmarkReducer.bookmarkId)
+    const [backPath, setBackPath] = useState(null)
 
     const getMovieFileById = (id) => {
         dispatch(getMovieFile(id))
@@ -56,6 +58,14 @@ export const MoviesPreview = (props) => {
         dispatch(setBookmarkId({active: movieFile.is_favorite}))
     }, [movieFile])
 
+    useEffect(() => {
+        if (currentPath) {
+            setBackPath(currentPath)
+        } else {
+            setBackPath("/main")
+        }
+    }, [currentPath])
+
     const genre = movieFile.genre && movieFile.genre.map((genre, i) => {
         return (<span key={i}>
             {i !== 0 && ", "}{genre.name}
@@ -68,6 +78,7 @@ export const MoviesPreview = (props) => {
     })
 
     const vote = movieFile.vote ? movieFile.vote : {}
+
 
     const onGoPath = (path) => history.push(path)
     const onSelect = (e, path) => {
@@ -108,9 +119,14 @@ export const MoviesPreview = (props) => {
                     <div className={css.preview__row}>
                         <div>
                             <NavOnBack className={css.on__back + " " + css.title}
-                                       onClick={() => onGoPath("/main")}
-                                       onKeyDown={(e => onSelect(e, "/main"))}
+                                       onClick={() => onGoPath(backPath)}
+                                       onKeyDown={(e => onSelect(e, backPath))}
                             />
+                            {/*<NavOnBack className={css.on__back + " " + css.title}*/}
+                            {/*           onClick={() => onGoPath("/main")}*/}
+                            {/*           onKeyDown={(e => onSelect(e, "/main"))}*/}
+                            {/*/>*/}
+
                             <div className={css.description}>
                                 <h1>{movieFile.title}</h1>
                                 <div>{movieFile.year} </div>

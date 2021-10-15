@@ -8,7 +8,6 @@ export const ButtonDescription = () => {
     const history = useHistory()
     const onGoPath = (path) => history.push(path)
     const onSelect = (e, push) => {
-        console.log(push)
         if (e.code === "ArrowDown") {
             onGoPath(push)
         }

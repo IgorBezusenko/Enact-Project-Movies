@@ -37,7 +37,6 @@ export const MoviesDescription = () => {
 
     const onGoPath = (path) => history.push(path)
     const onSelect = (e, push) => {
-        console.log(push)
         if (e.code === "ArrowUp") {
             onGoPath(push)
         }

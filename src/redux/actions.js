@@ -23,6 +23,8 @@ export const CLEAR_MOVIE_FILE_FOCUS = "MAIN/CLEAR_MOVIE_FILE_FOCUS"
 export const SET_CURRENT_ITEM_INCREMENT = "MAIN/SET_CURRENT_ITEM_INCREMENT"
 export const SET_CURRENT_ITEM_DECREMENT = "MAIN/SET_CURRENT_ITEM_DECREMENT"
 export const CLEAR_CURRENT_ITEM = "MAIN/CLEAR_CURRENT_ITEM"
+export const SET_CURRENT_PATH = "MAIN/SET_CURRENT_PATH"
+export const CLEAR_CURRENT_PATH = "MAIN/CLEAR_CURRENT_PATH"
 
 export const PUT_LIKE_AC = "MoviesPreview/PUT_LIKE_AC"
 export const SET_VOTE_AC = "MoviesPreview/SET_VOTE_AC"
@@ -241,6 +243,13 @@ export const setCurrentItemDec = () => ({
 })
 export const clearCurrentItem = () => ({
     type: CLEAR_CURRENT_ITEM,
+})
+export const setCurrentPath = (path) => ({
+    type: SET_CURRENT_PATH,
+    path
+})
+export const clearCurrentPath = () => ({
+    type: CLEAR_CURRENT_PATH,
 })
 
 //like

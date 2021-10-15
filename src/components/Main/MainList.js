@@ -5,7 +5,7 @@ import {useHistory} from "react-router-dom";
 import {ItemBase} from "../Buttons/ItemBase";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    clearCurrentItem,
+    clearCurrentItem, clearCurrentPath,
     getCategoryFilter,
     setCategoryId,
     setCurrentItemDec,
@@ -22,6 +22,7 @@ const MainList = ({moviesList, nextItem, moviesLength}) => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getCategoryFilter())
+        dispatch(clearCurrentPath())
     }, [])
 
     useEffect(() => {
