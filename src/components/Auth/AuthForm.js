@@ -6,6 +6,7 @@ import React, {useState} from "react";
 import Input from "@enact/moonstone/Input";
 import {getToken, setError} from "../../redux/actions";
 import {AppLoading} from "../AppLoading/AppLoading";
+import {ButtonSpotTable} from "../Buttons/ButtonSpotTable";
 
 export const AuthForm = (props) => {
     const dispatch = useDispatch()
@@ -80,7 +81,7 @@ export const AuthForm = (props) => {
                             />
                         </div>
 
-                        <button className={css.btn}>Войти</button>
+                        <ButtonSpotTable onClick={onSubmit} className={css.btn}>Войти</ButtonSpotTable>
                     </form>
                 </div>
             }

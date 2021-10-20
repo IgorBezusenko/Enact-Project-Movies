@@ -1,0 +1,45 @@
+.blockOut {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__btn {
+    margin: 2rem 0 0 0;
+  }
+}
+
+.btn {
+  width: 13rem;
+  padding: 0.6875rem;
+  text-align: center;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 2rem;
+  outline: none;
+  border: none;
+  border-radius: 1rem;
+  transition: all 0.22s;
+
+  &__enter {
+    background: #4c5059;
+
+    &:focus {
+      background: #0D9F00;
+    }
+  }
+
+  &__exit {
+    background: #4c5059;
+    margin: 0 0 0 1rem;
+
+    &:focus {
+      background: #FF0000;
+    }
+  }
+
+}
+
+

@@ -22,6 +22,7 @@ import {HistoryPage} from "../components/HistoryPage/HistoryPage";
 import {BookMark} from "../components/BookMark/BookMark";
 
 import "./App.less"
+import {AppExit} from "../components/AppExit/AppExit";
 
 const App = () => {
     return (
@@ -63,7 +64,7 @@ const App = () => {
                 <Route path={"/player"} component={CustomVideoPlayer}/>
                 <Route path={"/description"} component={MoviesDescription}/>
                 <Route path={"/series"} component={MovieSeries}/>
-                <Route path={"/*"} render={()=><div><Preloader/></div>}/>
+                <Route path={"/*"} render={() => <div><AppExit/></div>}/>
 
             </Switch>
 
