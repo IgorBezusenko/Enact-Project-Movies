@@ -23,7 +23,8 @@ class CVPlayer extends Component {
         duration: 0,
         playbackRate: 1.0,
         loop: false,
-        visibleControls: true
+        visibleControls: true,
+        error:""
     }
 
     componentDidMount() {
@@ -167,6 +168,22 @@ class CVPlayer extends Component {
     ref = player => {
         this.player = player
     }
+    onHandleError=(e)=>{
+        console.log('onError', e)
+        this.setState({error:e})
+    }
+    onHandleSeek=(e)=>{
+        console.log('onSeek', e)
+    }
+    onHandleReady=()=>{
+        console.log('onReady')
+    }
+    onHandleStart=()=>{
+        console.log('Start')
+    }
+    onHandleBuffer=() => {
+        console.log('onBuffer')
+    }
 
     render() {
 
@@ -200,6 +217,10 @@ class CVPlayer extends Component {
                                 duration={duration}
                 />
 
+                {/*<div>*/}
+                {/*    Error log {this.state.error && this.state.error}*/}
+                {/*</div>*/}
+
                 <ReactPlayer
                     ref={this.ref}
                     className='react-player'
@@ -214,16 +235,16 @@ class CVPlayer extends Component {
                     playbackRate={playbackRate}
                     volume={volume}
                     muted={muted}
-                    onReady={() => console.log('onReady')}
-                    onStart={() => console.log('onStart')}
+                    onReady={this.onHandleReady}
+                    onStart={this.onHandleStart}
                     onPlay={this.handlePlay}
                     onEnablePIP={this.handleEnablePIP}
                     onDisablePIP={this.handleDisablePIP}
                     onPause={this.handlePause}
-                    onBuffer={() => console.log('onBuffer')}
-                    onSeek={e => console.log('onSeek', e)}
+                    onBuffer={this.onHandleBuffer}
+                    onSeek={this.onHandleSeek}
                     onEnded={this.handleEnded}
-                    onError={e => console.log('onError', e)}
+                    onError={this.onHandleError}
                     onProgress={this.handleProgress}
                     onDuration={this.handleDuration}
                 />

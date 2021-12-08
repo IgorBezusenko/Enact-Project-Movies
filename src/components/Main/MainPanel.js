@@ -30,7 +30,6 @@ const MainPanel = () => {
         dispatch(setToken(token))
         dispatch(setError(null))
         dispatch(getUserProfile())
-        console.log("token", token)
     }, [token, connectionCode]);
 
     const list = movies.length > 0 && movies[currentItem]

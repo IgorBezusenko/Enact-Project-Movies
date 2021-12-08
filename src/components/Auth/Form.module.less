@@ -13,6 +13,29 @@
   line-height: normal;
 }
 
+.field {
+  margin: 0 0 1rem 0;
+
+  span {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 30vw;
+    height: 3rem;
+    background: #333333;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1.1rem;
+    margin: 0.5rem 0 0 0;
+  }
+}
+
+.field:focus,.field.active {
+  span {
+    border: #FFE600 0.1rem solid;
+    padding: 0.4rem 1rem;
+  }
+}
+
 .form {
   width: 44rem;
   margin: 3rem auto;
@@ -25,9 +48,9 @@
   margin-bottom: 3rem;
 }
 
-.formControl  input{
+.formControl input {
   font-family: Inter, Roboto, Oxygen, Fira Sans, Helvetica Neue, sans-serif;
-  margin:  0;
+  margin: 0;
   outline: none;
   border: none;
   display: block;
@@ -58,15 +81,15 @@
   border: 2px solid #e53935;
 }
 
-.auth__block{
+.auth__block {
   width: 48rem;
   margin: 10rem auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
-.auth__button{
+.auth__button {
   width: 20rem;
   height: 14rem;
   background: rgba(181, 175, 175, 0.25);
@@ -76,17 +99,18 @@
   border: none;
   cursor: pointer;
 }
-.auth__button svg{
+
+.auth__button svg {
   width: 3rem;
   height: 3rem;
 }
 
-.auth__button:focus{
+.auth__button:focus {
   background: #FF0000;
 }
 
 
-.auth__text{
+.auth__text {
   color: #FFFFFF;
   text-align: center;
   font-size: 1.5rem;
@@ -118,7 +142,7 @@
   transition: all 0.22s;
 }
 
-.btn:focus{
+.btn:focus {
   background: #FF0000;
 }
 
@@ -132,8 +156,8 @@
   line-height: 2.625rem;
 }
 
-.authMobile__title{
-  margin:  2rem 0;
+.authMobile__title {
+  margin: 2rem 0;
 }
 
 .authMobile__content {
@@ -142,11 +166,12 @@
   align-items: center;
 }
 
-.authMobile__list{
+.authMobile__list {
   width: 34rem;
 
 }
-.list__item{
+
+.list__item {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -154,23 +179,27 @@
   line-height: normal;
   margin: 0 0 2rem 0;
 }
-.authMobile__tab{
+
+.authMobile__tab {
   background: rgba(255, 255, 255, 0.25);
   border-radius: 1rem;
   text-align: center;
   padding: 3.65rem 2.5rem;
 }
-.authMobile__tab .code{
+
+.authMobile__tab .code {
   font-size: 6rem;
   line-height: normal;
   color: #FF0000;
   font-weight: bold;
 }
-.color__red{
+
+.color__red {
   color: #FF0000;
 }
-.index{
+
+.index {
   font-size: 3rem;
-  margin: 0 2.5rem 0 0 ;
+  margin: 0 2.5rem 0 0;
 }
 

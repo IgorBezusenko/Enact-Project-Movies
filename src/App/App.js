@@ -23,6 +23,7 @@ import {BookMark} from "../components/BookMark/BookMark";
 
 import "./App.less"
 import {AppExit} from "../components/AppExit/AppExit";
+import {DemoForm} from "../components/Auth/DemoForm";
 
 const App = () => {
     return (
@@ -40,7 +41,7 @@ const App = () => {
                 <Route path={"/main"} component={MainPanel}/>
 
                 <Route exact path={"/auth"} component={AuthPage}/>
-                <Route path={"/auth-form"} component={AuthForm}/>
+                <Route path={"/auth-form"} component={DemoForm}/>
                 <Route path={"/auth-mobile"} component={AuthMobile}/>
 
                 <Route path={"/detail"} component={MoviesPreview}/>

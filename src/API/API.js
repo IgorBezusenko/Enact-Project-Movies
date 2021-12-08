@@ -4,7 +4,8 @@ import {reactLocalStorage} from "reactjs-localstorage";
 const instance = axios.create({
     baseURL: "https://api.portal.idc.md/api/",
     headers: {
-        "HTTP-X-TOKEN": reactLocalStorage.get("token") || ""
+        "HTTP-X-TOKEN": reactLocalStorage.get("token") || "",
+        "HTTP-X-SOFT": "WEBVIEW"
     }
 })
 
@@ -39,8 +40,8 @@ export const AuthAPI = {
             delete instance.defaults.headers["HTTP-X-UID"];
         }
     },
-    userProfile(){
-        return instance.get(`getUserProfile`).then(r=>r.data)
+    userProfile() {
+        return instance.get(`getUserProfile`).then(r => r.data)
     }
 }
 
@@ -63,7 +64,7 @@ export const MainAPI = {
     categoryFilter() {
         return instance.get(`/listFilter`).then(r => r.data)
     },
-    searchFilter(genre = '', country = '', year = '', typeContent = '',page='') {
+    searchFilter(genre = '', country = '', year = '', typeContent = '', page = '') {
         return instance.get(`/searchExt/15?page=${page}&genre=${genre}&country=${country}&year=${year}&type_content=${typeContent}`).then(r => r.data)
     },
     searchMovie(query, limit) {
