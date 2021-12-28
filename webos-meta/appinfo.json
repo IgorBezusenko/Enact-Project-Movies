@@ -1,6 +1,6 @@
 {
-	"id": "portal-idc-x",
-	"version": "1.0.6",
+	"id": "portal-idc",
+	"version": "1.0.7",
 	"vendor": "IDC",
 	"type": "web",
 	"main": "index.html",

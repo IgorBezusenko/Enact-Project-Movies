@@ -4,7 +4,7 @@ const initialState = {
     mediaFiles: [],
     actualCurrentSeason: null,
     currentSeries: null,
-    inItemFocus: true
+    isItemFocus: true
 }
 export const seriesReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -34,15 +34,15 @@ export const seriesReducer = (state = initialState, action) => {
         case SET_ITEM_FOCUS:
             return {
                 ...state,
-                inItemFocus: false
+                isItemFocus: false
             }
         case CLEAR_ITEM_FOCUS:
             return {
                 ...state,
-                mediaFiles: [],
+                // mediaFiles: [],
                 actualCurrentSeason: null,
                 currentSeries: null,
-                inItemFocus: true
+                isItemFocus: true
             }
 
         default:

@@ -6,15 +6,19 @@ import {setItemFocus} from "../../../../redux/actions";
 const ButtonBase = ({itemFocusable, children, ...rest}) => {
     const itemRef = useRef(null)
     const dispatch = useDispatch()
-    const {inItemFocus, currentSeries} = useSelector(state => state.seriesReducer)
+    const {isItemFocus, currentSeries} = useSelector(state => state.seriesReducer)
 
     useEffect(() => {
         onSelectSeriesRef(currentSeries)
     }, [currentSeries])
     const onSelectSeriesRef = (currentSeries) => {
-        if (itemFocusable === currentSeries && inItemFocus === true) {
-            dispatch(setItemFocus())
+
+        if (itemFocusable === currentSeries && isItemFocus === true) {
+            // dispatch(setItemFocus())
             itemRef.current.focus();
+            // itemRef.current.scrollIntoView(
+            //     {block: "center"}
+            // )
         }
     }
     return (

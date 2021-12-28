@@ -3,11 +3,13 @@ import css from "./Main.module.less";
 import cssCategory from "./Category/Category.module.less"
 import {Link, useHistory} from "react-router-dom";
 import Spottable from "@enact/spotlight/Spottable";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {setCategoryId} from "../../redux/actions";
 
 const MainListItemBase =
     ({item, itemIndex, ...rest}) => {
         let history = useHistory();
+        let dispatch = useDispatch();
         const {currentItem} = useSelector(state => state.mainReducer)
         const [focusItem, setFocusItem] = useState(3)
         const selectCard = useRef(null)
@@ -20,10 +22,16 @@ const MainListItemBase =
             onSelectCardRef()
         }, [currentItem, focusItem])
 
+        const goPath = (path) => history.push(path)
+        const onClickItem = (url) => {
+            dispatch(setCategoryId(url.split("=")[1]))
+            goPath(url)
+        }
 
         const onSelectHandler = (e, path) => {
             if (e.code === "Enter") {
-                history.push(path)
+                dispatch(setCategoryId(path.split("=")[1]))
+                goPath(path)
             }
         }
 
@@ -44,13 +52,13 @@ const MainListItemBase =
                 >
                     {
                         !item.id &&
-                        <div className={css.item__last}>
-                            <Link to={item.url}>Смотреть все</Link>
+                        <div onClick={() => onClickItem(item.url)} className={css.item__last}>
+                            Смотреть все
                         </div>
                     }
                     {
                         item.id &&
-                        <div className={css.item__cover}>
+                        <div onClick={() => onClickItem(item.url)} className={css.item__cover} >
                             <Link to={item.url}>
                                 <img src={item.logo} alt="item"/>
                             </Link>

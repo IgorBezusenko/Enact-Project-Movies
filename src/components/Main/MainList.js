@@ -15,6 +15,7 @@ import {
 } from "../../redux/actions";
 import {MainListItemPreview} from "./MainListItemPreview";
 import {ChevronDown, ChevronsUp} from "react-feather";
+import Scroller from "@enact/sandstone/Scroller";
 
 const MainList = ({moviesList, nextItem, moviesLength}) => {
     const {mainData: movies, currentItem, movieFileFocus, movieCategoryTitle} = useSelector(state => state.mainReducer)
@@ -44,6 +45,7 @@ const MainList = ({moviesList, nextItem, moviesLength}) => {
         dispatch(setCategoryId(categoryId))
     }
     const onHandelSetItem = (item, title, id) => {
+
         if (id) {
             dispatch(setMovieFileFocus(item))
             dispatch(setMovieCategoryTitle(title))
@@ -108,20 +110,24 @@ const MainList = ({moviesList, nextItem, moviesLength}) => {
                 </div>
 
 
-                <div className={css.row}>
-                    <ItemBase>{" "}</ItemBase>
-                    {moviesList.items.map((item, idx) => {
-                        return (
-                            <MainListItem
-                                itemIndex={idx}
-                                key={idx}
-                                onFocus={() => onHandelSetItem(item, moviesList.title, item.id)}
+             <div className={css.row__container}>
+                 <Scroller>
+                     <div className={css.row}>
+                         {/*<ItemBase>{" "}</ItemBase>*/}
+                         {moviesList.items.map((item, idx) => {
+                             return (
+                                 <MainListItem
+                                     itemIndex={idx}
+                                     key={idx}
+                                     onFocus={() => onHandelSetItem(item, moviesList.title, item.id)}
 
-                                className={css.list__item} item={item}/>
-                        )
-                    })}
-                    <ItemBase className={css.plug}>{" "}</ItemBase>
-                </div>
+                                     className={css.list__item} item={item}/>
+                             )
+                         })}
+                         {/*<ItemBase className={css.plug}>{" "}</ItemBase>*/}
+                     </div>
+                 </Scroller>
+             </div>
 
                 {
                     movieCategoryTitle === moviesList.title && movieFileFocus &&

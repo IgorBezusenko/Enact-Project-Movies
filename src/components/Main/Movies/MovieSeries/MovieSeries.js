@@ -5,9 +5,9 @@ import {useHistory} from "react-router-dom";
 import {NavOnBack} from "../../../NavOnBack/NavOnBack";
 
 import css from "./MovieSeries.module.less"
-import {ItemBase} from "../../../Buttons/ItemBase";
 import {SeasonList} from "./SeasonList";
 import {SeriesList} from "./SeriesList";
+import Scroller from "@enact/sandstone/Scroller";
 
 export const MovieSeries = (props) => {
     const dispatch = useDispatch()
@@ -20,6 +20,7 @@ export const MovieSeries = (props) => {
     useEffect(() => {
         if (movieFile.serial) {
             dispatch(setMediaFiles(movieFile.media))
+            console.log(13232132132)
         }
     }, [])
 
@@ -28,16 +29,19 @@ export const MovieSeries = (props) => {
         if (actualCurrentSeason) {
             setCurrentSeason1(actualCurrentSeason.title)
             dispatch(setCurrentSeries())
+            console.log("asdadad")
         }
-    }, [mediaFiles])
+    }, [mediaFiles, actualCurrentSeason])
 
     const onClickToSeason = (mediaTitle) => {
+
         setLoading(true)
         setTimeout(() => {
             setCurrentSeason1(mediaTitle)
             setLoading(false)
         }, 100)
         dispatch(clearVideoUrl())
+
     }
 
     const onSelectSeries = (path) => {
@@ -80,13 +84,15 @@ export const MovieSeries = (props) => {
                     !loading && <>
                         {
                             currentSeason && <div className={css.series__container}>
-                                <div className={css.series__row}>
-                                    <ItemBase className={css.on__back}>{""}</ItemBase>
+                                <Scroller>
+                                    <div className={css.series__row}>
+                                        {/*<ItemBase className={css.on__back}>{""}</ItemBase>*/}
 
-                                    <SeriesList seasonSel={seasonSel} onSelectSeries={onSelectSeries}/>
+                                        <SeriesList seasonSel={seasonSel} onSelectSeries={onSelectSeries}/>
 
-                                    <ItemBase className={css.on__back}>{""}</ItemBase>
-                                </div>
+                                        {/*<ItemBase className={css.on__back}>{""}</ItemBase>*/}
+                                    </div>
+                                </Scroller>
                             </div>}
                     </>
                 }

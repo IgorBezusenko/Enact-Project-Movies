@@ -109,7 +109,7 @@ const Sidebar = ({token}) => {
                         onKeyUp={(e) => onSelectHandler(e, "/search-panel")}
                         onFocus={() => setSearch(true)}
                         onBlur={() => setSearch(false)}
-                        className={css.item__base}><Link to={"/search-panel"}><Search/></Link>
+                        className={css.item__base + ` ${history.location.pathname==="/search-panel" && css.active}` }><Link to={"/search-panel"}><Search/></Link>
 
                     </ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${search && css.color__red}`}>Поиск</div>}
@@ -120,7 +120,7 @@ const Sidebar = ({token}) => {
                         onKeyUp={(e) => onSelectHandler(e, "/history")}
                         onFocus={() => setPlay(true)}
                         onBlur={() => setPlay(false)}
-                        className={css.item__base}><Link to={"/history"}><PlayCircle/></Link></ItemBase>
+                        className={css.item__base  + ` ${history.location.pathname==="/history" && css.active}` }><Link to={"/history"}><PlayCircle/></Link></ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${play && css.color__red}`}>Я смотрю</div>}
                 </li>
                 <li>
@@ -129,35 +129,35 @@ const Sidebar = ({token}) => {
                         onKeyUp={(e) => onSelectHandler(e, "/bookmark")}
                         onFocus={() => setFavorite(true)}
                         onBlur={() => setFavorite(false)}
-                        className={css.item__base}><Link to={"/bookmark"}><Bookmark/></Link></ItemBase>
+                        className={css.item__base  + ` ${history.location.pathname==="/bookmark" && css.active}` }><Link to={"/bookmark"}><Bookmark/></Link></ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${favorite && css.color__red}`}>Избранное</div>}
                 </li>
                 <li>
                     <ItemBase onClick={() => onHandleClick("100")}
-                              onKeyUp={(e) => onSelectHandler(e, "category?cid=100", "100")}
+                              onKeyUp={(e) => onSelectHandler(e, "/category?id=100", "100")}
                               onFocus={() => setFilm(true)}
                               onBlur={() => setFilm(false)}
-                              className={css.item__base}><Link
-                        to={"/category?cid=100"}><Video/></Link></ItemBase>
+                              className={css.item__base  + ` ${history.location.search==="?id=100" && css.active}` }><Link
+                        to={"/category?id=100"}><Video/></Link></ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${film && css.color__red}`}>Фильмы</div>}
                 </li>
                 <li>
                     <ItemBase onClick={() => onHandleClick("39")}
-                              onKeyUp={(e) => onSelectHandler(e, "category?cid=39", "39")}
+                              onKeyUp={(e) => onSelectHandler(e, "/category?id=39", "39")}
                               onFocus={() => setSerial(true)}
                               onBlur={() => setSerial(false)}
-                              className={css.item__base}>
-                        <Link to={"/category?cid=39"}>
+                              className={css.item__base  + ` ${history.location.search==="?id=39" && css.active}` }>
+                        <Link to={"/category?id=39"}>
                             <Briefcase/></Link></ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${serial && css.color__red}`}>Сериалы</div>}
                 </li>
                 <li>
                     <ItemBase
                         onClick={() => onHandleClick("20")}
-                        onKeyUp={(e) => onSelectHandler(e, "category?cid=20", "20")}
+                        onKeyUp={(e) => onSelectHandler(e, "/category?id=20", "20")}
                         onFocus={() => setSmile(true)}
                         onBlur={() => setSmile(false)}
-                        className={css.item__base}><Link to={"/category?cid=20"}><Smile/></Link></ItemBase>
+                        className={css.item__base  + ` ${history.location.search==="?id=20" && css.active}` }><Link to={"/category?id=20"}><Smile/></Link></ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${smile && css.color__red}`}>Мультфильмы</div>}
                 </li>
                 <li>

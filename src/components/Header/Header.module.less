@@ -21,11 +21,10 @@
 
 .item__base {
   margin: 0;
-  padding: 0.2rem 0;
   display: flex;
   align-items: center;
   //flex-grow: 1;
-
+  border-radius: 0.1rem;
   svg {
     padding: 0.5rem;
     width: 2.5rem;
@@ -43,9 +42,15 @@
 .item__base:focus {
   svg, img {
     color: #FF0000;
+
+  ;
   }
 
+}.item__base.active {
+  border: #FF0000 0.1rem solid;
+
 }
+
 
 .icon__text {
   margin: 0 0 0 1rem;

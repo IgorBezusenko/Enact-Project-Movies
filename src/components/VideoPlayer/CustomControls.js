@@ -20,12 +20,19 @@ export const CustomControls = ({
                                    playing,
                                    played,
                                    duration,
+                                   loaded,
+                                   loop
                                }) => {
     const history = useHistory()
     const dispatch = useDispatch()
     const [keycode, setKeycode] = useState(null)
     const [hideControls, setHideControls] = useState()
+    const [path, setPath] = useState("/detail")
     const movieFile = useSelector(state => state.mainReducer.movieFile)
+
+    useEffect(() => {
+        if (movieFile.serial) setPath("/series")
+    }, [])
 
     useEffect(() => {
         setHideControls(6)
@@ -68,6 +75,10 @@ export const CustomControls = ({
         }
     }, [hideControls])
 
+    useEffect(() => {
+        if (played === 1) history.push(path)
+    }, [played])
+
     const SEEK15 = 1 / duration * 15;
     const SEEK120 = 1 / duration * 120;
 
@@ -83,10 +94,6 @@ export const CustomControls = ({
         </span>)
     })
 
-    let path = "/detail"
-    if (movieFile.serial) {
-        path = "/series"
-    }
 
     return <>
         {
@@ -123,7 +130,7 @@ export const CustomControls = ({
                         </ItemBaseRef>
 
                         <ItemBaseRef itemFocus={ARROW_RIGHT + " " + css.btn_controls_arrow}
-                                     className={css.btn_controls  + " " + css.btn_controls_arrow}
+                                     className={css.btn_controls + " " + css.btn_controls_arrow}
                                      onClick={() => {
                                          handleTogglePlus(SEEK15)
                                      }}><SkipForward

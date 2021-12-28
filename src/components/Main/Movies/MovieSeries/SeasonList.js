@@ -8,7 +8,7 @@ export const SeasonList = ({mediaItems, onClickToSeason, currentSeason}) => {
                 && <ButtonSpotTable key={index}
                                     className={css.btn + " " + css.btn__season
                                     + " " + `${media.title === currentSeason && css.btn__season_focus} `}
-                                    onFocus={() => onClickToSeason(media.title)}
+                                    onClick={() => onClickToSeason(media.title)}
                 >{media.title}</ButtonSpotTable>
         }
     )

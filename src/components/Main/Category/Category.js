@@ -34,10 +34,14 @@ export const Category = (props) => {
     }, [])
 
     useEffect(() => {
+        dispatch(clearPage())
+        dispatch(getCategory(categoryId, 1, 1))
+    }, [categoryId])
+
+    useEffect(() => {
         const parsed = queryString.parse(history.location.search.substr(1))
         let actualIdSort = idSort
-
-        if (!!parsed.cid) dispatch(setCategoryId(parsed.cid))
+        console.log("parsed",parsed)
         if (!!parsed.id_sort) actualIdSort = parsed.id_sort
         if (!!parsed.id) dispatch(setCategoryId(parsed.id))
         dispatch(getCategory(categoryId, currentPage, actualIdSort))
@@ -48,7 +52,7 @@ export const Category = (props) => {
         if (currentPage !== 1) {
             dispatch(setNewCategoryPage(categoryId, currentPage, idSort))
         }
-    }, [currentPage])
+    }, [currentPage, categoryId])
 
     useEffect(() => {
         dispatch(setCurrentPath(history.location.pathname + history.location.search))
