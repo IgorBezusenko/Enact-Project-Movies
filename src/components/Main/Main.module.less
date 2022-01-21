@@ -58,10 +58,12 @@
 .content {
   //margin:  0 0 0 5rem;
 }
+
 .row__container {
   width: 89vw;
   margin: 0 0 0 8rem;
 }
+
 .row {
   display: flex;
   justify-content: space-between;
@@ -194,11 +196,15 @@
 }
 
 .focus__content {
-  height: 4.3rem;
-  padding: 0 1rem 0 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin: 0 0 1rem 0;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-clamp: 3;
+  box-orient: vertical;
 }
 
 .focus__rate_age {
