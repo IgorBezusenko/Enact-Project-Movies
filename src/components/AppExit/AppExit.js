@@ -14,7 +14,7 @@ export const AppExit = () => {
         <>
             <div className={css.blockOut}>
                 <div>
-                    <h1>Выйти их приложения?</h1>
+                    <h1>Выйти из приложения?</h1>
                 </div>
                 <div className={css.blockOut__btn}>
                     <ButtonSpotTable className={css.btn + " " + css.btn__enter} onClick={onGoMain}>Остаться</ButtonSpotTable>

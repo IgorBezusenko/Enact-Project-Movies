@@ -45,6 +45,8 @@ export const SET_FILTER_TYPE_CONTENT = "CATEGORY/SET_FILTER_TYPE_CONTENT"
 export const SET_FILTER_SEARCH = "CATEGORY/SET_FILTER_SEARCH"
 export const SET_NEW_FILTER_SEARCH_PAGE = "CATEGORY/SET_NEW_FILTER_SEARCH_PAGE"
 
+export const SET_SEARCH_TEXT = "SEARCH/SET_SEARCH_TEXT"
+export const SET_IS_SEARCH_MODAL = "SEARCH/SET_IS_SEARCH_MODAL"
 export const SET_SEARCH_ITEMS = "SEARCH/SET_SEARCH_ITEMS"
 export const SET_NEW_SEARCH_PAGE = "SEARCH/SET_NEW_SEARCH_PAGE"
 export const RESET_SEARCH_PAGE = "SEARCH/RESET_SEARCH_PAGE"
@@ -412,6 +414,14 @@ export const getNewSearchFilterPage = (genre, country, year, typeContent, page) 
 }
 
 //search
+export const setSearchText= (text) => ({
+    type: SET_SEARCH_TEXT,
+    payload: text
+})
+export const toggleSearchModal = (isSearchModal) => ({
+    type: SET_IS_SEARCH_MODAL,
+    payload: isSearchModal
+})
 export const setSearchItems = (searchItems) => ({
     type: SET_SEARCH_ITEMS,
     searchItems
