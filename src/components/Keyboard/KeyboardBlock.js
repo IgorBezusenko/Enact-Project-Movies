@@ -1,25 +1,15 @@
 import css from "./Keyboard.module.less"
 import {ArrowLeft, Globe} from "react-feather";
 import React, {useState} from "react";
-// import {TextFieldBase} from "../../../SpottableComponents/TextField";
-// import {KeyboardField} from "../../../SpottableComponents/KeyboardField";
 import {KeyBoardItem} from "./KeyboardItem";
-// import {useAction} from "../../../../hooks/useAction";
-import {useHistory} from "react-router-dom";
 import {ItemBase} from "../Buttons/ItemBase";
-import {KeyboardField} from "../Buttons/KeyboardField";
-import {TextFieldBase} from "../Buttons/TextField";
-import {useDispatch} from "react-redux";
-import {setSearchText} from "../../redux/actions";
+import {KeyboardField, KeyboardFieldBase} from "../Buttons/KeyboardField";
 
 
-export const KeyboardBlock = ({onHiddenModal}) => {
-    // const {setVodSearchText} = useAction()
-    const dispatch = useDispatch()
-    const history = useHistory()
+export const KeyboardBlock = ({onHiddenModal, handleSubmitForm, textField}) => {
     const [lang, setLang] = useState('ru')
     const [isUpperCase, setIsUpperCase] = useState(false)
-    const [search, setSearch] = useState([])
+    const [search, setSearch] = useState(textField ? textField : [])
     const [isSearch, setIsSearch] = useState(true)
     let searchText = search.join("")
 
@@ -44,9 +34,7 @@ export const KeyboardBlock = ({onHiddenModal}) => {
     }
 
     const onSubmit = () => {
-        // setVodSearchText(searchText)
-        dispatch(setSearchText(searchText))
-        // history.push("/vod-category")
+        handleSubmitForm(searchText)
         onHiddenModal()
     }
     const onChangeLang = () => {
@@ -95,9 +83,9 @@ export const KeyboardBlock = ({onHiddenModal}) => {
     return <>
         <div className={css.vodSearch}>
             <div className={css.vodSearch__inputContainer}>
-                <TextFieldBase className={css.vodSearch__field + ` ${isSearch && css.active}`}
-                               text={searchText}
-                               onClick={onFocusSearch}
+                <KeyboardFieldBase className={css.vodSearch__field + ` ${isSearch && css.active}`}
+                                   text={searchText}
+                                   onClick={onFocusSearch}
                 />
                 <ItemBase onClick={onBackspace} className={css.vodSearch__btn}><ArrowLeft/> </ItemBase>
 

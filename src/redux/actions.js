@@ -1,6 +1,9 @@
 import {AuthAPI, MainAPI, MoviesPreview} from "../API/API";
 import {reactLocalStorage} from "reactjs-localstorage";
 
+export const TOGGLE_AUTH_MODAL = "AUTH/TOGGLE_AUTH_MODAL"
+export const SET_LOGIN = "AUTH/SET_LOGIN"
+export const SET_PASSWORD = "AUTH/SET_PASSWORD"
 export const AUTH_TOGGLE_IS_FETCHING = "AUTH/AUTH_TOGGLE_IS_FETCHING"
 export const SET_TOKEN = "AUTH/SET_TOKEN"
 export const SET_TOKEN_CODE = "AUTH/SET_TOKEN_CODE"
@@ -70,6 +73,18 @@ export const SET_FOCUS_REF = "CustomControls/SET_FOCUS_REF"
 
 // export const SET_FILTER_SEARCH = "CATEGORY/SET_FILTER_SEARCH"
 
+export const setLogin = (login) => ({
+    type: SET_LOGIN,
+    login
+})
+export const setPassword = (password) => ({
+    type: SET_PASSWORD,
+    password
+})
+export const toggleAuthModal = (isAuthModal) => ({
+    type: TOGGLE_AUTH_MODAL,
+    isAuthModal
+})
 export const authToggleIsFetching = (IsFetching) => ({
     type: AUTH_TOGGLE_IS_FETCHING,
     IsFetching
@@ -103,8 +118,7 @@ export const getToken = (login, password) => async (dispatch) => {
     try {
         const {data} = await AuthAPI.login(login, password)
         dispatch(setToken(data.data.token))
-        // reactLocalStorage.set('token', (data.data.token))
-        console.log("Auth", data.data.token)
+        // console.log("Auth", data.data.token)
         dispatch(clearError())
         dispatch(authToggleIsFetching(false))
     } catch (e) {
@@ -123,7 +137,7 @@ export const getTokenCode = (code_UID, token) => async (dispatch) => {
         if (data.token) {
             dispatch(setToken(data.token))
         }
-        console.log("AuthCode_UID", data)
+        // console.log("AuthCode_UID", data)
         dispatch(authToggleIsFetching(false))
     } catch (e) {
         // dispatch(setError(e.response.data.error.message))
@@ -213,7 +227,7 @@ export const getVideoUrl = (file) => async (dispatch) => {
     // dispatch(mainToggleIsFetching(true))
     try {
         const response = await MainAPI.videoUrl(file)
-        console.log(response.data.url)
+        // console.log(response.data.url)
         dispatch({
             type: GET_VIDEO_URL,
             videoUrl: response.data.url
@@ -414,7 +428,7 @@ export const getNewSearchFilterPage = (genre, country, year, typeContent, page) 
 }
 
 //search
-export const setSearchText= (text) => ({
+export const setSearchText = (text) => ({
     type: SET_SEARCH_TEXT,
     payload: text
 })

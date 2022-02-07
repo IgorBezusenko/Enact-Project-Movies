@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Header} from "../Header/Header";
 import {NavOnBack} from "../NavOnBack/NavOnBack";
 
@@ -9,64 +9,59 @@ import {
     getSearchItems,
     resetSearchPage,
     setClearSearchItems,
-    setNewSearchPage, setSearchText,
+    setNewSearchPage,
+    setSearchText,
     toggleSearchModal
 } from "../../redux/actions";
 import MainListItem from "../Main/MainListItem";
 import {KeyboardModal} from "../Keyboard/KeyboardModal";
-import {TextField} from "../Buttons/TextField";
 import {ItemBase} from "../Buttons/ItemBase";
 import {X} from "react-feather";
 import {ItemBaseRef} from "../Buttons/ItemBaseRef";
+import {stringSplit} from "../../utils/stringSplit";
 
 export const SearchPanel = (props) => {
     const dispatch = useDispatch()
     const history = useHistory()
-        const {
+    const {
         searchItems,
         limitItems,
         errorSearchItem,
         isSearchModal,
         searchInputText
     } = useSelector((state) => state.searchReducer)
-    // const [inputValue, setInputValue] = useState("")
-    // const inputRef = useRef(null)
+    const [textField, setTextField] = useState([])
 
     useEffect(() => {
-        dispatch(setClearSearchItems())
-        dispatch(resetSearchPage())
+
         // onFocusInput()
+        return () => {
+            dispatch(setClearSearchItems())
+            dispatch(resetSearchPage())
+            dispatch(setSearchText(null))
+        }
     }, [])
 
     useEffect(() => {
         if (limitItems !== 15 && searchInputText !== null) {
-            dispatch(getSearchItems(searchInputText, limitItems))
+            onSubmitSearch()
         }
     }, [limitItems])
 
     useEffect(() => {
-        onSubmit()
+        onSubmitSearch()
     }, [searchInputText])
 
     const onHiddenModal = () => dispatch(toggleSearchModal(false))
-    const onShowModal = () => dispatch(toggleSearchModal(true))
-
-    const onSubmit = () => {
-
-        dispatch(getSearchItems(searchInputText, limitItems))
+    const onShowModal = () => {
+        dispatch(toggleSearchModal(true))
+        setTextField(stringSplit(searchInputText))
     }
-    //
-    // const onFocusInput = () => {
-    //     inputRef.current.focus()
-    //     // const doc = document.querySelector('.enact_moonstone_Input_Input_input')
-    //     // doc.focus()
-    // }
-    //
-    // const onChangeInputValue = (e) => {
-    //     setInputValue(e.value)
-    // }
+
+    const onSubmitSearch = () => dispatch(getSearchItems(searchInputText, limitItems))
+    const handleSubmitForm = (searchText) => dispatch(setSearchText(searchText))
+
     const onResetInputValue = () => {
-        // setInputValue("")
         dispatch(setSearchText(null))
         dispatch(setClearSearchItems())
     }
@@ -89,7 +84,11 @@ export const SearchPanel = (props) => {
     }
     return (
         <>
-            {isSearchModal && <KeyboardModal isSearchModal={isSearchModal} onHiddenModal={onHiddenModal}/>}
+            <KeyboardModal isSearchModal={isSearchModal}
+                           onHiddenModal={onHiddenModal}
+                           handleSubmitForm={handleSubmitForm}
+                           textField={textField}
+            />
             <div className={css.container}>
                 <Header/>
 
@@ -120,8 +119,8 @@ export const SearchPanel = (props) => {
                         {errorSearchItem && errorSearchItem}
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
-                        <ItemBaseRef  className={css.textField} onClick={onShowModal}
-                                   index={0}>
+                        <ItemBaseRef className={css.textField} onClick={onShowModal}
+                                     index={0}>
                             {searchInputText ? searchInputText : "Введите поисковый запрос"}
                         </ItemBaseRef>
                         <ItemBase className={css.textField__reset}

@@ -2,11 +2,16 @@ import {reactLocalStorage} from "reactjs-localstorage";
 import {
     AUTH_TOGGLE_IS_FETCHING,
     CLEAR_ERROR,
-    CLEAR_TOKEN, CLEAR_USER_PROFILE,
+    CLEAR_TOKEN,
+    CLEAR_USER_PROFILE,
     SET_CONNECTION_CODE,
     SET_ERROR,
+    SET_LOGIN,
+    SET_PASSWORD,
     SET_TOKEN,
-    SET_TOKEN_CODE, SET_USER_PROFILE
+    SET_TOKEN_CODE,
+    SET_USER_PROFILE,
+    TOGGLE_AUTH_MODAL
 } from "../actions";
 
 
@@ -16,15 +21,22 @@ const initialState = {
     error: null,
     tokenCode: null,
     connectionCode: reactLocalStorage.get('code') || "",
-    userProfile: null
+    userProfile: null,
+    isAuthModal: false,
+    login: null,
+    password: null
 }
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SET_LOGIN:
+            return {...state, login: action.login}
+        case SET_PASSWORD:
+            return {...state, password: action.password}
+        case TOGGLE_AUTH_MODAL:
+            return {...state, isAuthModal: action.isAuthModal}
+
         case SET_TOKEN_CODE :
-            return {
-                ...state,
-                tokenCode: action.tokenCode
-            }
+            return {...state, tokenCode: action.tokenCode}
         case SET_CONNECTION_CODE :
             return {
                 ...state,
@@ -57,12 +69,12 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 error: null
             }
-            case  SET_USER_PROFILE:
+        case  SET_USER_PROFILE:
             return {
                 ...state,
                 userProfile: {...action.userProfile}
             }
-            case  CLEAR_USER_PROFILE:
+        case  CLEAR_USER_PROFILE:
             return {
                 ...state,
                 userProfile: null

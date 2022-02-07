@@ -8,8 +8,8 @@ export const Preloader = () => {
     useEffect(() => {
 
         // history.push("/main")
-        // history.push("/auth-form")
-        history.push("/search-panel")
+        history.push("/auth-form")
+        // history.push("/search-panel")
         setLoading(false)
 
     }, [])
