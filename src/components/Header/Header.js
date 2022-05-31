@@ -32,6 +32,7 @@ export const Header = () => {
 }
 
 const Sidebar = ({token}) => {
+    const APP_VERSION = "1.0.9"
     const userProfile = useSelector(state => state.authReducer.userProfile)
     const [search, setSearch] = useState(false)
     const [play, setPlay] = useState(false)
@@ -44,7 +45,7 @@ const Sidebar = ({token}) => {
     const dispatch = useDispatch()
     let history = useHistory();
 
-    const isFocus = search || play || favorite || serial || smile || login || film || navbar
+    const isFocus = search || play || favorite || serial || smile || login || film || navbar || true
     const onSelectHandler = (e, path, cid) => {
         if (e.code === "Enter") {
             history.push(path)
@@ -65,6 +66,7 @@ const Sidebar = ({token}) => {
         <div>
             {userProfile && userProfile.email ? userProfile.email : "Электронная почта"}
         </div>
+
         {
 
             <div className={css.user__subscribe}>
@@ -79,7 +81,12 @@ const Sidebar = ({token}) => {
 
             </div>
         }
-        <div className={css.user__date}>{userProfile && userProfile.dtEnd}</div>
+        <div className={css.user__date}>
+            <div>{userProfile && userProfile.dtEnd}</div>
+            <hr/>
+            <div>Версия: {APP_VERSION}</div>
+        </div>
+
     </div>;
 
     return (
@@ -109,7 +116,8 @@ const Sidebar = ({token}) => {
                         onKeyUp={(e) => onSelectHandler(e, "/search-panel")}
                         onFocus={() => setSearch(true)}
                         onBlur={() => setSearch(false)}
-                        className={css.item__base + ` ${history.location.pathname==="/search-panel" && css.active}` }><Link to={"/search-panel"}><Search/></Link>
+                        className={css.item__base + ` ${history.location.pathname === "/search-panel" && css.active}`}><Link
+                        to={"/search-panel"}><Search/></Link>
 
                     </ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${search && css.color__red}`}>Поиск</div>}
@@ -120,7 +128,8 @@ const Sidebar = ({token}) => {
                         onKeyUp={(e) => onSelectHandler(e, "/history")}
                         onFocus={() => setPlay(true)}
                         onBlur={() => setPlay(false)}
-                        className={css.item__base  + ` ${history.location.pathname==="/history" && css.active}` }><Link to={"/history"}><PlayCircle/></Link></ItemBase>
+                        className={css.item__base + ` ${history.location.pathname === "/history" && css.active}`}><Link
+                        to={"/history"}><PlayCircle/></Link></ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${play && css.color__red}`}>Я смотрю</div>}
                 </li>
                 <li>
@@ -129,7 +138,8 @@ const Sidebar = ({token}) => {
                         onKeyUp={(e) => onSelectHandler(e, "/bookmark")}
                         onFocus={() => setFavorite(true)}
                         onBlur={() => setFavorite(false)}
-                        className={css.item__base  + ` ${history.location.pathname==="/bookmark" && css.active}` }><Link to={"/bookmark"}><Bookmark/></Link></ItemBase>
+                        className={css.item__base + ` ${history.location.pathname === "/bookmark" && css.active}`}><Link
+                        to={"/bookmark"}><Bookmark/></Link></ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${favorite && css.color__red}`}>Избранное</div>}
                 </li>
                 <li>
@@ -137,7 +147,7 @@ const Sidebar = ({token}) => {
                               onKeyUp={(e) => onSelectHandler(e, "/category?id=100", "100")}
                               onFocus={() => setFilm(true)}
                               onBlur={() => setFilm(false)}
-                              className={css.item__base  + ` ${history.location.search==="?id=100" && css.active}` }><Link
+                              className={css.item__base + ` ${history.location.search === "?id=100" && css.active}`}><Link
                         to={"/category?id=100"}><Video/></Link></ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${film && css.color__red}`}>Фильмы</div>}
                 </li>
@@ -146,7 +156,7 @@ const Sidebar = ({token}) => {
                               onKeyUp={(e) => onSelectHandler(e, "/category?id=39", "39")}
                               onFocus={() => setSerial(true)}
                               onBlur={() => setSerial(false)}
-                              className={css.item__base  + ` ${history.location.search==="?id=39" && css.active}` }>
+                              className={css.item__base + ` ${history.location.search === "?id=39" && css.active}`}>
                         <Link to={"/category?id=39"}>
                             <Briefcase/></Link></ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${serial && css.color__red}`}>Сериалы</div>}
@@ -157,7 +167,8 @@ const Sidebar = ({token}) => {
                         onKeyUp={(e) => onSelectHandler(e, "/category?id=20", "20")}
                         onFocus={() => setSmile(true)}
                         onBlur={() => setSmile(false)}
-                        className={css.item__base  + ` ${history.location.search==="?id=20" && css.active}` }><Link to={"/category?id=20"}><Smile/></Link></ItemBase>
+                        className={css.item__base + ` ${history.location.search === "?id=20" && css.active}`}><Link
+                        to={"/category?id=20"}><Smile/></Link></ItemBase>
                     {isFocus && <div className={css.icon__text + " " + `${smile && css.color__red}`}>Мультфильмы</div>}
                 </li>
                 <li>

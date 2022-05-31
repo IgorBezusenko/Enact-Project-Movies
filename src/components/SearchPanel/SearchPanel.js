@@ -133,7 +133,7 @@ export const SearchPanel = (props) => {
                     <div className={css.list}>
                         {
                             searchItems && searchItems.length === 0 && searchInputText !== null &&
-                            <h1>Ничего не найденно...</h1>
+                            <h1>Ничего не найдено...</h1>
                         }
                         {searchItems && searchItems.map((item, idx) => {
                             return (
