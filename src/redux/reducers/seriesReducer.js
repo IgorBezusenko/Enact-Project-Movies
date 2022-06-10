@@ -1,19 +1,31 @@
-import {CLEAR_ITEM_FOCUS, SET_CURRENT_SEASON, SET_CURRENT_SERIES, SET_ITEM_FOCUS, SET_MEDIA_FILES} from "../actions";
+import {
+    CLEAR_ITEM_FOCUS,
+    SET_CURRENT_SEASON,
+    SET_CURRENT_SERIES,
+    SET_ITEM_FOCUS,
+    SET_MEDIA_FILES,
+    SET_PLAYING_SEASON_AND_SERIES
+} from "../actions";
 
 const initialState = {
     mediaFiles: [],
     actualCurrentSeason: null,
     currentSeries: null,
-    isItemFocus: true
+    isItemFocus: true,
+    playingSeasonAndSeries: {}
 }
 export const seriesReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SET_PLAYING_SEASON_AND_SERIES : {
+            return {
+                ...state,
+                playingSeasonAndSeries: {...action.payload},
+            }
+        }
         case SET_MEDIA_FILES : {
-
             return {
                 ...state,
                 mediaFiles: [...action.mediaFiles],
-
             }
         }
         case SET_CURRENT_SEASON: {

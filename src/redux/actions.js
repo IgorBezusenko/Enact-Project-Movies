@@ -68,10 +68,17 @@ export const SET_CURRENT_SEASON = "MoviesSeries/SET_CURRENT_SEASON"
 export const SET_CURRENT_SERIES = "MoviesSeries/SET_CURRENT_SERIES"
 export const SET_ITEM_FOCUS = "MoviesSeries/SET_ITEM_FOCUS"
 export const CLEAR_ITEM_FOCUS = "MoviesSeries/CLEAR_ITEM_FOCUS"
+export const SET_PLAYING_SEASON_AND_SERIES = "MoviesSeries/SET_PLAYING_SEASON_AND_SERIES"
 
 export const SET_FOCUS_REF = "CustomControls/SET_FOCUS_REF"
 
 // export const SET_FILTER_SEARCH = "CATEGORY/SET_FILTER_SEARCH"
+
+
+export const togglePlayingSeasonAndSeries = (payload) => ({
+    type: SET_PLAYING_SEASON_AND_SERIES,
+    payload
+})
 
 export const setLogin = (login) => ({
     type: SET_LOGIN,

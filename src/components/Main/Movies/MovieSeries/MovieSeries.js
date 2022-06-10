@@ -1,6 +1,12 @@
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
-import {clearVideoUrl, setCurrentSeason, setCurrentSeries, setMediaFiles} from "../../../../redux/actions";
+import {
+    clearVideoUrl,
+    setCurrentSeason,
+    setCurrentSeries,
+    setMediaFiles,
+    togglePlayingSeasonAndSeries
+} from "../../../../redux/actions";
 import {useHistory} from "react-router-dom";
 import {NavOnBack} from "../../../NavOnBack/NavOnBack";
 
@@ -20,7 +26,7 @@ export const MovieSeries = (props) => {
     useEffect(() => {
         if (movieFile.serial) {
             dispatch(setMediaFiles(movieFile.media))
-            console.log(13232132132)
+            // console.log(13232132132)
         }
     }, [])
 
@@ -29,7 +35,7 @@ export const MovieSeries = (props) => {
         if (actualCurrentSeason) {
             setCurrentSeason1(actualCurrentSeason.title)
             dispatch(setCurrentSeries())
-            console.log("asdadad")
+            // console.log("asdadad")
         }
     }, [mediaFiles, actualCurrentSeason])
 
@@ -44,7 +50,9 @@ export const MovieSeries = (props) => {
 
     }
 
-    const onSelectSeries = (path) => {
+    const onSelectSeries = (path, item) => {
+        console.log("click ceries", currentSeason, item.title)
+        dispatch(togglePlayingSeasonAndSeries({playingSeason:currentSeason,playingSeries:item.title}))
         history.push(path)
     }
 

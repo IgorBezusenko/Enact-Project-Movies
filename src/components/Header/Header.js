@@ -45,7 +45,7 @@ const Sidebar = ({token}) => {
     const dispatch = useDispatch()
     let history = useHistory();
 
-    const isFocus = search || play || favorite || serial || smile || login || film || navbar || true
+    const isFocus = search || play || favorite || serial || smile || login || film || navbar
     const onSelectHandler = (e, path, cid) => {
         if (e.code === "Enter") {
             history.push(path)
