@@ -11,7 +11,8 @@ const OnBack = ({title, subTitle, year, playingSeason, playingSeries, onGoBack, 
                 <div className={css.icon}><CornerUpLeft/></div>
                 <div>
                     <div
-                        className={css.ml_7 + " " + css.nav__title}> {title ? title : null} {playingSeason && playingSeason} {playingSeries && playingSeries} </div>
+                        className={css.ml_7 + " " + css.nav__title}> {title ? title : null} {playingSeason && playingSeries && `(${playingSeason}, ${playingSeries})`}
+                    </div>
                     <div className={css.ml_7}>{year ? year + ", " : null} {subTitle ? subTitle : null}</div>
                 </div>
             </div>

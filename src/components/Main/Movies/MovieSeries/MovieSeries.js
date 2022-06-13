@@ -1,7 +1,9 @@
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
 import {
+    clearMediaFiles,
     clearVideoUrl,
+    getVideoUrl,
     setCurrentSeason,
     setCurrentSeries,
     setMediaFiles,
@@ -26,7 +28,6 @@ export const MovieSeries = (props) => {
     useEffect(() => {
         if (movieFile.serial) {
             dispatch(setMediaFiles(movieFile.media))
-            // console.log(13232132132)
         }
     }, [])
 
@@ -35,7 +36,6 @@ export const MovieSeries = (props) => {
         if (actualCurrentSeason) {
             setCurrentSeason1(actualCurrentSeason.title)
             dispatch(setCurrentSeries())
-            // console.log("asdadad")
         }
     }, [mediaFiles, actualCurrentSeason])
 
@@ -51,16 +51,22 @@ export const MovieSeries = (props) => {
     }
 
     const onSelectSeries = (path, item) => {
-        console.log("click ceries", currentSeason, item.title)
-        dispatch(togglePlayingSeasonAndSeries({playingSeason:currentSeason,playingSeries:item.title}))
+        dispatch(togglePlayingSeasonAndSeries({playingSeason: currentSeason, playingSeries: item.title}))
+        dispatch(clearVideoUrl())
+        dispatch(getVideoUrl(item.file))
         history.push(path)
     }
 
     const seasonSel = movieFile.media && movieFile.media.filter(sel => sel.title === currentSeason)
 
     const onGoPath = (path) => history.push(path)
+    const onNavBack = (path) => {
+        dispatch(clearMediaFiles())
+        onGoPath(path)
+    }
     const onSelect = (e, path) => {
         if (e.code === "ArrowUp") {
+            dispatch(clearMediaFiles())
             onGoPath(path)
         }
     }
@@ -79,7 +85,7 @@ export const MovieSeries = (props) => {
                 className={css.container}>
                 <NavOnBack className={css.on__back}
                            title={movieFile.title}
-                           onClick={() => onGoPath(`/detail?id=${movieFile.id}`)}
+                           onClick={() => onNavBack(`/detail?id=${movieFile.id}`)}
                            onKeyDown={(e => onSelect(e, `/detail?id=${movieFile.id}`))}
                 />
                 <div className={css.season__row}>

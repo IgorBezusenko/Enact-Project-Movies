@@ -1,5 +1,6 @@
 import {
     CLEAR_ITEM_FOCUS,
+    CLEAR_MEDIA_FILES,
     SET_CURRENT_SEASON,
     SET_CURRENT_SERIES,
     SET_ITEM_FOCUS,
@@ -26,6 +27,12 @@ export const seriesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 mediaFiles: [...action.mediaFiles],
+            }
+        }
+        case CLEAR_MEDIA_FILES : {
+            return {
+                ...state,
+                mediaFiles: [],
             }
         }
         case SET_CURRENT_SEASON: {

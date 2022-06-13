@@ -8,7 +8,8 @@ import {
     setBookmarkId,
     setFocusRef,
     setVote,
-    toggleBookmarkById
+    toggleBookmarkById,
+    togglePlayingSeasonAndSeries
 } from "../../../redux/actions";
 import {useQuery} from "../../../utils/useQuery";
 import {Redirect, useHistory} from "react-router-dom";
@@ -42,6 +43,9 @@ export const MoviesPreview = (props) => {
         dispatch(clearVideoUrl())
         dispatch(clearItemFocus())
         dispatch(setFocusRef(ARROW_ENTER))
+        return () => {
+            dispatch(togglePlayingSeasonAndSeries({}))
+        }
     }, [])
 
     useEffect(() => {

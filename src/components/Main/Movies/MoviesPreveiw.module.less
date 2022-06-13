@@ -11,11 +11,12 @@
   justify-content: space-between;
   align-items: center;
 }
-.preview__img{
+
+.preview__img {
   width: 20.6rem;
 }
 
-.description{
+.description {
   padding: 0 0 0 1rem;
   margin: 3rem 0 2rem 0;
   border-left: #FF0000 solid 0.2rem;
@@ -25,8 +26,9 @@
 .on__back:focus {
   color: #FF0000;
 }
-.title{
- width: fit-content;
+
+.title {
+  width: fit-content;
 }
 
 .button__group {
@@ -55,21 +57,26 @@
 }
 
 .review {
-  height: 5.7rem;
-  padding: 0 1rem 0 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin: 1rem 0 1rem 0;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  line-clamp: 3;
+  box-orient: vertical;
 }
 
-.like.active{
+.like.active {
   color: #0D9F00;
 }
-.deslike.active{
-  color:  #FF0000;
+
+.deslike.active {
+  color: #FF0000;
 }
 
-.bookmark.active{
-  color:  #FF0000;
+.bookmark.active {
+  color: #FF0000;
 }
 

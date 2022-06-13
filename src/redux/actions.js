@@ -64,6 +64,7 @@ export const SET_BOOKMARK_ID = "BookMark/SET_BOOKMARK_ID"
 export const SET_NEW_BOOKMARK_PAGE = "BookMark/SET_NEW_BOOKMARK_PAGE"
 
 export const SET_MEDIA_FILES = "MoviesSeries/SET_MEDIA_FILES"
+export const CLEAR_MEDIA_FILES = "MoviesSeries/CLEAR_MEDIA_FILES"
 export const SET_CURRENT_SEASON = "MoviesSeries/SET_CURRENT_SEASON"
 export const SET_CURRENT_SERIES = "MoviesSeries/SET_CURRENT_SERIES"
 export const SET_ITEM_FOCUS = "MoviesSeries/SET_ITEM_FOCUS"
@@ -231,20 +232,20 @@ export const clearVideoUrl = () => ({
 })
 
 export const getVideoUrl = (file) => async (dispatch) => {
-    // dispatch(mainToggleIsFetching(true))
+    dispatch(mainToggleIsFetching(true))
     try {
         const response = await MainAPI.videoUrl(file)
-        // console.log(response.data.url)
+        // console.log("response.data.url", response.data.url, file)
         dispatch({
             type: GET_VIDEO_URL,
             videoUrl: response.data.url
 
         })
-        // dispatch(mainToggleIsFetching(false))
+        dispatch(mainToggleIsFetching(false))
     } catch (e) {
         console.log("Error getVideoUrl", e.response)
         // dispatch(clearToken())
-        // dispatch(mainToggleIsFetching(false))
+        dispatch(mainToggleIsFetching(false))
     }
 }
 
@@ -539,6 +540,10 @@ export const setMediaFiles = (mediaFiles) => ({
     type: SET_MEDIA_FILES,
     mediaFiles
 })
+export const clearMediaFiles = () => ({
+    type: CLEAR_MEDIA_FILES,
+})
+
 export const setCurrentSeason = () => ({
     type: SET_CURRENT_SEASON,
 })

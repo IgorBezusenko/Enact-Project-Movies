@@ -8,9 +8,10 @@ import {FastForward, PauseCircle, PlayCircle, SkipBack, SkipForward} from "react
 import Duration from "./DurationT";
 import {ItemBaseRef} from "./ItemBaseRef";
 import {ARROW_DOWN, ARROW_ENTER, ARROW_LEFT, ARROW_RIGHT, ARROW_UP} from "../../redux/reducers/playerReducer";
-import {setFocusRef, togglePlayingSeasonAndSeries} from "../../redux/actions";
+import {clearVideoUrl, getVideoUrl, setFocusRef, togglePlayingSeasonAndSeries} from "../../redux/actions";
 import {REMOTE_KEYS} from "../../API/constKey";
 import {useEventListener} from "../../hooks/useEventListener";
+import {AppLoading} from "../AppLoading/AppLoading";
 
 export const CustomControls = ({
                                    handlePlayPause,
@@ -31,13 +32,13 @@ export const CustomControls = ({
     const [hideControls, setHideControls] = useState()
     const [path, setPath] = useState("/detail")
     const movieFile = useSelector(state => state.mainReducer.movieFile)
-    const {playingSeasonAndSeries} = useSelector(state => state.seriesReducer)
+    const {isFetching} = movieFile
+    const {playingSeasonAndSeries, mediaFiles,} = useSelector(state => state.seriesReducer)
+
 
     useEffect(() => {
         if (movieFile.serial) setPath("/series")
-        return () => {
-            dispatch(togglePlayingSeasonAndSeries({}))
-        }
+
     }, [])
 
     useEffect(() => {
@@ -81,27 +82,53 @@ export const CustomControls = ({
         }
     }, [hideControls])
 
+
+    const currentSeasonIndex = mediaFiles.length !== 0 && mediaFiles.findIndex(item => item.title === playingSeasonAndSeries?.playingSeason);
+    const currentSeriesIndex = mediaFiles.length !== 0 && mediaFiles[currentSeasonIndex].items.findIndex(item => item.title === playingSeasonAndSeries?.playingSeries)
+    const totalSeries = mediaFiles.length !== 0 && mediaFiles[currentSeasonIndex].items.length - 1
+    const nextSeriesItem = mediaFiles.length !== 0 && mediaFiles[currentSeasonIndex].items[currentSeriesIndex + 1]
+
+    const onSelectNextSeries = () => {
+        // console.log("click ceries", mediaFiles[currentSeasonIndex].title, nextSeriesItem.title, "/player?file=" + nextSeriesItem.file)
+        dispatch(togglePlayingSeasonAndSeries({
+            playingSeason: mediaFiles[currentSeasonIndex].title,
+            playingSeries: nextSeriesItem.title
+        }))
+        dispatch(clearVideoUrl())
+        dispatch(getVideoUrl(nextSeriesItem.file))
+        history.push("/player?file=" + nextSeriesItem.file)
+    }
+
     useEffect(() => {
-        if (played === 1) history.push(path)
+        if (played === 1) {
+            if (mediaFiles.length === 0) {
+                onGoPath(path)
+            } else if (currentSeriesIndex < totalSeries) {
+                onSelectNextSeries()
+            } else if (currentSeriesIndex === totalSeries) {
+                onGoPath(path)
+            }
+        }
     }, [played])
 
-    const fullTime = 1 / duration
-    const SEEK15 = fullTime * 15;
-    const SEEK120 = fullTime * 120;
+    const timeOneSecond = 1 / duration;
+    const remainingTime = 1 - played;
+    const SEEK15 = timeOneSecond * 15;
+    const SEEK120 = timeOneSecond * 120;
 
     function fastForward15() {
-        // console.log({
-        //     duration, playing,
-        //     played, lll: (1 - SEEK15), SEEK15
-        // })
         if (played < (1 - SEEK15)) {
             handleTogglePlus(SEEK15)
+        } else if (remainingTime > timeOneSecond) {
+            handleTogglePlus(remainingTime)
         }
     }
 
     function fastForward120() {
         if (played < (1 - SEEK120)) {
             handleTogglePlus(SEEK120)
+        } else if (remainingTime > timeOneSecond) {
+            handleTogglePlus(remainingTime)
         }
     }
 
@@ -123,9 +150,9 @@ export const CustomControls = ({
             onGoPath(path)
         }
     }
+    //кнопки на пульте
     const funcEventKEY = (e) => {
         switch (e.keyCode) {
-
             case REMOTE_KEYS.Stop:
                 onGoPath(path);
                 break;
@@ -153,9 +180,8 @@ export const CustomControls = ({
         </span>)
     })
 
-    // console.log({actualCurrentSeason, currentSeries})
-
     return <>
+        {isFetching && <AppLoading/>}
         {
             hideControls > 1 &&
             <div>
