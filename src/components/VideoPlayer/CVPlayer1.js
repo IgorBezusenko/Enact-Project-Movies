@@ -24,7 +24,7 @@ class CVPlayer extends Component {
         playbackRate: 1.0,
         loop: false,
         visibleControls: true,
-        error:""
+        error: ""
     }
 
     componentDidMount() {
@@ -168,20 +168,20 @@ class CVPlayer extends Component {
     ref = player => {
         this.player = player
     }
-    onHandleError=(e)=>{
+    onHandleError = (e) => {
         console.log('onError', e)
-        this.setState({error:e})
+        this.setState({error: e})
     }
-    onHandleSeek=(e)=>{
+    onHandleSeek = (e) => {
         console.log('onSeek', e)
     }
-    onHandleReady=()=>{
+    onHandleReady = () => {
         console.log('onReady')
     }
-    onHandleStart=()=>{
+    onHandleStart = () => {
         console.log('Start')
     }
-    onHandleBuffer=() => {
+    onHandleBuffer = () => {
         console.log('onBuffer')
     }
 
@@ -207,6 +207,8 @@ class CVPlayer extends Component {
             < div className={css.player}
             >
                 <CustomControls handlePlayPause={this.handlePlayPause}
+                                handlePause={this.handlePause}
+                                handlePlay={this.handlePlay}
                                 handleSeekMouseDown={this.handleSeekMouseDown}
                                 handleSeekChange={this.handleSeekChange}
                                 handleSeekMouseUp={this.handleSeekMouseUp}

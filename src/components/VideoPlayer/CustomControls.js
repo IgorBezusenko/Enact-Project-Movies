@@ -15,6 +15,8 @@ import {AppLoading} from "../AppLoading/AppLoading";
 
 export const CustomControls = ({
                                    handlePlayPause,
+                                   handlePlay,
+                                   handlePause,
                                    handleSeekChange,
                                    handleSeekMouseDown,
                                    handleSeekMouseUp,
@@ -38,7 +40,6 @@ export const CustomControls = ({
 
     useEffect(() => {
         if (movieFile.serial) setPath("/series")
-
     }, [])
 
     useEffect(() => {
@@ -82,14 +83,12 @@ export const CustomControls = ({
         }
     }, [hideControls])
 
-
     const currentSeasonIndex = mediaFiles.length !== 0 && mediaFiles.findIndex(item => item.title === playingSeasonAndSeries?.playingSeason);
     const currentSeriesIndex = mediaFiles.length !== 0 && mediaFiles[currentSeasonIndex].items.findIndex(item => item.title === playingSeasonAndSeries?.playingSeries)
     const totalSeries = mediaFiles.length !== 0 && mediaFiles[currentSeasonIndex].items.length - 1
     const nextSeriesItem = mediaFiles.length !== 0 && mediaFiles[currentSeasonIndex].items[currentSeriesIndex + 1]
 
     const onSelectNextSeries = () => {
-        // console.log("click ceries", mediaFiles[currentSeasonIndex].title, nextSeriesItem.title, "/player?file=" + nextSeriesItem.file)
         dispatch(togglePlayingSeasonAndSeries({
             playingSeason: mediaFiles[currentSeasonIndex].title,
             playingSeries: nextSeriesItem.title
@@ -116,6 +115,7 @@ export const CustomControls = ({
     const SEEK15 = timeOneSecond * 15;
     const SEEK120 = timeOneSecond * 120;
 
+    //перемотки
     function fastForward15() {
         if (played < (1 - SEEK15)) {
             handleTogglePlus(SEEK15)
@@ -133,17 +133,18 @@ export const CustomControls = ({
     }
 
     function fastForwardBack15() {
-        console.log({
-            played
-        })
         if (played > SEEK15) {
             handleToggleMinus(SEEK15)
+        } else if (played < SEEK15) {
+            handleToggleMinus(played)
         }
     }
 
     function fastForwardBack120() {
         if (played > SEEK120) {
             handleToggleMinus(SEEK120)
+        } else if (played < SEEK120) {
+            handleToggleMinus(played)
         }
     }
 
@@ -160,10 +161,10 @@ export const CustomControls = ({
                 onGoPath(path);
                 break;
             case REMOTE_KEYS.Play:
-                handlePlayPause();
+                handlePlay();
                 break;
             case REMOTE_KEYS.Pause:
-                handlePlayPause();
+                handlePause();
                 break;
             case REMOTE_KEYS.FastForward:
                 fastForward15()
