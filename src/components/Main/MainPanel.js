@@ -12,14 +12,7 @@ const MainPanel = () => {
     const {mainData: movies, currentItem} = useSelector(state => state.mainReducer)
     const {token, connectionCode} = useSelector((state) => state.authReducer)
     const dispatch = useDispatch()
-    // const [keyDown, setKeyDown] = useState("")
-    // useEffect(() => {
-    //     document.addEventListener("keydown", (e) => {
-    //         console.log(e.type)
-    //         console.log("application", platformBack)
-    //         setKeyDown(`${e.keyCode} | ${e.type}`)
-    //     })
-    // }, [setKeyDown])
+
 
     useEffect(() => {
         reactLocalStorage.set('token', token);

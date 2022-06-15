@@ -133,6 +133,9 @@ export const CustomControls = ({
     }
 
     function fastForwardBack15() {
+        console.log({
+            played
+        })
         if (played > SEEK15) {
             handleToggleMinus(SEEK15)
         }

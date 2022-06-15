@@ -11,7 +11,7 @@ const MainListItemBase =
         let history = useHistory();
         let dispatch = useDispatch();
         const {currentItem} = useSelector(state => state.mainReducer)
-        const [focusItem, setFocusItem] = useState(3)
+        const [focusItem, setFocusItem] = useState(0)
         const selectCard = useRef(null)
 
         useEffect(() => {
@@ -36,8 +36,8 @@ const MainListItemBase =
         }
 
         const onSelectCardRef = () => {
-            if (history.location.pathname === "/main") setFocusItem(3)
-            if (history.location.pathname !== "/main") setFocusItem(2)
+            if (history.location.pathname === "/main") setFocusItem(0)
+            if (history.location.pathname !== "/main") setFocusItem(0)
             if (itemIndex === focusItem) {
                 selectCard.current.focus();
             }
@@ -58,7 +58,7 @@ const MainListItemBase =
                     }
                     {
                         item.id &&
-                        <div onClick={() => onClickItem(item.url)} className={css.item__cover} >
+                        <div onClick={() => onClickItem(item.url)} className={css.item__cover}>
                             <Link to={item.url}>
                                 <img src={item.logo} alt="item"/>
                             </Link>
@@ -67,9 +67,12 @@ const MainListItemBase =
                     {
                         visibleDescription ?
                             <div className={css.item__details}>
-                                <div>{item.year} | {!!item.access ?
-                                    <span className={cssCategory.follow}>Подписка</span> :
-                                    <span className={cssCategory.free}>Бесплатный</span>}</div>
+                                <div>{item.year} | {
+                                    !!item.access
+                                        ? <span className={cssCategory.follow}>Подписка</span>
+                                        : <span className={cssCategory.free}>Бесплатный</span>
+                                }
+                                </div>
                                 <div className={css.nowrap}>{!!item.rate_age && item.rate_age} {item.title}</div>
                             </div>
                             : null

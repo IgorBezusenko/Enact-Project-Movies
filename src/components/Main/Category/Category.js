@@ -41,7 +41,6 @@ export const Category = (props) => {
     useEffect(() => {
         const parsed = queryString.parse(history.location.search.substr(1))
         let actualIdSort = idSort
-        console.log("parsed",parsed)
         if (!!parsed.id_sort) actualIdSort = parsed.id_sort
         if (!!parsed.id) dispatch(setCategoryId(parsed.id))
         dispatch(getCategory(categoryId, currentPage, actualIdSort))

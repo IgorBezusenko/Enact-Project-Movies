@@ -1,0 +1,43 @@
+.row__container {
+  width: 90vw;
+  margin: 0 0 0 7rem;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 24rem;
+  //overflow: hidden;
+  padding: 0 1rem 0 0;
+  //margin: 0 0 0 8rem;
+  flex-shrink: 0;
+}
+
+.banner {
+  width: 52rem;
+  height: 22rem;
+  border-radius: 0.2rem;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.2rem;
+  }
+
+  &__item {
+    //display: block;
+    margin: 0 1rem;
+    padding: 0.1rem;
+    font-size: 1rem;
+    border-radius: 0.1rem;
+  }
+
+  &__item:focus {
+    padding: 0;
+    border: 0.1rem solid #FF0000;
+    border-radius: 0.3rem;
+  }
+}
+

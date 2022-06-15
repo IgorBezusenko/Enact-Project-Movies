@@ -5,7 +5,8 @@ import {useHistory} from "react-router-dom";
 import {ItemBase} from "../Buttons/ItemBase";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    clearCurrentItem, clearCurrentPath,
+    clearCurrentItem,
+    clearCurrentPath,
     getCategoryFilter,
     setCategoryId,
     setCurrentItemDec,
@@ -16,6 +17,7 @@ import {
 import {MainListItemPreview} from "./MainListItemPreview";
 import {ChevronDown, ChevronsUp} from "react-feather";
 import Scroller from "@enact/sandstone/Scroller";
+import {Banner} from "./Banner/Banner";
 
 const MainList = ({moviesList, nextItem, moviesLength}) => {
     const {mainData: movies, currentItem, movieFileFocus, movieCategoryTitle} = useSelector(state => state.mainReducer)
@@ -81,6 +83,7 @@ const MainList = ({moviesList, nextItem, moviesLength}) => {
             {i !== 0 && ", "}{country}
         </span>)
     })
+
     return (
         <div>
             <div className={css.block__column}>
@@ -109,71 +112,49 @@ const MainList = ({moviesList, nextItem, moviesLength}) => {
                     {moviesList.title}
                 </div>
 
-
-             <div className={css.row__container}>
-                 <Scroller>
-                     <div className={css.row}>
-                         {/*<ItemBase>{" "}</ItemBase>*/}
-                         {moviesList.items.map((item, idx) => {
-                             return (
-                                 <MainListItem
-                                     itemIndex={idx}
-                                     key={idx}
-                                     onFocus={() => onHandelSetItem(item, moviesList.title, item.id)}
-
-                                     className={css.list__item} item={item}/>
-                             )
-                         })}
-                         {/*<ItemBase className={css.plug}>{" "}</ItemBase>*/}
-                     </div>
-                 </Scroller>
-             </div>
+                {
+                    moviesList.viewport === 0.8 &&
+                    <Banner moviesList={moviesList}/>
+                }
+                {moviesList.viewport === 0.3 && <div className={css.row__container}>
+                    <Scroller>
+                        <div className={css.row}>
+                            {moviesList.items.map((item, idx) => {
+                                return (
+                                    <MainListItem
+                                        itemIndex={idx}
+                                        key={idx}
+                                        onFocus={() => onHandelSetItem(item, moviesList.title, item.id)}
+                                        className={css.list__item} item={item}
+                                    />
+                                )
+                            })
+                            }
+                        </div>
+                    </Scroller>
+                </div>}
 
                 {
-                    movieCategoryTitle === moviesList.title && movieFileFocus &&
-                    <div className={css.main__list_focus}>
-                        <div className={css.focus__description}>
-                            <div className={css.focus__title}>{movieFileFocus.title} {!!country.length && <span
-                                className={css.focus__genre}>({country})</span>}</div>
-                            <div className={css.focus__genre}>
-                                {movieFileFocus.year} {genre} | {!!movieFileFocus.access
-                                ? <span style={{color: "#FF0000"}}>Подписка</span>
-                                : <span style={{color: "#6C757D"}}>Бесплатный</span>}
-                                {
-                                    !!movieFileFocus.rate_age &&
-                                    <span className={css.focus__rate_age}>{movieFileFocus.rate_age}</span>
-                                }
-                            </div>
-                            <div className={css.focus__content}>{movieFileFocus.description}</div>
-                        </div>
-                        <div className={css.focus__rating}>
-                            <div className={css.focus__rating__kp}>
-                                <span
-                                    className={css.focus__rate__number}>{movieFileFocus.rate_kp === 0 ? "-" : movieFileFocus.rate_kp}</span>
-                                <div className={css.focus__small}>КиноПоиск</div>
-                            </div>
-                            <div className={css.focus__rating__imbd}>
-                                <div
-                                    className={css.focus__rate__number}>{movieFileFocus.rate_imdb === 0 ? "-" : movieFileFocus.rate_imdb}</div>
-                                <div className={css.focus__small}>IMBb</div>
-                            </div>
-                        </div>
-                    </div>
+                    moviesList.viewport === 0.3 && movieCategoryTitle === moviesList.title && movieFileFocus &&
+                    <DescriptionMovieOnFocus movieFileFocus={movieFileFocus} country={country} genre={genre}/>
+
                 }
                 {
                     nextItem && <>
                         <div className={css.title__mainList}>
                             {nextItem.title}
                         </div>
-                        <div className={css.row}>
-                            {nextItem.items.map((item, idx) => {
-                                return (
-                                    <MainListItemPreview key={idx}
-                                                         item={item}
-                                                         className={css.list__item}
-                                    />
-                                )
-                            })}
+                        <div className={css.row__container + " " + css.overflowHidden}>
+                            <div className={css.row}>
+                                {nextItem.items.map((item, idx) => {
+                                    return (
+                                        <MainListItemPreview key={idx}
+                                                             item={item}
+                                                             className={css.list__item}
+                                        />
+                                    )
+                                })}
+                            </div>
                         </div>
                     </>
                 }
@@ -186,3 +167,34 @@ const MainList = ({moviesList, nextItem, moviesLength}) => {
 
 
 export default MainList
+
+const DescriptionMovieOnFocus = ({movieFileFocus, country, genre}) => {
+    return (<div className={css.main__list_focus}>
+        <div className={css.focus__description}>
+            <div className={css.focus__title}>{movieFileFocus.title} {!!country.length && <span
+                className={css.focus__genre}>({country})</span>}</div>
+            <div className={css.focus__genre}>
+                {movieFileFocus.year} {genre} | {!!movieFileFocus.access
+                ? <span style={{color: "#FF0000"}}>Подписка</span>
+                : <span style={{color: "#6C757D"}}>Бесплатный</span>}
+                {
+                    !!movieFileFocus.rate_age &&
+                    <span className={css.focus__rate_age}>{movieFileFocus.rate_age}</span>
+                }
+            </div>
+            <div className={css.focus__content}>{movieFileFocus.description}</div>
+        </div>
+        <div className={css.focus__rating}>
+            <div className={css.focus__rating__kp}>
+                                <span
+                                    className={css.focus__rate__number}>{movieFileFocus.rate_kp === 0 ? "-" : movieFileFocus.rate_kp}</span>
+                <div className={css.focus__small}>КиноПоиск</div>
+            </div>
+            <div className={css.focus__rating__imbd}>
+                <div
+                    className={css.focus__rate__number}>{movieFileFocus.rate_imdb === 0 ? "-" : movieFileFocus.rate_imdb}</div>
+                <div className={css.focus__small}>IMBb</div>
+            </div>
+        </div>
+    </div>)
+}

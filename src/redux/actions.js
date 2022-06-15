@@ -198,10 +198,14 @@ export const getMain = (token, code) => async (dispatch) => {
         // await AuthAPI.setAuthToken(token)
         const {data} = await MainAPI.main(token, code)
         const movies = data.filter(m => m.viewport === 0.3)
+        const Banner = data.filter(m => m.viewport === 0.8)[0]
+        const moviesWithBanner = [Banner, ...movies]
+        // console.log({moviesWithBanner})
+
         dispatch(mainToggleIsFetching(false))
         dispatch({
             type: GET_MAIN,
-            payload: movies
+            payload: moviesWithBanner
         })
 
     } catch (e) {
