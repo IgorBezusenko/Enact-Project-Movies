@@ -32,7 +32,7 @@ export const Header = () => {
 }
 
 const Sidebar = ({token}) => {
-    const APP_VERSION = "1.0.9"
+    const APP_VERSION = "1.0.9.5"
     const userProfile = useSelector(state => state.authReducer.userProfile)
     const [search, setSearch] = useState(false)
     const [play, setPlay] = useState(false)

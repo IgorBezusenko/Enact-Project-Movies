@@ -37,7 +37,7 @@ export const MovieSeries = (props) => {
         if (movieFile.id) {
             dispatch(getMovieFile(movieFile.id))
         }
-    }, [movieFile.id])
+    }, [history.location.pathname])
 
     useEffect(() => {
         dispatch(setCurrentSeason())

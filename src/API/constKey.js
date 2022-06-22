@@ -2,6 +2,7 @@ export const SOFT_ID_LG = "SOFT_ID_REACT_SMART_LG"
 export const SOFT_ID_SAMSUNG = "SOFT_ID_REACT_SMART_SAMSUNG"
 export const SOFT_ID_HISENSE = "SOFT_ID_REACT_SMART_HISENSE"
 
+// нужно подставлять для каждой платформы свой soft_id
 export const SOFT_ID = SOFT_ID_LG
 
 export const REMOTE_KEYS = {

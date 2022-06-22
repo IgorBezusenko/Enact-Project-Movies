@@ -34,10 +34,10 @@ export const CustomControls = ({
     const [keycode, setKeycode] = useState(null)
     const [hideControls, setHideControls] = useState()
     const [path, setPath] = useState("/detail")
+    // const [uiCode, setUiCode] = useState("UI TEST")
     const movieFile = useSelector(state => state.mainReducer.movieFile)
     const {isFetching} = movieFile
     const {playingSeasonAndSeries, mediaFiles,} = useSelector(state => state.seriesReducer)
-    const Soft_id = reactLocalStorage.get("soft_id_portal")
 
     useEffect(() => {
         if (movieFile.serial) setPath("/series")
@@ -157,6 +157,7 @@ export const CustomControls = ({
     }
     //кнопки на пульте
     const funcEventKEY = (e) => {
+        // setUiCode(`code:${e.code}-key:${e.key}-keyCode:${e.keyCode}--type:${e.type}-returnValue:${e.returnValue}-isTrusted:${e.isTrusted}`)
         switch (e.keyCode) {
             case REMOTE_KEYS.Stop:
                 onGoPath(path);
@@ -206,6 +207,7 @@ export const CustomControls = ({
                     />
                 </div>
                 <div className={css.controls}>
+
                     <div className={css.btn_group}>
                         <ItemBase className={css.btn_controls + " " + css.btn_controls_arrow}
                                   onClick={fastForwardBack120}
@@ -234,6 +236,9 @@ export const CustomControls = ({
                             <FastForward className={css.p_controls}/>
                         </ItemBase>
                     </div>
+
+                    {/*{<h4>{uiCode}</h4>}*/}
+
                     <div className={css.btn_group}>
                         <div className={css.time_controls}><Duration seconds={duration * played}/></div>
                         <input className={css.input_control}
