@@ -29,6 +29,7 @@ export const seriesReducer = (state = initialState, action) => {
                 mediaFiles: [...action.mediaFiles],
             }
         }
+
         case CLEAR_MEDIA_FILES : {
             return {
                 ...state,

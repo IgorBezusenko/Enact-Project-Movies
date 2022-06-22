@@ -22,6 +22,7 @@ import {Link, useHistory} from "react-router-dom";
 
 import * as queryString from "querystring";
 import {AppLoading} from "../../AppLoading/AppLoading";
+import {returnBackHandler, useEventListener} from "../../../hooks/useEventListener";
 
 export const Category = (props) => {
     const dispatch = useDispatch()
@@ -57,16 +58,9 @@ export const Category = (props) => {
         dispatch(setCurrentPath(history.location.pathname + history.location.search))
     }, [history.location.search])
 
-    // useEffect(() => {
-    //     const query = {};
-    //     if (categoryId !== null) query.cid = categoryId
-    //     if (idSort !== 1) query.id_sort = idSort
-    //
-    //     history.push({
-    //         pathname: '/category',
-    //         search: queryString.stringify(query)
-    //     })
-    // }, [idSort, categoryId])
+    useEventListener("keydown", (e) => {
+        returnBackHandler(e, () => onBackHandler("/main"))
+    })
 
     const onBackHandler = (path) => history.push(path)
 

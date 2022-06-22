@@ -10,6 +10,7 @@ import {ItemBase} from "../Buttons/ItemBase";
 import {KeyboardModal} from "../Keyboard/KeyboardModal";
 import {Lock, Mail} from "react-feather";
 import {stringSplit} from "../../utils/stringSplit";
+import {returnBackHandler, useEventListener} from "../../hooks/useEventListener";
 
 export const DemoForm = () => {
     const dispatch = useDispatch()
@@ -18,6 +19,12 @@ export const DemoForm = () => {
     const [textField, setTextField] = useState([])
     const [isLogin, setIsLogin] = useState(true)
     const [isPass, setIsPass] = useState(false)
+
+    useEventListener("keydown", (e) => {
+        if (isAuthModal === false) {
+            returnBackHandler(e, onGoBack)
+        }
+    })
 
     const onSetFocusLogin = () => {
         setIsLogin(true)

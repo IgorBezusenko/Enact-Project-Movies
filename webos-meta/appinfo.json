@@ -8,5 +8,6 @@
 	"icon": "portal.png",
 	"miniicon": "portal-mini.png",
 	"largeIcon": "portal-large.png",
-	"uiRevision": 2
+	"uiRevision": 2,
+	"disableBackHistoryAPI": true
 }

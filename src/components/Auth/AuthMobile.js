@@ -4,17 +4,32 @@ import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getTokenCode, setConnectionCode} from "../../redux/actions";
 import {Redirect, useHistory} from "react-router-dom";
+import {returnBackHandler, useEventListener} from "../../hooks/useEventListener";
+import {reactLocalStorage} from "reactjs-localstorage";
+import {SOFT_ID} from "../../API/constKey";
 
 export const AuthMobile = (props) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const {connectionCode, token, tokenCode} = useSelector(state => state.authReducer)
-    useEffect(() => {
-        dispatch(setConnectionCode("info.modelName"))
-    }, [])
+    let deviseUID = reactLocalStorage.get("portal_deviseUID")
 
     useEffect(() => {
-        console.log("18con", connectionCode)
+
+        if (!deviseUID) {
+            const currentTime = Date.now().toString()
+            reactLocalStorage.set("portal_deviseUID", SOFT_ID + currentTime)
+            dispatch(setConnectionCode(currentTime))
+        }
+        if (deviseUID) {
+            dispatch(setConnectionCode(deviseUID))
+        }
+
+        // dispatch(setConnectionCode("info.modelName"))
+    }, [history.location.pathname])
+
+    useEffect(() => {
+        // console.log("18con", connectionCode)
         const interval = setInterval(() => {
             dispatch(getTokenCode(connectionCode, token))
         }, 3000)
@@ -23,6 +38,10 @@ export const AuthMobile = (props) => {
             clearInterval(interval)
         }
     }, [connectionCode])
+
+    useEventListener("keydown", (e) => {
+        returnBackHandler(e, onGoBack)
+    })
 
     const onGoBack = () => history.push("/auth")
     const onBackHandler = (e) => {
@@ -37,7 +56,7 @@ export const AuthMobile = (props) => {
                 <NavOnBack className={css.on__back} title={"Вход"}
                            onClick={onGoBack}
                            onKeyDown={onBackHandler}
-                           />
+                />
                 <h3 className={css.authMobile__title}>Для подключения телевизора к вашему профилю PORTAL всего 3
                     шага:</h3>
                 <div className={css.authMobile__content}>

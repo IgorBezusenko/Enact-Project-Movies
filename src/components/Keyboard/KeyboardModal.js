@@ -4,9 +4,13 @@ import {ChevronLeft} from "react-feather";
 import React from "react";
 import {ItemBase} from "../Buttons/ItemBase";
 import {KeyboardBlock} from "./KeyboardBlock";
+import {returnBackHandler, useEventListener} from "../../hooks/useEventListener";
 
 export const KeyboardModal = ({isSearchModal, onHiddenModal, handleSubmitForm, textField}) => {
 
+    useEventListener("keydown", (e) => {
+        returnBackHandler(e, onHiddenModal)
+    })
 
     return (
         <>

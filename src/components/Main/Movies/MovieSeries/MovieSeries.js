@@ -3,19 +3,21 @@ import React, {useEffect, useState} from "react";
 import {
     clearMediaFiles,
     clearVideoUrl,
+    getMovieFile,
     getVideoUrl,
     setCurrentSeason,
     setCurrentSeries,
     setMediaFiles,
     togglePlayingSeasonAndSeries
 } from "../../../../redux/actions";
-import {useHistory} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import {NavOnBack} from "../../../NavOnBack/NavOnBack";
 
 import css from "./MovieSeries.module.less"
 import {SeasonList} from "./SeasonList";
 import {SeriesList} from "./SeriesList";
 import Scroller from "@enact/sandstone/Scroller";
+import {returnBackHandler, useEventListener} from "../../../../hooks/useEventListener";
 
 export const MovieSeries = (props) => {
     const dispatch = useDispatch()
@@ -32,12 +34,22 @@ export const MovieSeries = (props) => {
     }, [])
 
     useEffect(() => {
+        if (movieFile.id) {
+            dispatch(getMovieFile(movieFile.id))
+        }
+    }, [movieFile.id])
+
+    useEffect(() => {
         dispatch(setCurrentSeason())
         if (actualCurrentSeason) {
             setCurrentSeason1(actualCurrentSeason.title)
             dispatch(setCurrentSeries())
         }
     }, [mediaFiles, actualCurrentSeason])
+
+    useEventListener("keydown", (e) => {
+        returnBackHandler(e, () => onNavBack("/detail"))
+    })
 
     const onClickToSeason = (mediaTitle) => {
 
@@ -61,15 +73,20 @@ export const MovieSeries = (props) => {
 
     const onGoPath = (path) => history.push(path)
     const onNavBack = (path) => {
-        dispatch(clearMediaFiles())
         onGoPath(path)
+        dispatch(clearMediaFiles())
     }
     const onSelect = (e, path) => {
+        e.stopPropagation()
         if (e.code === "ArrowUp") {
             dispatch(clearMediaFiles())
             onGoPath(path)
         }
     }
+    if (Object.keys(movieFile).length === 0) {
+        return <Redirect to={"/main"}/>
+    }
+
 
     return (
         <div style={{

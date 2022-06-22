@@ -7,6 +7,7 @@ import {NavOnBack} from "../NavOnBack/NavOnBack";
 import {useHistory} from "react-router-dom";
 import MainListItem from "../Main/MainListItem";
 import {AppLoading} from "../AppLoading/AppLoading";
+import {returnBackHandler, useEventListener} from "../../hooks/useEventListener";
 
 export const HistoryPage = () => {
     const history = useHistory();
@@ -24,6 +25,9 @@ export const HistoryPage = () => {
         }
     }, [limitItems])
 
+    useEventListener("keydown", (e) => {
+        returnBackHandler(e, () => onGoPath("/main"))
+    })
 
     const onFocusHandler = (index, array) => {
         if (Math.ceil(index / 5) === Math.ceil(array.length / 5)) {

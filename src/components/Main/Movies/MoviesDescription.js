@@ -4,10 +4,15 @@ import {NavOnBack} from "../../NavOnBack/NavOnBack";
 
 import css from "./MoviesDescription.module.less"
 import {useHistory} from "react-router-dom";
+import {returnBackHandler, useEventListener} from "../../../hooks/useEventListener";
 
 export const MoviesDescription = () => {
     const history = useHistory()
     const movieFile = useSelector(state => state.mainReducer.movieFile)
+
+    useEventListener("keydown", (e) => {
+        returnBackHandler(e, () => onGoPath("/detail"))
+    })
 
     const country = movieFile.country && movieFile.country.map((country, i) => {
         return (<span key={i}>
@@ -35,12 +40,16 @@ export const MoviesDescription = () => {
         </span>)
     })
 
-    const onGoPath = (path) => history.push(path)
+    function onGoPath(path) {
+        history.push(path)
+    }
+
     const onSelect = (e, push) => {
         if (e.code === "ArrowUp") {
             onGoPath(push)
         }
     }
+
 
     return (
         <div style={{
