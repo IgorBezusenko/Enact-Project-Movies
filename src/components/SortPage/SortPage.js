@@ -6,6 +6,7 @@ import {clearCategory, getNewSearchFilterPage, getSearchFilter, setPageIncrement
 import css from "../Main/Category/Category.module.less"
 import {NavOnBack} from "../NavOnBack/NavOnBack";
 import {Header} from "../Header/Header";
+import {returnBackHandler, useEventListener} from "../../hooks/useEventListener";
 
 export const SortPage = () => {
     const dispatch = useDispatch()
@@ -30,6 +31,9 @@ export const SortPage = () => {
         }
     }, [currentPage])
 
+    useEventListener("keydown", (e) => {
+        returnBackHandler(e, () => onGoPath("/main"))
+    })
 
     const onFocusHandler = (index, array) => {
         if (Math.ceil(index / 5) === Math.ceil(array.length / 5)) {
@@ -48,8 +52,8 @@ export const SortPage = () => {
 
             <div className={css.row}>
                 <NavOnBack className={css.on__back} title={"Результат"}
-                    onClick={() => onGoPath("/main")}
-                    onKeyDown={(e=>onSelect(e,"/main"))}
+                           onClick={() => onGoPath("/main")}
+                           onKeyDown={(e => onSelect(e, "/main"))}
                 />
             </div>
             <div className={css.list}>

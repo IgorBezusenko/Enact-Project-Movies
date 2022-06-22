@@ -7,6 +7,7 @@ import {NavOnBack} from "../NavOnBack/NavOnBack";
 import {useHistory} from "react-router-dom";
 import MainListItem from "../Main/MainListItem";
 import {AppLoading} from "../AppLoading/AppLoading";
+import {returnBackHandler, useEventListener} from "../../hooks/useEventListener";
 
 export const BookMark = () => {
     const history = useHistory();
@@ -22,6 +23,10 @@ export const BookMark = () => {
             dispatch(getBookmarkItems(limitBookmark))
         }
     }, [limitBookmark])
+
+    useEventListener("keydown", (e) => {
+        returnBackHandler(e, () => onGoPath("/main"))
+    })
 
     const onFocusHandler = (index, array) => {
         if (Math.ceil(index / 5) === Math.ceil(array.length / 5)) {

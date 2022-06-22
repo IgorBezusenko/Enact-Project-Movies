@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {AppFilter} from "./AppFilter";
 import css from "./AppFilter.module.less";
 import {Sliders} from "react-feather";
@@ -8,6 +8,7 @@ import {InputCheckBox} from "./InputCheckBox";
 import {InputRadio} from "./InputRadio";
 import {Link, useHistory} from "react-router-dom";
 import {clearPage, getCategoryFilter, setFilterTypeContent, setFilterYear} from "../../redux/actions";
+import {returnBackHandler, useEventListener} from "../../hooks/useEventListener";
 
 export const CategoryFilter = (props) => {
     const history = useHistory();
@@ -15,6 +16,9 @@ export const CategoryFilter = (props) => {
     const categoryReducer = useSelector(state => state.categoryReducer)
     const {categoryFilter, filterYear, filterTypeContent, categoryId} = categoryReducer
 
+    useEventListener("keydown", (e) => {
+        returnBackHandler(e, onBackHandler)
+    })
     const onBackHandler = () => history.push(`/category?cid=${categoryId}`)
     const onSelectHandler = (e, path) => {
         if (e.code === "Enter") {

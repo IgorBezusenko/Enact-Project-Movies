@@ -83,22 +83,22 @@ class CVPlayer extends Component {
     }
 
     handlePlay = () => {
-        console.log('onPlay')
+        // console.log('onPlay')
         this.setState({playing: true})
     }
 
     handleEnablePIP = () => {
-        console.log('onEnablePIP')
+        // console.log('onEnablePIP')
         this.setState({pip: true})
     }
 
     handleDisablePIP = () => {
-        console.log('onDisablePIP')
+        // console.log('onDisablePIP')
         this.setState({pip: false})
     }
 
     handlePause = () => {
-        console.log('onPause')
+        // console.log('onPause')
         this.setState({playing: false})
     }
 
@@ -144,12 +144,12 @@ class CVPlayer extends Component {
     }
 
     handleEnded = () => {
-        console.log('onEnded')
+        // console.log('onEnded')
         this.setState({playing: this.state.loop})
     }
 
     handleDuration = (duration) => {
-        console.log('onDuration', duration)
+        // console.log('onDuration', duration)
         this.setState({duration})
     }
 
@@ -169,20 +169,20 @@ class CVPlayer extends Component {
         this.player = player
     }
     onHandleError = (e) => {
-        console.log('onError', e)
+        // console.log('onError', e)
         this.setState({error: e})
     }
     onHandleSeek = (e) => {
-        console.log('onSeek', e)
+        // console.log('onSeek', e)
     }
     onHandleReady = () => {
-        console.log('onReady')
+        // console.log('onReady')
     }
     onHandleStart = () => {
-        console.log('Start')
+        // console.log('Start')
     }
     onHandleBuffer = () => {
-        console.log('onBuffer')
+        // console.log('onBuffer')
     }
 
     render() {

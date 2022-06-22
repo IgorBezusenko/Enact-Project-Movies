@@ -1,5 +1,6 @@
 import {AuthAPI, MainAPI, MoviesPreview} from "../API/API";
 import {reactLocalStorage} from "reactjs-localstorage";
+import {SOFT_ID} from "../API/constKey";
 
 export const TOGGLE_AUTH_MODAL = "AUTH/TOGGLE_AUTH_MODAL"
 export const SET_LOGIN = "AUTH/SET_LOGIN"
@@ -124,6 +125,7 @@ export const clearError = () => ({
 export const getToken = (login, password) => async (dispatch) => {
     dispatch(authToggleIsFetching(true))
     try {
+        reactLocalStorage.set("soft_id_portal", SOFT_ID)
         const {data} = await AuthAPI.login(login, password)
         dispatch(setToken(data.data.token))
         // console.log("Auth", data.data.token)
@@ -138,6 +140,7 @@ export const getToken = (login, password) => async (dispatch) => {
 export const getTokenCode = (code_UID, token) => async (dispatch) => {
     dispatch(authToggleIsFetching(true))
     try {
+        reactLocalStorage.set("soft_id_portal", SOFT_ID)
         const {data} = await AuthAPI.loginMobil(code_UID, token)
         if (data.code) {
             dispatch(setTokenCode(data.code))
@@ -158,10 +161,15 @@ export const getTokenCode = (code_UID, token) => async (dispatch) => {
 export const getLogout = () => async (dispatch) => {
     try {
         await AuthAPI.logout()
+        dispatch(setLogin(null))
+        dispatch(setPassword(null))
         dispatch(clearToken())
         dispatch(clearUserProfile())
         reactLocalStorage.remove("token");
         reactLocalStorage.remove("code");
+        reactLocalStorage.remove("portal_deviseUID");
+        // reactLocalStorage.remove("deviseUID");
+
     } catch (e) {
         console.log("Error getToken", e.response)
     }

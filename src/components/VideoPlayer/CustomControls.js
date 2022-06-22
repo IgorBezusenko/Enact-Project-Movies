@@ -10,8 +10,9 @@ import {ItemBaseRef} from "./ItemBaseRef";
 import {ARROW_DOWN, ARROW_ENTER, ARROW_LEFT, ARROW_RIGHT, ARROW_UP} from "../../redux/reducers/playerReducer";
 import {clearVideoUrl, getVideoUrl, setFocusRef, togglePlayingSeasonAndSeries} from "../../redux/actions";
 import {REMOTE_KEYS} from "../../API/constKey";
-import {useEventListener} from "../../hooks/useEventListener";
+import {returnBackHandler, useEventListener} from "../../hooks/useEventListener";
 import {AppLoading} from "../AppLoading/AppLoading";
+import {reactLocalStorage} from "reactjs-localstorage";
 
 export const CustomControls = ({
                                    handlePlayPause,
@@ -36,7 +37,7 @@ export const CustomControls = ({
     const movieFile = useSelector(state => state.mainReducer.movieFile)
     const {isFetching} = movieFile
     const {playingSeasonAndSeries, mediaFiles,} = useSelector(state => state.seriesReducer)
-
+    const Soft_id = reactLocalStorage.get("soft_id_portal")
 
     useEffect(() => {
         if (movieFile.serial) setPath("/series")
@@ -176,7 +177,11 @@ export const CustomControls = ({
                 break;
         }
     }
-    useEventListener("keydown", funcEventKEY)
+
+    useEventListener("keydown", (e) => {
+        funcEventKEY(e)
+        returnBackHandler(e, () => onGoPath(path))
+    })
 
     const genre = movieFile.genre && movieFile.genre.map((genre, i) => {
         return (<span key={i}>

@@ -5,13 +5,15 @@ import MainList from "./MainList";
 import {getMain, getUserProfile, setError, setToken} from "../../redux/actions";
 import {Header} from "../Header/Header";
 import {reactLocalStorage} from "reactjs-localstorage";
-import {Redirect} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import {AppLoading} from "../AppLoading/AppLoading";
+import {returnBackHandler, useEventListener} from "../../hooks/useEventListener";
 
 const MainPanel = () => {
+    const dispatch = useDispatch()
+    const history = useHistory()
     const {mainData: movies, currentItem} = useSelector(state => state.mainReducer)
     const {token, connectionCode} = useSelector((state) => state.authReducer)
-    const dispatch = useDispatch()
 
 
     useEffect(() => {
@@ -24,6 +26,12 @@ const MainPanel = () => {
             dispatch(getUserProfile())
         }
     }, [token, connectionCode]);
+
+    const onGoPath = () => history.push("/*")
+
+    useEventListener("keydown", (e) => {
+        returnBackHandler(e, onGoPath)
+    })
 
     const list = movies.length > 0 && movies[currentItem]
     // const nextItem = movies.length > 0 && movies[currentItem + 1] || movies.length - 1 && movies[currentItem]

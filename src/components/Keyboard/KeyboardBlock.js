@@ -107,10 +107,7 @@ export const KeyboardBlock = ({onHiddenModal, handleSubmitForm, textField}) => {
                     <KeyBoardItem cssClass={css.vodSearch__num + " " + css.vodSearch__symbol} arrKeys={arrKey123}
                                   writeToField={writeToField}/>}
                     {lang !== 'symbol' && <KeyboardField text={"shift"}
-                                                         onClick={() => {
-                                                             onUpperCase()
-                                                             console.log("shift")
-                                                         }}
+                                                         onClick={onUpperCase}
                                                          className={css.vodSearch__num + " " + css.vodSearch__flexGrow}/>}
 
                 </div>

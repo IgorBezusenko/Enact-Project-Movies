@@ -6,6 +6,7 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getCategoryFilter, setFilterTypeContent, setFilterYear} from "../../redux/actions";
 import {InputRadio} from "./InputRadio";
+import {returnBackHandler, useEventListener} from "../../hooks/useEventListener";
 
 export const AllRadioFilter = ({title, itemType}) => {
     const history = useHistory()
@@ -13,11 +14,15 @@ export const AllRadioFilter = ({title, itemType}) => {
     const categoryReducer = useSelector(state => state.categoryReducer)
     const {categoryFilter, filterYear, filterTypeContent} = categoryReducer
 
-    const goToPath = (path) => history.push(path)
-    const onBackHandler = () => goToPath("/app-filter")
-    const onSelectHandler = (e, path) => {
+    useEventListener("keydown", (e) => {
+        returnBackHandler(e, onBackHandler)
+    })
+
+    const onBackHandler = () => history.push("/app-filter")
+
+    const onSelectHandler = (e) => {
         if (e.code === "Enter") {
-            goToPath(path)
+            onBackHandler()
         }
     }
 
@@ -57,7 +62,7 @@ export const AllRadioFilter = ({title, itemType}) => {
 
                     <div className={css.row}>
                         <ButtonSpotTable className={css.btn__filter}
-                                         onKeyDown={(e) => onSelectHandler(e, "/app-filter")}
+                                         onKeyDown={onSelectHandler}
                         >
                             <Link to={"/app-filter"} className={css.btn__row}>
                                 <div>Применить</div>

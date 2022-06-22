@@ -19,6 +19,7 @@ import {ItemBase} from "../Buttons/ItemBase";
 import {X} from "react-feather";
 import {ItemBaseRef} from "../Buttons/ItemBaseRef";
 import {stringSplit} from "../../utils/stringSplit";
+import {returnBackHandler, useEventListener} from "../../hooks/useEventListener";
 
 export const SearchPanel = (props) => {
     const dispatch = useDispatch()
@@ -51,6 +52,15 @@ export const SearchPanel = (props) => {
     useEffect(() => {
         onSubmitSearch()
     }, [searchInputText])
+
+
+    useEventListener("keydown", (e) => {
+        // console.log({isSearchModal})
+        if (isSearchModal === false) {
+            returnBackHandler(e, () => onGoPath("/main"))
+        }
+    })
+
 
     const onHiddenModal = () => dispatch(toggleSearchModal(false))
     const onShowModal = () => {
@@ -128,7 +138,7 @@ export const SearchPanel = (props) => {
                                   onKeyDown={onSelectHandler}
                         ><X/></ItemBase>
                     </div>
-                    <h2>Результат поиска</h2>
+                    {searchItems && searchItems.length !== 0 && <h2>Результат поиска</h2>}
 
                     <div className={css.list}>
                         {

@@ -6,12 +6,17 @@ import React from "react";
 import {InputCheckBox} from "./InputCheckBox";
 import {useDispatch, useSelector} from "react-redux";
 import {getCategoryFilter, setFilterTypeContent, setFilterYear} from "../../redux/actions";
+import {returnBackHandler, useEventListener} from "../../hooks/useEventListener";
 
 export const AllCheckBoxFilter = ({title, itemType}) => {
     const history = useHistory()
     const dispatch = useDispatch()
     const categoryReducer = useSelector(state => state.categoryReducer)
     const {categoryFilter} = categoryReducer
+
+    useEventListener("keydown", (e) => {
+        returnBackHandler(e, onBackHandler)
+    })
 
     const goToPath = (path) => history.push(path)
     const onBackHandler = () => goToPath("/app-filter")

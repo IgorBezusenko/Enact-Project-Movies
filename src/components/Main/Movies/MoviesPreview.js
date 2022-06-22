@@ -24,6 +24,7 @@ import {ButtonDescription} from "../../Buttons/ButtonDescription";
 import {LikeGroup} from "../../Buttons/LikeGroup";
 import {AppLoading} from "../../AppLoading/AppLoading";
 import {ARROW_ENTER} from "../../../redux/reducers/playerReducer";
+import {returnBackHandler, useEventListener} from "../../../hooks/useEventListener";
 
 export const MoviesPreview = (props) => {
     const query = useQuery();
@@ -49,7 +50,9 @@ export const MoviesPreview = (props) => {
     }, [])
 
     useEffect(() => {
-        getMovieFileById(movieFileId)
+        if (movieFileId) {
+            getMovieFileById(movieFileId)
+        }
     }, [movieFileId])
 
     useEffect(() => {
@@ -69,6 +72,10 @@ export const MoviesPreview = (props) => {
             setBackPath("/main")
         }
     }, [currentPath])
+
+    useEventListener("keydown", (e) => {
+        returnBackHandler(e, () => onGoPath(backPath))
+    })
 
     const genre = movieFile.genre && movieFile.genre.map((genre, i) => {
         return (<span key={i}>
