@@ -8,7 +8,7 @@ export const Preloader = () => {
     useEffect(() => {
 
         // history.push("/main")
-        history.push("/auth-form")
+        history.push("/auth")
         // history.push("/search-panel")
         setLoading(false)
 

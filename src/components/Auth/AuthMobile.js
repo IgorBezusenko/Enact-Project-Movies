@@ -2,7 +2,7 @@ import css from "./Form.module.less"
 import {NavOnBack} from "../NavOnBack/NavOnBack";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getTokenCode, setConnectionCode} from "../../redux/actions";
+import {getTokenCode, setConnectionCode, setTokenCode} from "../../redux/actions";
 import {Redirect, useHistory} from "react-router-dom";
 import {returnBackHandler, useEventListener} from "../../hooks/useEventListener";
 import {reactLocalStorage} from "reactjs-localstorage";
@@ -15,7 +15,7 @@ export const AuthMobile = (props) => {
     let deviseUID = reactLocalStorage.get("portal_deviseUID")
 
     useEffect(() => {
-
+        dispatch(setTokenCode(null))
         if (!deviseUID) {
             const currentTime = Date.now().toString()
             reactLocalStorage.set("portal_deviseUID", SOFT_ID + currentTime)
