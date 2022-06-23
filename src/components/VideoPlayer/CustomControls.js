@@ -12,7 +12,6 @@ import {clearVideoUrl, getVideoUrl, setFocusRef, togglePlayingSeasonAndSeries} f
 import {REMOTE_KEYS} from "../../API/constKey";
 import {returnBackHandler, useEventListener} from "../../hooks/useEventListener";
 import {AppLoading} from "../AppLoading/AppLoading";
-import {reactLocalStorage} from "reactjs-localstorage";
 
 export const CustomControls = ({
                                    handlePlayPause,
@@ -41,6 +40,17 @@ export const CustomControls = ({
 
     useEffect(() => {
         if (movieFile.serial) setPath("/series")
+
+        const keys = ["MediaPlay", "MediaPause", "MediaStop", "MediaRewind", "MediaFastForward", "MediaTrackPrevious", "MediaTrackNext"]
+        if (window.tizen) {
+            window.tizen.tvinputdevice.registerKeyBatch(keys)
+
+        }
+        return () => {
+            if (window.tizen) {
+                window.tizen.tvinputdevice.unregisterKeyBatch(keys)
+            }
+        }
     }, [])
 
     useEffect(() => {
