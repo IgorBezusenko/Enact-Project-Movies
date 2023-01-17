@@ -1,44 +1,4 @@
 This app was  optimization for the TVs with HD, FULLHD, 4K, 8K.
-## Deploy/ https://igorbezusenko.github.io/Enact-Project-Movies/
-
-This project was bootstrapped with [@enact/cli](https://github.com/enactjs/cli).
-Below you will find some information on how to perform common tasks.
-You can find the most recent version of this guide [here](https://github.com/enactjs/templates/blob/master/packages/webostv/template/README.md).
-Additional documentation on @enact/cli can be found [here](https://github.com/enactjs/cli/blob/master/docs/index.md).
-
-## Folder Structure
-
-After creation, your project should look like this:
-
-```
-my-app/
-  README.md
-  .gitignore
-  node_modules/
-  package.json
-  src/
-    App/
-      App.js
-      App.less
-      package.json
-    components/
-    views/      
-    index.js
-  resources/
-  webos-meta/
-```
-
-For the project to build, **these files must exist with exact filenames**:
-
-* `package.json` is the core package manifest for the project
-* `src/index.js` is the JavaScript entry point.
-
-You can delete or rename the other files.
-
-You can update the `license` entry in `package.json` to match the license of your choice. For more
-information on licenses, please see the [npm documentation](https://docs.npmjs.com/files/package.json#license).
-
-## Available Scripts
 
 In the project directory, you can run:
 
